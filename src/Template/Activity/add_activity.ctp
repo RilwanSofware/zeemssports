@@ -4,11 +4,21 @@ echo $this->Html->script('bootstrap-multiselect');
 ?>
 <script>
 $(document).ready(function(){
-	// $(".validateForm").validationEngine();
 	$('.membership_list').multiselect({
 		includeSelectAllOption: true	
 	});
 });
+function validate_multiselect()
+{		
+		var classes = $("#membership").val();
+		if(classes == null)
+		{
+			alert("Please Select Membership first.");
+			return false;
+		}else{
+			return true;
+		}		
+}
 </script>
 <section class="content">
 	<br>
@@ -27,58 +37,58 @@ $(document).ready(function(){
 		</div>
 		<hr>
 		<div class="box-body">
-		<?php 
-			echo $this->Form->create("addactivity",["class"=>"validateForm form-horizontal","role"=>"form"]);
-		?>			
-		<div class='form-group'>
-			<label class="control-label col-md-3" for="email"><?php echo __("Select Category");?><span class="text-danger"> *</span></label>
-			<div class="col-md-6">
+			<?php 
+				echo $this->Form->create("addactivity",["class"=>"validateForm form-horizontal","role"=>"form","onsubmit"=>"return validate_multiselect()"]);
+			?>			
+			<div class='form-group'>
+				<label class="control-label col-md-3" for="email"><?php echo __("Select Category");?><span class="text-danger"> *</span></label>
+				<div class="col-md-6 add_listcat module_padding">
 				<?php 
 					echo $this->Form->select("cat_id",$categories,["default"=>($edit)?array($data['cat_id']):"","empty"=>__("Select Category"),"class"=>"validate[required] cat_list form-control"]);
 				?>
+				</div>
+				<div class="col-md-2">
+					<button class="form-control add_category btn btn-default btn-flat" type="button" data-url="<?php echo $this->Gym->createurl("GymAjax","addCategory"); ?>"><?php echo __("Add Category");?></button>
+				</div>
 			</div>
-			<div class="col-md-2">
-			<button class="form-control add_category btn btn-default btn-flat" type="button" data-url="<?php echo $this->Gym->createurl("GymAjax","addCategory"); ?>"><?php echo __("Add Category");?></button>
-			</div>
-		</div>
-		<div class='form-group'>
-			<label class="control-label col-md-3" for="email"><?php echo __("Activity Title");?><span class="text-danger"> *</span></label>
-			<div class="col-md-6">
+			<div class='form-group'>
+				<label class="control-label col-md-3" for="email"><?php echo __("Activity Title");?><span class="text-danger"> *</span></label>
+				<div class="col-md-6">
 				<?php 
-					echo $this->Form->input("",["label"=>false,"name"=>"title","class"=>"validate[required] form-control","value"=>(($edit)?$data['title']:"")]);
+					echo $this->Form->input("",["label"=>false,"name"=>"title","class"=>"validate[required,maxSize[40]] form-control","value"=>(($edit)?$data['title']:""),]);
 				?>
-			</div>	
-		</div>
-		<div class='form-group'>
-			<label class="control-label col-md-3" for="email"><?php echo __("Assign to Staff Member");?><span class="text-danger"> *</span></label>
+				</div>	
+			</div>
+			<div class='form-group'>
+				<label class="control-label col-md-3 " for="email"><?php echo __("Assign to Staff Member");?><span class="text-danger"> *</span></label>
 			
-			<div class="col-md-6">
+				<div class="col-md-6 module_padding">
 				<?php 
 					echo $this->Form->select("assigned_to",$staff,["default"=>($edit)?array($data['assigned_to']):"","empty"=>__("Select Staff Member"),"class"=>"validate[required] form-control"]);
 				?>
-			</div>
+				</div>
 			
-			<?php if($role == 'administrator'){ ?>
-			<div class="col-md-3">
-				<a href="<?php echo $this->request->base;?>/StaffMembers/addStaff" class="btn btn-flat btn-default"><?php echo __("Add Staff Member");?></a>
+				<?php if($role == 'administrator'){ ?>
+				<div class="col-md-3">
+					<a href="<?php echo $this->request->base;?>/StaffMembers/addStaff" class="btn btn-flat btn-default"><?php echo __("Add Staff Member");?></a>
+				</div>
+				<?php } ?>
 			</div>
-			<?php } ?>
-		</div>
-		<div class='form-group'>
-			<label class="control-label col-md-3" for="email"><?php echo __("Select Membership");?><span class="text-danger"> *</span></label>
-			<div class="col-md-6">
+			<div class='form-group'>
+				<label class="control-label col-md-3" for="email"><?php echo __("Select Membership");?><span class="text-danger"> *</span></label>
+				<div class="col-md-6 module_padding">
 				<?php 
-					echo $this->Form->select("membership_id",$membership,["default"=>($edit)?$data['membership_ids']:"","multiple"=>"multiple","class"=>"validate[required] form-control membership_list"]);
+					echo $this->Form->select("membership_id",$membership,["default"=>($edit)?$data['membership_ids']:"","multiple"=>"multiple","class"=>"validate[required] form-control membership_list","id"=>"membership"]);
 				?>
+				</div>
+				<div class="col-md-3">
+					<a href="<?php echo $this->request->base;?>/Membership/add" class="btn btn-flat btn-default"><?php echo __("Add Membership");?></a>
+				</div>			
 			</div>
-			<div class="col-md-3">
-				<a href="<?php echo $this->request->base;?>/Membership/add" class="btn btn-flat btn-default"><?php echo __("Add Membership");?></a>
-			</div>			
-		</div>
-		<?php 
-		echo $this->Form->button(__("Save Activity"),['class'=>"col-md-offset-3 btn btn-flat btn-success","name"=>"add_activity"]);
+			<?php 
+			echo $this->Form->button(__("Save Activity"),['class'=>"col-md-offset-3 btn btn-flat btn-success","name"=>"add_activity"]);
 					
-		echo $this->Form->end();?>
+			echo $this->Form->end();?>
 		<br><br>
 		</div>
 	</div>

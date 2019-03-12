@@ -1,8 +1,7 @@
 <?php $session = $this->request->session(); ?>
 <header class="main-header">        
         <a href="#" class="logo">
-		 <!-- <span class="logo-mini"><b></b>GYM</span>		 
-          <span class="logo-lg"><b>Cake</b>GYM</span> -->
+	
 		   <?php  $left_header = $session->read("User.left_header");?>
 		   <span class="logo-lg"><?php echo $left_header;?></span>
         </a>
@@ -12,11 +11,13 @@
           </a>
 		  <span class="top-title">	
 			 <?php $logo = $session->read("User.logo"); ?>
-			<span style="height: 100%;max-width: 50px;display: inline-block;">
+			<span style="height: 100%;max-width: 80px;display: inline-block;">
 			<?php echo $this->Html->image($logo,["style"=>"max-height: 100%;max-width: 100%;"]);?>
 			</span>
+			<span class="title_gym">
 			 &nbsp;&nbsp;&nbsp;				
-			 <?php echo $session->read("User.name");?>		
+			 <?php echo $session->read("User.name");?>	
+           </span>			 
 		  </span>
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
@@ -33,7 +34,7 @@
 				  echo $this->Html->image("../webroot/upload/{$user_img}",array("class"=>"img-circle","alt"=>"User Image")); ?>
                     <p>
                       <?php echo $session->read("User.display_name") . "-" . ucwords(str_replace("_"," ",$session->read("User.role_name")));?>
-                      <small><?php echo __("Member since"); ?> <?php echo date("F 'y",strtotime($session->read("User.join_date")));?></small>
+                      <small><?php echo __("Member since"); ?> <?php echo $this->Gym->get_db_format(date("F 'y",strtotime($session->read("User.join_date"))));?></small>
                     </p>
                   </li>
 				  <li class="user-footer callout callout-info lead">	

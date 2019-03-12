@@ -8,14 +8,13 @@ class GymEmailSettingController extends AppController
 	public function index()
 	{
 		$email = Email::configTransport("default");
-		// var_dump($email);die;
+		
 		$this->set("email",$email);
 		if($this->request->is("post") && isset($this->request->data["save_mail"]))
 		{
 			$post = $this->request->data;
 			var_dump($post);
 			$file = ROOT . DS . 'config'. DS . 'app.php';       
-			// $content = file_get_contents($file);
 						
 			$host = $post["host"];
 			$port = $post["port"];
@@ -23,7 +22,6 @@ class GymEmailSettingController extends AppController
 			$password = $post["password"];		
 			
 			$content = str_replace(["EMAIL_HOST",0,"EMAIL_ID","EMAIL_PASS"],[$host,$port,$username,$password],$content);
-			// $status = file_put_contents($file, $content);
 						
 			return $this->redirect(["controller"=>"gymEmailSetting"]);
 		}
@@ -47,9 +45,6 @@ class GymEmailSettingController extends AppController
 							
 			$email = new Email();			
 			$email->transport('gmail');
-			// $transport = new DebugTransport();
-			// $email->transport($transport);
-			// var_dump($email);die;
 			
 			$email->from(["{$username}" => "Cake Gym Management"])
 				->to("{$to}")

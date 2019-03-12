@@ -4,11 +4,14 @@ echo $this->Html->script('select2.min');
 ?>
 <script>
 $(document).ready(function(){
+	$(".mydataTable").DataTable({
+		"responsive": true,
+	});
 $(".mem_list").select2();
 $(".date").datepicker( "option", "dateFormat", "<?php echo $this->Gym->dateformat_PHP_to_jQueryUI($this->Gym->getSettings("date_format")); ?>" );
-<?php if($edit){ ?>
-$( ".date" ).datepicker( "setDate", new Date("<?php echo date($this->Gym->getSettings("date_format"),strtotime($data['invoice_date'])); ?>" ));
-<?php } ?>
+	<?php if($edit){ ?>
+		$( ".date" ).datepicker( "setDate", new Date("<?php echo date($this->Gym->getSettings("date_format"),strtotime($data['invoice_date'])); ?>" ));
+	<?php } ?>
 });
 </script>
 <section class="content">
@@ -18,7 +21,13 @@ $( ".date" ).datepicker( "setDate", new Date("<?php echo date($this->Gym->getSet
 			<section class="content-header">
 				<h1>
 					<i class="fa fa-plus"></i>
-					<?php echo __("Income List");?>
+					<?php if($edit){
+							echo __("Edit Income");
+						}else{
+							echo __("Add Income");
+						}
+					?>
+					
 					<small><?php echo __("Income");?></small>
 				</h1>
 				<ol class="breadcrumb">
@@ -29,23 +38,23 @@ $( ".date" ).datepicker( "setDate", new Date("<?php echo date($this->Gym->getSet
 		<hr>
 		<div class="box-body">		
 		<form name="income_form" action="" method="post" class="form-horizontal validateForm" id="income_form">
-        <input type="hidden" name="invoice_type" value="<?php echo __("income");?>">		
+        <input type="hidden" name="invoice_type" value="<?php echo "income";?>">		
 		<div class="form-group">
-			<label class="col-sm-2 control-label" for="day"><?php echo __("Member"); ?></label>	
-			<div class="col-sm-8">
-				<?php echo $this->Form->select("supplier_name",$members,["default"=>($edit)?$data["supplier_name"]:"","empty"=>__("Select Member"),"class"=>"mem_list","required"=>"true"])?>
+			<label class="col-md-2 control-label" for="day"><?php echo __("Member"); ?></label>	
+			<div class="col-md-8">
+				<?php echo $this->Form->select("supplier_name",$members,["default"=>($edit)?$data["supplier_name"]:"","class"=>"mem_list","required"=>"true"])?>
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-2 control-label" for="invoice_label"><?php echo __("Income label"); ?><span class="text-danger">*</span></label>
-			<div class="col-sm-8">
-				<input id="invoice_label" class="form-control validate[required,custom[onlyLetterSp]] text-input" type="text" value="<?php echo ($edit)?$data["invoice_label"]:"";?>" name="invoice_label">
+			<label class="col-md-2 control-label" for="invoice_label"><?php echo __("Income label"); ?><span class="text-danger">*</span></label>
+			<div class="col-md-8">
+				<input id="invoice_label" class="form-control validate[required,custom[onlyLetterSp],maxSize[50]] text-input" type="text" value="<?php echo ($edit)?$data["invoice_label"]:"";?>" name="invoice_label">
 			</div>
 		</div>
 				
 		<div class="form-group">
-			<label class="col-sm-2 control-label" for="payment_status"><?php echo __("Status"); ?><span class="text-danger">*</span></label>
-			<div class="col-sm-8">
+			<label class="col-md-2 control-label" for="payment_status"><?php echo __("Status"); ?><span class="text-danger">*</span></label>
+			<div class="col-md-8">
 				<?php 
 				$status = ["Paid"=>__("Paid"),"Part Paid"=>__("Part Paid"),"Unpaid"=>__("Unpaid")];
 				echo $this->Form->select("payment_status",$status,["default"=>($edit)?$data["payment_status"]:"","empty"=>__("Select Status"),"class"=>"form-control"]);
@@ -53,8 +62,8 @@ $( ".date" ).datepicker( "setDate", new Date("<?php echo date($this->Gym->getSet
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-2 control-label" for="invoice_date"><?php echo __("Date"); ?><span class="text-danger">*</span></label>
-			<div class="col-sm-8">
+			<label class="col-md-2 control-label" for="invoice_date"><?php echo __("Date"); ?><span class="text-danger">*</span></label>
+			<div class="col-md-8">
 				<input id="invoice_date" class="form-control validate[required] date" type="text" value="" name="invoice_date">
 			</div>
 		</div>
@@ -64,14 +73,14 @@ $( ".date" ).datepicker( "setDate", new Date("<?php echo date($this->Gym->getSet
 		{?>
 		<div id="income_entry" class="income_entry_div">			
 			<div class="form-group">
-				<label class="col-sm-2 control-label" for="income_entry"><?php echo __("Income Entry"); ?><span class="text-danger">*</span></label>
-				<div class="col-sm-2">
-					<input id="income_amount" class="form-control validate[required] text-input" type="text" value="" name="income_amount[]" placeholder="<?php echo __("Income Amount");?>">
+				<label class="col-md-2 control-label" for="income_entry"><?php echo __("Income Entry"); ?><span class="text-danger">*</span></label>
+				<div class="col-md-2 module_padding">
+					<input id="income_amount" class="form-control validate[required,custom[integer],maxSize[10]] text-input" type="text" value="" name="income_amount[]" placeholder="<?php echo __("Income Amount");?>">
 				</div>
-				<div class="col-sm-4">
-					<input id="income_entry" class="form-control validate[required] text-input" type="text" value="" name="income_entry[]" placeholder="<?php echo __("Income Entry Label");?>">
+				<div class="col-md-4 module_padding">
+					<input id="income_entry" class="form-control validate[required,maxSize[50]] text-input" type="text" value="" name="income_entry[]" placeholder="<?php echo __("Income Entry Label");?>">
 				</div>						
-				<div class="col-sm-2">
+				<div class="col-md-2">
 					<button type="button" class="btn btn-flat btn-default" onclick="deleteParentElement(this)">
 					<i class="entypo-trash"><?php echo __("Delete"); ?></i>
 					</button>
@@ -86,14 +95,14 @@ $( ".date" ).datepicker( "setDate", new Date("<?php echo date($this->Gym->getSet
 				{?>
 					<div id="income_entry" class="income_entry_div">
 					<div class="form-group">
-						<label class="col-sm-2 control-label" for="income_entry"><?php echo __("Income Entry"); ?><span class="text-danger">*</span></label>
-						<div class="col-sm-2">
-							<input id="" class="form-control validate[required] text-input income_amount" type="text" value="<?php echo $entry->amount;?>" name="income_amount[]" placeholder="<?php echo __("Income Amount");?>">
+						<label class="col-md-2 control-label" for="income_entry"><?php echo __("Income Entry"); ?><span class="text-danger">*</span></label>
+						<div class="col-md-2 module_padding">
+							<input id="" class="form-control validate[required,custom[integer],maxSize[10]] text-input income_amount" type="text" value="<?php echo $entry->amount;?>" name="income_amount[]" placeholder="<?php echo __("Income Amount");?>">
 						</div>
-						<div class="col-sm-4">
+						<div class="col-md-4 module_padding">
 							<input id="" class="form-control validate[required] text-input income_entry" type="text" value="<?php echo $entry->entry;?>" name="income_entry[]" placeholder="<?php echo __("Income Entry Label");?>">
 						</div>						
-						<div class="col-sm-2">
+						<div class="col-md-2">
 							<button type="button" class="btn btn-flat btn-default" onclick="deleteParentElement(this)">
 							<i class="entypo-trash"><?php echo __("Delete"); ?></i>
 							</button>
@@ -104,13 +113,13 @@ $( ".date" ).datepicker( "setDate", new Date("<?php echo date($this->Gym->getSet
 			}
 		?>		
 		<div class="form-group">
-			<label class="col-sm-2 control-label" for="income_entry"></label>
-			<div class="col-sm-3">				
+			<label class="col-md-2 control-label" for="income_entry"></label>
+			<div class="col-md-3">				
 				<button id="add_new_entry" class="btn btn-flat btn-default btn-sm btn-icon icon-left" type="button" name="add_new_entry" onclick="add_entry()"><?php echo __("Add Income Entry");?>				</button>
 			</div>
 		</div>
 		<hr>
-		<div class="col-sm-offset-2 col-sm-8">
+		<div class="col-md-offset-2 col-md-8" style="padding-left: 5px;">
         	<input type="submit" value="<?php echo __("Create Income Entry");?>" name="save_income" class="btn btn-flat btn-success">
         </div>
         </form>

@@ -12,13 +12,7 @@
   body { margin: 1.6cm; }
 }
 </style>
-<script>
-// $(document).ready(function(){
-	// var box_height = $(".box").height();
-	// var box_height = box_height + 100 ;
-	// $(".content-wrapper").css("height",box_height+"px");
-// });		
-</script>
+
 
 
 <div class="">

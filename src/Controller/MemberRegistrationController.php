@@ -55,11 +55,14 @@ Class MemberRegistrationController  extends AppController
 		{
 			$this->request->data['member_id'] = $member_id;
 			$image = $this->GYMFunction->uploadImage($this->request->data['image']);
-			$this->request->data['image'] = (!empty($image)) ? $image : "logo.png";
-			$this->request->data['birth_date'] = date("Y-m-d",strtotime($this->request->data['birth_date']));
+			$this->request->data['image'] = (!empty($image)) ? $image : "Thumbnail-img.png";
+			$this->request->data['birth_date'] = $this->GYMFunction->get_db_format_date($this->request->data['birth_date']);
+			$this->request->data['membership_valid_from'] = $this->GYMFunction->get_db_format_date($this->request->data['membership_valid_from']);
+			$this->request->data['membership_valid_to'] = $this->GYMFunction->get_db_format_date($this->request->data['membership_valid_to']);
 			$this->request->data['created_date'] = date("Y-m-d");
 			$this->request->data['assign_group'] = json_encode($this->request->data['assign_group']);			
 			$this->request->data['membership_status'] = "Prospect";							
+			$this->request->data['member_type'] = "Member";							
 			$this->request->data["role_name"]="member";
 			
 			$member = $this->MemberRegistration->GymMember->patchEntity($member,$this->request->data);
@@ -92,11 +95,6 @@ Class MemberRegistrationController  extends AppController
 				
 				$message = "Hi {$this->request->data["first_name"]},\n\nThank you for registering on our system.\nYour Username: {$this->request->data['username']}\nYou can login once after admin review your account and activates it.\n\nThank You.";
 				
-				/* $message = "<p>Hi {$this->request->data["first_name"]},</p>";
-				$message .= "<p>Thank you for registering on our system.</p>";
-				$message .= "<p>Your Username:{$this->request->data['username']}</p>";
-				$message .= "<p>You can login once after admin review your account and activates it.</p>";
-				$message .= "<p>Thank You.</p>"; */
 				$email = new Email('default');
 				$email->from(array($sys_email => $sys_name))
 					->to($this->request->data["email"])
@@ -104,12 +102,13 @@ Class MemberRegistrationController  extends AppController
 					->send($message);
 				@mail($this->request->data["email"],_("New Registration : {$sys_name}"),$message,$headers);
 				
-				$this->Flash->success(__("Registration completed successfully. Please Check email"));
+				//$this->Flash->success(__("Registration completed successfully. Please Check email"));
+				$this->Flash->success(__("Registration completed successfully. You will get email after activation"));
 				// echo "<script>alert('Success! Registration completed successfully.');</script>";
 				//Send Mail
 				
 				return $this->redirect(["controller"=>"users","action"=>"login"]);
-				// return $this->redirect(["action"=>"regComplete"]);
+				
 			}else
 			{				
 				if($member->errors())
@@ -135,7 +134,6 @@ Class MemberRegistrationController  extends AppController
 		$save["paid_amount"] = 0;
 		$save["start_date"] = $data["membership_valid_from"];
 		$save["end_date"] = $data["membership_valid_to"];
-		/* $save["membership_status"] = $data["membership_status"]; */
 		$save["payment_status"] = 0;
 		$save["created_date"] = date("Y-m-d");
 		/* $save["created_dby"] = 1; */
@@ -158,11 +156,7 @@ Class MemberRegistrationController  extends AppController
 		
 		if($this->request->is("ajax"))
 		{
-			// $format = $this->GYMFunction->date_format();
-			// $format = str_ireplace(array("yyyy","yy","dd","mm"),array("y","y","d","m"),$format);
-			// $format = str_replace("yy","Y",$format);
-			// $format = str_replace("dd","d",$format);
-			// $format = str_replace("mm","m",$format);
+
 			$date = $this->request->data["date"];
 			$date = str_replace("/","-",$date);
 			$membership_id = $this->request->data["membership"];
@@ -172,7 +166,6 @@ Class MemberRegistrationController  extends AppController
 			$period = $row["membership_length"];
 			$end_date = date("Y-m-d",strtotime($date1 . " + {$period} days"));
 			echo $end_date;
-			// echo "Asd";
 			die;
 		}
 	}

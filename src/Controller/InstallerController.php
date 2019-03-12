@@ -202,23 +202,7 @@ class InstallerController extends AppController
 			  `page_link` text NULL,
 			  PRIMARY KEY (`id`)
 				)DEFAULT CHARSET=utf8";
-		
-	/* 	$stmt = $conn->execute($sql);	 */	
-					
-		/* $sql="CREATE TABLE IF NOT EXISTS `gym_accessright` (
-			  `id` int(11) NOT NULL AUTO_INCREMENT,
-			  `controller` text NULL,
-			  `action` text NULL,
-			  `menu` text NULL,
-			  `menu_icon` text NULL,
-			  `menu_title` text NULL,
-			  `member` int(11) NULL,
-			  `staff_member` int(11) NULL,
-			  `accountant` int(11) NULL,
-			  `page_link` text NULL,
-			  PRIMARY KEY (`id`)
-				)DEFAULT CHARSET=utf8";
-				 */
+	
 		$path = $this->request->base;		
 		$insert ="INSERT INTO `gym_accessright` (`controller`, `action`, `menu`, `menu_icon`, `menu_title`, `member`, `staff_member`, `accountant`, `page_link`) VALUES
 					('StaffMembers', '', 'staff_member', 'staff-member.png', 'Staff Members', 1, 1, 1, '".$path."/staff-members/staff-list'),
@@ -236,7 +220,7 @@ class InstallerController extends AppController
 					('MembershipPayment', '', 'expense', 'payment.png', 'Expense', 0, 0, 1, '".$path."/membership-payment/expense-list'),
 					('GymProduct', '', 'product', 'products.png', 'Product', 0, 1, 1, '".$path."/gym-product/product-list'),
 					('GymStore', '', 'store', 'store.png', 'Store', 0, 1, 1, '".$path."/gym-store/sell-record'),
-					('GymNewsletter', '', 'news_letter', 'newsletter.png', 'Newsletter', 0, 1, 0, '".$path."/gym-newsletter/setting'),
+					('GymNewsletter', '', 'news_letter', 'newsletter.png', 'Newsletter', 0, 0, 0, '".$path."/gym-newsletter/setting'),
 					('GymMessage', '', 'message', 'message.png', 'Message', 1, 1, 1, '".$path."/gym-message/compose-message'),
 					('GymNotice', '', 'notice', 'notice.png', 'Notice', 1, 1, 1, '".$path."/gym-notice/notice-list'),
 					('GymNutrition', '', 'nutrition', 'nutrition-schedule.png', 'Nutrition Schedule', 1, 1, 0, '".$path."/gym-nutrition/nutrition-list'),
@@ -419,14 +403,14 @@ class InstallerController extends AppController
 		$curr_date = date("Y-m-d");
 		
 		$insert = "INSERT INTO `gym_member` (`role_name`,`first_name`, `middle_name`, `last_name`,`gender`, `birth_date`,`address`, `city`, `state`, `zipcode`, `mobile`, `phone`, `email`,`username`, `password`, `image`,`created_date`) VALUES
-		('administrator','Admin', '', '', 'male', '2016-07-01','null', 'null', 't', '123123', '123123123', '', 'admin@admin.com', '{$username}', '{$password}', 'logo.png','{$curr_date}')";
+		('administrator','Admin', '', '', 'male', '2016-07-01','null', 'null', 't', '123123', '123123123', '', 'admin@admin.com', '{$username}', '{$password}', 'Thumbnail-img2.png','{$curr_date}')";
 	
 		$stmt = $conn->execute($sql);	
 		$stmt = $conn->execute($insert);
 		
 		$pass = "";
 		$insert = "INSERT INTO `gym_member` (`role_name`, `member_id`, `first_name`, `middle_name`, `last_name`, `member_type`, `role`, `gender`, `birth_date`, `assign_group`, `address`, `city`, `state`, `zipcode`, `mobile`, `phone`, `email`, `weight`, `height`, `chest`, `waist`, `thing`, `arms`, `fat`, `username`, `password`, `image`, `assign_staff_mem`, `intrested_area`, `g_source`, `referrer_by`, `selected_membership`, `membership_status`, `created_by`, `created_date`, `alert_sent`) VALUES
-		('staff_member', '', 'Sergio', '', 'Romero', '', 1, 'male', '2016-08-10', '', 'Address line', 'City', '', '', '2288774455', '', 'sergio@sergio.com', '', '', '', '', '', '', '', 'sergio', '{$pass}', 'logo.png', 0, 0, 0, 0, '', '', 0, '2016-08-22', 0)";
+		('staff_member', '', 'Sergio', '', 'Romero', '', 1, 'male', '2016-08-10', '', 'Address line', 'City', '', '', '2288774455', '', 'sergio@sergio.com', '', '', '', '', '', '', '', 'sergio', '{$pass}', 'Thumbnail-img2.png', 0, 0, 0, 0, '', '', 0, '2016-08-22', 0)";
 	
 		$stmt = $conn->execute($sql);	
 		$stmt = $conn->execute($insert);	
@@ -691,6 +675,42 @@ class InstallerController extends AppController
 
 		$stmt = $conn->execute($sql);	
 		
+		/* new added 06-03-2019 */
+		$sql = "ALTER TABLE `general_setting` ADD `enable_rtl` INT(11) NULL DEFAULT '0'";
+			$conn->execute($sql);
+				
+		$sql = "ALTER TABLE `general_setting` CHANGE `enable_rtl` `enable_rtl` INT(11) NULL DEFAULT '0'";
+			$conn->execute($sql);
+				
+		$sql = "ALTER TABLE `general_setting` ADD `datepicker_lang` TEXT NULL DEFAULT NULL";
+			$conn->execute($sql);
+				
+		$sql = "ALTER TABLE `general_setting` ADD `system_version` TEXT NULL DEFAULT NULL";
+			$conn->execute($sql);
+				
+		$sql = "ALTER TABLE `general_setting` ADD `sys_language` VARCHAR(20) NOT NULL DEFAULT 'en'";
+			$conn->execute($sql);
+			
+		$sql = "UPDATE `general_setting` SET datepicker_lang = 'en'";
+			$conn->execute($sql);				
+								
+		$path = $this->request->base;
+		$sql = "INSERT INTO `gym_accessright` (`controller`, `action`, `menu`, `menu_icon`, `menu_title`, `member`, `staff_member`, `accountant`, `page_link`) VALUES ('Reports', '', 'report', 'report.png', 'Report', '1', '1', '1', '".$path."/reports/membership-report')";
+			$conn->execute($sql);
+				
+		$sql = "ALTER TABLE `general_setting` ADD `time_zone` VARCHAR(20) NOT NULL DEFAULT 'UTC' AFTER `datepicker_lang`";
+			$conn->execute($sql);
+			
+		$sql = "ALTER TABLE `gym_member` ADD `token` VARCHAR(300) NULL DEFAULT NULL AFTER `member_id`";
+			$conn->execute($sql);
+				
+		$sql = "SHOW COLUMNS FROM `membership` LIKE 'membership_class' ";
+			$columns = $conn->execute($sql)->fetch();
+			if($columns == false)
+			{
+				$sql = "ALTER TABLE `membership` ADD `membership_class` varchar(255) NULL";
+				$conn->execute($sql);
+			}
 		file_put_contents(TMP.'installed.txt', date('Y-m-d, H:i:s'));	
 		
 		$this->redirect(["action"=>"success"]);
@@ -703,8 +723,8 @@ class InstallerController extends AppController
 		$this->autoRender = false;
 		$year = date("Y");
 		$conn = ConnectionManager::get('install_db');
-		$sql = $insert = "INSERT INTO `general_setting` (`name`, `start_year`, `address`, `office_number`, `country`, `email`, `date_format`, `calendar_lang`, `gym_logo`, `cover_image`, `weight`, `height`, `chest`, `waist`, `thing`, `arms`, `fat`, `member_can_view_other`, `staff_can_view_own_member`, `enable_sandbox`, `paypal_email`, `currency`, `enable_alert`, `reminder_days`, `reminder_message`, `enable_message`, `left_header`, `footer`,`system_installed`) VALUES
-			('{$data['name']}', '{$year}', 'address', '8899665544', '{$data['country']}','{$data['email']}', '{$data['date_format']}', '{$data['calendar_lang']}', '', 'cover-image.png', 'KG', 'Centimeter', 'Inches', 'Inches', 'Inches', 'Inches', 'Percentage', 0, 1, 0, 'your_id@paypal.com', '{$data['currency']}', 1, '5', 'Hello GYM_MEMBERNAME,\r\n      Your Membership  GYM_MEMBERSHIP  started at GYM_STARTDATE and it will expire on GYM_ENDDATE.\r\nThank You.', 1,'GYM MASTER','Copyright © 2016-2017. All rights reserved.',1)";
+		$sql = $insert = "INSERT INTO `general_setting` (`name`, `start_year`, `address`, `office_number`, `country`, `email`, `date_format`, `calendar_lang`, `gym_logo`, `cover_image`, `weight`, `height`, `chest`, `waist`, `thing`, `arms`, `fat`, `member_can_view_other`, `staff_can_view_own_member`, `enable_sandbox`, `paypal_email`, `currency`, `enable_alert`, `reminder_days`, `reminder_message`, `enable_message`, `left_header`, `footer`,`system_installed`,`datepicker_lang`,`sys_language`) VALUES
+			('{$data['name']}', '{$year}', 'address', '8899665544', '{$data['country']}','{$data['email']}', '{$data['date_format']}', '{$data['sys_language']}', '', 'cover-image.png', 'KG', 'Centimeter', 'Inches', 'Inches', 'Inches', 'Inches', 'Percentage', 0, 1, 0, 'your_id@paypal.com', '{$data['currency']}', 1, '5', 'Hello GYM_MEMBERNAME,\r\n      Your Membership  GYM_MEMBERSHIP  started at GYM_STARTDATE and it will expire on GYM_ENDDATE.\r\nThank You.', 1,'GYM MASTER','Copyright © 2016-2017. All rights reserved.',1,'{$data['sys_language']}','{$data['sys_language']}')";
 		$stmt = $conn->execute($sql);		
 		
 		
@@ -742,13 +762,13 @@ class InstallerController extends AppController
 		$stmt = $conn->execute($sql);
 		
 		$sql = "INSERT INTO `class_schedule` (`class_name`, `assign_staff_mem`, `assistant_staff_member`, `location`, `days`, `start_time`, `end_time`, `created_by`, `created_date`) VALUES
-				('Yoga Class', 2, 0, 'At Gym Facility', \"['Sunday','Saturday']\", '8:00:AM', '10:00:AM', 1, '2016-08-22'),
-				('Aerobics Class', 2, 0, 'Class 1', \"['Sunday','Friday','Saturday']\", '5:15:PM', '6:15:PM', 1, '2016-08-22'),
-				('HIT Class', 2, 2, 'Old location', \"['Sunday','Tuesday','Thursday']\", '7:30:PM', '8:45:PM', 1, '2016-08-22'),
-				('Cardio Class', 2, 0, 'At Gym Facility', \"['Friday','Saturday']\", '3:30:PM', '4:30:PM', 1, '2016-08-22'),
-				('Pilates', 2, 0, 'Old location', \"['Sunday']\", '12:00:PM', '3:15:PM', 1, '2016-08-22'),
-				('Zumba Class',2, 0, 'New Location', \"['Saturday']\", '8:30:PM', '10:30:PM', 1, '2016-08-22'),
-				('Power Yoga Class', 2, 0, 'New Location', \"['Monday','Wednesday','Thursday','Friday','Saturday']\", '9:15:AM', '11:45:AM', 1, '2016-08-22')";
+				('Yoga Class', 2, 0, 'At Gym Facility', \"['Sunday','Saturday']\", '8:00', '10:00', 1, '2016-08-22'),
+				('Aerobics Class', 2, 0, 'Class 1', \"['Sunday','Friday','Saturday']\", '17:15', '18:15', 1, '2016-08-22'),
+				('HIT Class', 2, 2, 'Old location', \"['Sunday','Tuesday','Thursday']\", '18:30', '19:45', 1, '2016-08-22'),
+				('Cardio Class', 2, 0, 'At Gym Facility', \"['Friday','Saturday']\", '15:30', '16:30', 1, '2016-08-22'),
+				('Pilates', 2, 0, 'Old location', \"['Sunday']\", '12:00', '15:15', 1, '2016-08-22'),
+				('Zumba Class',2, 0, 'New Location', \"['Saturday']\", '20:30', '22:30', 1, '2016-08-22'),
+				('Power Yoga Class', 2, 0, 'New Location', \"['Monday','Wednesday','Thursday','Friday','Saturday']\", '9:15', '11:45', 1, '2016-08-22')";
 		$stmt = $conn->execute($sql);
 		
 		$sql = "INSERT INTO `membership` (`membership_label`, `membership_cat_id`, `membership_length`, `membership_class_limit`, `limit_days`, `limitation`, `install_plan_id`, `membership_amount`, `membership_class`, `installment_amount`, `signup_fee`, `gmgt_membershipimage`, `created_date`, `created_by_id`, `membership_description`) VALUES
@@ -782,19 +802,23 @@ class InstallerController extends AppController
 					$sql = "ALTER TABLE `general_setting` ADD `time_zone` VARCHAR(20) NOT NULL DEFAULT 'UTC' AFTER `datepicker_lang`";
 					$conn->execute($sql);
 					
-					$sql = "ALTER TABLE `gym_daily_workout` ADD `reminder_status` TINYINT NOT NULL DEFAULT '0' AFTER `status`";
-					$conn->execute($sql);
+					
 					
 					$sql = "ALTER TABLE `gym_member` ADD `token` VARCHAR(300) NULL DEFAULT NULL AFTER `member_id`";
 					$conn->execute($sql);
+					break ;
+					CASE "12": 
+						/* Nothing to update query */						
 					break ;
 				}
 				
 			}
 			else
 			{
-				/* 1st Update */		
-				$sql = "ALTER TABLE `general_setting` ADD `enable_rtl` INT(11) NULL DEFAULT '0'";
+				/* 1st Update */
+					
+				/*-------- 06-03-2019 --------- */	
+				/* $sql = "ALTER TABLE `general_setting` ADD `enable_rtl` INT(11) NULL DEFAULT '0'";
 				$conn->execute($sql);
 				$sql = "ALTER TABLE `general_setting` CHANGE `enable_rtl` `enable_rtl` INT(11) NULL DEFAULT '0'";
 				$conn->execute($sql);
@@ -803,12 +827,13 @@ class InstallerController extends AppController
 				$sql = "ALTER TABLE `general_setting` ADD `system_version` TEXT NULL DEFAULT NULL";
 				$conn->execute($sql);
 				$sql = "ALTER TABLE `general_setting` ADD `sys_language` VARCHAR(20) NOT NULL DEFAULT 'en'";
-				$conn->execute($sql);
-				/* $sql = "UPDATE `general_setting` SET system_version = '2'"; */
-				$sql = "UPDATE `general_setting` SET system_version = '12'";
+				$conn->execute($sql); */
+				// $sql = "UPDATE `general_setting` SET system_version = '2'"; 
+				// $sql = "UPDATE `general_setting` SET system_version = '12'";
+				$sql = "UPDATE `general_setting` SET system_version = '13'";
 				$conn->execute($sql);
 				
-				$sql = "UPDATE `general_setting` SET datepicker_lang = 'en'";
+				/* $sql = "UPDATE `general_setting` SET datepicker_lang = 'en'";
 				$conn->execute($sql);				
 								
 				$path = $this->request->base;
@@ -816,12 +841,12 @@ class InstallerController extends AppController
 				$conn->execute($sql);
 				
 				$sql = "ALTER TABLE `general_setting` ADD `time_zone` VARCHAR(20) NOT NULL DEFAULT 'UTC' AFTER `datepicker_lang`";
-				$conn->execute($sql);
+				$conn->execute($sql); */
 				
-				$sql = "ALTER TABLE `gym_daily_workout` ADD `reminder_status` TINYINT NOT NULL DEFAULT '0' AFTER `status`";
-				$conn->execute($sql);
+				// $sql = "ALTER TABLE `gym_daily_workout` ADD `reminder_status` TINYINT NOT NULL DEFAULT '0' AFTER `status`";
+				// $conn->execute($sql);
 				
-				$sql = "ALTER TABLE `gym_member` ADD `token` VARCHAR(300) NULL DEFAULT NULL AFTER `member_id`";
+				/* $sql = "ALTER TABLE `gym_member` ADD `token` VARCHAR(300) NULL DEFAULT NULL AFTER `member_id`";
 				$conn->execute($sql);
 				
 				$sql = "SHOW COLUMNS FROM `membership` LIKE 'membership_class' ";
@@ -830,8 +855,9 @@ class InstallerController extends AppController
 				{
 					$sql = "ALTER TABLE `membership` ADD `membership_class` varchar(255) NULL";
 					$conn->execute($sql);
-				}						
-			}				
+				}	 */					
+				/*-------- 06-03-2019 --------- */	
+			}	
 		}		
 	}
 	

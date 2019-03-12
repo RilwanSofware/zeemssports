@@ -1,6 +1,10 @@
 <?php
 namespace App\Controller;
 use Cake\Event\Event;
+use Cake\I18n\I18n;
+use Cake\I18n\Time;
+use Cake\I18n\Date;
+use Cake\I18n\FrozenDate;
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
 use Cake\Datasource\ConnectionManager;
@@ -8,7 +12,12 @@ use Cake\Datasource\ConnectionManager;
 
 class UsersController extends AppController
 {
-	public function beforeFilter(Event $event)
+	public function initialize()
+	{
+       parent::initialize();
+
+	}
+	/* public function beforeFilter(Event $event)
     {
         // parent::beforeFilter($event);
         // Allow users to register and logout.
@@ -16,7 +25,7 @@ class UsersController extends AppController
         // cause problems with normal functioning of AuthComponent.
         $this->Auth->allow(['login','index']);
     }
-	
+	 */
 	
 	public function index()
 	{		
@@ -56,18 +65,18 @@ class UsersController extends AppController
 				{
 					$this->Flash->error(__('Error! Your account not activated yet!'));				
 					return $this->redirect($this->Auth->logout());	
-					die;
 				}
 				
 				$this->loadComponent("GYMFunction");
 				$logo = $this->GYMFunction->getSettings("gym_logo");
-				$logo = (!empty($logo)) ? "/webroot/upload/". $logo : "Thumbnail-img2.png";
+				$logo = (!empty($logo)) ? "/webroot/upload/". $logo : "logo.png";
 				$name = $this->GYMFunction->getSettings("name");
 				$left_header = $this->GYMFunction->getSettings("left_header");
 				$footer = $this->GYMFunction->getSettings("footer");
 				$is_rtl = ($this->GYMFunction->getSettings("enable_rtl") == 1) ? true : false;
 				$datepicker_lang = $this->GYMFunction->getSettings("datepicker_lang");
 				$version = $this->GYMFunction->getSettings("system_version");
+				
 				
 				$session = $this->request->session();
 				$fname = $session->read('Auth.User.first_name');
@@ -90,6 +99,7 @@ class UsersController extends AppController
 				$session->write("User.is_rtl",$is_rtl);
 				$session->write("User.dtp_lang",$datepicker_lang);
 				$session->write("User.version",$version);
+				
 				// $session->write("User.assign_class",$assign_class);			
 				
 				return $this->redirect($this->Auth->redirectUrl());

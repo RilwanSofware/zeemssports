@@ -48,7 +48,9 @@ $(document).ready(function(){
 			
 			
 			foreach($days_array as $data=>$row)
-			{?>
+			{
+				?>
+				
 				<div class="panel panel-default workout-block" id="remove_panel_<?php echo $data;?>">				
 				  <div class="panel-heading">
 					<i class="fa fa-calendar"></i> <?php echo __("Start From")." <span class='work_date'>".date($this->Gym->getSettings("date_format"),strtotime($row["start_date"]))."</span> ".__("TO")." <span class='work_date'>".date($this->Gym->getSettings("date_format"),strtotime($row["end_date"]))."</span>";?>

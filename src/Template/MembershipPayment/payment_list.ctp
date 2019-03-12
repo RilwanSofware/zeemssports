@@ -63,7 +63,6 @@ $(document).ready(function() {
 				{
 					foreach($data as $row)
 					{
-						// $due = ($row['membership_amount']- $row['paid_amount'])+($row['membership']['signup_fee']);
 						$due = ($row['membership_amount']- $row['paid_amount']);
 						
 						echo "<tr>
@@ -72,16 +71,16 @@ $(document).ready(function() {
 								<td>".$this->Gym->get_currency_symbol()." {$row['membership_amount']}</td>
 								<td>".$this->Gym->get_currency_symbol()." {$row['paid_amount']}</td>
 								<td>".$this->Gym->get_currency_symbol()." {$due}</td>
-								<td>".date($this->Gym->getSettings("date_format"),strtotime($row["start_date"]))."</td>
-								<td>".date($this->Gym->getSettings("date_format"),strtotime($row["end_date"]))."</td>
+								<td>".$this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($row["start_date"])))."</td>
+								<td>".$this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($row["end_date"])))."</td>
 								<td><span class='bg-primary pay_status'>". __($this->Gym->get_membership_paymentstatus($row['mp_id']))."<span></td>
 								<td>
-								<a href='javascript:void(0)' class='btn btn-flat btn-default amt_pay' data-url='".$this->request->base ."/GymAjax/gymPay/{$row['mp_id']}'>".__('Pay')."</a>
-								<a href='javascript:void(0)' class='btn btn-flat btn-info view_invoice' data-url='".$this->request->base ."/GymAjax/viewInvoice/{$row['mp_id']}'><i class='fa fa-eye'></i></a>";
+								<a href='javascript:void(0)' class='btn1 btn btn-flat btn-default amt_pay' data-url='".$this->request->base ."/GymAjax/gymPay/{$row['mp_id']}'>".__('Pay')."</a>
+								<a href='javascript:void(0)' class='btn1 btn btn-flat btn-info view_invoice' data-url='".$this->request->base ."/GymAjax/viewInvoice/{$row['mp_id']}'><i class='fa fa-eye'></i></a>";
 								if($session["role_name"] == "administrator")
 								{
-									echo " <a href='".$this->request->base ."/MembershipPayment/MembershipEdit/{$row['mp_id']}' class='btn btn-flat btn-primary' title='Edit'><i class='fa fa-edit'></i></a>
-									<a href='".$this->request->base ."/MembershipPayment/deletePayment/{$row['mp_id']}' class='btn btn-flat btn-danger' onclick=\"return confirm('Are you sure,You want to delete this record?')\"><i class='fa fa-trash'></i></a>";
+									echo " <a href='".$this->request->base ."/MembershipPayment/MembershipEdit/{$row['mp_id']}' class='btn1 btn btn-flat btn-primary' title='Edit'><i class='fa fa-edit'></i></a>
+									<a href='".$this->request->base ."/MembershipPayment/deletePayment/{$row['mp_id']}' class='btn1 btn btn-flat btn-danger' onclick=\"return confirm('Are you sure,You want to delete this record?')\"><i class='fa fa-trash'></i></a>";
 								}
 								echo "</td>
 						</tr>";

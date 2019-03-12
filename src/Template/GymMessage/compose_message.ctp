@@ -13,9 +13,7 @@ $(document).ready(function(){
 				<?php echo __("Compose Message");?>
 				<small><?php echo __("Message");?></small>
 			  </h1>
-			  <ol class="breadcrumb">
-				<!-- <a href="<?php // echo $this->Gym->createurl("GymNotice","NoticeList");?>" class="btn btn-flat btn-custom"><i class="fa fa-bars"></i> <?php //echo __("Notice List");?></a> -->
-			 </ol>
+			 
 			</section>
 		</div>
 		<hr>
@@ -38,7 +36,7 @@ $(document).ready(function(){
 				<a href="<?php echo $this->request->base;?>/GymMessage/sent"><i class="fa fa-sign-out"></i>&nbsp;<?php echo __("Sent");?></a></li>                                
 			</ul>
 		</div>
-		<div class="col-md-10">
+		<div class="col-md-10 no-padding-left">
 			 <script type="text/javascript">
 			$(document).ready(function(){
 				$('#message_form').validationEngine();
@@ -49,8 +47,8 @@ $(document).ready(function(){
 			<form name="class_form" action="" method="post" class="form-horizontal" id="message_form">
 			<input type="hidden" name="action" value="insert">
 			<div class="form-group">
-				<label class="col-sm-2 control-label" for="to"><?php echo __("Message To");?> <span class="text-danger">*</span></label>
-				<div class="col-sm-8">
+				<label class="col-md-2 control-label" for="to"><?php echo __("Message To");?> <span class="text-danger">*</span></label>
+				<div class="col-md-8">
 					<?php $options = $this->Gym->get_member_list_for_message();
 					echo $this->Form->select("receiver",$options,["class"=>"form-control text-input"]);
 					?>
@@ -59,36 +57,27 @@ $(document).ready(function(){
 			</div>
 			  <div id="smgt_select_class">
 			<div class="form-group">
-				<label class="col-sm-2 control-label" for="sms_template"><?php echo __("Select Class");?></label>
-				<div class="col-sm-8">				
+				<label class="col-md-2 control-label" for="sms_template"><?php echo __("Select Class");?></label>
+				<div class="col-md-8">				
 					 <?php echo $this->Form->select("class_id",$classes,["empty"=>__("None"),"class"=>"form-control"]); ?>
 				</div>
 			</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label" for="subject"><?php echo __("Subject");?> <span class="text-danger">*</span></label>
-				<div class="col-sm-8">
+				<label class="col-md-2 control-label" for="subject"><?php echo __("Subject");?> <span class="text-danger">*</span></label>
+				<div class="col-md-8">
 				<input id="subject" class="form-control validate[required] text-input" type="text" name="subject">
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label" for="subject"><?php echo __("Message Comment");?> <span class="text-danger">*</span></label>
-				<div class="col-sm-8">
+				<label class="col-md-2 control-label" for="subject"><?php echo __("Message Comment");?> <span class="text-danger">*</span></label>
+				<div class="col-md-8">
 				  <textarea name="message_body" id="message_body" class="form-control validate[required] text-input"></textarea>
 				</div>
 			</div>											
-			<!--	
-			<div id="hmsg_message_sent" class="hmsg_message_none">
+					
 			<div class="form-group">
-				<label class="col-sm-2 control-label" for="sms_template"><?php //echo __("SMS Text");?><span class="require-field">*</span></label>
-				<div class="col-sm-8">
-					<textarea name="sms_template" class="form-control validate[required]" maxlength="160"></textarea>
-					<label><?php //echo __("Max 160 Character");?>.</label>
-				</div>
-			</div>
-			</div> -->			
-			<div class="form-group">
-				<div class="col-sm-10">
+				<div class="col-md-10">
 					<div class="pull-right">
 						<input type="submit" value="<?php echo __("Send Message"); ?>" name="save_message" class="btn btn-flat btn-success">
 					</div>

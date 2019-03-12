@@ -35,7 +35,7 @@ class ReportsController extends AppController
 	public function monthlyworkoutreport()
 	{
 		$mem_tbl = TableRegistry::get("GymMember");
-		$members = $mem_tbl->find("list",["keyField"=>"id","valueField"=>function ($e) { return $e->first_name." ".$e->last_name;}]);
+		$members = $mem_tbl->find("list",["keyField"=>"id","valueField"=>function ($e) { return $e->first_name." ".$e->last_name;}])->where(["role_name"=>"member"]);
 		$this->set("members",$members);
 		
 		$this->set('post',false);
@@ -62,7 +62,6 @@ class ReportsController extends AppController
 			
 			$this->set("member_id",$member_id);
 			$this->set("curr_month",$curr_month);
-			// debug($month);die;
 			
 			$conn = ConnectionManager::get('default');
 			
@@ -87,15 +86,17 @@ class ReportsController extends AppController
 	}
 	public function attendanceReport()
     {
+		$this->set("view",false);
 		if($this->request->is("post"))
 		{
 			$att_tbl = TableRegistry::get("gym_attendance");	
 			$cls_tbl = TableRegistry::get("class_schedule");
 			
-			$sdate = date('Y-m-d',strtotime($this->request->data['sdate']));
-			$edate = date('Y-m-d',strtotime($this->request->data['edate']));
-			//$sdate = '2015-09-01';
-			//$edate = '2015-09-10';
+			//$sdate = date('Y-m-d',strtotime($this->request->data['sdate']));
+			//$edate = date('Y-m-d',strtotime($this->request->data['edate']));
+			$sdate = $this->GYMFunction->get_db_format_date($this->request->data['sdate']);
+			$edate = $this->GYMFunction->get_db_format_date($this->request->data['edate']);
+			
 			$conn = ConnectionManager::get('default');	
 			
 			$report_2 = "SELECT  at.class_id,cl.class_name, 
@@ -115,8 +116,12 @@ class ReportsController extends AppController
 					$chart_array[] = [$result['class_name'],(int)$result["Present"],(int)$result["Absent"]];
 				}
 			}
+			
 			$this->set("report_2",$report_2); 
 			$this->set("chart_array",$chart_array); 
+			$this->set("sdate",$sdate);
+			$this->set("edate",$edate);
+			$this->set("view",true);
 		}
     }
 	
@@ -126,7 +131,6 @@ class ReportsController extends AppController
 		$chart_array = array();
 		$chart_array[] = array('Membership','Number Of Member');
 
-		// $data = $mem_tbl->find("all")->where(["membership_status"=>"Expired"])->orWhere(["membership_status"=>"Continue"])->orWhere(["membership_status"=>"Dropped"]);
 		$data = $mem_tbl->find("all")->where(["role_name"=>"member","OR"=>[["membership_status"=>"Expired"],["membership_status"=>"Continue"],["membership_status"=>"Dropped"]]]);
 		$data = $data->select(["membership_status","count"=>$data->func()->count('membership_status')])->group("membership_status")->hydrate(false)->toArray();
 		if(!empty($data))

@@ -1,6 +1,6 @@
 <?php $session = $this->request->session(); ?>
   <br>
-  <br>
+
   <ul class="sidebar-menu">
 	<li class= "treeview <?php echo ($this->request->controller == "Dashboard") ? "active" : "";?>">
 	  <a href="<?php echo $this->Gym->createurl("Dashboard","index");?>">

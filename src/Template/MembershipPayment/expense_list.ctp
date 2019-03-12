@@ -51,7 +51,7 @@ $(document).ready(function() {
 						echo "<tr>
 								<td>{$row['supplier_name']}</td>
 								<td>". $this->Gym->get_currency_symbol() ." {$row['total_amount']}</td>
-								<td>".date($this->Gym->getSettings("date_format"),strtotime($row["invoice_date"]))."</td>
+								<td>".$this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($row["invoice_date"])))."</td>
 								<td>
 								<a href='javascript:void(0)' class='btn btn-flat btn-info view_income_expense' data-url='".$this->request->base ."/GymAjax/viewIncomeExpense/{$row['id']}' type='expense'><i class='fa fa-eye'></i></a>
 								<a href='".$this->request->base ."/MembershipPayment/expenseEdit/{$row['id']}' class='btn btn-flat btn-primary' title='Edit'><i class='fa fa-edit'></i></a>
@@ -64,7 +64,7 @@ $(document).ready(function() {
 			</tbody>
 			<tfoot>
             <tr>
-				<th><?php  echo __( 'Member Name', 'gym_mgt' ) ;?></th>
+				<th><?php  echo __( 'Supplier Name', 'gym_mgt' ) ;?></th>
 				<th><?php  echo __( 'Amount', 'gym_mgt' ) ;?></th>				
 				<th><?php  echo __( 'Date', 'gym_mgt' ) ;?></th>				
 				<th><?php  echo __( 'Action', 'gym_mgt' ) ;?></th>

@@ -1,8 +1,6 @@
-<?php
-// include_once ROOT . '\webroot\lib\chart\GoogleCharts.class.php';
-?>
+
 <script>
-$(".content-wrapper").css("height","2500px");
+$(".content-wrapper").css("min-height","2500px");
 $(document).ready(function(){	
 $(".sub-history").dataTable({
 		"responsive": true,
@@ -19,7 +17,7 @@ $(".sub-history").dataTable({
 	
 	var box_height = $(".box").height();
 	var box_height = box_height + 100 ;
-	$(".content").css("height",box_height+"px");
+	/* $(".content").css("height",box_height+"px"); */
 });
 </script>
 <section class="content">
@@ -40,22 +38,22 @@ $(".sub-history").dataTable({
 		<hr>
 		<div class="box-body">
 		<div class="row">
-			<div class="col-md-7 no-padding border">
-			<div class="col-md-4 no-padding text-center" style="margin-top: 10%;">
+			<div class="col-md-7 col-sm-12  col-xs-12 no-padding border">
+			<div class="col-md-4 col-sm-4 col-xs-12 no-padding text-center" style="margin-top: 10%;">
 				<?php
-					/* $logo = $this->Gym->getSettings("gym_logo");	 */
+					
 					$logo = $data['image'];
 					$logo = (!empty($logo)) ? "/webroot/upload/". $logo : "Thumbnail-img2.png";
 					echo $this->Html->image($logo,["style"=>"height:217px;width:201px"]);
-				// $date1 = strtr($data['birth_date'], '/', '-');
+				
 				$date = $data['birth_date'];
 				$timestamp = $date->getTimestamp();
 				$date->setTimestamp($timestamp);
-				$birthday = $date->format($this->Gym->getSettings("date_format"));
-				// var_dump($birthday);
+				$birthday = $this->Gym->get_db_format($date->format($this->Gym->getSettings("date_format")));
+				
 				?>
 			</div>
-			<div class="col-md-8 pull-right">
+			<div class="col-md-8 col-sm-7 col-xs-12 pull-right">
 				<br>
 				<table class="table">
 					<tr>
@@ -93,15 +91,10 @@ $(".sub-history").dataTable({
 				</table>
 			</div>
 			</div>
-			<div class="col-md-1">
+			<div class="col-md-1 space_member">
 			</div>
 			<div class="col-md-4 no-padding border">	
-			<!-- <span class="report_title">
-				<span class="fa-stack fa-sm">
-					 <i class="fa fa-circle-thin fa-stack-2x"></i>
-					  <i class="fa fa-align-left fa-stack-1x"></i>					
-				</span> <?php echo __("Moreinfo");?>
-			</span> -->
+			
 					<table class="table table-margin">
 					<tr>
 						<th><i class="fa fa-users"></i>&nbsp;&nbsp;&nbsp;<?php echo __("MemberShip");?></th>
@@ -109,7 +102,7 @@ $(".sub-history").dataTable({
 					</tr>
 					<tr>
 						<th><i class="fa fa-calendar"></i>&nbsp;&nbsp;<?php echo __("Expiry Date");?></th>
-						<td class="txt_color"><?php echo date($this->Gym->getSettings("date_format"),strtotime($data['membership_valid_to']));?></td>
+						<td class="txt_color"><?php echo $this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($data['membership_valid_to'])));?></td>
 					</tr>
 					<tr>
 						<th><i class="fa fa-graduation-cap"></i>&nbsp;&nbsp;<?php echo __("Classes");?></th>
@@ -137,7 +130,7 @@ $(".sub-history").dataTable({
 			</div>
 		</div>
 		<hr>
-		<div class="row view_detail">
+		<div class="row view_detail view_member_detail">
 			<div class="col-md-6 col-sm-6 col-xs-12 border">
 			<span class="report_title">
 				<span class="fa-stack">
@@ -162,7 +155,7 @@ $(".sub-history").dataTable({
 			</script>
 			</div>			
 			
-			<div class="col-md-6 col-sm-6 col-xs-12 border">
+			<div class="col-md-6 col-sm-6 col-xs-12 border view_report_top">
 			<span class="report_title">
 				<span class="fa-stack cutomcircle">
 					<i class="fa fa-line-chart fa-stack-1x"></i>
@@ -212,7 +205,7 @@ $(".sub-history").dataTable({
 			</script>
 			</div>			
 			
-			<div class="col-md-6 col-sm-6 col-xs-12 border">
+			<div class="col-md-6 col-sm-6 col-xs-12 border view_report_top">
 			<span class="report_title">
 				<span class="fa-stack cutomcircle">
 					<i class="fa fa-line-chart fa-stack-1x"></i>
@@ -262,7 +255,7 @@ $(".sub-history").dataTable({
 			</script>
 			</div>			
 			
-			<div class="col-md-6 col-sm-6 col-xs-12 border">
+			<div class="col-md-6 col-sm-6 col-xs-12 border view_report_top">
 			<span class="report_title">
 				<span class="fa-stack cutomcircle">
 					<i class="fa fa-line-chart fa-stack-1x"></i>
@@ -312,7 +305,7 @@ $(".sub-history").dataTable({
 			</script>
 			</div>				
 	
-			<div class="col-md-6 col-sm-6 col-xs-12 border">
+			<div class="col-md-6 col-sm-6 col-xs-12 border view_report_top">
 			<span class="report_title">
 				<span class="fa-stack cutomcircle">
 					<i class="fa fa-line-chart fa-stack-1x"></i>
@@ -344,9 +337,7 @@ $(".sub-history").dataTable({
 						}
 					}
 				?>	
-				<!--<div class="item carousel-margin active">
-					<img src="/priyal/cake_project/cake_gym_management/webroot/upload/1470991358_625915.jpg" alt="image">
-				</div> -->
+				
 			 </div>
 					
 			  <!-- Left and right controls -->
@@ -381,7 +372,7 @@ $(".sub-history").dataTable({
 			</span> 
 			<span class="shiptitle"><?php echo __("Subscription History");?></span>	
 		</span>
-		<table class="table table-striped sub-history">
+		<table class="table table-striped sub-history" width="100%">
 			<thead>				
 				<tr>
 					<th><?php echo __("Membership Title");?></th>
@@ -402,8 +393,8 @@ $(".sub-history").dataTable({
 							<td>{$row["membership"]["membership_label"]}</td>
 							<td>". $this->Gym->get_currency_symbol() ." {$row["membership_amount"]}</td>
 							<td>". $this->Gym->get_currency_symbol() ." ". ($row["membership_amount"] - $row["paid_amount"]) ."</td>
-							<td>".(($row['start_date'] != '')?date($this->Gym->getSettings("date_format"),strtotime($row["start_date"])):'Null')."</td>
-							<td>".(($row['end_date'] != '')?date($this->Gym->getSettings("date_format"),strtotime($row["end_date"])):'Null')."</td>
+							<td>".(($row['start_date'] != '')?$this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($row["start_date"]))):'Null')."</td>
+							<td>".(($row['end_date'] != '')?$this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($row["end_date"]))):'Null')."</td>
 							<td><span class='bg-primary pay_status'>".$this->Gym->get_membership_paymentstatus($row["mp_id"])."</span></td>
 						</tr>";
 				}

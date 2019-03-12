@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Gym Master\n"
-"POT-Creation-Date: 2016-12-07 12:02+0530\n"
-"PO-Revision-Date: 2016-12-07 12:02+0530\n"
+"Project-Id-Version: GYM - Master\n"
+"POT-Creation-Date: 2019-02-18 18:46+0530\n"
+"PO-Revision-Date: 2019-02-19 16:38+0530\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: th\n"
@@ -11,964 +11,1301 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.6\n"
 "X-Poedit-Basepath: ../..\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __\n"
+"X-Poedit-KeywordsList: __;__e\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: Controller/ActivityController.php:38 Template/Activity/activity_list.ctp:42 Template/Membership/view_activity.ctp:50
+#: Controller/ActivityController.php:38 Template/Activity/activity_list.ctp:37
+#: Template/Membership/view_activity.ctp:62
 msgid "Add Activity"
 msgstr "เพิ่มกิจกรรม"
 
-#: Controller/ActivityController.php:69 Controller/GymDailyWorkoutController.php:90 Controller/GymDailyWorkoutController.php:191 Controller/GymDailyWorkoutController.php:263
-#: Controller/GymMemberController.php:127 Controller/GymMemberController.php:262 Controller/MembershipPaymentController.php:199 Controller/MembershipPaymentController.php:321
+#: Controller/ActivityController.php:72
+#: Controller/GymDailyWorkoutController.php:91
+#: Controller/GymDailyWorkoutController.php:194
+#: Controller/GymDailyWorkoutController.php:275
+#: Controller/GymMemberController.php:135
+#: Controller/GymProductController.php:28 Controller/GymStoreController.php:45
+#: Controller/MembershipPaymentController.php:201
+#: Controller/MembershipPaymentController.php:342
 msgid "Success! Record Saved Successfully."
-msgstr "ความสำเร็จ! บันทึกบันทึกเรียบร้อยแล้ว"
+msgstr "ที่ประสบความสำเร็จ! บันทึกสำเร็จแล้ว"
 
-#: Controller/ActivityController.php:80 Controller/GymGroupController.php:74 Controller/GymReservationController.php:75
+#: Controller/ActivityController.php:83 Controller/GymGroupController.php:89
+#: Controller/GymReservationController.php:79
 msgid "Success! Record Deleted Successfully"
-msgstr "ความสำเร็จ! บันทึกลบเรียบร้อยแล้ว"
+msgstr "ที่ประสบความสำเร็จ! บันทึกถูกลบสำเร็จแล้ว"
 
-#: Controller/ActivityController.php:88
+#: Controller/ActivityController.php:91
 msgid "Edit Activity"
 msgstr "แก้ไขกิจกรรม"
 
-#: Controller/ActivityController.php:131 Controller/GymAccountantController.php:80 Controller/GymDailyWorkoutController.php:214 Controller/GymDailyWorkoutController.php:351
-#: Controller/MembershipPaymentController.php:155 Controller/MembershipPaymentController.php:244 Controller/MembershipPaymentController.php:347
-#: Controller/StaffMembersController.php:92
+#: Controller/ActivityController.php:137
+#: Controller/GymAccountantController.php:90
+#: Controller/GymDailyWorkoutController.php:223
+#: Controller/GymDailyWorkoutController.php:436
+#: Controller/GymMemberController.php:286
+#: Controller/GymProductController.php:46 Controller/GymStoreController.php:89
+#: Controller/MembershipPaymentController.php:155
+#: Controller/MembershipPaymentController.php:246
+#: Controller/MembershipPaymentController.php:368
+#: Controller/StaffMembersController.php:105
 msgid "Success! Record Updated Successfully."
-msgstr "ความสำเร็จ! บันทึกการปรับปรุงเรียบร้อยแล้ว"
+msgstr "ที่ประสบความสำเร็จ! บันทึกการอัปเดตเรียบร้อยแล้ว"
 
-#: Controller/AdminProfileController.php:52
+#: Controller/AdminProfileController.php:55
 msgid "Success! Record Saved Successfully.Please login again to see changes."
-msgstr "ความสำเร็จ! บันทึกที่บันทึกไว้ Successfully.Please เข้าสู่ระบบอีกครั้งเพื่อดูการเปลี่ยนแปลง"
+msgstr "ที่ประสบความสำเร็จ! บันทึกสำเร็จแล้วโปรดลงชื่อเข้าใช้อีกครั้งเพื่อดูการเปลี่ยนแปลง"
 
-#: Controller/ClassScheduleController.php:41 Template/ClassSchedule/class_list.ctp:51
+#: Controller/AdminProfileController.php:72
+#: Controller/GeneralSettingController.php:95
+#: Controller/GymAccountantController.php:58
+#: Controller/GymAccountantController.php:106
+#: Controller/GymDailyWorkoutController.php:279
+#: Controller/GymDailyWorkoutController.php:440
+#: Controller/GymGroupController.php:43 Controller/GymGroupController.php:76
+#: Controller/GymMemberController.php:162
+#: Controller/GymMemberController.php:315
+#: Controller/MembershipController.php:71
+#: Controller/MembershipController.php:153
+#: Controller/StaffMembersController.php:66
+#: Controller/StaffMembersController.php:121
+msgid "Invalid File Extension, Please Retry."
+msgstr "นามสกุลไฟล์ไม่ถูกต้องกรุณาลองใหม่"
+
+#: Controller/ClassScheduleController.php:41
+#: Template/ClassSchedule/class_list.ctp:51
 msgid "Add Class Schedule"
 msgstr "เพิ่มตารางเรียน"
 
-#: Controller/ClassScheduleController.php:77 Controller/GymReservationController.php:31 Controller/GymReservationController.php:63 Controller/MembershipController.php:61
+#: Controller/ClassScheduleController.php:80
+#: Controller/GymReservationController.php:33
+#: Controller/MembershipController.php:64
 msgid "Success! Record Saved Successfully"
-msgstr "ความสำเร็จ! บันทึกบันทึกเรียบร้อยแล้ว"
+msgstr "ที่ประสบความสำเร็จ! บันทึกสำเร็จแล้ว"
 
-#: Controller/ClassScheduleController.php:80 Controller/MembershipController.php:139
+#: Controller/ClassScheduleController.php:83
+#: Controller/MembershipController.php:150
 msgid "Error! There was an error while updating,Please try again later."
-msgstr "ข้อผิดพลาด! เกิดข้อผิดพลาดขณะที่การปรับปรุงโปรดลองอีกครั้งในภายหลัง"
+msgstr "ข้อผิดพลาด! เกิดข้อผิดพลาดขณะอัปเดตโปรดลองอีกครั้งในภายหลัง"
 
-#: Controller/ClassScheduleController.php:89
+#: Controller/ClassScheduleController.php:92
 msgid "Edit Class Schedule"
 msgstr "แก้ไขตารางเรียน"
 
-#: Controller/ClassScheduleController.php:137 Controller/GymGroupController.php:61 Controller/MembershipController.php:136
+#: Controller/ClassScheduleController.php:143
+#: Controller/GymGroupController.php:72
+#: Controller/GymReservationController.php:67
+#: Controller/MembershipController.php:147
 msgid "Success! Record Updated Successfully"
-msgstr "ความสำเร็จ! บันทึกการปรับปรุงเรียบร้อยแล้ว"
+msgstr "ที่ประสบความสำเร็จ! บันทึกการอัปเดตเรียบร้อยแล้ว"
 
-#: Controller/ClassScheduleController.php:147 Controller/StaffMembersController.php:115
-msgid "Success! Staff Member Deleted Successfully."
-msgstr "ความสำเร็จ! สมาชิกพนักงานลบเรียบร้อยแล้ว"
+#: Controller/ClassScheduleController.php:153
+msgid "Success! Class Deleted Successfully."
+msgstr "ที่ประสบความสำเร็จ! ลบคลาสสำเร็จแล้ว"
 
-#: Controller/Component/GYMFunctionComponent.php:259 Template/GymMember/view_member.ctp:140
+#: Controller/Component/GYMFunctionComponent.php:262
+#: Template/GymMember/view_member.ctp:146
 msgid "Weight Report"
 msgstr "รายงานน้ำหนัก"
 
-#: Controller/Component/GYMFunctionComponent.php:260 Controller/Component/GYMFunctionComponent.php:266 Controller/Component/GYMFunctionComponent.php:272
-#: Controller/Component/GYMFunctionComponent.php:278 Controller/Component/GYMFunctionComponent.php:284 Controller/Component/GYMFunctionComponent.php:290
-#: Controller/Component/GYMFunctionComponent.php:296 Template/GymMember/view_attendance.ctp:51
+#: Controller/Component/GYMFunctionComponent.php:263
+#: Controller/Component/GYMFunctionComponent.php:269
+#: Controller/Component/GYMFunctionComponent.php:275
+#: Controller/Component/GYMFunctionComponent.php:281
+#: Controller/Component/GYMFunctionComponent.php:287
+#: Controller/Component/GYMFunctionComponent.php:293
+#: Controller/Component/GYMFunctionComponent.php:299
+#: Template/GymMember/view_attendance.ctp:69
 msgid "Day"
 msgstr "วัน"
 
-#: Controller/Component/GYMFunctionComponent.php:265 Template/GymMember/view_member.ctp:190
+#: Controller/Component/GYMFunctionComponent.php:268
+#: Template/GymMember/view_member.ctp:196
 msgid "Thigh Report"
 msgstr "รายงานต้นขา"
 
-#: Controller/Component/GYMFunctionComponent.php:271 Template/GymMember/view_member.ctp:240
+#: Controller/Component/GYMFunctionComponent.php:274
+#: Template/GymMember/view_member.ctp:246
 msgid "Height Report"
-msgstr "รายงานความสูง"
+msgstr "รายงานส่วนสูง"
 
-#: Controller/Component/GYMFunctionComponent.php:277 Template/GymMember/view_member.ctp:264
+#: Controller/Component/GYMFunctionComponent.php:280
+#: Template/GymMember/view_member.ctp:270
 msgid "Chest Report"
 msgstr "รายงานหน้าอก"
 
-#: Controller/Component/GYMFunctionComponent.php:283 Template/GymMember/view_member.ctp:164
+#: Controller/Component/GYMFunctionComponent.php:286
+#: Template/GymMember/view_member.ctp:170
 msgid "Waist Report"
-msgstr "รายงานเอว"
+msgstr "รายงานรอบเอว"
 
-#: Controller/Component/GYMFunctionComponent.php:289 Template/GymMember/view_member.ctp:214
+#: Controller/Component/GYMFunctionComponent.php:292
+#: Template/GymMember/view_member.ctp:220
 msgid "Arms Report"
-msgstr "รายงานแขน"
+msgstr "รายงานอาวุธ"
 
-#: Controller/Component/GYMFunctionComponent.php:295 Template/GymMember/view_member.ctp:290
+#: Controller/Component/GYMFunctionComponent.php:298
+#: Template/GymMember/view_member.ctp:296
 msgid "Fat Report"
 msgstr "รายงานไขมัน"
 
-#: Controller/Component/GYMFunctionComponent.php:378
+#: Controller/Component/GYMFunctionComponent.php:379
+msgid "Fully Paid"
+msgstr "จ่ายเต็มแล้ว"
+
+#: Controller/Component/GYMFunctionComponent.php:381
 msgid "Not Paid"
-msgstr "ไม่ได้ชำระเงิน"
+msgstr "ไม่จ่ายเงิน"
 
-#: Controller/Component/GYMFunctionComponent.php:380
+#: Controller/Component/GYMFunctionComponent.php:383
 msgid "Partially Paid"
-msgstr "ที่เรียกชำระแล้วบางส่วน"
+msgstr "จ่ายบางส่วน"
 
-#: Controller/Component/GYMFunctionComponent.php:579
+#: Controller/Component/GYMFunctionComponent.php:586
 msgid "Membership Reminder Alert!"
-msgstr "แจ้งเตือนสมาชิกแจ้งเตือน!"
+msgstr "การแจ้งเตือนการแจ้งเตือนสมาชิก!"
 
-#: Controller/Component/GYMFunctionComponent.php:615
+#: Controller/Component/GYMFunctionComponent.php:622
 msgid "January"
 msgstr "มกราคม"
 
-#: Controller/Component/GYMFunctionComponent.php:615
+#: Controller/Component/GYMFunctionComponent.php:622
 msgid "February"
 msgstr "กุมภาพันธ์"
 
-#: Controller/Component/GYMFunctionComponent.php:615
+#: Controller/Component/GYMFunctionComponent.php:622
 msgid "March"
 msgstr "มีนาคม"
 
-#: Controller/Component/GYMFunctionComponent.php:615
+#: Controller/Component/GYMFunctionComponent.php:622
 msgid "April"
 msgstr "เมษายน"
 
-#: Controller/Component/GYMFunctionComponent.php:616
+#: Controller/Component/GYMFunctionComponent.php:623
 msgid "May"
-msgstr "พฤษภาคม"
+msgstr "อาจ"
 
-#: Controller/Component/GYMFunctionComponent.php:616
+#: Controller/Component/GYMFunctionComponent.php:623
 msgid "June"
 msgstr "มิถุนายน"
 
-#: Controller/Component/GYMFunctionComponent.php:616
+#: Controller/Component/GYMFunctionComponent.php:623
 msgid "July"
 msgstr "กรกฎาคม"
 
-#: Controller/Component/GYMFunctionComponent.php:616
+#: Controller/Component/GYMFunctionComponent.php:623
 msgid "August"
 msgstr "สิงหาคม"
 
-#: Controller/Component/GYMFunctionComponent.php:616
+#: Controller/Component/GYMFunctionComponent.php:623
 msgid "September"
 msgstr "กันยายน"
 
-#: Controller/Component/GYMFunctionComponent.php:616
+#: Controller/Component/GYMFunctionComponent.php:623
 msgid "October"
 msgstr "ตุลาคม"
 
-#: Controller/Component/GYMFunctionComponent.php:616
+#: Controller/Component/GYMFunctionComponent.php:623
 msgid "November"
 msgstr "พฤศจิกายน"
 
-#: Controller/Component/GYMFunctionComponent.php:616
+#: Controller/Component/GYMFunctionComponent.php:623
 msgid "December"
 msgstr "ธันวาคม"
 
-#: Controller/Component/GYMFunctionComponent.php:617
+#: Controller/Component/GYMFunctionComponent.php:624
 msgid "You are not authorized to access that location."
-msgstr "คุณยังไม่ได้รับอนุญาตให้เข้าถึงสถานที่ที่"
+msgstr "คุณไม่ได้รับอนุญาตให้เข้าถึงตำแหน่งนั้น"
 
-#: Controller/DashboardController.php:106 Controller/ReportsController.php:57 Template/Dashboard/dashboard.ctp:212 Template/GymAttendance/attendance.ctp:61
-#: Template/GymMember/add_member.ctp:350 Template/GymNotice/add_notice.ctp:44 Template/GymNotice/notice_list.ctp:44 Template/GymNotice/notice_list.ctp:73
-#: Template/MemberRegistration/index.ctp:153 Template/Reports/attendance_report.ctp:58
+#: Controller/DashboardController.php:106 Controller/ReportsController.php:109
+#: Template/Dashboard/dashboard.ctp:215
+#: Template/GymAttendance/attendance.ctp:80
+#: Template/GymMember/add_member.ctp:430 Template/GymNotice/add_notice.ctp:73
+#: Template/GymNotice/notice_list.ctp:44 Template/GymNotice/notice_list.ctp:73
+#: Template/MemberRegistration/index.ctp:266
+#: Template/Reports/attendance_report.ctp:87
 msgid "Class"
-msgstr "ชั้นเรียน"
+msgstr "ชั้น"
 
-#: Controller/DashboardController.php:106 Controller/DashboardController.php:133 Controller/ReportsController.php:57 Template/GymAttendance/attendance.ctp:68
-#: Template/GymAttendance/staff_attendance.ctp:53
+#: Controller/DashboardController.php:106
+#: Controller/DashboardController.php:133 Controller/ReportsController.php:109
+#: Template/GymAttendance/attendance.ctp:91
+#: Template/GymAttendance/staff_attendance.ctp:58
 msgid "Present"
 msgstr "ปัจจุบัน"
 
-#: Controller/DashboardController.php:106 Controller/DashboardController.php:133 Controller/ReportsController.php:57 Template/GymAttendance/attendance.ctp:70
-#: Template/GymAttendance/staff_attendance.ctp:55
+#: Controller/DashboardController.php:106
+#: Controller/DashboardController.php:133 Controller/ReportsController.php:109
+#: Template/GymAttendance/attendance.ctp:93
+#: Template/GymAttendance/staff_attendance.ctp:60
 msgid "Absent"
-msgstr "ขาดเรียน"
+msgstr "ขาด"
 
-#: Controller/DashboardController.php:133 Template/Cell/GymRenderMenu/admin_menu.ctp:84 Template/Dashboard/dashboard.ctp:69 Template/Dashboard/dashboard.ctp:266
-#: Template/Dashboard/member_dashboard.ctp:67 Template/Dashboard/staff_acc_dashboard.ctp:67 Template/Element/sidebar.ctp:66 Template/GymAccessright/access_right.ctp:24
-#: Template/GymAccessright/access_right.ctp:31 Template/GymMember/view_member.ctp:117 Template/GymNotice/add_notice.ctp:38 Template/StaffMembers/add_staff.ctp:37
-#: Template/StaffMembers/staff_list.ctp:38
+#: Controller/DashboardController.php:133
+#: Template/Cell/GymRenderMenu/admin_menu.ctp:84
+#: Template/Dashboard/dashboard.ctp:70 Template/Dashboard/dashboard.ctp:269
+#: Template/Dashboard/member_dashboard.ctp:79
+#: Template/Dashboard/staff_acc_dashboard.ctp:89
+#: Template/Element/sidebar.ctp:66 Template/GymAccessright/access_right.ctp:24
+#: Template/GymAccessright/access_right.ctp:33
+#: Template/GymMember/view_member.ctp:123 Template/GymNotice/add_notice.ctp:67
+#: Template/StaffMembers/add_staff.ctp:47
+#: Template/StaffMembers/staff_list.ctp:31
 msgid "Staff Member"
-msgstr "สมาชิกพนักงาน"
+msgstr "พนักงานสมาชิก"
 
-#: Controller/GeneralSettingController.php:56 Controller/GeneralSettingController.php:77
+#: Controller/GeneralSettingController.php:65
+#: Controller/GeneralSettingController.php:89
 msgid "Success! Settings Saved Successfully."
-msgstr "ความสำเร็จ! การตั้งค่าการบันทึกเรียบร้อยแล้ว"
+msgstr "ที่ประสบความสำเร็จ! บันทึกการตั้งค่าสำเร็จแล้ว"
 
-#: Controller/GymAccessrightController.php:247
+#: Controller/GymAccessrightController.php:249
 msgid "Success! Settings Saved successfully."
-msgstr "ความสำเร็จ! ประสบความสำเร็จในการตั้งค่าที่บันทึกไว้"
+msgstr "ที่ประสบความสำเร็จ! บันทึกการตั้งค่าสำเร็จแล้ว"
 
-#: Controller/GymAccountantController.php:23 Template/GymAccountant/accountant_list.ctp:43
+#: Controller/GymAccountantController.php:23
+#: Template/GymAccountant/accountant_list.ctp:43
 msgid "Add Accountant"
-msgstr "เพิ่มบัญชี"
+msgstr "เพิ่มนักบัญชี"
 
-#: Controller/GymAccountantController.php:39 Controller/GymNoticeController.php:62 Controller/GymProductController.php:25 Controller/GymStoreController.php:35
-#: Controller/StaffMembersController.php:44
+#: Controller/GymAccountantController.php:42
+#: Controller/GymNoticeController.php:62
+#: Controller/StaffMembersController.php:50
 msgid "Success! Record Successfully Saved."
-msgstr "ความสำเร็จ! บันทึกบันทึกเรียบร้อยแล้ว"
+msgstr "ที่ประสบความสำเร็จ! บันทึกสำเร็จแล้ว"
 
-#: Controller/GymAccountantController.php:60
+#: Controller/GymAccountantController.php:67
 msgid "Edit Accountant"
-msgstr "แก้ไขบัญชี"
+msgstr "แก้ไขนักบัญชี"
 
-#: Controller/GymAccountantController.php:103 Controller/MembershipPaymentController.php:359
+#: Controller/GymAccountantController.php:117
+#: Controller/MembershipPaymentController.php:380
 msgid "Success! Accountant Deleted Successfully."
-msgstr "ความสำเร็จ! บัญชีลบเรียบร้อยแล้ว"
+msgstr "ที่ประสบความสำเร็จ! ลบบัญชีสำเร็จแล้ว"
 
-#: Controller/GymAjaxController.php:25
+#: Controller/GymAjaxController.php:27 Controller/GymAjaxController1.php:25
 msgid "Add/Remove Category"
 msgstr "เพิ่ม / ลบหมวดหมู่"
 
-#: Controller/GymAjaxController.php:30
+#: Controller/GymAjaxController.php:32 Controller/GymAjaxController1.php:30
 msgid "enter category name"
-msgstr "ใส่ชื่อหมวดหมู่"
+msgstr "ป้อนชื่อหมวดหมู่"
 
-#: Controller/GymAjaxController.php:33 Controller/GymAjaxController.php:121 Template/Activity/add_activity.ctp:41 Template/Membership/add.ctp:83
+#: Controller/GymAjaxController.php:35 Controller/GymAjaxController.php:123
+#: Controller/GymAjaxController1.php:33 Controller/GymAjaxController1.php:121
+#: Template/Activity/add_activity.ctp:52 Template/Membership/add.ctp:93
 #: Template/Membership/edit_membership.ctp:31
 msgid "Add Category"
 msgstr "เพิ่มหมวดหมู่"
 
-#: Controller/GymAjaxController.php:42 Controller/GymAjaxController.php:214 Controller/GymAjaxController.php:295
+#: Controller/GymAjaxController.php:44 Controller/GymAjaxController.php:216
+#: Controller/GymAjaxController.php:297 Controller/GymAjaxController1.php:42
+#: Controller/GymAjaxController1.php:214 Controller/GymAjaxController1.php:295
 msgid "Category"
-msgstr "หมวดหมู่"
+msgstr "ประเภท"
 
-#: Controller/GymAjaxController.php:43 Controller/GymAjaxController.php:131 Controller/GymAjaxController.php:215 Controller/GymAjaxController.php:296
-#: Controller/GymAjaxController.php:376 Controller/GymAjaxController.php:454 Controller/GymAjaxController.php:551 Controller/GymAjaxController.php:886
-#: Controller/GymAjaxController.php:992 Template/Activity/activity_list.ctp:55 Template/Activity/activity_list.ctp:79 Template/ClassSchedule/add_class.ctp:117
-#: Template/ClassSchedule/class_list.ctp:66 Template/ClassSchedule/class_list.ctp:94 Template/GymAccountant/accountant_list.ctp:57
-#: Template/GymAccountant/accountant_list.ctp:87 Template/GymAssignWorkout/workout_log.ctp:55 Template/GymAssignWorkout/workout_log.ctp:79
-#: Template/GymDailyWorkout/workout_list.ctp:59 Template/GymDailyWorkout/workout_list.ctp:85 Template/GymGroup/group_list.ctp:47 Template/GymGroup/group_list.ctp:78
-#: Template/GymMember/member_list.ctp:72 Template/GymMember/member_list.ctp:120 Template/GymNotice/notice_list.ctp:45 Template/GymNotice/notice_list.ctp:74
-#: Template/GymNutrition/nutrition_list.ctp:55 Template/GymNutrition/nutrition_list.ctp:78 Template/GymProduct/product_list.ctp:55 Template/GymProduct/product_list.ctp:78
-#: Template/GymReservation/reservation_list.ctp:63 Template/GymReservation/reservation_list.ctp:91 Template/GymStore/sell_record.ctp:38 Template/GymStore/sell_record.ctp:61
-#: Template/Membership/membership_list.ctp:58 Template/Membership/membership_list.ctp:99 Template/Membership/view_activity.ctp:63 Template/Membership/view_activity.ctp:87
-#: Template/MembershipPayment/expense_list.ctp:42 Template/MembershipPayment/expense_list.ctp:70 Template/MembershipPayment/income_list.ctp:42
-#: Template/MembershipPayment/income_list.ctp:70 Template/MembershipPayment/payment_list.ctp:57 Template/MembershipPayment/payment_list.ctp:102
-#: Template/StaffMembers/staff_list.ctp:59 Template/StaffMembers/staff_list.ctp:89
+#: Controller/GymAjaxController.php:45 Controller/GymAjaxController.php:133
+#: Controller/GymAjaxController.php:217 Controller/GymAjaxController.php:298
+#: Controller/GymAjaxController.php:378 Controller/GymAjaxController.php:456
+#: Controller/GymAjaxController.php:554 Controller/GymAjaxController.php:930
+#: Controller/GymAjaxController.php:1036 Controller/GymAjaxController1.php:43
+#: Controller/GymAjaxController1.php:131 Controller/GymAjaxController1.php:215
+#: Controller/GymAjaxController1.php:296 Controller/GymAjaxController1.php:376
+#: Controller/GymAjaxController1.php:454 Controller/GymAjaxController1.php:551
+#: Controller/GymAjaxController1.php:886 Controller/GymAjaxController1.php:992
+#: Template/Activity/activity_list.ctp:51
+#: Template/Activity/activity_list.ctp:79
+#: Template/ClassSchedule/add_class.ctp:141
+#: Template/ClassSchedule/class_list.ctp:67
+#: Template/ClassSchedule/class_list.ctp:101
+#: Template/GymAccountant/accountant_list.ctp:58
+#: Template/GymAccountant/accountant_list.ctp:92
+#: Template/GymAssignWorkout/workout_log.ctp:55
+#: Template/GymAssignWorkout/workout_log.ctp:79
+#: Template/GymDailyWorkout/workout_list.ctp:59
+#: Template/GymDailyWorkout/workout_list.ctp:85
+#: Template/GymGroup/group_list.ctp:47 Template/GymGroup/group_list.ctp:78
+#: Template/GymMember/member_list.ctp:62 Template/GymMember/member_list.ctp:115
+#: Template/GymNotice/notice_list.ctp:45 Template/GymNotice/notice_list.ctp:74
+#: Template/GymNutrition/nutrition_list.ctp:55
+#: Template/GymNutrition/nutrition_list.ctp:79
+#: Template/GymProduct/product_list.ctp:51
+#: Template/GymProduct/product_list.ctp:80
+#: Template/GymReservation/reservation_list.ctp:57
+#: Template/GymReservation/reservation_list.ctp:89
+#: Template/GymStore/sell_record.ctp:38 Template/GymStore/sell_record.ctp:65
+#: Template/Membership/membership_list.ctp:59
+#: Template/Membership/membership_list.ctp:107
+#: Template/Membership/view_activity.ctp:76
+#: Template/Membership/view_activity.ctp:100
+#: Template/MembershipPayment/expense_list.ctp:42
+#: Template/MembershipPayment/expense_list.ctp:70
+#: Template/MembershipPayment/income_list.ctp:42
+#: Template/MembershipPayment/income_list.ctp:70
+#: Template/MembershipPayment/payment_list.ctp:57
+#: Template/MembershipPayment/payment_list.ctp:102
+#: Template/StaffMembers/staff_list.ctp:53
+#: Template/StaffMembers/staff_list.ctp:86
 msgid "Action"
-msgstr "การดำเนินการ"
+msgstr "การกระทำ"
 
-#: Controller/GymAjaxController.php:53 Controller/GymAjaxController.php:79 Controller/GymAjaxController.php:141 Controller/GymAjaxController.php:168
-#: Controller/GymAjaxController.php:227 Controller/GymAjaxController.php:253 Controller/GymAjaxController.php:308 Controller/GymAjaxController.php:336
-#: Controller/GymAjaxController.php:388 Controller/GymAjaxController.php:414 Controller/GymAjaxController.php:466 Controller/GymAjaxController.php:492
-#: Controller/GymAjaxController.php:563 Controller/GymAjaxController.php:590 Controller/GymAjaxController.php:1004 Controller/GymAjaxController.php:1032
-#: Template/ClassSchedule/view_schedule.ctp:39 Template/GymMessage/view_message.ctp:47 Template/GymNotice/notice_list.ctp:61 Template/GymProduct/product_list.ctp:68
-#: Template/GymStore/sell_record.ctp:51 Template/MembershipPayment/add_expense.ctp:62 Template/MembershipPayment/add_expense.ctp:84
-#: Template/MembershipPayment/add_income.ctp:73 Template/MembershipPayment/add_income.ctp:95
+#: Controller/GymAjaxController.php:55 Controller/GymAjaxController.php:81
+#: Controller/GymAjaxController.php:143 Controller/GymAjaxController.php:170
+#: Controller/GymAjaxController.php:229 Controller/GymAjaxController.php:255
+#: Controller/GymAjaxController.php:310 Controller/GymAjaxController.php:338
+#: Controller/GymAjaxController.php:390 Controller/GymAjaxController.php:416
+#: Controller/GymAjaxController.php:468 Controller/GymAjaxController.php:494
+#: Controller/GymAjaxController.php:566 Controller/GymAjaxController.php:593
+#: Controller/GymAjaxController.php:1048 Controller/GymAjaxController.php:1107
+#: Controller/GymAjaxController1.php:53 Controller/GymAjaxController1.php:79
+#: Controller/GymAjaxController1.php:141 Controller/GymAjaxController1.php:168
+#: Controller/GymAjaxController1.php:227 Controller/GymAjaxController1.php:253
+#: Controller/GymAjaxController1.php:308 Controller/GymAjaxController1.php:336
+#: Controller/GymAjaxController1.php:388 Controller/GymAjaxController1.php:414
+#: Controller/GymAjaxController1.php:466 Controller/GymAjaxController1.php:492
+#: Controller/GymAjaxController1.php:563 Controller/GymAjaxController1.php:590
+#: Controller/GymAjaxController1.php:1004
+#: Controller/GymAjaxController1.php:1032
+#: Template/ClassSchedule/view_schedule.ctp:48
+#: Template/GymMessage/view_message.ctp:47
+#: Template/GymNotice/notice_list.ctp:61
+#: Template/GymProduct/product_list.ctp:67 Template/GymStore/sell_record.ctp:54
+#: Template/MembershipPayment/add_expense.ctp:70
+#: Template/MembershipPayment/add_expense.ctp:92
+#: Template/MembershipPayment/add_income.ctp:85
+#: Template/MembershipPayment/add_income.ctp:107
 msgid "Delete"
 msgstr "ลบ"
 
-#: Controller/GymAjaxController.php:63 Controller/GymAjaxController.php:151 Controller/GymAjaxController.php:238 Controller/GymAjaxController.php:319
-#: Controller/GymAjaxController.php:399 Controller/GymAjaxController.php:477 Controller/GymAjaxController.php:574 Controller/GymAjaxController.php:917
-#: Controller/GymAjaxController.php:1015 Controller/GymAjaxController.php:1080 Controller/GymAjaxController.php:1132 Controller/GymAjaxController.php:1284
-#: Controller/GymAjaxController.php:1420 Controller/GymAjaxController.php:1466
+#: Controller/GymAjaxController.php:65 Controller/GymAjaxController.php:153
+#: Controller/GymAjaxController.php:240 Controller/GymAjaxController.php:321
+#: Controller/GymAjaxController.php:401 Controller/GymAjaxController.php:479
+#: Controller/GymAjaxController.php:577 Controller/GymAjaxController.php:961
+#: Controller/GymAjaxController.php:1059 Controller/GymAjaxController.php:1155
+#: Controller/GymAjaxController.php:1212 Controller/GymAjaxController.php:1368
+#: Controller/GymAjaxController.php:1504 Controller/GymAjaxController.php:1550
+#: Controller/GymAjaxController1.php:63 Controller/GymAjaxController1.php:151
+#: Controller/GymAjaxController1.php:238 Controller/GymAjaxController1.php:319
+#: Controller/GymAjaxController1.php:399 Controller/GymAjaxController1.php:477
+#: Controller/GymAjaxController1.php:574 Controller/GymAjaxController1.php:917
+#: Controller/GymAjaxController1.php:1015
+#: Controller/GymAjaxController1.php:1080
+#: Controller/GymAjaxController1.php:1132
+#: Controller/GymAjaxController1.php:1284
+#: Controller/GymAjaxController1.php:1420
+#: Controller/GymAjaxController1.php:1466
 msgid "Close"
 msgstr "ปิด"
 
-#: Controller/GymAjaxController.php:104
-msgid "Add/Remove Instalment Plan"
-msgstr "เพิ่ม / ลบแผนงวด"
+#: Controller/GymAjaxController.php:106 Controller/GymAjaxController1.php:104
+msgid "Add/Remove Installment Plan"
+msgstr "เพิ่ม / ลบแผนการผ่อนชำระ"
 
-#: Controller/GymAjaxController.php:109
+#: Controller/GymAjaxController.php:111 Controller/GymAjaxController1.php:109
 msgid "Enter Duration Number"
-msgstr "ใส่จำนวนระยะเวลา"
+msgstr "ป้อนหมายเลขระยะเวลา"
 
-#: Controller/GymAjaxController.php:113
+#: Controller/GymAjaxController.php:115 Controller/GymAjaxController1.php:113
 msgid "Select Duration"
-msgstr "เลือกช่วงเวลา"
+msgstr "เลือกระยะเวลา"
 
-#: Controller/GymAjaxController.php:114 Template/ClassSchedule/add_class.ctp:117
+#: Controller/GymAjaxController.php:116 Controller/GymAjaxController1.php:114
+#: Template/ClassSchedule/add_class.ctp:141
 msgid "Days"
 msgstr "วัน"
 
-#: Controller/GymAjaxController.php:115
+#: Controller/GymAjaxController.php:117 Controller/GymAjaxController1.php:115
 msgid "Week"
 msgstr "สัปดาห์"
 
-#: Controller/GymAjaxController.php:116 Template/Dashboard/dashboard.ctp:160 Template/Reports/payment_report.ctp:33
+#: Controller/GymAjaxController.php:118 Controller/GymAjaxController1.php:116
+#: Template/Dashboard/dashboard.ctp:163
+#: Template/Reports/monthlyworkoutreport.ctp:58
+#: Template/Reports/payment_report.ctp:39
 msgid "Month"
 msgstr "เดือน"
 
-#: Controller/GymAjaxController.php:117
+#: Controller/GymAjaxController.php:119 Controller/GymAjaxController1.php:117
 msgid "Year"
 msgstr "ปี"
 
-#: Controller/GymAjaxController.php:130
+#: Controller/GymAjaxController.php:132 Controller/GymAjaxController1.php:130
 msgid "Plan"
-msgstr "แผน"
+msgstr "วางแผน"
 
-#: Controller/GymAjaxController.php:197
+#: Controller/GymAjaxController.php:199 Controller/GymAjaxController1.php:197
 msgid "Add/Remove Role"
 msgstr "เพิ่ม / ลบบทบาท"
 
-#: Controller/GymAjaxController.php:202
+#: Controller/GymAjaxController.php:204 Controller/GymAjaxController1.php:202
 msgid "Enter Role"
-msgstr "ใส่บทบาท"
+msgstr "เข้าสู่บทบาท"
 
-#: Controller/GymAjaxController.php:205 Controller/GymAjaxController.php:286
+#: Controller/GymAjaxController.php:207 Controller/GymAjaxController.php:288
+#: Controller/GymAjaxController1.php:205 Controller/GymAjaxController1.php:286
 msgid "Add Role"
 msgstr "เพิ่มบทบาท"
 
-#: Controller/GymAjaxController.php:230 Controller/GymAjaxController.php:311 Controller/GymAjaxController.php:1007
+#: Controller/GymAjaxController.php:232 Controller/GymAjaxController1.php:230
+#: Controller/GymAjaxController1.php:311 Controller/GymAjaxController1.php:1007
 msgid "No roles added"
-msgstr "ไม่มีบทบาทเพิ่ม"
+msgstr "ไม่มีการเพิ่มบทบาท"
 
-#: Controller/GymAjaxController.php:278
+#: Controller/GymAjaxController.php:280 Controller/GymAjaxController1.php:278
 msgid "Add/Remove Specialization"
 msgstr "เพิ่ม / ลบความเชี่ยวชาญ"
 
-#: Controller/GymAjaxController.php:283
+#: Controller/GymAjaxController.php:285 Controller/GymAjaxController1.php:283
 msgid "Enter Specialization"
-msgstr "ใส่ความเชี่ยวชาญ"
+msgstr "เข้าสู่ความเชี่ยวชาญ"
 
-#: Controller/GymAjaxController.php:358
+#: Controller/GymAjaxController.php:313
+msgid "No Specialization added"
+msgstr "ไม่มีการเพิ่มความเชี่ยวชาญ"
+
+#: Controller/GymAjaxController.php:360 Controller/GymAjaxController1.php:358
 msgid "Add/Remove Interest"
-msgstr "เพิ่ม / เอาดอกเบี้ย"
+msgstr "เพิ่ม / ลบความสนใจ"
 
-#: Controller/GymAjaxController.php:363
+#: Controller/GymAjaxController.php:365 Controller/GymAjaxController1.php:363
 msgid "Enter Interest"
 msgstr "ใส่ความสนใจ"
 
-#: Controller/GymAjaxController.php:366
+#: Controller/GymAjaxController.php:368 Controller/GymAjaxController1.php:366
 msgid "Add Interest"
-msgstr "เพิ่มความน่าสนใจ"
+msgstr "เพิ่มความสนใจ"
 
-#: Controller/GymAjaxController.php:375
+#: Controller/GymAjaxController.php:377 Controller/GymAjaxController1.php:375
 msgid "Interest"
-msgstr "ดอกเบี้"
+msgstr "ดอกเบี้ย"
 
-#: Controller/GymAjaxController.php:391 Controller/GymAjaxController.php:469 Controller/GymAjaxController.php:566
+#: Controller/GymAjaxController.php:393 Controller/GymAjaxController.php:471
+#: Controller/GymAjaxController.php:569 Controller/GymAjaxController1.php:391
+#: Controller/GymAjaxController1.php:469 Controller/GymAjaxController1.php:566
 msgid "No record added yet"
-msgstr "ไม่มีการบันทึกเพิ่มเลย"
+msgstr "ยังไม่มีการเพิ่มบันทึก"
 
-#: Controller/GymAjaxController.php:436
+#: Controller/GymAjaxController.php:438 Controller/GymAjaxController1.php:436
 msgid "Add/Remove Source"
 msgstr "เพิ่ม / ลบแหล่งที่มา"
 
-#: Controller/GymAjaxController.php:441
+#: Controller/GymAjaxController.php:443 Controller/GymAjaxController1.php:441
 msgid "Enter Source"
-msgstr "ใส่มา"
+msgstr "ป้อนที่มา"
 
-#: Controller/GymAjaxController.php:444
+#: Controller/GymAjaxController.php:446 Controller/GymAjaxController1.php:444
 msgid "Add Source"
 msgstr "เพิ่มแหล่งที่มา"
 
-#: Controller/GymAjaxController.php:453
+#: Controller/GymAjaxController.php:455 Controller/GymAjaxController1.php:453
 msgid "Source List"
-msgstr "แหล่งที่มาของรายการ"
+msgstr "รายการแหล่งที่มา"
 
-#: Controller/GymAjaxController.php:533
+#: Controller/GymAjaxController.php:536 Controller/GymAjaxController1.php:533
 msgid "Add/Remove Levels"
-msgstr "Add / Remove ระดับ"
+msgstr "เพิ่ม / ลบระดับ"
 
-#: Controller/GymAjaxController.php:538
+#: Controller/GymAjaxController.php:541 Controller/GymAjaxController1.php:538
 msgid "Enter Level"
-msgstr "ใส่ระดับ"
+msgstr "เข้าสู่ระดับ"
 
-#: Controller/GymAjaxController.php:541 Controller/GymAjaxController.php:726 Template/GymAssignWorkout/assign_workout.ctp:78
+#: Controller/GymAjaxController.php:544 Controller/GymAjaxController.php:742
+#: Controller/GymAjaxController1.php:541 Controller/GymAjaxController1.php:726
+#: Template/GymAssignWorkout/assign_workout.ctp:99
+#: Template/GymAssignWorkout/assign_workout1.ctp:78
 msgid "Add Level"
 msgstr "เพิ่มระดับ"
 
-#: Controller/GymAjaxController.php:550
+#: Controller/GymAjaxController.php:553 Controller/GymAjaxController1.php:550
 msgid "Levels"
 msgstr "ระดับ"
 
-#: Controller/GymAjaxController.php:673 Controller/GymAjaxController.php:750 Template/Activity/activity_list.ctp:36 Template/Activity/add_activity.ctp:21
-#: Template/Cell/GymRenderMenu/admin_menu.ctp:96 Template/Element/sidebar.ctp:78 Template/GymAccessright/access_right.ctp:151 Template/GymAssignWorkout/assign_workout.ctp:175
-#: Template/GymAssignWorkout/member_assiged_workout.ctp:63 Template/GymAssignWorkout/print_workout.ctp:60
+#: Controller/GymAjaxController.php:686 Controller/GymAjaxController.php:768
+#: Controller/GymAjaxController1.php:673 Controller/GymAjaxController1.php:750
+#: Template/Activity/activity_list.ctp:31 Template/Activity/add_activity.ctp:32
+#: Template/Cell/GymRenderMenu/admin_menu.ctp:96
+#: Template/Element/sidebar.ctp:78 Template/GymAccessright/access_right.ctp:153
+#: Template/GymAssignWorkout/assign_workout.ctp:197
+#: Template/GymAssignWorkout/assign_workout1.ctp:175
+#: Template/GymAssignWorkout/member_assiged_workout.ctp:63
+#: Template/GymAssignWorkout/print_workout.ctp:60
 msgid "Activity"
 msgstr "กิจกรรม"
 
-#: Controller/GymAjaxController.php:674 Controller/GymAjaxController.php:686 Controller/GymAjaxController.php:751 Template/GymAssignWorkout/assign_workout.ctp:176
-#: Template/GymAssignWorkout/member_assiged_workout.ctp:64 Template/GymAssignWorkout/print_workout.ctp:61
+#: Controller/GymAjaxController.php:687 Controller/GymAjaxController.php:699
+#: Controller/GymAjaxController.php:769 Controller/GymAjaxController1.php:674
+#: Controller/GymAjaxController1.php:686 Controller/GymAjaxController1.php:751
+#: Template/GymAssignWorkout/assign_workout.ctp:198
+#: Template/GymAssignWorkout/assign_workout1.ctp:176
+#: Template/GymAssignWorkout/member_assiged_workout.ctp:64
+#: Template/GymAssignWorkout/print_workout.ctp:61
+#: Template/Reports/monthlyworkoutreport.ctp:79
 msgid "Sets"
 msgstr "ชุด"
 
-#: Controller/GymAjaxController.php:675 Controller/GymAjaxController.php:687 Controller/GymAjaxController.php:752 Template/GymAssignWorkout/assign_workout.ctp:177
-#: Template/GymAssignWorkout/member_assiged_workout.ctp:65 Template/GymAssignWorkout/print_workout.ctp:62
+#: Controller/GymAjaxController.php:688 Controller/GymAjaxController.php:700
+#: Controller/GymAjaxController.php:770 Controller/GymAjaxController1.php:675
+#: Controller/GymAjaxController1.php:687 Controller/GymAjaxController1.php:752
+#: Template/GymAssignWorkout/assign_workout.ctp:199
+#: Template/GymAssignWorkout/assign_workout1.ctp:177
+#: Template/GymAssignWorkout/member_assiged_workout.ctp:65
+#: Template/GymAssignWorkout/print_workout.ctp:62
+#: Template/Reports/monthlyworkoutreport.ctp:80
 msgid "Reps"
 msgstr "พนักงาน"
 
-#: Controller/GymAjaxController.php:676 Controller/GymAjaxController.php:753 Template/GymAssignWorkout/assign_workout.ctp:178
-#: Template/GymAssignWorkout/member_assiged_workout.ctp:66 Template/GymAssignWorkout/print_workout.ctp:63
+#: Controller/GymAjaxController.php:689 Controller/GymAjaxController.php:771
+#: Controller/GymAjaxController1.php:676 Controller/GymAjaxController1.php:753
+#: Template/GymAssignWorkout/assign_workout.ctp:200
+#: Template/GymAssignWorkout/assign_workout1.ctp:178
+#: Template/GymAssignWorkout/member_assiged_workout.ctp:66
+#: Template/GymAssignWorkout/print_workout.ctp:63
 msgid "KG"
 msgstr "กิโลกรัม"
 
-#: Controller/GymAjaxController.php:677 Controller/GymAjaxController.php:754 Template/GymAssignWorkout/assign_workout.ctp:179
-#: Template/GymAssignWorkout/member_assiged_workout.ctp:67 Template/GymAssignWorkout/print_workout.ctp:64
+#: Controller/GymAjaxController.php:690 Controller/GymAjaxController.php:772
+#: Controller/GymAjaxController1.php:677 Controller/GymAjaxController1.php:754
+#: Template/GymAssignWorkout/assign_workout.ctp:201
+#: Template/GymAssignWorkout/assign_workout1.ctp:179
+#: Template/GymAssignWorkout/member_assiged_workout.ctp:67
+#: Template/GymAssignWorkout/print_workout.ctp:64
+#: Template/Reports/monthlyworkoutreport.ctp:82
 msgid "Rest Time"
-msgstr "เวลาพักผ่อน"
+msgstr "เวลาพัก"
 
-#: Controller/GymAjaxController.php:688
+#: Controller/GymAjaxController.php:701 Controller/GymAjaxController1.php:688
+#: Template/Reports/monthlyworkoutreport.ctp:81
 msgid "Kg"
 msgstr "กิโลกรัม"
 
-#: Controller/GymAjaxController.php:689
+#: Controller/GymAjaxController.php:702 Controller/GymAjaxController1.php:689
 msgid "Min"
 msgstr "นาที"
 
-#: Controller/GymAjaxController.php:693
+#: Controller/GymAjaxController.php:706 Controller/GymAjaxController1.php:693
 msgid "Your Workout"
 msgstr "ออกกำลังกายของคุณ"
 
-#: Controller/GymAjaxController.php:705
+#: Controller/GymAjaxController.php:713 Controller/GymAjaxController.php:791
+msgid "Note"
+msgstr "บันทึก"
+
+#: Controller/GymAjaxController.php:721 Controller/GymAjaxController1.php:705
 msgid "No Workout assigned for today.You can add data from below."
-msgstr "ไม่มีการออกกำลังกายที่ได้รับมอบหมายสำหรับ today.You สามารถเพิ่มข้อมูลจากด้านล่าง"
+msgstr "ไม่มีการออกกำลังกายที่ได้รับมอบหมายในวันนี้คุณสามารถเพิ่มข้อมูลได้จากด้านล่าง"
 
-#: Controller/GymAjaxController.php:710 Template/GymAssignWorkout/assign_workout.ctp:71
+#: Controller/GymAjaxController.php:726 Controller/GymAjaxController1.php:710
+#: Template/GymAssignWorkout/assign_workout.ctp:92
+#: Template/GymAssignWorkout/assign_workout1.ctp:71
 msgid "Level"
-msgstr "ระดับ"
+msgstr "ชั้น"
 
-#: Controller/GymAjaxController.php:713 Template/GymAssignWorkout/assign_workout.ctp:74
+#: Controller/GymAjaxController.php:729 Controller/GymAjaxController1.php:713
+#: Template/GymAssignWorkout/assign_workout.ctp:95
+#: Template/GymAssignWorkout/assign_workout1.ctp:74
 msgid "Select Level"
 msgstr "เลือกระดับ"
 
-#: Controller/GymAjaxController.php:736
-msgid "Category List"
-msgstr "รายการหมวดหมู้"
-
-#: Controller/GymAjaxController.php:874
+#: Controller/GymAjaxController.php:918 Controller/GymAjaxController1.php:874
 msgid "Edit/Delete Measurement"
-msgstr "แก้ไข / ลบวัด"
+msgstr "แก้ไข / ลบการวัด"
 
-#: Controller/GymAjaxController.php:882
+#: Controller/GymAjaxController.php:926 Controller/GymAjaxController1.php:882
 msgid "Image"
-msgstr "รูปภาพ"
+msgstr "ภาพ"
 
-#: Controller/GymAjaxController.php:883
+#: Controller/GymAjaxController.php:927 Controller/GymAjaxController1.php:883
 msgid "Measurement"
-msgstr " การวัด,"
+msgstr "การวัด"
 
-#: Controller/GymAjaxController.php:884 Template/GymDailyWorkout/add_measurment.ctp:62
+#: Controller/GymAjaxController.php:928 Controller/GymAjaxController1.php:884
+#: Template/GymDailyWorkout/add_measurment.ctp:65
 msgid "Result"
 msgstr "ผล"
 
-#: Controller/GymAjaxController.php:885
+#: Controller/GymAjaxController.php:929 Controller/GymAjaxController1.php:885
 msgid "Record Date"
-msgstr "วัน Record Date"
+msgstr "วันที่บันทึก"
 
-#: Controller/GymAjaxController.php:908
+#: Controller/GymAjaxController.php:952 Controller/GymAjaxController1.php:908
 msgid "No Data Found."
 msgstr "ไม่พบข้อมูล."
 
-#: Controller/GymAjaxController.php:974
+#: Controller/GymAjaxController.php:1018 Controller/GymAjaxController1.php:974
 msgid "Add/Remove Event Place"
-msgstr "เพิ่ม / ลบเหตุการณ์สถานที่"
+msgstr "เพิ่ม / ลบสถานที่จัดกิจกรรม"
 
-#: Controller/GymAjaxController.php:979
+#: Controller/GymAjaxController.php:1023 Controller/GymAjaxController1.php:979
 msgid "Enter Place Name"
-msgstr "ใส่ชื่อสถานที่"
+msgstr "ป้อนชื่อสถานที่"
 
-#: Controller/GymAjaxController.php:982
+#: Controller/GymAjaxController.php:1026 Controller/GymAjaxController1.php:982
 msgid "Add Place"
 msgstr "เพิ่มสถานที่"
 
-#: Controller/GymAjaxController.php:991
+#: Controller/GymAjaxController.php:1035 Controller/GymAjaxController1.php:991
 msgid "Place Name"
 msgstr "ชื่อสถานที่"
 
-#: Controller/GymAjaxController.php:1059
+#: Controller/GymAjaxController.php:1051
+msgid "No Event Place added"
+msgstr "ไม่มีสถานที่จัดกิจกรรมเพิ่ม"
+
+#: Controller/GymAjaxController.php:1134 Controller/GymAjaxController1.php:1059
 msgid "Group Members"
-msgstr "กับสมาชิกในกลุ่ม"
+msgstr "สมาชิกกลุ่ม"
 
-#: Controller/GymAjaxController.php:1074
+#: Controller/GymAjaxController.php:1149 Controller/GymAjaxController1.php:1074
 msgid "No Members Assigned Yet."
-msgstr "ไม่มีสมาชิกที่ได้รับมอบหมาย แต่"
+msgstr "ยังไม่มีสมาชิกที่ได้รับมอบหมาย"
 
-#: Controller/GymAjaxController.php:1093 Controller/GymAjaxController.php:1127
+#: Controller/GymAjaxController.php:1173 Controller/GymAjaxController.php:1207
+#: Controller/GymAjaxController1.php:1093
+#: Controller/GymAjaxController1.php:1127
 msgid "Add Payment"
 msgstr "เพิ่มการชำระเงิน"
 
-#: Controller/GymAjaxController.php:1101 Template/MembershipPayment/payment_list.ctp:52 Template/MembershipPayment/payment_list.ctp:97
+#: Controller/GymAjaxController.php:1181 Controller/GymAjaxController1.php:1101
+#: Template/MembershipPayment/payment_list.ctp:52
+#: Template/MembershipPayment/payment_list.ctp:97
 msgid "Paid Amount"
-msgstr "จำนวนเงินที่ชำระ"
+msgstr "จำนวนเงินที่จ่าย"
 
-#: Controller/GymAjaxController.php:1110
+#: Controller/GymAjaxController.php:1190 Controller/GymAjaxController1.php:1110
 msgid "Payment By"
-msgstr "การชำระเงินด้วย"
+msgstr "ชำระเงินตาม"
 
-#: Controller/GymAjaxController.php:1116
+#: Controller/GymAjaxController.php:1196 Controller/GymAjaxController1.php:1116
 msgid "Paypal"
-msgstr "Paypal"
+msgstr "เพย์พาล"
 
-#: Controller/GymAjaxController.php:1119
+#: Controller/GymAjaxController.php:1199 Controller/GymAjaxController1.php:1119
 msgid "Cash"
 msgstr "เงินสด"
 
-#: Controller/GymAjaxController.php:1120
+#: Controller/GymAjaxController.php:1200 Controller/GymAjaxController1.php:1120
 msgid "Cheque"
-msgstr "เช็ค"
+msgstr "ตรวจสอบ"
 
-#: Controller/GymAjaxController.php:1121
+#: Controller/GymAjaxController.php:1201 Controller/GymAjaxController1.php:1121
 msgid "Bank Transfer"
 msgstr "โอนเงินผ่านธนาคาร"
 
-#: Controller/GymAjaxController.php:1166 Controller/GymAjaxController.php:1315
+#: Controller/GymAjaxController.php:1247 Controller/GymAjaxController.php:1399
+#: Controller/GymAjaxController1.php:1166
+#: Controller/GymAjaxController1.php:1315
 msgid "Invoice"
 msgstr "ใบแจ้งหนี้"
 
-#: Controller/GymAjaxController.php:1179 Controller/GymAjaxController.php:1328 Template/MembershipPayment/print_invoice.ctp:26
+#: Controller/GymAjaxController.php:1260 Controller/GymAjaxController.php:1412
+#: Controller/GymAjaxController1.php:1179
+#: Controller/GymAjaxController1.php:1328
+#: Template/MembershipPayment/print_invoice.ctp:26
 msgid "Issue Date"
-msgstr "ออกวันที่："
+msgstr "วันที่ออก"
 
-#: Controller/GymAjaxController.php:1180 Controller/GymAjaxController.php:1329 Template/GymAttendance/attendance.ctp:77 Template/GymAttendance/attendance.ctp:80
-#: Template/GymAttendance/staff_attendance.ctp:62 Template/GymAttendance/staff_attendance.ctp:65 Template/GymMember/member_list.ctp:73 Template/GymMember/member_list.ctp:121
-#: Template/GymMember/view_member.ctp:122 Template/MembershipPayment/add_expense.ctp:33 Template/MembershipPayment/add_income.ctp:44
+#: Controller/GymAjaxController.php:1261 Controller/GymAjaxController.php:1413
+#: Controller/GymAjaxController1.php:1180
+#: Controller/GymAjaxController1.php:1329
+#: Template/GymAttendance/attendance.ctp:109
+#: Template/GymAttendance/attendance.ctp:115
+#: Template/GymAttendance/attendance.ctp:118
+#: Template/GymAttendance/staff_attendance.ctp:67
+#: Template/GymAttendance/staff_attendance.ctp:70
+#: Template/GymMember/member_list.ctp:64 Template/GymMember/member_list.ctp:117
+#: Template/GymMember/view_member.ctp:128
+#: Template/MembershipPayment/add_expense.ctp:41
+#: Template/MembershipPayment/add_income.ctp:56
 #: Template/MembershipPayment/print_invoice.ctp:27
 msgid "Status"
 msgstr "สถานะ"
 
-#: Controller/GymAjaxController.php:1193 Controller/GymAjaxController.php:1342 Template/MembershipPayment/print_invoice.ctp:37
+#: Controller/GymAjaxController.php:1274 Controller/GymAjaxController.php:1426
+#: Controller/GymAjaxController1.php:1193
+#: Controller/GymAjaxController1.php:1342
+#: Template/MembershipPayment/print_invoice.ctp:37
 msgid "Payment To"
-msgstr "การชำระเงิน"
+msgstr "จ่ายให้"
 
-#: Controller/GymAjaxController.php:1196 Controller/GymAjaxController.php:1345 Template/MembershipPayment/print_invoice.ctp:40
+#: Controller/GymAjaxController.php:1277 Controller/GymAjaxController.php:1429
+#: Controller/GymAjaxController1.php:1196
+#: Controller/GymAjaxController1.php:1345
+#: Template/MembershipPayment/print_invoice.ctp:40
 msgid "Bill To"
 msgstr "ส่งเบิกไปที่"
 
-#: Controller/GymAjaxController.php:1227 Template/Cell/GymRenderMenu/admin_menu.ctp:51 Template/Element/sidebar.ctp:33 Template/GymAccessright/access_right.ctp:61
+#: Controller/GymAjaxController.php:1308 Controller/GymAjaxController1.php:1227
+#: Template/Cell/GymRenderMenu/admin_menu.ctp:51
+#: Template/Element/sidebar.ctp:33 Template/GymAccessright/access_right.ctp:63
+#: Template/MembershipPayment/print_invoice.ctp:91
 msgid "Membership Type"
 msgstr "ประเภทสมาชิก"
 
-#: Controller/GymAjaxController.php:1228
+#: Controller/GymAjaxController.php:1309 Controller/GymAjaxController1.php:1228
 msgid "Sign Up Fee"
-msgstr "ค่าสมัคร"
+msgstr "ค่าธรรมเนียมการสมัคร"
 
-#: Controller/GymAjaxController.php:1229
+#: Controller/GymAjaxController.php:1310 Controller/GymAjaxController1.php:1229
+#: Template/MembershipPayment/print_invoice.ctp:92
 msgid "Membership Fee"
-msgstr "ค่าบำรุง"
+msgstr "ค่าสมาชิก"
 
-#: Controller/GymAjaxController.php:1230
+#: Controller/GymAjaxController.php:1311 Controller/GymAjaxController1.php:1230
+#: Template/MembershipPayment/print_invoice.ctp:93
 msgid "Total"
 msgstr "ทั้งหมด"
 
-#: Controller/GymAjaxController.php:1244 Template/MembershipPayment/print_invoice.ctp:143
+#: Controller/GymAjaxController.php:1325 Controller/GymAjaxController1.php:1244
+#: Template/MembershipPayment/print_invoice.ctp:170
 msgid "Subtotal :"
-msgstr "ยอดรวม"
+msgstr "ยอดรวม:"
 
-#: Controller/GymAjaxController.php:1248
+#: Controller/GymAjaxController.php:1329 Controller/GymAjaxController1.php:1248
+#: Template/MembershipPayment/print_invoice.ctp:174
 msgid "Payment Made :"
-msgstr "การชำระเงิน:"
+msgstr "ชำระเงิน:"
 
-#: Controller/GymAjaxController.php:1252
+#: Controller/GymAjaxController.php:1333 Controller/GymAjaxController1.php:1252
 msgid "Due Amount  :"
-msgstr "เนื่องจากจำนวนเงินที่ :"
+msgstr "จำนวนเงินที่ต้องชำระ:"
 
-#: Controller/GymAjaxController.php:1260
+#: Controller/GymAjaxController.php:1341 Controller/GymAjaxController1.php:1260
+#: Template/MembershipPayment/print_invoice.ctp:204
 msgid "Payment History"
 msgstr "ประวัติการชำระเงิน"
 
-#: Controller/GymAjaxController.php:1264 Controller/GymAjaxController.php:1383 Template/GymAttendance/attendance.ctp:31 Template/GymAttendance/attendance.ctp:62
-#: Template/GymAttendance/staff_attendance.ctp:26 Template/GymDailyWorkout/view_workout.ctp:31 Template/GymMember/view_attendance.ctp:50 Template/GymMessage/inbox.ctp:55
-#: Template/GymMessage/sent.ctp:44 Template/GymStore/sell_product.ctp:39 Template/MembershipPayment/add_expense.ctp:42 Template/MembershipPayment/add_income.ctp:53
-#: Template/MembershipPayment/expense_list.ctp:41 Template/MembershipPayment/expense_list.ctp:69 Template/MembershipPayment/income_list.ctp:41
-#: Template/MembershipPayment/income_list.ctp:69 Template/MembershipPayment/print_invoice.ctp:79
+#: Controller/GymAjaxController.php:1345 Controller/GymAjaxController.php:1467
+#: Controller/GymAjaxController1.php:1264
+#: Controller/GymAjaxController1.php:1383
+#: Template/GymAttendance/attendance.ctp:39
+#: Template/GymAttendance/attendance.ctp:81
+#: Template/GymAttendance/staff_attendance.ctp:31
+#: Template/GymDailyWorkout/view_workout.ctp:51
+#: Template/GymMember/view_attendance.ctp:68 Template/GymMessage/inbox.ctp:55
+#: Template/GymMessage/sent.ctp:44 Template/GymStore/sell_product.ctp:54
+#: Template/MembershipPayment/add_expense.ctp:50
+#: Template/MembershipPayment/add_income.ctp:65
+#: Template/MembershipPayment/expense_list.ctp:41
+#: Template/MembershipPayment/expense_list.ctp:69
+#: Template/MembershipPayment/income_list.ctp:41
+#: Template/MembershipPayment/income_list.ctp:69
+#: Template/MembershipPayment/print_invoice.ctp:101
+#: Template/MembershipPayment/print_invoice.ctp:208
 msgid "Date"
 msgstr "วันที่"
 
-#: Controller/GymAjaxController.php:1265 Template/GymMember/view_member.ctp:382 Template/GymMember/view_member.ctp:410 Template/GymSubscriptionHistory/index.ctp:41
-#: Template/GymSubscriptionHistory/index.ctp:69 Template/Membership/add.ctp:142 Template/MembershipPayment/expense_list.ctp:40 Template/MembershipPayment/expense_list.ctp:68
-#: Template/MembershipPayment/income_list.ctp:40 Template/MembershipPayment/income_list.ctp:68 Template/MembershipPayment/payment_list.ctp:51
+#: Controller/GymAjaxController.php:1346 Controller/GymAjaxController1.php:1265
+#: Template/GymMember/view_member.ctp:388
+#: Template/GymMember/view_member.ctp:416
+#: Template/GymSubscriptionHistory/index.ctp:43
+#: Template/GymSubscriptionHistory/index.ctp:73 Template/Membership/add.ctp:152
+#: Template/MembershipPayment/expense_list.ctp:40
+#: Template/MembershipPayment/expense_list.ctp:68
+#: Template/MembershipPayment/income_list.ctp:40
+#: Template/MembershipPayment/income_list.ctp:68
+#: Template/MembershipPayment/payment_list.ctp:51
 #: Template/MembershipPayment/payment_list.ctp:96
+#: Template/MembershipPayment/print_invoice.ctp:209
 msgid "Amount"
 msgstr "จำนวน"
 
-#: Controller/GymAjaxController.php:1266
+#: Controller/GymAjaxController.php:1347 Controller/GymAjaxController1.php:1266
+#: Template/MembershipPayment/print_invoice.ctp:210
 msgid "Method"
-msgstr "วิธีการ"
+msgstr "วิธี"
 
-#: Controller/GymAjaxController.php:1378 Template/MembershipPayment/print_invoice.ctp:74
-msgid "Invoice Entries"
-msgstr "รายการใบแจ้งหนี้"
-
-#: Controller/GymAjaxController.php:1384 Template/MembershipPayment/print_invoice.ctp:80
-msgid "Entry"
-msgstr "การเข้า"
-
-#: Controller/GymAjaxController.php:1385 Template/MembershipPayment/print_invoice.ctp:81
-msgid "Price"
-msgstr "ราคา"
-
-#: Controller/GymAjaxController.php:1386 Template/AdminProfile/edit_profile.ctp:62 Template/GymAccountant/add_accountant.ctp:114 Template/GymEmailSetting/index.ctp:34
-#: Template/GymMember/add_member.ctp:248 Template/GymMember/view_member.ctp:84 Template/GymProfile/view_profile.ctp:64 Template/Installer/index.ctp:483
-#: Template/MemberRegistration/index.ctp:225 Template/MembershipPayment/print_invoice.ctp:82 Template/StaffMembers/add_staff.ctp:149 Template/Users/login.ctp:26
-msgid "Username"
-msgstr "ชื่อผู้ใช้"
-
-#: Controller/GymAjaxController.php:1409 Template/MembershipPayment/print_invoice.ctp:165
-msgid "Grand Total :"
-msgstr "ผลรวมทั้งสิ้น :"
-
-#: Controller/GymAjaxController.php:1418 Template/GymAssignWorkout/member_assiged_workout.ctp:55 Template/GymNutrition/member_nutrition.ctp:54
+#: Controller/GymAjaxController.php:1366 Controller/GymAjaxController.php:1502
+#: Controller/GymAjaxController1.php:1418
+#: Template/GymAssignWorkout/member_assiged_workout.ctp:55
+#: Template/GymNutrition/member_nutrition.ctp:54
 msgid "Print"
 msgstr "พิมพ์"
 
-#: Controller/GymAjaxController.php:1435
+#: Controller/GymAjaxController.php:1462 Controller/GymAjaxController1.php:1378
+#: Template/MembershipPayment/print_invoice.ctp:83
+msgid "Invoice Entries"
+msgstr "รายการใบแจ้งหนี้"
+
+#: Controller/GymAjaxController.php:1468 Controller/GymAjaxController1.php:1384
+#: Template/MembershipPayment/print_invoice.ctp:102
+msgid "Entry"
+msgstr "การเข้า"
+
+#: Controller/GymAjaxController.php:1469 Controller/GymAjaxController1.php:1385
+#: Template/MembershipPayment/print_invoice.ctp:103
+msgid "Price"
+msgstr "ราคา"
+
+#: Controller/GymAjaxController.php:1470 Controller/GymAjaxController1.php:1386
+#: Template/AdminProfile/edit_profile.ctp:62
+#: Template/GymAccountant/add_accountant.ctp:124
+#: Template/GymEmailSetting/index.ctp:34 Template/GymMember/add_member.ctp:328
+#: Template/GymMember/view_member.ctp:90
+#: Template/GymProfile/view_profile.ctp:70 Template/Installer/index.ctp:554
+#: Template/MemberRegistration/index.ctp:219
+#: Template/MembershipPayment/print_invoice.ctp:104
+#: Template/StaffMembers/add_staff.ctp:159 Template/Users/login.ctp:29
+msgid "Username"
+msgstr "ชื่อผู้ใช้"
+
+#: Controller/GymAjaxController.php:1493 Controller/GymAjaxController1.php:1409
+#: Template/MembershipPayment/print_invoice.ctp:195
+msgid "Grand Total :"
+msgstr "รวมทั้งหมด :"
+
+#: Controller/GymAjaxController.php:1519 Controller/GymAjaxController1.php:1435
 msgid "Notice Detail"
-msgstr "รายละเอียดแจ้งให้ทราบล่วงหน้า"
+msgstr "รายละเอียดประกาศ"
 
-#: Controller/GymAjaxController.php:1440
+#: Controller/GymAjaxController.php:1524 Controller/GymAjaxController1.php:1440
 msgid "Notice Title "
-msgstr "แจ้งให้ทราบชื่อ "
+msgstr "ชื่อประกาศ "
 
-#: Controller/GymAjaxController.php:1445 Template/GymNotice/notice_list.ctp:42 Template/GymNotice/notice_list.ctp:71
+#: Controller/GymAjaxController.php:1529 Controller/GymAjaxController1.php:1445
+#: Template/GymNotice/notice_list.ctp:42 Template/GymNotice/notice_list.ctp:71
 msgid "Notice Comment"
-msgstr "แสดงความคิดเห็นแจ้งให้ทราบล่วงหน้า"
+msgstr "ประกาศความคิดเห็น"
 
-#: Controller/GymAjaxController.php:1450 Template/GymNotice/add_notice.ctp:35 Template/GymNotice/notice_list.ctp:43 Template/GymNotice/notice_list.ctp:72
+#: Controller/GymAjaxController.php:1534 Controller/GymAjaxController1.php:1450
+#: Template/GymNotice/add_notice.ctp:64 Template/GymNotice/notice_list.ctp:43
+#: Template/GymNotice/notice_list.ctp:72
 msgid "Notice For"
-msgstr "แจ้งให้ทราบล่วงหน้า"
+msgstr "ประกาศสำหรับ"
 
-#: Controller/GymAjaxController.php:1455 Template/GymAssignWorkout/assign_workout.ctp:88 Template/GymDailyWorkout/add_workout.ctp:120
-#: Template/GymMember/view_attendance.ctp:30 Template/GymNotice/add_notice.ctp:53 Template/GymNutrition/addnutrition_schedule.ctp:46
+#: Controller/GymAjaxController.php:1539 Controller/GymAjaxController1.php:1455
+#: Template/GymAssignWorkout/assign_workout.ctp:109
+#: Template/GymAssignWorkout/assign_workout1.ctp:88
+#: Template/GymDailyWorkout/add_workout.ctp:185
+#: Template/GymMember/view_attendance.ctp:48
+#: Template/GymNotice/add_notice.ctp:82
+#: Template/GymNutrition/addnutrition_schedule.ctp:70
 msgid "Start Date"
 msgstr "วันที่เริ่มต้น"
 
-#: Controller/GymAjaxController.php:1460
+#: Controller/GymAjaxController.php:1544 Controller/GymAjaxController1.php:1460
 msgid "End Date "
 msgstr "วันที่สิ้นสุด "
 
-#: Controller/GymAssignWorkoutController.php:40 Template/Cell/GymRenderMenu/admin_menu.ctp:105 Template/Element/sidebar.ctp:87 Template/GymAssignWorkout/assign_workout.ctp:46
-#: Template/GymAssignWorkout/member_assiged_workout.ctp:19 Template/GymAssignWorkout/member_assiged_workout.ctp:25 Template/GymAssignWorkout/workout_log.ctp:36
-#: Template/GymAssignWorkout/workout_log.ctp:42 Template/GymNutrition/member_nutrition.ctp:25
+#: Controller/GymAjaxController1.php:736
+msgid "Category List"
+msgstr "รายการหมวดหมู่"
+
+#: Controller/GymAssignWorkoutController - copy.php:40
+#: Controller/GymAssignWorkoutController.php:40
+#: Template/Cell/GymRenderMenu/admin_menu.ctp:105
+#: Template/Element/sidebar.ctp:87
+#: Template/GymAssignWorkout/assign_workout.ctp:65
+#: Template/GymAssignWorkout/assign_workout1.ctp:46
+#: Template/GymAssignWorkout/member_assiged_workout.ctp:19
+#: Template/GymAssignWorkout/member_assiged_workout.ctp:25
+#: Template/GymAssignWorkout/workout_log.ctp:36
+#: Template/GymAssignWorkout/workout_log.ctp:42
+#: Template/GymNutrition/member_nutrition.ctp:25
 msgid "Assign Workout"
-msgstr "กําหนดการออกกำลังกาย"
+msgstr "กำหนดออกกำลังกาย"
 
-#: Controller/GymAssignWorkoutController.php:101 Controller/GymAssignWorkoutController.php:272
+#: Controller/GymAssignWorkoutController - copy.php:101 copy.php:293
+#: Controller/GymAssignWorkoutController.php:101
+#: Controller/GymAssignWorkoutController.php:291
 msgid "success! Record Saved Successfully."
-msgstr "ความสำเร็จ! บันทึกบันทึกเรียบร้อยแล้ว"
+msgstr "ความสำเร็จ! บันทึกสำเร็จแล้ว"
 
-#: Controller/GymAssignWorkoutController.php:103
+#: Controller/GymAssignWorkoutController - copy.php:103
+#: Controller/GymAssignWorkoutController.php:104
+#: Controller/GymAssignWorkoutController.php:294
 msgid "Error! Workout days data couldn't saved.Please try again."
-msgstr "ข้อผิดพลาด! ข้อมูลวันที่ออกกำลังกายไม่ saved.Please ลองอีกครั้ง"
+msgstr "ข้อผิดพลาด! ไม่สามารถบันทึกข้อมูลวันออกกำลังกายได้โปรดลองอีกครั้ง"
 
-#: Controller/GymAssignWorkoutController.php:108 Controller/GymAssignWorkoutController.php:278
+#: Controller/GymAssignWorkoutController - copy.php:108 copy.php:299
+#: Controller/GymAssignWorkoutController.php:109
+#: Controller/GymAssignWorkoutController.php:297
 msgid "Error! Record couldn't saved.Please try again."
-msgstr "ข้อผิดพลาด! ไม่สามารถบันทึก saved.Please ลองอีกครั้ง"
+msgstr "ข้อผิดพลาด! บันทึกไม่ได้โปรดลองอีกครั้ง"
 
-#: Controller/GymAssignWorkoutController.php:196 Template/GymDailyWorkout/view_workout.ctp:13
+#: Controller/GymAssignWorkoutController - copy.php:196
+#: Controller/GymAssignWorkoutController.php:197
+#: Template/GymDailyWorkout/view_workout.ctp:33
 msgid "View Workout"
 msgstr "ดูการออกกำลังกาย"
 
-#: Controller/GymAssignWorkoutController.php:275
+#: Controller/GymAssignWorkoutController - copy.php:296
 msgid "Error! Workout days daya couldn't saved.Please try again."
-msgstr "ข้อผิดพลาด! ออกกำลังกายวัน Daya ไม่ saved.Please ลองอีกครั้ง"
+msgstr "ข้อผิดพลาด! ไม่สามารถบันทึกวันออกกำลังกายได้โปรดลองอีกครั้ง"
 
-#: Controller/GymAssignWorkoutController.php:299 Controller/GymMemberController.php:296 Controller/MembershipPaymentController.php:256
+#: Controller/GymAssignWorkoutController - copy.php:320
+#: Controller/GymAssignWorkoutController.php:318
+#: Controller/GymMemberController.php:326
+#: Controller/GymNutritionController.php:305
+#: Controller/GymProductController.php:61 Controller/GymStoreController.php:111
+#: Controller/MembershipPaymentController.php:258
 msgid "Success! Record Deleted Successfully."
-msgstr "ความสำเร็จ! บันทึกลบเรียบร้อยแล้ว"
+msgstr "ที่ประสบความสำเร็จ! บันทึกถูกลบสำเร็จแล้ว"
 
-#: Controller/GymAttendanceController.php:78 Controller/GymAttendanceController.php:142
+#: Controller/GymAttendanceController.php:85
+#: Controller/GymAttendanceController.php:149
 msgid "Success! Attendance Saved Successfully."
-msgstr "ความสำเร็จ! ผู้เข้าร่วมการบันทึกเรียบร้อยแล้ว"
+msgstr "ที่ประสบความสำเร็จ! บันทึกการเข้าร่วมสำเร็จแล้ว"
 
-#: Controller/GymAttendanceController.php:146
+#: Controller/GymAttendanceController.php:153
 msgid "Error! Please Select Member/Staff-Member."
-msgstr "ข้อผิดพลาด! กรุณาเลือกสมาชิก / บุคลากรสมาชิก"
+msgstr "ข้อผิดพลาด! กรุณาเลือกสมาชิก / พนักงาน - สมาชิก"
 
-#: Controller/GymDailyWorkoutController.php:42 Template/GymDailyWorkout/add_measurment.ctp:26 Template/GymDailyWorkout/workout_list.ctp:43
+#: Controller/GymDailyWorkoutController.php:42
+#: Template/GymDailyWorkout/add_measurment.ctp:29
+#: Template/GymDailyWorkout/workout_list.ctp:43
 msgid "Add Workout"
 msgstr "เพิ่มการออกกำลังกาย"
 
-#: Controller/GymDailyWorkoutController.php:234 Template/GymDailyWorkout/add_workout.ctp:93 Template/GymDailyWorkout/view_workout.ctp:19
+#: Controller/GymDailyWorkoutController.php:243
+#: Template/GymDailyWorkout/add_workout.ctp:132
+#: Template/GymDailyWorkout/view_workout.ctp:39
 #: Template/GymDailyWorkout/workout_list.ctp:45
 msgid "Add Measurement"
 msgstr "เพิ่มการวัด"
 
-#: Controller/GymDailyWorkoutController.php:328
+#: Controller/GymDailyWorkoutController.php:410
 msgid "Edit Measurement"
 msgstr "แก้ไขการวัด"
 
 #: Controller/GymEmailSettingController.php:56
 msgid "Test Email"
-msgstr "ทดสอบอีเมล์"
+msgstr "ทดสอบอีเมล"
 
-#: Controller/GymGroupController.php:23 Template/GymMember/add_member.ctp:135
+#: Controller/GymGroupController.php:23 Template/GymMember/add_member.ctp:215
 msgid "Add Group"
 msgstr "เพิ่มกลุ่ม"
 
-#: Controller/GymGroupController.php:35
+#: Controller/GymGroupController.php:39
 msgid "Success! Group Added Successfully."
-msgstr "ความสำเร็จ! กลุ่มเพิ่มเรียบร้อยแล้ว"
+msgstr "ที่ประสบความสำเร็จ! เพิ่มกลุ่มสำเร็จแล้ว"
 
-#: Controller/GymGroupController.php:42
+#: Controller/GymGroupController.php:50
 msgid "Edit Group"
 msgstr "แก้ไขกลุ่ม"
 
-#: Controller/GymMemberController.php:56 Template/GymAssignWorkout/assign_workout.ctp:67 Template/GymDailyWorkout/add_workout.ctp:110 Template/GymMember/member_list.ctp:55
-#: Template/GymNutrition/addnutrition_schedule.ctp:42
+#: Controller/GymMemberController.php:61
+#: Template/GymAssignWorkout/assign_workout.ctp:87
+#: Template/GymAssignWorkout/assign_workout1.ctp:67
+#: Template/GymDailyWorkout/add_workout.ctp:172
+#: Template/GymMember/member_list.ctp:45
+#: Template/GymNutrition/addnutrition_schedule.ctp:65
 msgid "Add Member"
 msgstr "เพิ่มสมาชิก"
 
-#: Controller/GymMemberController.php:178
+#: Controller/GymMemberController.php:190
 msgid "Edit Member"
 msgstr "แก้ไขสมาชิก"
 
-#: Controller/GymMemberController.php:388
+#: Controller/GymMemberController.php:446
 msgid "Success! Member activated successfully."
-msgstr "ความสำเร็จ! สมาชิกประสบความสำเร็จในการเปิดใช้งาน"
+msgstr "ที่ประสบความสำเร็จ! เปิดใช้งานสมาชิกสำเร็จแล้ว"
 
-#: Controller/GymMessageController.php:145
+#: Controller/GymMessageController.php:154
 msgid "Success! Message Sent Successfully."
-msgstr "ความสำเร็จ! ข้อความถูกส่งเรียบร้อยแล้ว"
+msgstr "ที่ประสบความสำเร็จ! ข้อความที่ส่งประสบความสำเร็จ."
 
-#: Controller/GymMessageController.php:147
+#: Controller/GymMessageController.php:156
 msgid "Error! Message Couldn't be Sent, Please Try Again."
-msgstr "ข้อผิดพลาด! ข้อความไม่สามารถถูกส่งไปโปรดลองอีกครั้ง"
+msgstr "ข้อผิดพลาด! ไม่สามารถส่งข้อความได้โปรดลองอีกครั้ง"
 
-#: Controller/GymMessageController.php:195
+#: Controller/GymMessageController.php:204
 msgid "Success! Message Deleted Successfully."
-msgstr "ความสำเร็จ! ข้อความลบเรียบร้อยแล้ว"
+msgstr "ที่ประสบความสำเร็จ! ข้อความถูกลบสำเร็จแล้ว"
 
 #: Controller/GymNewsletterController.php:36
 msgid "Success! Api Key Saved successfully."
-msgstr "ความสำเร็จ! คีย์ API ที่บันทึกไว้เรียบร้อยแล้ว"
+msgstr "ที่ประสบความสำเร็จ! บันทึก Api Key สำเร็จแล้ว"
 
 #: Controller/GymNewsletterController.php:44
 msgid "Success! Api Key Updated successfully."
-msgstr "ความสำเร็จ! คีย์ API ปรับปรุงเรียบร้อยแล้ว"
+msgstr "ที่ประสบความสำเร็จ! อัปเดต Api Key สำเร็จแล้ว"
 
-#: Controller/GymNewsletterController.php:92
+#: Controller/GymNewsletterController.php:94
 msgid "Success! Mail Synchronize Successfully Done."
-msgstr "ความสำเร็จ! จดหมายประสานทำสำเร็จ"
+msgstr "ที่ประสบความสำเร็จ! เมลซิงโครไนซ์สำเร็จแล้ว"
 
-#: Controller/GymNewsletterController.php:128
+#: Controller/GymNewsletterController.php:131
 msgid "Campaign Tests Not Sent!"
-msgstr "การทดสอบไม่ได้ส่งแคมเปญ!"
+msgstr "การทดสอบแคมเปญไม่ถูกส่ง!"
 
-#: Controller/GymNewsletterController.php:130
+#: Controller/GymNewsletterController.php:133
 msgid "Campaign Tests Sent!"
-msgstr "การทดสอบแคมเปญได้ส่ง!"
+msgstr "ส่งการทดสอบแคมเปญแล้ว!"
 
-#: Controller/GymNoticeController.php:65 Controller/GymProductController.php:28 Controller/GymStoreController.php:39
+#: Controller/GymNoticeController.php:65 Controller/GymProductController.php:31
+#: Controller/GymStoreController.php:49
 msgid "Error! Record Not Saved.Please Try Again."
-msgstr "ข้อผิดพลาด! บันทึกไม่ Saved.Please ลองใหม่อีกครั้ง"
+msgstr "ข้อผิดพลาด! ไม่ได้บันทึกข้อมูลโปรดลองอีกครั้ง"
 
-#: Controller/GymNoticeController.php:91 Controller/GymProductController.php:43 Controller/GymStoreController.php:61
+#: Controller/GymNoticeController.php:91
 msgid "Success! Record Successfully Updated."
-msgstr "ความสำเร็จ! บันทึกการปรับปรุงเรียบร้อยแล้ว"
+msgstr "ที่ประสบความสำเร็จ! บันทึกการอัปเดตเรียบร้อยแล้ว"
 
-#: Controller/GymNoticeController.php:94 Controller/GymProductController.php:46 Controller/GymStoreController.php:64
+#: Controller/GymNoticeController.php:94 Controller/GymProductController.php:49
+#: Controller/GymStoreController.php:93
 msgid "Error! Record Not Updated.Please Try Again."
-msgstr "ข้อผิดพลาด! บันทึกไม่ Updated.Please ลองใหม่อีกครั้ง"
+msgstr "ข้อผิดพลาด! ไม่ได้อัปเดตบันทึกโปรดลองอีกครั้ง"
 
-#: Controller/GymNoticeController.php:105 Controller/GymStoreController.php:75
+#: Controller/GymNoticeController.php:105
 msgid "Success! Record Deleted Successfully Updated."
-msgstr "ความสำเร็จ! บันทึกลบการปรับปรุงเรียบร้อยแล้ว"
+msgstr "ที่ประสบความสำเร็จ! บันทึกถูกลบอัปเดตเรียบร้อยแล้ว"
 
-#: Controller/GymNutritionController.php:38 Template/GymNutrition/nutrition_list.ctp:42
+#: Controller/GymNutritionController.php:40
+#: Template/GymNutrition/nutrition_list.ctp:42
 msgid "Add Nutrition Schedule"
-msgstr "เพิ่มโภชนาการกำหนดการ"
+msgstr "เพิ่มตารางโภชนาการ"
 
-#: Controller/GymNutritionController.php:75 Controller/GymNutritionController.php:215
-msgid "Success"
-msgstr "สำเร็จ"
+#: Controller/GymNutritionController.php:77
+#: Controller/GymNutritionController.php:217
+msgid "Success! Nutrition Added Sucessfully."
+msgstr "ที่ประสบความสำเร็จ! โภชนาการที่เพิ่มเข้ามาอย่างเพียงพอ"
 
-#: Controller/GymNutritionController.php:79 Controller/GymNutritionController.php:219
+#: Controller/GymNutritionController.php:81
+#: Controller/GymNutritionController.php:221
 msgid "Error! Nutrition data couldn't saved.Please try again."
-msgstr "ข้อผิดพลาด! ข้อมูลโภชนาการไม่ saved.Please ลองอีกครั้ง"
+msgstr "ข้อผิดพลาด! ไม่สามารถบันทึกข้อมูลโภชนาการได้โปรดลองอีกครั้ง"
 
-#: Controller/GymNutritionController.php:83 Controller/GymNutritionController.php:223
+#: Controller/GymNutritionController.php:85
+#: Controller/GymNutritionController.php:225
 msgid "Error! Nutrition Schedule couldn't saved.Please try again."
-msgstr "ข้อผิดพลาด! โภชนาการกำหนดการไม่ saved.Please ลองอีกครั้ง"
+msgstr "ข้อผิดพลาด! ไม่สามารถบันทึกตารางโภชนาการได้โปรดลองอีกครั้ง"
 
-#: Controller/GymNutritionController.php:170
+#: Controller/GymNutritionController.php:172
 msgid "View Nutrition Schedule"
-msgstr "ดูตารางเวลาโภชนาการ"
+msgstr "ดูตารางโภชนาการ"
 
-#: Controller/GymProfileController.php:26
+#: Controller/GymProfileController.php:30
 msgid "Error! New password and confirm password does not matched.Please try again."
-msgstr "ข้อผิดพลาด! รหัสผ่านใหม่และยืนยันรหัสผ่านไม่ matched.Please ลองอีกครั้ง"
-
-#: Controller/GymProfileController.php:33 Controller/GymProfileController.php:57
-msgid "Success! Password Updated Successfully"
-msgstr "ความสำเร็จ! รหัสผ่านการปรับปรุงเรียบร้อยแล้ว"
+msgstr "ข้อผิดพลาด! รหัสผ่านใหม่และยืนยันรหัสผ่านไม่ตรงกันโปรดลองอีกครั้ง"
 
 #: Controller/GymProfileController.php:37
+msgid "Success! Password Updated Successfully"
+msgstr "ที่ประสบความสำเร็จ! อัปเดตรหัสผ่านสำเร็จแล้ว"
+
+#: Controller/GymProfileController.php:41
 msgid "Error! Current password is wrong.Please try again."
-msgstr "ข้อผิดพลาด! รหัสผ่านปัจจุบันเป็น wrong.Please ลองอีกครั้ง"
+msgstr "ข้อผิดพลาด! รหัสผ่านปัจจุบันผิดโปรดลองอีกครั้ง"
 
-#: Controller/GymProfileController.php:61
-msgid "Error! Email-id already exists.Please try again."
-msgstr "ข้อผิดพลาด! อีเมล์-ID แล้ว exists.Please ลองอีกครั้ง"
+#: Controller/GymProfileController.php:65
+msgid "Success! Information Updated Successfully"
+msgstr "ที่ประสบความสำเร็จ! อัปเดตข้อมูลเรียบร้อยแล้ว"
 
-#: Controller/MemberRegistrationController.php:98
-msgid "Registration completed successfully. Please Check email"
-msgstr "ลงทะเบียนเสร็จสมบูรณ์แล้ว โปรดตรวจสอบอีเมล"
+#: Controller/GymProfileController.php:69
+msgid "Error! Not Update.Please try again."
+msgstr "ข้อผิดพลาด! ไม่ได้อัปเดตโปรดลองอีกครั้ง"
 
-#: Controller/MembershipController.php:23 Template/Activity/add_activity.ctp:71 Template/GymMember/add_member.ctp:345 Template/Membership/edit_membership.ctp:7
+#: Controller/GymStoreController.php:52 Controller/GymStoreController.php:96
+msgid "Only "
+msgstr "เท่านั้น "
+
+#: Controller/MemberRegistrationController.php:108
+msgid "Registration completed successfully. You will get email after activation"
+msgstr "การลงทะเบียนเสร็จสมบูรณ์ คุณจะได้รับอีเมลหลังจากเปิดใช้งาน"
+
+#: Controller/MembershipController.php:23 Template/Activity/add_activity.ctp:86
+#: Template/GymMember/add_member.ctp:425
+#: Template/Membership/edit_membership.ctp:7
 msgid "Add Membership"
-msgstr "เพิ่มสมาชิก"
+msgstr "เพิ่มการเป็นสมาชิก"
 
-#: Controller/MembershipController.php:64
+#: Controller/MembershipController.php:67
 msgid "Error! There was an error while saving,Please try again later."
-msgstr "ข้อผิดพลาด! เกิดข้อผิดพลาดในขณะที่ประหยัดได้โปรดลองอีกครั้งในภายหลัง"
+msgstr "ข้อผิดพลาด! เกิดข้อผิดพลาดขณะบันทึกโปรดลองอีกครั้งในภายหลัง"
 
-#: Controller/MembershipController.php:91
+#: Controller/MembershipController.php:99
 msgid "Edit Membership"
-msgstr "แก้ไขสมาชิก"
+msgstr "แก้ไขการเป็นสมาชิก"
 
-#: Controller/MembershipController.php:183
+#: Controller/MembershipController.php:198
 msgid "Success! Activity Successfully Assigned."
-msgstr "ความสำเร็จ! กิจกรรมที่ได้รับมอบหมายสำเร็จ"
+msgstr "ที่ประสบความสำเร็จ! กิจกรรมที่มอบหมายสำเร็จแล้ว"
 
-#: Controller/MembershipController.php:193
+#: Controller/MembershipController.php:208
 msgid "Success! Activity Unassigned Successfully."
-msgstr "ความสำเร็จ! กิจกรรมที่ไม่ได้มอบหมายประสบความสำเร็จ"
+msgstr "ที่ประสบความสำเร็จ! กิจกรรมที่ไม่ได้มอบหมายประสบความสำเร็จ"
 
-#: Controller/MembershipPaymentController.php:63 Controller/MembershipPaymentController.php:113
+#: Controller/MembershipPaymentController.php:63
+#: Controller/MembershipPaymentController.php:113
 msgid "Success! Payment Added Successfully."
-msgstr "ความสำเร็จ! การชำระเงินเพิ่มเรียบร้อยแล้ว"
+msgstr "ที่ประสบความสำเร็จ! เพิ่มการชำระเงินเรียบร้อยแล้ว"
 
 #: Controller/MembershipPaymentController.php:166
 msgid "Success! Payment Record Deleted Successfully."
-msgstr "ความสำเร็จ! บันทึกการชำระเงินเรียบร้อยแล้ว"
+msgstr "ที่ประสบความสำเร็จ! ลบประวัติการชำระเงินสำเร็จแล้ว"
 
-#: Controller/MembershipPaymentController.php:385 Controller/MembershipPaymentController.php:406
+#: Controller/MembershipPaymentController.php:406
+#: Controller/MembershipPaymentController.php:427
 msgid "Success! Payment Successfully Completed."
-msgstr "ความสำเร็จ! การชำระเงินเสร็จเรียบร้อยแล้ว"
+msgstr "ที่ประสบความสำเร็จ! ชำระเงินสำเร็จแล้ว"
 
-#: Controller/MembershipPaymentController.php:409
+#: Controller/MembershipPaymentController.php:430
 msgid "Paypal Payment IPN save failed to DB."
-msgstr "Paypal IPN การชำระเงินล้มเหลวในการบันทึกฐานข้อมูล"
+msgstr "การชำระเงิน Paypal บันทึก IPN ล้มเหลวในฐานข้อมูล"
 
-#: Controller/StaffMembersController.php:22 Template/Activity/add_activity.ctp:60
+#: Controller/StaffMembersController.php:22
+#: Template/Activity/add_activity.ctp:74
+#: Template/StaffMembers/staff_list.ctp:37
 msgid "Add Staff Member"
-msgstr "เพิ่มสมาชิกพนักงาน"
+msgstr "เพิ่มพนักงาน"
 
-#: Controller/StaffMembersController.php:65
+#: Controller/StaffMembersController.php:75
 msgid "Edit Staff Member"
-msgstr "แก้ไขสมาชิกพนักงาน"
+msgstr "แก้ไขพนักงาน"
 
-#: Controller/UsersController.php:48
+#: Controller/StaffMembersController.php:132
+msgid "Success! Staff Member Deleted Successfully."
+msgstr "ที่ประสบความสำเร็จ! ลบพนักงานสมาชิกสำเร็จแล้ว"
+
+#: Controller/UsersController.php:47
 msgid "Sorry, Your account is expired."
 msgstr "ขออภัยบัญชีของคุณหมดอายุ"
 
-#: Controller/UsersController.php:58
+#: Controller/UsersController.php:57
 msgid "Error! Your account not activated yet!"
-msgstr "ข้อผิดพลาด! บัญชีของคุณไม่ได้เปิดใช้ ๆ !"
+msgstr "ข้อผิดพลาด! บัญชีของคุณยังไม่เปิดใช้งาน!"
 
-#: Controller/UsersController.php:98
+#: Controller/UsersController.php:97
 msgid "Invalid username or password, try again"
-msgstr "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้องลองใหม่อีกครั้ง"
+msgstr "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้องลองอีกครั้ง"
 
-#: View/Helper/GymHelper.php:233
+#: View/Helper/GymHelper.php:272
 msgid "Not Taken"
 msgstr "ไม่ได้ถ่าย"
 
-#: View/Helper/GymHelper.php:259 View/Helper/GymHelper.php:261 Template/Cell/GymRenderMenu/admin_menu.ctp:80 Template/Element/sidebar.ctp:62
+#: View/Helper/GymHelper.php:307 View/Helper/GymHelper.php:309
+#: Template/Cell/GymRenderMenu/admin_menu.ctp:80
+#: Template/Element/sidebar.ctp:62
 msgid "Members"
-msgstr "ของสมาชิก"
+msgstr "สมาชิก"
 
-#: View/Helper/GymHelper.php:259 View/Helper/GymHelper.php:261
+#: View/Helper/GymHelper.php:307 View/Helper/GymHelper.php:309
 msgid "Staff Members"
-msgstr "สมาชิกพนักงาน"
+msgstr "พนักงานสมาชิก"
 
-#: View/Helper/GymHelper.php:259 View/Helper/GymHelper.php:261
+#: View/Helper/GymHelper.php:307 View/Helper/GymHelper.php:309
 msgid "Accountants"
 msgstr "บัญชี"
 
-#: View/Helper/GymHelper.php:261
+#: View/Helper/GymHelper.php:309
 msgid "Administrator"
-msgstr "ผู้บริหารจัดการ"
+msgstr "ผู้บริหาร"
 
-#: View/Helper/GymHelper.php:476
+#: View/Helper/GymHelper.php:524
 msgid "No data available in table"
 msgstr "ไม่มีข้อมูลในตาราง"
 
-#: View/Helper/GymHelper.php:477
+#: View/Helper/GymHelper.php:525
 msgid "Showing _START_ to _END_ of _TOTAL_ entries"
-msgstr "แสดง _START_ เพื่อ _END_ ของรายการ _TOTAL_"
+msgstr "แสดงเริ่มต้นจนจบของรายการทั้งหมด"
 
-#: View/Helper/GymHelper.php:478
+#: View/Helper/GymHelper.php:526
 msgid "Showing 0 to 0 of 0 entries"
-msgstr "แสดง 0-0 จาก 0 รายการ"
+msgstr "แสดง 0 ถึง 0 จาก 0 รายการ"
 
-#: View/Helper/GymHelper.php:479
+#: View/Helper/GymHelper.php:527
 msgid "(filtered from _MAX_ total entries)"
-msgstr "(กรองจากรายการทั้งหมด _MAX_)"
+msgstr "(กรองจากรายการรวมสูงสุด)"
 
-#: View/Helper/GymHelper.php:482
+#: View/Helper/GymHelper.php:530
 msgid "Show _MENU_ entries"
-msgstr "แสดงรายการ _MENU_"
+msgstr "แสดงรายการเมนู"
 
-#: View/Helper/GymHelper.php:483
+#: View/Helper/GymHelper.php:531
 msgid "Loading..."
 msgstr "กำลังโหลด ..."
 
-#: View/Helper/GymHelper.php:484
+#: View/Helper/GymHelper.php:532
 msgid "Processing..."
 msgstr "กำลังประมวลผล ..."
 
-#: View/Helper/GymHelper.php:485
+#: View/Helper/GymHelper.php:533
 msgid "Search"
 msgstr "ค้นหา"
 
-#: View/Helper/GymHelper.php:486
+#: View/Helper/GymHelper.php:534
 msgid "No matching records found"
-msgstr "ไม่มีบันทึกตรงกัน"
+msgstr "ไม่พบระเบียนที่ตรงกัน"
 
-#: View/Helper/GymHelper.php:488
+#: View/Helper/GymHelper.php:536
 msgid "First"
-msgstr "อันดับแรก"
+msgstr "เป็นครั้งแรก"
 
-#: View/Helper/GymHelper.php:489
+#: View/Helper/GymHelper.php:537
 msgid "Last"
 msgstr "สุดท้าย"
 
-#: View/Helper/GymHelper.php:490
+#: View/Helper/GymHelper.php:538
 msgid "Next"
-msgstr "ถัดไป"
+msgstr "ต่อไป"
 
-#: View/Helper/GymHelper.php:491
+#: View/Helper/GymHelper.php:539
 msgid "Previous"
-msgstr "ก่อนหน้า"
+msgstr "ก่อน"
 
-#: View/Helper/GymHelper.php:494
+#: View/Helper/GymHelper.php:542
 msgid "activate to sort column ascending"
-msgstr "เปิดใช้งานในการจัดเรียงจากน้อยไปมากคอลัมน์"
+msgstr "เปิดใช้งานการเรียงลำดับคอลัมน์จากน้อยไปมาก"
 
-#: View/Helper/GymHelper.php:495
+#: View/Helper/GymHelper.php:543
 msgid "activate to sort column descending"
-msgstr "เปิดใช้งานในการเรียงลำดับจากมากไปน้อยคอลัมน์"
+msgstr "เปิดใช้งานการเรียงลำดับคอลัมน์จากมากไปน้อย"
 
-#: Template/Activity/activity_list.ctp:35 Template/Activity/add_activity.ctp:24
+#: Template/Activity/activity_list.ctp:30 Template/Activity/add_activity.ctp:35
 msgid "Activity List"
 msgstr "รายการกิจกรรม"
 
-#: Template/Activity/activity_list.ctp:52 Template/Activity/activity_list.ctp:76 Template/Membership/view_activity.ctp:60 Template/Membership/view_activity.ctp:84
+#: Template/Activity/activity_list.ctp:47
+#: Template/Activity/activity_list.ctp:75
+#: Template/Membership/view_activity.ctp:73
+#: Template/Membership/view_activity.ctp:97
 msgid "Activity Name"
 msgstr "ชื่อกิจกรรม"
 
-#: Template/Activity/activity_list.ctp:53 Template/Activity/activity_list.ctp:77 Template/Membership/view_activity.ctp:61 Template/Membership/view_activity.ctp:85
+#: Template/Activity/activity_list.ctp:48
+#: Template/Activity/activity_list.ctp:76
+#: Template/Membership/view_activity.ctp:74
+#: Template/Membership/view_activity.ctp:98
 msgid "Activity Category"
-msgstr "กิจกรรมหมวดหมู่"
+msgstr "หมวดกิจกรรม"
 
-#: Template/Activity/activity_list.ctp:54 Template/Activity/activity_list.ctp:78 Template/Membership/view_activity.ctp:62 Template/Membership/view_activity.ctp:86
+#: Template/Activity/activity_list.ctp:49
+#: Template/Activity/activity_list.ctp:77
+#: Template/Membership/view_activity.ctp:75
+#: Template/Membership/view_activity.ctp:99
 msgid "Activity Trainer"
-msgstr "เทรนเนอร์กิจกรรม"
+msgstr "ผู้ฝึกสอนกิจกรรม"
 
-#: Template/Activity/add_activity.ctp:34 Template/Activity/add_activity.ctp:37 Template/Membership/add.ctp:80 Template/Membership/edit_membership.ctp:26
+#: Template/Activity/add_activity.ctp:45 Template/Activity/add_activity.ctp:48
+#: Template/Membership/add.ctp:90 Template/Membership/edit_membership.ctp:26
 msgid "Select Category"
 msgstr "เลือกประเภท"
 
-#: Template/Activity/add_activity.ctp:45
+#: Template/Activity/add_activity.ctp:56
 msgid "Activity Title"
-msgstr "กิจกรรมชื่อ"
+msgstr "ชื่อกิจกรรม"
 
-#: Template/Activity/add_activity.ctp:53
+#: Template/Activity/add_activity.ctp:64
 msgid "Assign to Staff Member"
-msgstr "กำหนดให้พนักงานสมาชิก"
+msgstr "มอบหมายให้กับเจ้าหน้าที่"
 
-#: Template/Activity/add_activity.ctp:56 Template/ClassSchedule/add_class.ctp:41 Template/ClassSchedule/add_class.ctp:43 Template/ClassSchedule/add_class.ctp:58
-#: Template/GymMember/add_member.ctp:273 Template/GymMember/add_member.ctp:275 Template/GymMember/add_member.ctp:305
+#: Template/Activity/add_activity.ctp:68
+#: Template/ClassSchedule/add_class.ctp:51
+#: Template/ClassSchedule/add_class.ctp:53
+#: Template/ClassSchedule/add_class.ctp:68
+#: Template/GymMember/add_member.ctp:353 Template/GymMember/add_member.ctp:355
+#: Template/GymMember/add_member.ctp:385
 msgid "Select Staff Member"
-msgstr "เลือกสมาชิกพนักงาน"
+msgstr "เลือกพนักงาน"
 
-#: Template/Activity/add_activity.ctp:64 Template/GymMember/add_member.ctp:342 Template/MemberRegistration/index.ctp:267
-#: Template/MembershipPayment/generate_payment_invoice.ctp:70
+#: Template/Activity/add_activity.ctp:79 Template/GymMember/add_member.ctp:422
+#: Template/MemberRegistration/index.ctp:261
+#: Template/MembershipPayment/generate_payment_invoice.ctp:78
 msgid "Select Membership"
-msgstr "เลือกสมาชิก"
+msgstr "เลือกการเป็นสมาชิก"
 
-#: Template/Activity/add_activity.ctp:75
+#: Template/Activity/add_activity.ctp:90
 msgid "Save Activity"
 msgstr "บันทึกกิจกรรม"
 
@@ -978,350 +1315,489 @@ msgstr "การตั้งค่าโปรไฟล์"
 
 #: Template/AdminProfile/edit_profile.ctp:26
 msgid "Admin"
-msgstr "งานธุรการ (Admin)"
+msgstr "ผู้ดูแลระบบ"
 
-#: Template/AdminProfile/edit_profile.ctp:34 Template/GymAccountant/add_accountant.ctp:32 Template/GymMember/add_member.ctp:80 Template/MemberRegistration/index.ctp:103
-#: Template/StaffMembers/add_staff.ctp:48
+#: Template/AdminProfile/edit_profile.ctp:34
+#: Template/GymAccountant/add_accountant.ctp:42
+#: Template/GymMember/add_member.ctp:160
+#: Template/MemberRegistration/index.ctp:104
+#: Template/StaffMembers/add_staff.ctp:58
 msgid "Personal Information"
 msgstr "ข้อมูลส่วนบุคคล"
 
-#: Template/AdminProfile/edit_profile.ctp:39 Template/GymAccountant/add_accountant.ctp:34 Template/GymMember/add_member.ctp:91 Template/MemberRegistration/index.ctp:114
-#: Template/StaffMembers/add_staff.ctp:50
+#: Template/AdminProfile/edit_profile.ctp:39
+#: Template/GymAccountant/add_accountant.ctp:44
+#: Template/GymMember/add_member.ctp:171
+#: Template/MemberRegistration/index.ctp:115
+#: Template/StaffMembers/add_staff.ctp:60
 msgid "First Name"
-msgstr "ชื่อ"
+msgstr "ชื่อจริง"
 
-#: Template/AdminProfile/edit_profile.ctp:46 Template/GymAccountant/add_accountant.ctp:48 Template/GymMember/add_member.ctp:105 Template/MemberRegistration/index.ctp:128
-#: Template/StaffMembers/add_staff.ctp:64
+#: Template/AdminProfile/edit_profile.ctp:46
+#: Template/GymAccountant/add_accountant.ctp:58
+#: Template/GymMember/add_member.ctp:185
+#: Template/MemberRegistration/index.ctp:129
+#: Template/StaffMembers/add_staff.ctp:74
 msgid "Last Name"
 msgstr "นามสกุล"
 
-#: Template/AdminProfile/edit_profile.ctp:53 Template/GeneralSetting/save_setting.ctp:159 Template/GymAccountant/add_accountant.ctp:105
-#: Template/GymDailyWorkout/workout_list.ctp:58 Template/GymDailyWorkout/workout_list.ctp:84 Template/GymMember/add_member.ctp:187 Template/GymMember/view_member.ctp:68
-#: Template/GymProfile/view_profile.ctp:140 Template/Installer/index.ctp:393 Template/MemberRegistration/index.ctp:215 Template/StaffMembers/add_staff.ctp:140
+#: Template/AdminProfile/edit_profile.ctp:53
+#: Template/GeneralSetting/save_setting.ctp:159
+#: Template/GymAccountant/add_accountant.ctp:115
+#: Template/GymDailyWorkout/workout_list.ctp:58
+#: Template/GymDailyWorkout/workout_list.ctp:84
+#: Template/GymMember/add_member.ctp:267 Template/GymMember/view_member.ctp:74
+#: Template/GymProfile/view_profile.ctp:148 Template/Installer/index.ctp:464
+#: Template/MemberRegistration/index.ctp:209
+#: Template/StaffMembers/add_staff.ctp:150
 msgid "Email"
 msgstr "อีเมล์"
 
-#: Template/AdminProfile/edit_profile.ctp:60 Template/GymAccountant/add_accountant.ctp:112 Template/GymMember/add_member.ctp:246 Template/MemberRegistration/index.ctp:222
-#: Template/StaffMembers/add_staff.ctp:147
+#: Template/AdminProfile/edit_profile.ctp:60
+#: Template/GymAccountant/add_accountant.ctp:122
+#: Template/GymMember/add_member.ctp:326
+#: Template/MemberRegistration/index.ctp:216
+#: Template/StaffMembers/add_staff.ctp:157
 msgid "Login Information"
-msgstr "ข้อมูลเข้าสู่ระบบ"
+msgstr "ข้อมูลการเข้าสู่ระบบ"
 
-#: Template/AdminProfile/edit_profile.ctp:69 Template/GymAccountant/add_accountant.ctp:121 Template/GymEmailSetting/index.ctp:40 Template/GymMember/add_member.ctp:255
-#: Template/Installer/index.ctp:491 Template/MemberRegistration/index.ctp:232 Template/StaffMembers/add_staff.ctp:156 Template/Users/login.ctp:27
+#: Template/AdminProfile/edit_profile.ctp:69
+#: Template/GymAccountant/add_accountant.ctp:131
+#: Template/GymEmailSetting/index.ctp:40 Template/GymMember/add_member.ctp:335
+#: Template/Installer/index.ctp:562 Template/MemberRegistration/index.ctp:226
+#: Template/StaffMembers/add_staff.ctp:166 Template/Users/login.ctp:30
 msgid "Password"
 msgstr "รหัสผ่าน"
 
-#: Template/AdminProfile/edit_profile.ctp:76 Template/GymAccountant/add_accountant.ctp:128 Template/GymDailyWorkout/add_measurment.ctp:74
-#: Template/GymMember/add_member.ctp:262 Template/MemberRegistration/index.ctp:239 Template/StaffMembers/add_staff.ctp:163
+#: Template/AdminProfile/edit_profile.ctp:76
+#: Template/GymAccountant/add_accountant.ctp:138
+#: Template/GymDailyWorkout/add_measurment.ctp:77
+#: Template/GymMember/add_member.ctp:342
+#: Template/MemberRegistration/index.ctp:233
+#: Template/StaffMembers/add_staff.ctp:173
 msgid "Display Image"
-msgstr "การแสดงผลภาพ"
+msgstr "แสดงภาพ"
 
 #: Template/AdminProfile/edit_profile.ctp:86
 msgid "Save Details"
 msgstr "บันทึกรายละเอียด"
 
-#: Template/Cell/GymRenderMenu/acc_menu.ctp:17 Template/Cell/GymRenderMenu/admin_menu.ctp:46 Template/Cell/GymRenderMenu/member_menu.ctp:33
-#: Template/Cell/GymRenderMenu/staff_menu.ctp:17 Template/Element/sidebar.ctp:28
+#: Template/Cell/GymRenderMenu/acc_menu.ctp:8
+#: Template/Cell/GymRenderMenu/admin_menu.ctp:46
+#: Template/Cell/GymRenderMenu/member_menu.ctp:33
+#: Template/Cell/GymRenderMenu/staff_menu.ctp:17
+#: Template/Element/sidebar.ctp:28
 msgid "Dashboard"
-msgstr "หน้าแรก"
+msgstr "แผงควบคุม"
 
-#: Template/Cell/GymRenderMenu/admin_menu.ctp:56 Template/Dashboard/dashboard.ctp:82 Template/Dashboard/member_dashboard.ctp:80 Template/Dashboard/staff_acc_dashboard.ctp:80
-#: Template/Element/sidebar.ctp:38 Template/GymAccessright/access_right.ctp:91 Template/GymGroup/add_group.ctp:18 Template/GymGroup/group_list.ctp:28
-#: Template/GymGroup/group_list.ctp:34 Template/GymMember/add_member.ctp:130 Template/MemberRegistration/index.ctp:160
+#: Template/Cell/GymRenderMenu/admin_menu.ctp:56
+#: Template/Dashboard/dashboard.ctp:83
+#: Template/Dashboard/member_dashboard.ctp:97
+#: Template/Dashboard/staff_acc_dashboard.ctp:112
+#: Template/Element/sidebar.ctp:38 Template/GymAccessright/access_right.ctp:93
+#: Template/GymGroup/add_group.ctp:18 Template/GymGroup/group_list.ctp:28
+#: Template/GymGroup/group_list.ctp:34 Template/GymMember/add_member.ctp:210
+#: Template/MemberRegistration/index.ctp:154
 msgid "Group"
 msgstr "กลุ่ม"
 
-#: Template/Cell/GymRenderMenu/admin_menu.ctp:61 Template/Element/sidebar.ctp:43
+#: Template/Cell/GymRenderMenu/admin_menu.ctp:61
+#: Template/Element/sidebar.ctp:43
 msgid "Class & Nutrition Schedule"
-msgstr "ระดับและโภชนาการกำหนดการ"
+msgstr "ตารางเรียนและโภชนาการ"
 
-#: Template/Cell/GymRenderMenu/admin_menu.ctp:66 Template/ClassSchedule/add_class.ctp:22 Template/ClassSchedule/class_list.ctp:40 Template/ClassSchedule/view_schedule.ctp:10
-#: Template/Element/sidebar.ctp:48 Template/GymAccessright/access_right.ctp:181
+#: Template/Cell/GymRenderMenu/admin_menu.ctp:66
+#: Template/ClassSchedule/add_class.ctp:32
+#: Template/ClassSchedule/class_list.ctp:40
+#: Template/ClassSchedule/view_schedule.ctp:10 Template/Element/sidebar.ctp:48
+#: Template/GymAccessright/access_right.ctp:183
 msgid "Class Schedule"
 msgstr "ตารางเรียน"
 
-#: Template/Cell/GymRenderMenu/admin_menu.ctp:70 Template/Element/sidebar.ctp:52 Template/GymAccessright/access_right.ctp:601
-#: Template/GymNutrition/addnutrition_schedule.ctp:22 Template/GymNutrition/member_nutrition.ctp:19 Template/GymNutrition/nutrition_list.ctp:35
+#: Template/Cell/GymRenderMenu/admin_menu.ctp:70
+#: Template/Element/sidebar.ctp:52 Template/GymAccessright/access_right.ctp:603
+#: Template/GymNutrition/addnutrition_schedule.ctp:43
+#: Template/GymNutrition/member_nutrition.ctp:19
+#: Template/GymNutrition/nutrition_list.ctp:35
 #: Template/GymNutrition/nutrition_list.ctp:36
 msgid "Nutrition Schedule"
-msgstr "โภชนาการกำหนดการ"
+msgstr "กำหนดการโภชนาการ"
 
-#: Template/Cell/GymRenderMenu/admin_menu.ctp:76 Template/Element/sidebar.ctp:58
+#: Template/Cell/GymRenderMenu/admin_menu.ctp:76
+#: Template/Element/sidebar.ctp:58
 msgid "Member Management"
-msgstr "การบริหารจัดการสมาชิก"
+msgstr "การจัดการสมาชิก"
 
-#: Template/Cell/GymRenderMenu/admin_menu.ctp:89 Template/Element/sidebar.ctp:71 Template/GymAccessright/access_right.ctp:25 Template/GymAccessright/access_right.ctp:301
-#: Template/GymAccountant/accountant_list.ctp:37 Template/GymAccountant/add_accountant.ctp:21 Template/GymNotice/add_notice.ctp:38
+#: Template/Cell/GymRenderMenu/admin_menu.ctp:89
+#: Template/Element/sidebar.ctp:71 Template/GymAccessright/access_right.ctp:25
+#: Template/GymAccessright/access_right.ctp:303
+#: Template/GymAccountant/accountant_list.ctp:37
+#: Template/GymAccountant/add_accountant.ctp:31
+#: Template/GymNotice/add_notice.ctp:67
 msgid "Accountant"
 msgstr "นักบัญชี"
 
-#: Template/Cell/GymRenderMenu/admin_menu.ctp:101 Template/Element/sidebar.ctp:83 Template/GymDailyWorkout/add_workout.ctp:129
+#: Template/Cell/GymRenderMenu/admin_menu.ctp:101
+#: Template/Element/sidebar.ctp:83 Template/GymDailyWorkout/add_workout.ctp:194
 msgid "Workout"
 msgstr "ออกไปทำงาน"
 
-#: Template/Cell/GymRenderMenu/admin_menu.ctp:109 Template/Element/sidebar.ctp:91
+#: Template/Cell/GymRenderMenu/admin_menu.ctp:109
+#: Template/Element/sidebar.ctp:91
 msgid "Daily Workout"
-msgstr "ออกกำลังกายประจำวัน"
+msgstr "ออกกำลังกายทุกวัน"
 
-#: Template/Cell/GymRenderMenu/admin_menu.ctp:116 Template/Element/sidebar.ctp:98
+#: Template/Cell/GymRenderMenu/admin_menu.ctp:116
+#: Template/Element/sidebar.ctp:98
 msgid "Store & Products"
 msgstr "ร้านค้าและผลิตภัณฑ์"
 
-#: Template/Cell/GymRenderMenu/admin_menu.ctp:120 Template/Element/sidebar.ctp:102 Template/GymAccessright/access_right.ctp:420 Template/GymStore/sell_product.ctp:45
+#: Template/Cell/GymRenderMenu/admin_menu.ctp:120
+#: Template/Element/sidebar.ctp:102
+#: Template/GymAccessright/access_right.ctp:422
+#: Template/GymStore/sell_product.ctp:60
 msgid "Product"
-msgstr "การพัฒนาผลิตภัณฑ์ (Product Development)"
+msgstr "สินค้า"
 
-#: Template/Cell/GymRenderMenu/admin_menu.ctp:124 Template/Element/sidebar.ctp:106 Template/GymAccessright/access_right.ctp:450 Template/GymStore/sell_product.ctp:20
-#: Template/GymStore/sell_record.ctp:23
+#: Template/Cell/GymRenderMenu/admin_menu.ctp:124
+#: Template/Element/sidebar.ctp:106
+#: Template/GymAccessright/access_right.ctp:452
+#: Template/GymStore/sell_product.ctp:35 Template/GymStore/sell_record.ctp:23
 msgid "Store"
-msgstr "คลังสินค้า"
+msgstr "เก็บ"
 
-#: Template/Cell/GymRenderMenu/admin_menu.ctp:131 Template/Element/sidebar.ctp:113 Template/GymAccessright/access_right.ctp:631
-#: Template/GymReservation/reservation_list.ctp:42
-msgid "Reservation"
-msgstr "การจองห้องพัก:"
+#: Template/Cell/GymRenderMenu/admin_menu.ctp:131
+#: Template/Element/sidebar.ctp:113
+#: Template/GymAccessright/access_right.ctp:633
+#: Template/GymReservation/reservation_list.ctp:35
+msgid "Event"
+msgstr "เหตุการณ์"
 
-#: Template/Cell/GymRenderMenu/admin_menu.ctp:136 Template/Element/sidebar.ctp:118 Template/GymAttendance/attendance.ctp:15 Template/GymAttendance/staff_attendance.ctp:14
-#: Template/GymMember/view_attendance.ctp:52
+#: Template/Cell/GymRenderMenu/admin_menu.ctp:136
+#: Template/Element/sidebar.ctp:118 Template/GymAttendance/attendance.ctp:23
+#: Template/GymAttendance/staff_attendance.ctp:19
+#: Template/GymMember/member_list.ctp:88
+#: Template/GymMember/view_attendance.ctp:70
 msgid "Attendance"
-msgstr "การเข้าเรียน"
+msgstr "การดูแลรักษา"
 
-#: Template/Cell/GymRenderMenu/admin_menu.ctp:141 Template/Dashboard/dashboard.ctp:168 Template/Dashboard/dashboard.ctp:183 Template/Element/sidebar.ctp:123
-#: Template/MembershipPayment/generate_payment_invoice.ctp:42 Template/MembershipPayment/payment_list.ctp:32
+#: Template/Cell/GymRenderMenu/admin_menu.ctp:141
+#: Template/Dashboard/dashboard.ctp:171 Template/Dashboard/dashboard.ctp:186
+#: Template/Element/sidebar.ctp:123
+#: Template/MembershipPayment/generate_payment_invoice.ctp:50
+#: Template/MembershipPayment/payment_list.ctp:32
 msgid "Payment"
 msgstr "การชำระเงิน"
 
-#: Template/Cell/GymRenderMenu/admin_menu.ctp:146 Template/Element/sidebar.ctp:128
+#: Template/Cell/GymRenderMenu/admin_menu.ctp:146
+#: Template/Element/sidebar.ctp:128
 msgid "Membership Payment"
-msgstr "การชำระเงินสมาชิก"
+msgstr "การชำระค่าสมาชิก"
 
-#: Template/Cell/GymRenderMenu/admin_menu.ctp:151 Template/Element/sidebar.ctp:133 Template/GymAccessright/access_right.ctp:361 Template/MembershipPayment/add_income.ctp:19
+#: Template/Cell/GymRenderMenu/admin_menu.ctp:151
+#: Template/Element/sidebar.ctp:133
+#: Template/GymAccessright/access_right.ctp:363
+#: Template/MembershipPayment/add_income.ctp:31
 #: Template/MembershipPayment/income_list.ctp:27
 msgid "Income"
-msgstr "รายรับ"
+msgstr "เงินได้"
 
-#: Template/Cell/GymRenderMenu/admin_menu.ctp:156 Template/Element/sidebar.ctp:138
+#: Template/Cell/GymRenderMenu/admin_menu.ctp:156
+#: Template/Element/sidebar.ctp:138
 msgid "Expenses"
 msgstr "รายจ่าย"
 
-#: Template/Cell/GymRenderMenu/admin_menu.ctp:164 Template/Dashboard/dashboard.ctp:95 Template/Dashboard/member_dashboard.ctp:93 Template/Dashboard/staff_acc_dashboard.ctp:93
-#: Template/Element/sidebar.ctp:146 Template/GymAccessright/access_right.ctp:510 Template/GymMessage/compose_message.ctp:14 Template/GymMessage/inbox.ctp:10
+#: Template/Cell/GymRenderMenu/admin_menu.ctp:164
+#: Template/Dashboard/dashboard.ctp:96
+#: Template/Dashboard/member_dashboard.ctp:116
+#: Template/Dashboard/staff_acc_dashboard.ctp:136
+#: Template/Element/sidebar.ctp:146
+#: Template/GymAccessright/access_right.ctp:512
+#: Template/GymMessage/compose_message.ctp:14 Template/GymMessage/inbox.ctp:10
 #: Template/GymMessage/sent.ctp:9 Template/GymMessage/view_message.ctp:9
 msgid "Message"
-msgstr "ข้อความ"
-
-#: Template/Cell/GymRenderMenu/admin_menu.ctp:169 Template/Element/sidebar.ctp:151 Template/GymAccessright/access_right.ctp:480 Template/GymNewsletter/campaign.ctp:1
-#: Template/GymNewsletter/setting.ctp:1 Template/GymNewsletter/sync_mail.ctp:1
-msgid "Newsletter"
 msgstr "ข่าวสาร"
 
-#: Template/Cell/GymRenderMenu/admin_menu.ctp:174 Template/Element/sidebar.ctp:156 Template/GymAccessright/access_right.ctp:540 Template/GymNotice/add_notice.ctp:18
-#: Template/GymNotice/notice_list.ctp:25
-msgid "Notice"
-msgstr "ประกาศ"
+#: Template/Cell/GymRenderMenu/admin_menu.ctp:169
+#: Template/Element/sidebar.ctp:151
+#: Template/GymAccessright/access_right.ctp:482
+#: Template/GymNewsletter/campaign.ctp:1 Template/GymNewsletter/setting.ctp:1
+#: Template/GymNewsletter/sync_mail.ctp:1
+msgid "Newsletter"
+msgstr "จดหมายข่าว"
 
-#: Template/Cell/GymRenderMenu/admin_menu.ctp:179 Template/Element/sidebar.ctp:161 Template/GymAccessright/access_right.ctp:570
+#: Template/Cell/GymRenderMenu/admin_menu.ctp:174
+#: Template/Element/sidebar.ctp:156
+#: Template/GymAccessright/access_right.ctp:542
+#: Template/GymNotice/add_notice.ctp:47 Template/GymNotice/notice_list.ctp:25
+msgid "Notice"
+msgstr "แจ้งให้ทราบ"
+
+#: Template/Cell/GymRenderMenu/admin_menu.ctp:179
+#: Template/Cell/GymRenderMenu/member_menu.ctp:45
+#: Template/Element/sidebar.ctp:170
+#: Template/GymAccessright/access_right.ctp:572
 msgid "Report"
 msgstr "รายงาน"
 
 #: Template/Cell/GymRenderMenu/admin_menu.ctp:184
 msgid "Email Settings"
-msgstr "การตั้งค่าอีเมล"
+msgstr "การตั้งค่าอีเมล์"
 
-#: Template/Cell/GymRenderMenu/admin_menu.ctp:189 Template/Element/sidebar.ctp:166 Template/GeneralSetting/save_setting.ctp:15
+#: Template/Cell/GymRenderMenu/admin_menu.ctp:190
+msgid "SubscriptionHistory"
+msgstr "ประวัติการสมัครสมาชิก"
+
+#: Template/Cell/GymRenderMenu/admin_menu.ctp:195
+#: Template/Element/sidebar.ctp:175 Template/GeneralSetting/save_setting.ctp:15
 msgid "General Settings"
-msgstr "ตั้งค่าทั่วไป"
+msgstr "การตั้งค่าทั่วไป"
 
-#: Template/Cell/GymRenderMenu/admin_menu.ctp:194 Template/Element/sidebar.ctp:171 Template/GymAccessright/access_right.ctp:14
+#: Template/Cell/GymRenderMenu/admin_menu.ctp:200
+#: Template/Element/sidebar.ctp:180 Template/GymAccessright/access_right.ctp:14
 msgid "Access Right"
-msgstr "สิทธิการเข้าถึง"
+msgstr "สิทธิ์การเข้าถึง"
 
-#: Template/ClassSchedule/add_class.ctp:25 Template/ClassSchedule/class_list.ctp:39 Template/ClassSchedule/view_schedule.ctp:13 Template/GymNewsletter/sync_mail.ctp:1
+#: Template/ClassSchedule/add_class.ctp:35
+#: Template/ClassSchedule/class_list.ctp:39
+#: Template/ClassSchedule/view_schedule.ctp:13
+#: Template/GymNewsletter/sync_mail.ctp:1
 msgid "Class List"
-msgstr "รายชื่อชั้นเรียน"
+msgstr "รายการคลาส"
 
-#: Template/ClassSchedule/add_class.ctp:34 Template/ClassSchedule/class_list.ctp:61 Template/ClassSchedule/class_list.ctp:89
+#: Template/ClassSchedule/add_class.ctp:44
+#: Template/ClassSchedule/class_list.ctp:61
+#: Template/ClassSchedule/class_list.ctp:95
 msgid "Class Name"
-msgstr "ชื่อชั้นเรียน"
+msgstr "ชื่อคลาส"
 
-#: Template/ClassSchedule/add_class.ctp:49 Template/ClassSchedule/add_class.ctp:64
+#: Template/ClassSchedule/add_class.ctp:59
+#: Template/ClassSchedule/add_class.ctp:74
 msgid "Add"
 msgstr "เพิ่ม"
 
-#: Template/ClassSchedule/add_class.ctp:56
+#: Template/ClassSchedule/add_class.ctp:66
 msgid "Select Assistant Staff Member"
 msgstr "เลือกผู้ช่วยพนักงานสมาชิก"
 
-#: Template/ClassSchedule/add_class.ctp:70 Template/ClassSchedule/class_list.ctp:65 Template/ClassSchedule/class_list.ctp:93
+#: Template/ClassSchedule/add_class.ctp:80
+#: Template/ClassSchedule/class_list.ctp:65
+#: Template/ClassSchedule/class_list.ctp:99
 msgid "Location"
-msgstr "สถานทีี"
+msgstr "ที่ตั้ง"
 
-#: Template/ClassSchedule/add_class.ctp:77 Template/GymAssignWorkout/assign_workout.ctp:108 Template/GymNutrition/addnutrition_schedule.ctp:66
+#: Template/ClassSchedule/add_class.ctp:87
+#: Template/GymAssignWorkout/assign_workout.ctp:129
+#: Template/GymAssignWorkout/assign_workout1.ctp:108
+#: Template/GymNutrition/addnutrition_schedule.ctp:90
 msgid "Select Days"
 msgstr "เลือกวัน"
 
-#: Template/ClassSchedule/add_class.ctp:79
+#: Template/ClassSchedule/add_class.ctp:89
 msgid "Sunday"
 msgstr "วันอาทิตย์"
 
-#: Template/ClassSchedule/add_class.ctp:79
+#: Template/ClassSchedule/add_class.ctp:89
 msgid "Monday"
 msgstr "วันจันทร์"
 
-#: Template/ClassSchedule/add_class.ctp:79
+#: Template/ClassSchedule/add_class.ctp:89
 msgid "Tuesday"
 msgstr "วันอังคาร"
 
-#: Template/ClassSchedule/add_class.ctp:79
+#: Template/ClassSchedule/add_class.ctp:89
 msgid "Wednesday"
 msgstr "วันพุธ"
 
-#: Template/ClassSchedule/add_class.ctp:79
+#: Template/ClassSchedule/add_class.ctp:89
 msgid "Thursday"
 msgstr "วันพฤหัสบดี"
 
-#: Template/ClassSchedule/add_class.ctp:79
+#: Template/ClassSchedule/add_class.ctp:89
 msgid "Friday"
 msgstr "วันศุกร์"
 
-#: Template/ClassSchedule/add_class.ctp:79
+#: Template/ClassSchedule/add_class.ctp:89
 msgid "Saturday"
 msgstr "วันเสาร์"
 
-#: Template/ClassSchedule/add_class.ctp:89 Template/ClassSchedule/add_class.ctp:117 Template/GymReservation/add_reservation.ctp:56
-#: Template/GymReservation/reservation_list.ctp:61 Template/GymReservation/reservation_list.ctp:89
+#: Template/ClassSchedule/add_class.ctp:125
+#: Template/ClassSchedule/add_class.ctp:141
+#: Template/GymReservation/add_reservation.ctp:103
+#: Template/GymReservation/reservation_list.ctp:54
+#: Template/GymReservation/reservation_list.ctp:86
 msgid "Start Time"
 msgstr "เวลาเริ่มต้น"
 
-#: Template/ClassSchedule/add_class.ctp:91 Template/ClassSchedule/add_class.ctp:104 Template/GymReservation/add_reservation.ctp:58
-#: Template/GymReservation/add_reservation.ctp:71
-msgid "Select Time"
-msgstr "เลือกเวลา"
-
-#: Template/ClassSchedule/add_class.ctp:102 Template/ClassSchedule/add_class.ctp:117 Template/GymReservation/add_reservation.ctp:69
+#: Template/ClassSchedule/add_class.ctp:132
+#: Template/ClassSchedule/add_class.ctp:141
+#: Template/GymReservation/add_reservation.ctp:110
 msgid "End Time"
 msgstr "เวลาสิ้นสุด"
 
-#: Template/ClassSchedule/add_class.ctp:113
+#: Template/ClassSchedule/add_class.ctp:137
 msgid "Add Time"
 msgstr "เพิ่มเวลา"
 
-#: Template/ClassSchedule/add_class.ctp:142 Template/GymReservation/add_reservation.ctp:82
+#: Template/ClassSchedule/add_class.ctp:173
+#: Template/GymReservation/add_reservation.ctp:142
 msgid "Save Class"
-msgstr "บันทึกชั้น"
+msgstr "บันทึกคลาส"
 
-#: Template/ClassSchedule/class_list.ctp:46 Template/ClassSchedule/view_schedule.ctp:9
+#: Template/ClassSchedule/class_list.ctp:46
+#: Template/ClassSchedule/view_schedule.ctp:9
 msgid "Class Schedules"
 msgstr "ตารางเรียน"
 
-#: Template/ClassSchedule/class_list.ctp:62 Template/ClassSchedule/class_list.ctp:90
+#: Template/ClassSchedule/class_list.ctp:62
+#: Template/ClassSchedule/class_list.ctp:96
 msgid "Staff Name"
-msgstr "พนักงานชื่อ"
+msgstr "ชื่อพนักงาน"
 
-#: Template/ClassSchedule/class_list.ctp:63 Template/ClassSchedule/class_list.ctp:91
+#: Template/ClassSchedule/class_list.ctp:63
+#: Template/ClassSchedule/class_list.ctp:97
 msgid "Starting Time"
 msgstr "เวลาเริ่มต้น"
 
-#: Template/ClassSchedule/class_list.ctp:64 Template/ClassSchedule/class_list.ctp:92 Template/GymReservation/reservation_list.ctp:62
-#: Template/GymReservation/reservation_list.ctp:90
+#: Template/ClassSchedule/class_list.ctp:64
+#: Template/ClassSchedule/class_list.ctp:98
+#: Template/GymReservation/reservation_list.ctp:55
+#: Template/GymReservation/reservation_list.ctp:87
 msgid "Ending Time"
 msgstr "เวลาสิ้นสุด"
 
-#: Template/ClassSchedule/view_schedule.ctp:35 Template/GymNotice/notice_list.ctp:60 Template/GymProduct/product_list.ctp:67 Template/GymStore/sell_record.ctp:50
+#: Template/ClassSchedule/view_schedule.ctp:43
+#: Template/GymNotice/notice_list.ctp:60
+#: Template/GymProduct/product_list.ctp:65 Template/GymStore/sell_record.ctp:51
 msgid "Edit"
 msgstr "แก้ไข"
 
-#: Template/Dashboard/dashboard.ctp:57 Template/Dashboard/member_dashboard.ctp:55 Template/Dashboard/staff_acc_dashboard.ctp:55 Template/GymAccessright/access_right.ctp:23
-#: Template/GymAccessright/access_right.ctp:121 Template/GymDailyWorkout/add_measurment.ctp:43 Template/GymMember/add_member.ctp:69 Template/GymMember/add_member.ctp:332
-#: Template/GymMember/member_list.ctp:49 Template/GymMember/view_attendance.ctp:16 Template/GymMember/view_member.ctp:33 Template/GymNotice/add_notice.ctp:38
-#: Template/GymStore/sell_product.ctp:31 Template/MembershipPayment/add_income.ctp:31 Template/MembershipPayment/generate_payment_invoice.ctp:56
+#: Template/Dashboard/dashboard.ctp:58
+#: Template/Dashboard/member_dashboard.ctp:61
+#: Template/Dashboard/staff_acc_dashboard.ctp:66
+#: Template/GymAccessright/access_right.ctp:23
+#: Template/GymAccessright/access_right.ctp:123
+#: Template/GymDailyWorkout/add_measurment.ctp:46
+#: Template/GymDailyWorkout/add_workout.ctp:147
+#: Template/GymMember/add_member.ctp:149 Template/GymMember/add_member.ctp:412
+#: Template/GymMember/member_list.ctp:39
+#: Template/GymMember/view_attendance.ctp:34
+#: Template/GymMember/view_member.ctp:33 Template/GymNotice/add_notice.ctp:67
+#: Template/GymStore/sell_product.ctp:46
+#: Template/MembershipPayment/add_income.ctp:43
+#: Template/MembershipPayment/generate_payment_invoice.ctp:64
 msgid "Member"
 msgstr "สมาชิก"
 
-#: Template/Dashboard/dashboard.ctp:105 Template/Dashboard/member_dashboard.ctp:103 Template/Dashboard/staff_acc_dashboard.ctp:103 Template/GymMember/add_member.ctp:340
-#: Template/MemberRegistration/index.ctp:265 Template/Membership/add.ctp:56 Template/Membership/edit_membership.ctp:8 Template/Membership/membership_list.ctp:37
-#: Template/Membership/membership_list.ctp:43 Template/Membership/view_activity.ctp:29 Template/MembershipPayment/generate_payment_invoice.ctp:68
+#: Template/Dashboard/dashboard.ctp:106
+#: Template/Dashboard/member_dashboard.ctp:134
+#: Template/Dashboard/staff_acc_dashboard.ctp:158
+#: Template/GymMember/add_member.ctp:420
+#: Template/MemberRegistration/index.ctp:259 Template/Membership/add.ctp:66
+#: Template/Membership/edit_membership.ctp:8
+#: Template/Membership/membership_list.ctp:37
+#: Template/Membership/membership_list.ctp:43
+#: Template/Membership/view_activity.ctp:40
+#: Template/MembershipPayment/generate_payment_invoice.ctp:76
 msgid "Membership"
-msgstr "สมาชิก"
+msgstr "การเป็นสมาชิก"
 
-#: Template/Dashboard/dashboard.ctp:123 Template/Dashboard/member_dashboard.ctp:121 Template/Dashboard/staff_acc_dashboard.ctp:121 Template/GymGroup/add_group.ctp:21
-#: Template/GymGroup/group_list.ctp:27
+#: Template/Dashboard/dashboard.ctp:124
+#: Template/Dashboard/member_dashboard.ctp:158
+#: Template/Dashboard/staff_acc_dashboard.ctp:187
+#: Template/GymGroup/add_group.ctp:21 Template/GymGroup/group_list.ctp:27
 msgid "Group List"
 msgstr "รายชื่อกลุ่ม"
 
-#: Template/Dashboard/dashboard.ctp:151
+#: Template/Dashboard/dashboard.ctp:154
 msgid "Payment by month"
-msgstr "การชำระเงินตามเดือน"
+msgstr "ชำระรายเดือน"
 
-#: Template/Dashboard/dashboard.ctp:189 Template/Dashboard/dashboard.ctp:244 Template/Dashboard/dashboard.ctp:295 Template/Dashboard/member_dashboard.ctp:158
-#: Template/Dashboard/member_dashboard.ctp:182 Template/Dashboard/member_dashboard.ctp:206 Template/Dashboard/member_dashboard.ctp:230
-#: Template/Dashboard/member_dashboard.ctp:254 Template/Dashboard/member_dashboard.ctp:278 Template/Dashboard/member_dashboard.ctp:302 Template/GymMember/view_member.ctp:149
-#: Template/GymMember/view_member.ctp:173 Template/GymMember/view_member.ctp:199 Template/GymMember/view_member.ctp:223 Template/GymMember/view_member.ctp:249
-#: Template/GymMember/view_member.ctp:273 Template/GymMember/view_member.ctp:299
+#: Template/Dashboard/dashboard.ctp:192 Template/Dashboard/dashboard.ctp:247
+#: Template/Dashboard/dashboard.ctp:298
+#: Template/Dashboard/member_dashboard.ctp:200
+#: Template/Dashboard/member_dashboard.ctp:224
+#: Template/Dashboard/member_dashboard.ctp:248
+#: Template/Dashboard/member_dashboard.ctp:272
+#: Template/Dashboard/member_dashboard.ctp:296
+#: Template/Dashboard/member_dashboard.ctp:320
+#: Template/Dashboard/member_dashboard.ctp:344
+#: Template/GymMember/view_member.ctp:155
+#: Template/GymMember/view_member.ctp:179
+#: Template/GymMember/view_member.ctp:205
+#: Template/GymMember/view_member.ctp:229
+#: Template/GymMember/view_member.ctp:255
+#: Template/GymMember/view_member.ctp:279
+#: Template/GymMember/view_member.ctp:305
 msgid "There is not enough data to generate report"
-msgstr "มีข้อมูลไม่มากพอที่จะสร้างรายงาน"
+msgstr "มีข้อมูลไม่เพียงพอที่จะสร้างรายงาน"
 
-#: Template/Dashboard/dashboard.ctp:206 Template/Dashboard/dashboard.ctp:237 Template/Reports/attendance_report.ctp:52
+#: Template/Dashboard/dashboard.ctp:209 Template/Dashboard/dashboard.ctp:240
+#: Template/Reports/attendance_report.ctp:81
 msgid "Member Attendance Report"
-msgstr "รายงานการเข้าร่วมเป็นสมาชิก"
+msgstr "รายงานการเข้าร่วมประชุมสมาชิก"
 
-#: Template/Dashboard/dashboard.ctp:220 Template/Reports/attendance_report.ctp:64 Template/Reports/membership_report.ctp:35
+#: Template/Dashboard/dashboard.ctp:223
+#: Template/Reports/attendance_report.ctp:93
+#: Template/Reports/membership_report.ctp:41
 msgid "No of Member"
-msgstr "จำนวนสมาชิก"
+msgstr "ไม่มีสมาชิก"
 
-#: Template/Dashboard/dashboard.ctp:260
+#: Template/Dashboard/dashboard.ctp:263
 msgid "Staff Attendance Report"
-msgstr "รายงานการเข้าร่วมประชุมพนักงาน"
+msgstr "รายงานการเข้าร่วมของพนักงาน"
 
-#: Template/Dashboard/dashboard.ctp:274
+#: Template/Dashboard/dashboard.ctp:277
 msgid "Number of Staff Members"
-msgstr "จำนวนบุคลากร"
+msgstr "จำนวนพนักงาน"
 
-#: Template/Dashboard/dashboard.ctp:289 Template/GymAttendance/attendance.ctp:21 Template/GymAttendance/staff_attendance.ctp:13
+#: Template/Dashboard/dashboard.ctp:292
+#: Template/GymAttendance/attendance.ctp:29
+#: Template/GymAttendance/staff_attendance.ctp:18
 msgid "Staff Attendance"
-msgstr "พนักงานเข้าร่วมประชุม"
+msgstr "พนักงานเข้าร่วม"
 
-#: Template/Dashboard/member_dashboard.ctp:149
+#: Template/Dashboard/member_dashboard.ctp:191
 msgid "Weight Progress Report"
-msgstr "น้ำหนักรายงานความคืบหน้า"
+msgstr "รายงานความคืบหน้าเรื่องน้ำหนัก"
 
-#: Template/Dashboard/member_dashboard.ctp:173
+#: Template/Dashboard/member_dashboard.ctp:215
 msgid "Waist  Progress Report"
-msgstr "เอวรายงานความคืบหน้า"
+msgstr "รายงานความคืบหน้าของเอว"
 
-#: Template/Dashboard/member_dashboard.ctp:197
+#: Template/Dashboard/member_dashboard.ctp:239
 msgid "Thigh Progress Report"
-msgstr "ต้นขารายงานความคืบหน้า"
+msgstr "รายงานความก้าวหน้าต้นขา"
 
-#: Template/Dashboard/member_dashboard.ctp:221
+#: Template/Dashboard/member_dashboard.ctp:263
 msgid "Arms Progress Report"
-msgstr "แขนรายงานความคืบหน้า"
+msgstr "รายงานความคืบหน้าของอาวุธ"
 
-#: Template/Dashboard/member_dashboard.ctp:245
+#: Template/Dashboard/member_dashboard.ctp:287
 msgid "Height Progress Report"
-msgstr "ความสูงรายงานความคืบหน้า"
+msgstr "รายงานความก้าวหน้าส่วนสูง"
 
-#: Template/Dashboard/member_dashboard.ctp:269
+#: Template/Dashboard/member_dashboard.ctp:311
 msgid "Chest Progress Report"
-msgstr "หน้าอกรายงานความคืบหน้า"
+msgstr "รายงานความก้าวหน้าหน้าอก"
 
-#: Template/Dashboard/member_dashboard.ctp:293
+#: Template/Dashboard/member_dashboard.ctp:335
 msgid "Fat Progress Report"
-msgstr "รายงานความคืบหน้าอ้วน"
+msgstr "รายงานความคืบหน้าไขมัน"
 
 #: Template/Element/footer.ctp:10
 msgid "Version"
 msgstr "รุ่น"
 
-#: Template/Element/topbar.ctp:36
+#: Template/Element/topbar.ctp:40
 msgid "Member since"
 msgstr "สมาชิกตั้งแต่"
 
-#: Template/Element/topbar.ctp:43 Template/Element/topbar.ctp:49
+#: Template/Element/topbar.ctp:47 Template/Element/topbar.ctp:53
 msgid "Profile"
 msgstr "ข้อมูลส่วนตัว"
 
-#: Template/Element/topbar.ctp:53
+#: Template/Element/topbar.ctp:57
 msgid "Sign out"
 msgstr "ออกจากระบบ"
 
@@ -1335,11 +1811,11 @@ msgstr "การตั้งค่าระบบ"
 
 #: Template/GeneralSetting/save_setting.ctp:29
 msgid "Gym Name"
-msgstr "ชื่อยิม"
+msgstr "ชื่อโรงยิม"
 
 #: Template/GeneralSetting/save_setting.ctp:36
 msgid "Starting Year"
-msgstr "เริ่มต้นปี"
+msgstr "ปีที่เริ่ม"
 
 #: Template/GeneralSetting/save_setting.ctp:43
 msgid "Gym Address"
@@ -1349,7 +1825,7 @@ msgstr "ที่อยู่ยิม"
 msgid "Office Phone Number"
 msgstr "หมายเลขโทรศัพท์ที่ทำงาน"
 
-#: Template/GeneralSetting/save_setting.ctp:57 Template/Installer/index.ctp:61
+#: Template/GeneralSetting/save_setting.ctp:57 Template/Installer/index.ctp:132
 msgid "Country"
 msgstr "ประเทศ"
 
@@ -1359,158 +1835,199 @@ msgstr "ภาษาของระบบ"
 
 #: Template/GeneralSetting/save_setting.ctp:108
 msgid "Set Language to RTL"
-msgstr "ตั้งค่าภาษาในการรายงาน"
+msgstr "ตั้งค่าภาษาเป็น RTL"
 
-#: Template/GeneralSetting/save_setting.ctp:110 Template/GeneralSetting/save_setting.ctp:335 Template/GeneralSetting/save_setting.ctp:342
-#: Template/GeneralSetting/save_setting.ctp:352 Template/GeneralSetting/save_setting.ctp:382 Template/GeneralSetting/save_setting.ctp:418
+#: Template/GeneralSetting/save_setting.ctp:110
+#: Template/GeneralSetting/save_setting.ctp:369
+#: Template/GeneralSetting/save_setting.ctp:376
+#: Template/GeneralSetting/save_setting.ctp:386
+#: Template/GeneralSetting/save_setting.ctp:416
+#: Template/GeneralSetting/save_setting.ctp:453
 msgid "Enable"
 msgstr "ทำให้สามารถ"
 
 #: Template/GeneralSetting/save_setting.ctp:115
 msgid "Date Picker Language"
-msgstr "เลือกวันภาษา"
+msgstr "ภาษาตัวใช้เลือกวันที่"
 
-#: Template/GeneralSetting/save_setting.ctp:166 Template/Installer/index.ctp:401
-msgid "Date Formate"
-msgstr "รูปแบบเอกสารวันที่"
+#: Template/GeneralSetting/save_setting.ctp:166
+#: Template/Installer/index.ctp:472
+msgid "Date Format"
+msgstr "รูปแบบวันที่"
 
-#: Template/GeneralSetting/save_setting.ctp:178 Template/Installer/index.ctp:412
+#: Template/GeneralSetting/save_setting.ctp:179
+#: Template/Installer/index.ctp:483
 msgid "Calendar Language"
-msgstr "ปฏิทินภาษา"
+msgstr "ภาษาปฏิทิน"
 
-#: Template/GeneralSetting/save_setting.ctp:251
+#: Template/GeneralSetting/save_setting.ctp:253
+msgid "Time Zone"
+msgstr "เขตเวลา"
+
+#: Template/GeneralSetting/save_setting.ctp:283
 msgid "Gym Logo"
-msgstr "ยิมโลโก้"
+msgstr "โลโก้ยิม"
 
-#: Template/GeneralSetting/save_setting.ctp:267
+#: Template/GeneralSetting/save_setting.ctp:300
 msgid "Cover Image"
-msgstr "ภาพปก"
+msgstr "รูปภาพหน้าปก"
 
-#: Template/GeneralSetting/save_setting.ctp:278
+#: Template/GeneralSetting/save_setting.ctp:312
 msgid "Measurement Units"
-msgstr "หน่วยการวัด"
+msgstr "หน่วยวัด"
 
-#: Template/GeneralSetting/save_setting.ctp:280 Template/GymMember/add_member.ctp:197
+#: Template/GeneralSetting/save_setting.ctp:314
+#: Template/GymMember/add_member.ctp:277
 msgid "Weight"
 msgstr "น้ำหนัก"
 
-#: Template/GeneralSetting/save_setting.ctp:287 Template/GymMember/add_member.ctp:204
+#: Template/GeneralSetting/save_setting.ctp:321
+#: Template/GymMember/add_member.ctp:284
 msgid "Height"
-msgstr "ความสูง:"
+msgstr "ความสูง"
 
-#: Template/GeneralSetting/save_setting.ctp:294 Template/GymMember/add_member.ctp:211
+#: Template/GeneralSetting/save_setting.ctp:328
+#: Template/GymMember/add_member.ctp:291
 msgid "Chest"
 msgstr "หน้าอก"
 
-#: Template/GeneralSetting/save_setting.ctp:301 Template/GymMember/add_member.ctp:218
+#: Template/GeneralSetting/save_setting.ctp:335
+#: Template/GymMember/add_member.ctp:298
 msgid "Waist"
 msgstr "เอว"
 
-#: Template/GeneralSetting/save_setting.ctp:308 Template/GymMember/add_member.ctp:225
+#: Template/GeneralSetting/save_setting.ctp:342
 msgid "Thing"
-msgstr "สิ่งของ"
+msgstr "สิ่ง"
 
-#: Template/GeneralSetting/save_setting.ctp:315 Template/GymMember/add_member.ctp:232
+#: Template/GeneralSetting/save_setting.ctp:349
+#: Template/GymMember/add_member.ctp:312
 msgid "Arms"
 msgstr "อาวุธ"
 
-#: Template/GeneralSetting/save_setting.ctp:322 Template/GymMember/add_member.ctp:239
+#: Template/GeneralSetting/save_setting.ctp:356
+#: Template/GymMember/add_member.ctp:319
 msgid "Fat"
 msgstr "อ้วน"
 
-#: Template/GeneralSetting/save_setting.ctp:330
+#: Template/GeneralSetting/save_setting.ctp:364
 msgid "Member Privacy Setting"
 msgstr "การตั้งค่าความเป็นส่วนตัวของสมาชิก"
 
-#: Template/GeneralSetting/save_setting.ctp:332
+#: Template/GeneralSetting/save_setting.ctp:366
 msgid "Member can view other member's details"
-msgstr "สมาชิกสามารถดูรายละเอียดของสมาชิกอื่น ๆ"
+msgstr "สมาชิกสามารถดูรายละเอียดของสมาชิกคนอื่น ๆ"
 
-#: Template/GeneralSetting/save_setting.ctp:339
+#: Template/GeneralSetting/save_setting.ctp:373
 msgid "Staff Member can view own trainee member's details"
-msgstr "พนักงานสมาชิกสามารถดูรายละเอียดสมาชิกฝึกงานของ"
+msgstr "สมาชิกพนักงานสามารถดูรายละเอียดสมาชิกฝึกหัดของตัวเอง"
 
-#: Template/GeneralSetting/save_setting.ctp:348
+#: Template/GeneralSetting/save_setting.ctp:382
 msgid "Paypal Setting"
 msgstr "การตั้งค่า Paypal"
 
-#: Template/GeneralSetting/save_setting.ctp:350
+#: Template/GeneralSetting/save_setting.ctp:384
 msgid "Enable Sandbox"
 msgstr "เปิดใช้งาน Sandbox"
 
-#: Template/GeneralSetting/save_setting.ctp:357
+#: Template/GeneralSetting/save_setting.ctp:391
 msgid "Paypal Email Id"
-msgstr "Email รหัส Paypal"
+msgstr "รหัสอีเมล Paypal"
 
-#: Template/GeneralSetting/save_setting.ctp:364
+#: Template/GeneralSetting/save_setting.ctp:398
 msgid "Select Currency"
 msgstr "เลือกสกุลเงิน"
 
-#: Template/GeneralSetting/save_setting.ctp:378
+#: Template/GeneralSetting/save_setting.ctp:412
 msgid "Membership Alert Message Setting"
 msgstr "การตั้งค่าข้อความแจ้งเตือนสมาชิก"
 
-#: Template/GeneralSetting/save_setting.ctp:380
+#: Template/GeneralSetting/save_setting.ctp:414
 msgid "Enable Alert Mail"
-msgstr "เปิดใช้งานการแจ้งเตือนจดหมาย"
+msgstr "เปิดใช้จดหมายแจ้งเตือน"
 
-#: Template/GeneralSetting/save_setting.ctp:387
+#: Template/GeneralSetting/save_setting.ctp:421
 msgid "Reminder Before Days"
-msgstr "การแจ้งเตือนก่อนสมัย"
+msgstr "เตือนความจำก่อนวัน"
 
-#: Template/GeneralSetting/save_setting.ctp:395
+#: Template/GeneralSetting/save_setting.ctp:429
 msgid "Reminder Message"
-msgstr "การแจ้งเตือนข้อความ"
+msgstr "ข้อความเตือนความจำ"
 
-#: Template/GeneralSetting/save_setting.ctp:402
+#: Template/GeneralSetting/save_setting.ctp:436
 msgid "ShortCodes For Notification Mail Message"
-msgstr "ย่อสำหรับการแจ้งเตือนข้อความจดหมาย"
+msgstr "รหัสย่อสำหรับข้อความจดหมายแจ้งเตือน"
 
-#: Template/GeneralSetting/save_setting.ctp:404 Template/GymAssignWorkout/workout_log.ctp:53 Template/GymAssignWorkout/workout_log.ctp:77
-#: Template/GymAttendance/attendance.ctp:79 Template/GymAttendance/staff_attendance.ctp:64 Template/GymDailyWorkout/workout_list.ctp:56
-#: Template/GymDailyWorkout/workout_list.ctp:82 Template/GymMember/member_list.ctp:66 Template/GymMember/member_list.ctp:114 Template/GymNutrition/nutrition_list.ctp:53
-#: Template/GymNutrition/nutrition_list.ctp:76 Template/GymStore/sell_record.ctp:36 Template/GymStore/sell_record.ctp:59 Template/MembershipPayment/expense_list.ctp:67
-#: Template/MembershipPayment/income_list.ctp:39 Template/MembershipPayment/income_list.ctp:67 Template/MembershipPayment/payment_list.ctp:50
+#: Template/GeneralSetting/save_setting.ctp:439
+#: Template/GymAssignWorkout/workout_log.ctp:53
+#: Template/GymAssignWorkout/workout_log.ctp:77
+#: Template/GymAttendance/attendance.ctp:108
+#: Template/GymAttendance/attendance.ctp:117
+#: Template/GymAttendance/staff_attendance.ctp:69
+#: Template/GymDailyWorkout/workout_list.ctp:56
+#: Template/GymDailyWorkout/workout_list.ctp:82
+#: Template/GymMember/member_list.ctp:56 Template/GymMember/member_list.ctp:109
+#: Template/GymNutrition/nutrition_list.ctp:53
+#: Template/GymNutrition/nutrition_list.ctp:77
+#: Template/GymStore/sell_record.ctp:36 Template/GymStore/sell_record.ctp:63
+#: Template/GymSubscriptionHistory/index.ctp:41
+#: Template/GymSubscriptionHistory/index.ctp:71
+#: Template/MembershipPayment/income_list.ctp:39
+#: Template/MembershipPayment/income_list.ctp:67
+#: Template/MembershipPayment/payment_list.ctp:50
 #: Template/MembershipPayment/payment_list.ctp:95
 msgid "Member Name"
 msgstr "ชื่อสมาชิก"
 
-#: Template/GeneralSetting/save_setting.ctp:405 Template/Membership/add.ctp:71 Template/Membership/edit_membership.ctp:21 Template/Membership/membership_list.ctp:54
-#: Template/Membership/membership_list.ctp:95 Template/Reports/membership_report.ctp:29
+#: Template/GeneralSetting/save_setting.ctp:440 Template/Membership/add.ctp:81
+#: Template/Membership/edit_membership.ctp:21
+#: Template/Membership/membership_list.ctp:54
+#: Template/Membership/membership_list.ctp:102
+#: Template/Reports/membership_report.ctp:35
 msgid "Membership Name"
 msgstr "ชื่อสมาชิก"
 
-#: Template/GeneralSetting/save_setting.ctp:406 Template/GymMember/view_member.ctp:384 Template/GymMember/view_member.ctp:412 Template/GymSubscriptionHistory/index.ctp:43
-#: Template/GymSubscriptionHistory/index.ctp:71 Template/MembershipPayment/payment_list.ctp:54 Template/MembershipPayment/payment_list.ctp:99
+#: Template/GeneralSetting/save_setting.ctp:441
+#: Template/GymMember/view_member.ctp:390
+#: Template/GymMember/view_member.ctp:418
+#: Template/GymSubscriptionHistory/index.ctp:45
+#: Template/GymSubscriptionHistory/index.ctp:75
+#: Template/MembershipPayment/payment_list.ctp:54
+#: Template/MembershipPayment/payment_list.ctp:99
 msgid "Membership Start Date"
-msgstr "สมาชิกวันที่เริ่มต้น"
+msgstr "วันที่เริ่มเป็นสมาชิก"
 
-#: Template/GeneralSetting/save_setting.ctp:407 Template/GymMember/view_member.ctp:385 Template/GymMember/view_member.ctp:413 Template/GymSubscriptionHistory/index.ctp:44
-#: Template/GymSubscriptionHistory/index.ctp:72 Template/MembershipPayment/payment_list.ctp:55 Template/MembershipPayment/payment_list.ctp:100
+#: Template/GeneralSetting/save_setting.ctp:442
+#: Template/GymMember/view_member.ctp:391
+#: Template/GymMember/view_member.ctp:419
+#: Template/GymSubscriptionHistory/index.ctp:46
+#: Template/GymSubscriptionHistory/index.ctp:76
+#: Template/MembershipPayment/payment_list.ctp:55
+#: Template/MembershipPayment/payment_list.ctp:100
 msgid "Membership End Date"
-msgstr "สมาชิกวันที่สิ้นสุด"
+msgstr "วันที่สิ้นสุดการเป็นสมาชิก"
 
-#: Template/GeneralSetting/save_setting.ctp:414
+#: Template/GeneralSetting/save_setting.ctp:449
 msgid "Message Setting"
 msgstr "การตั้งค่าข้อความ"
 
-#: Template/GeneralSetting/save_setting.ctp:416
+#: Template/GeneralSetting/save_setting.ctp:451
 msgid "Member can Message To other's"
-msgstr "สามารถเป็นสมาชิกข้อความถึงอื่น ๆ"
+msgstr "สมาชิกสามารถส่งข้อความถึงผู้อื่นได้"
 
-#: Template/GeneralSetting/save_setting.ctp:423
+#: Template/GeneralSetting/save_setting.ctp:458
 msgid "Header & Footer Text"
-msgstr "ส่วนหัวและส่วนท้ายของข้อความ"
+msgstr "ข้อความส่วนหัวและท้ายกระดาษ"
 
-#: Template/GeneralSetting/save_setting.ctp:425
+#: Template/GeneralSetting/save_setting.ctp:460
 msgid "Left Header Text"
-msgstr "ส่วนหัวด้านซ้ายข้อความ"
+msgstr "ข้อความส่วนหัวด้านซ้าย"
 
-#: Template/GeneralSetting/save_setting.ctp:432
+#: Template/GeneralSetting/save_setting.ctp:467
 msgid "Footer Text"
-msgstr "ส่วนท้ายของข้อความ"
+msgstr "ข้อความส่วนท้าย"
 
-#: Template/GeneralSetting/save_setting.ctp:440
+#: Template/GeneralSetting/save_setting.ctp:475
 msgid "Save Settings"
 msgstr "บันทึกการตั้งค่า"
 
@@ -1520,287 +2037,390 @@ msgstr "เข้าถึงการตั้งค่าที่เหมา
 
 #: Template/GymAccessright/access_right.ctp:22
 msgid "Menu"
-msgstr "รายการ"
+msgstr "เมนู"
 
-#: Template/GymAccessright/access_right.ctp:211
+#: Template/GymAccessright/access_right.ctp:213
 msgid "Attendence"
-msgstr "Attendence"
+msgstr "การดูแลรักษา"
 
-#: Template/GymAccessright/access_right.ctp:241
+#: Template/GymAccessright/access_right.ctp:243
 msgid "Assigned Workouts"
 msgstr "การออกกำลังกายที่ได้รับมอบหมาย"
 
-#: Template/GymAccessright/access_right.ctp:271
+#: Template/GymAccessright/access_right.ctp:273
 msgid "Workouts"
 msgstr "การออกกำลังกาย"
 
-#: Template/GymAccessright/access_right.ctp:331 Template/Reports/payment_report.ctp:41
+#: Template/GymAccessright/access_right.ctp:333
+#: Template/Reports/payment_report.ctp:47
 msgid "Fee Payment"
-msgstr "ค่าธรรมเนียมการชำระเงิน"
+msgstr "ชำระค่าธรรมเนียม"
 
-#: Template/GymAccessright/access_right.ctp:390 Template/MembershipPayment/add_expense.ctp:14 Template/MembershipPayment/expense_list.ctp:27
+#: Template/GymAccessright/access_right.ctp:392
+#: Template/MembershipPayment/add_expense.ctp:22
+#: Template/MembershipPayment/expense_list.ctp:27
 msgid "Expense"
-msgstr "รายจ่าย"
+msgstr "ค่าใช้จ่าย"
 
-#: Template/GymAccessright/access_right.ctp:661
+#: Template/GymAccessright/access_right.ctp:663
 msgid "Account"
 msgstr "บัญชี"
 
-#: Template/GymAccessright/access_right.ctp:692 Template/GymMember/view_member.ctp:376 Template/GymSubscriptionHistory/index.ctp:30
+#: Template/GymAccessright/access_right.ctp:694
+#: Template/GymMember/view_member.ctp:382
 #: Template/GymSubscriptionHistory/index.ctp:31
+#: Template/GymSubscriptionHistory/index.ctp:32
 msgid "Subscription History"
-msgstr "ประวัติความเป็นมาการสมัครสมาชิก"
+msgstr "ประวัติการสมัครสมาชิก"
 
-#: Template/GymAccessright/access_right.ctp:722 Template/GymDailyWorkout/add_workout.ctp:143 Template/GymEmailSetting/index.ctp:46 Template/GymNewsletter/setting.ctp:1
-#: Template/GymNotice/add_notice.ctp:74 Template/GymNutrition/addnutrition_schedule.ctp:122 Template/GymProduct/add_product.ctp:41 Template/GymProfile/view_profile.ctp:89
-#: Template/GymProfile/view_profile.ctp:147 Template/GymStore/sell_product.ctp:66
+#: Template/GymAccessright/access_right.ctp:724
+#: Template/GymDailyWorkout/add_workout.ctp:210
+#: Template/GymEmailSetting/index.ctp:46 Template/GymNewsletter/setting.ctp:1
+#: Template/GymNotice/add_notice.ctp:102
+#: Template/GymNutrition/addnutrition_schedule.ctp:146
+#: Template/GymProduct/add_product.ctp:47
+#: Template/GymProfile/view_profile.ctp:95
+#: Template/GymProfile/view_profile.ctp:155
+#: Template/GymStore/sell_product.ctp:84
 msgid "Save"
 msgstr "บันทึก"
 
-#: Template/GymAccountant/accountant_list.ctp:36 Template/GymAccountant/add_accountant.ctp:24
+#: Template/GymAccountant/accountant_list.ctp:36
+#: Template/GymAccountant/add_accountant.ctp:34
 msgid "Accountant List"
 msgstr "รายการบัญชี"
 
-#: Template/GymAccountant/accountant_list.ctp:53 Template/GymAccountant/accountant_list.ctp:83 Template/GymAssignWorkout/workout_log.ctp:52
-#: Template/GymAssignWorkout/workout_log.ctp:76 Template/GymAttendance/attendance.ctp:78 Template/GymAttendance/staff_attendance.ctp:63
-#: Template/GymDailyWorkout/workout_list.ctp:55 Template/GymDailyWorkout/workout_list.ctp:81 Template/GymGroup/group_list.ctp:44 Template/GymGroup/group_list.ctp:75
-#: Template/GymMember/member_list.ctp:65 Template/GymMember/member_list.ctp:113 Template/GymMember/view_member.ctp:314 Template/Membership/membership_list.ctp:53
-#: Template/Membership/membership_list.ctp:94 Template/StaffMembers/staff_list.ctp:54 Template/StaffMembers/staff_list.ctp:84
+#: Template/GymAccountant/accountant_list.ctp:53
+#: Template/GymAccountant/accountant_list.ctp:87
+#: Template/GymAssignWorkout/workout_log.ctp:52
+#: Template/GymAssignWorkout/workout_log.ctp:76
+#: Template/GymAttendance/attendance.ctp:107
+#: Template/GymAttendance/attendance.ctp:116
+#: Template/GymAttendance/staff_attendance.ctp:68
+#: Template/GymDailyWorkout/workout_list.ctp:55
+#: Template/GymDailyWorkout/workout_list.ctp:81
+#: Template/GymGroup/group_list.ctp:44 Template/GymGroup/group_list.ctp:75
+#: Template/GymMember/member_list.ctp:55 Template/GymMember/member_list.ctp:108
+#: Template/GymMember/view_member.ctp:320
+#: Template/Membership/membership_list.ctp:53
+#: Template/Membership/membership_list.ctp:101
+#: Template/StaffMembers/staff_list.ctp:47
+#: Template/StaffMembers/staff_list.ctp:80
 msgid "Photo"
-msgstr "รูปภาพ"
+msgstr "ภาพถ่าย"
 
-#: Template/GymAccountant/accountant_list.ctp:54 Template/GymAccountant/accountant_list.ctp:84
+#: Template/GymAccountant/accountant_list.ctp:54
+#: Template/GymAccountant/accountant_list.ctp:88
 msgid "Accountant Name"
 msgstr "ชื่อบัญชี"
 
-#: Template/GymAccountant/accountant_list.ctp:55 Template/GymAccountant/accountant_list.ctp:85
+#: Template/GymAccountant/accountant_list.ctp:55
+#: Template/GymAccountant/accountant_list.ctp:89
 msgid "Accountant Email"
-msgstr "บัญชีอีเมล์"
+msgstr "อีเมลบัญชี"
 
-#: Template/GymAccountant/accountant_list.ctp:56 Template/GymAccountant/accountant_list.ctp:86 Template/GymProfile/view_profile.ctp:128
-#: Template/StaffMembers/staff_list.ctp:58 Template/StaffMembers/staff_list.ctp:88
+#: Template/GymAccountant/accountant_list.ctp:56
+#: Template/GymAccountant/accountant_list.ctp:90
+#: Template/GymProfile/view_profile.ctp:136
+#: Template/StaffMembers/staff_list.ctp:51
+#: Template/StaffMembers/staff_list.ctp:84
 msgid "Mobile No."
 msgstr "หมายเลขโทรศัพท์มือถือ"
 
-#: Template/GymAccountant/add_accountant.ctp:41 Template/GymMember/add_member.ctp:98 Template/MemberRegistration/index.ctp:121 Template/StaffMembers/add_staff.ctp:57
+#: Template/GymAccountant/add_accountant.ctp:51
+#: Template/GymMember/add_member.ctp:178
+#: Template/MemberRegistration/index.ctp:122
+#: Template/StaffMembers/add_staff.ctp:67
 msgid "Middle Name"
-msgstr "ชื่อกลาง                                                                                                                                                            :"
+msgstr "ชื่อกลาง"
 
-#: Template/GymAccountant/add_accountant.ctp:55 Template/GymMember/add_member.ctp:112 Template/GymMember/view_member.ctp:80 Template/MemberRegistration/index.ctp:135
-#: Template/StaffMembers/add_staff.ctp:71
+#: Template/GymAccountant/add_accountant.ctp:65
+#: Template/GymMember/add_member.ctp:192 Template/GymMember/view_member.ctp:86
+#: Template/MemberRegistration/index.ctp:136
+#: Template/StaffMembers/add_staff.ctp:81
 msgid "Gender"
-msgstr "เพศ:"
+msgstr "เพศ"
 
-#: Template/GymAccountant/add_accountant.ctp:58 Template/GymMember/add_member.ctp:115 Template/StaffMembers/add_staff.ctp:74
+#: Template/GymAccountant/add_accountant.ctp:68
+#: Template/GymMember/add_member.ctp:195 Template/StaffMembers/add_staff.ctp:84
 msgid "Male"
 msgstr "ชาย"
 
-#: Template/GymAccountant/add_accountant.ctp:59 Template/GymMember/add_member.ctp:116 Template/StaffMembers/add_staff.ctp:75
+#: Template/GymAccountant/add_accountant.ctp:69
+#: Template/GymMember/add_member.ctp:196 Template/StaffMembers/add_staff.ctp:85
 msgid "Female"
 msgstr "หญิง"
 
-#: Template/GymAccountant/add_accountant.ctp:66 Template/GymMember/add_member.ctp:123 Template/GymProfile/view_profile.ctp:107 Template/MemberRegistration/index.ctp:146
-#: Template/StaffMembers/add_staff.ctp:82
+#: Template/GymAccountant/add_accountant.ctp:76
+#: Template/GymMember/add_member.ctp:203
+#: Template/GymProfile/view_profile.ctp:113
+#: Template/MemberRegistration/index.ctp:147
+#: Template/StaffMembers/add_staff.ctp:92
 msgid "Date of birth"
-msgstr "วันเดือนปีเกิด"
+msgstr "วันเกิด"
 
-#: Template/GymAccountant/add_accountant.ctp:72 Template/GymMember/add_member.ctp:140 Template/MemberRegistration/index.ctp:167 Template/StaffMembers/add_staff.ctp:107
+#: Template/GymAccountant/add_accountant.ctp:82
+#: Template/GymMember/add_member.ctp:220
+#: Template/MemberRegistration/index.ctp:161
+#: Template/StaffMembers/add_staff.ctp:117
 msgid "Contact Information"
-msgstr "ที่อยู่ของบริษัทผู้จัดจำหน่าย:"
+msgstr "ข้อมูลติดต่อ"
 
-#: Template/GymAccountant/add_accountant.ctp:74 Template/GymProfile/view_profile.ctp:114 Template/StaffMembers/add_staff.ctp:109
+#: Template/GymAccountant/add_accountant.ctp:84
+#: Template/GymProfile/view_profile.ctp:122
+#: Template/StaffMembers/add_staff.ctp:119
 msgid "Home Town Address"
-msgstr "ที่อยู่ทาวน์โฮม"
+msgstr "ที่อยู่บ้านเกิด"
 
-#: Template/GymAccountant/add_accountant.ctp:81 Template/GymMember/add_member.ctp:149 Template/GymProfile/view_profile.ctp:122 Template/MemberRegistration/index.ctp:177
-#: Template/StaffMembers/add_staff.ctp:116
+#: Template/GymAccountant/add_accountant.ctp:91
+#: Template/GymMember/add_member.ctp:229
+#: Template/GymProfile/view_profile.ctp:130
+#: Template/MemberRegistration/index.ctp:171
+#: Template/StaffMembers/add_staff.ctp:126
 msgid "City"
 msgstr "เมือง"
 
-#: Template/GymAccountant/add_accountant.ctp:88 Template/GymMember/add_member.ctp:170 Template/MemberRegistration/index.ctp:198 Template/StaffMembers/add_staff.ctp:123
+#: Template/GymAccountant/add_accountant.ctp:98
+#: Template/GymMember/add_member.ctp:250
+#: Template/MemberRegistration/index.ctp:192
+#: Template/StaffMembers/add_staff.ctp:133
 msgid "Mobile Number"
 msgstr "เบอร์มือถือ"
 
-#: Template/GymAccountant/add_accountant.ctp:98 Template/GymMember/add_member.ctp:180 Template/GymProfile/view_profile.ctp:134 Template/MemberRegistration/index.ctp:208
-#: Template/StaffMembers/add_staff.ctp:133
+#: Template/GymAccountant/add_accountant.ctp:108
+#: Template/GymMember/add_member.ctp:260
+#: Template/GymProfile/view_profile.ctp:142
+#: Template/MemberRegistration/index.ctp:202
+#: Template/StaffMembers/add_staff.ctp:143
 msgid "Phone"
 msgstr "โทรศัพท์"
 
-#: Template/GymAccountant/add_accountant.ctp:137
+#: Template/GymAccountant/add_accountant.ctp:147
 msgid "Save Accountant"
-msgstr "บันทึกบัญชี"
+msgstr "บันทึกนักบัญชี"
 
-#: Template/GymAssignWorkout/assign_workout.ctp:49
+#: Template/GymAssignWorkout/assign_workout.ctp:68
+#: Template/GymAssignWorkout/assign_workout1.ctp:49
 msgid "Workout Logs"
 msgstr "บันทึกการออกกำลังกาย"
 
-#: Template/GymAssignWorkout/assign_workout.ctp:59 Template/GymDailyWorkout/add_measurment.ctp:46 Template/GymDailyWorkout/add_workout.ctp:103
-#: Template/GymDailyWorkout/add_workout.ctp:106 Template/GymNutrition/addnutrition_schedule.ctp:35 Template/GymNutrition/addnutrition_schedule.ctp:38
-#: Template/GymStore/sell_product.ctp:34 Template/MembershipPayment/add_income.ctp:33 Template/MembershipPayment/add_income.ctp:48
-#: Template/MembershipPayment/generate_payment_invoice.ctp:63
+#: Template/GymAssignWorkout/assign_workout.ctp:78
+#: Template/GymAssignWorkout/assign_workout1.ctp:59
+#: Template/GymDailyWorkout/add_workout.ctp:149
+#: Template/GymDailyWorkout/add_workout.ctp:163
+#: Template/GymNutrition/addnutrition_schedule.ctp:56
+#: Template/MembershipPayment/generate_payment_invoice.ctp:71
+#: Template/Reports/monthlyworkoutreport.ctp:52
 msgid "Select Member"
 msgstr "เลือกสมาชิก"
 
-#: Template/GymAssignWorkout/assign_workout.ctp:82 Template/GymMessage/inbox.ctp:54 Template/GymMessage/sent.ctp:43 Template/GymNutrition/addnutrition_schedule.ctp:161
-#: Template/GymNutrition/member_nutrition.ctp:63 Template/GymNutrition/print_nutrition.ctp:53
+#: Template/GymAssignWorkout/assign_workout.ctp:103
+#: Template/GymAssignWorkout/assign_workout1.ctp:82
+#: Template/GymMessage/inbox.ctp:54 Template/GymMessage/sent.ctp:43
+#: Template/GymNutrition/addnutrition_schedule.ctp:185
+#: Template/GymNutrition/member_nutrition.ctp:63
+#: Template/GymNutrition/print_nutrition.ctp:54
 msgid "Description"
-msgstr "รายละเอียด"
+msgstr "ลักษณะ"
 
-#: Template/GymAssignWorkout/assign_workout.ctp:96 Template/GymMember/view_attendance.ctp:34 Template/GymNotice/add_notice.ctp:60
-#: Template/GymNutrition/addnutrition_schedule.ctp:54 Template/Reports/attendance_report.ctp:38
+#: Template/GymAssignWorkout/assign_workout.ctp:117
+#: Template/GymAssignWorkout/assign_workout1.ctp:96
+#: Template/GymMember/view_attendance.ctp:52
+#: Template/GymNotice/add_notice.ctp:89
+#: Template/GymNutrition/addnutrition_schedule.ctp:78
+#: Template/Reports/attendance_report.ctp:68
 msgid "End Date"
 msgstr "วันที่สิ้นสุด"
 
-#: Template/GymAssignWorkout/assign_workout.ctp:116
+#: Template/GymAssignWorkout/assign_workout.ctp:138
+#: Template/GymAssignWorkout/assign_workout1.ctp:116
 msgid "Select workout activity to add on selected days"
-msgstr "เลือกกิจกรรมการออกกำลังกายเพิ่มในวันที่เลือก"
+msgstr "เลือกกิจกรรมการออกกำลังกายเพื่อเพิ่มในวันที่เลือก"
 
-#: Template/GymAssignWorkout/assign_workout.ctp:122
+#: Template/GymAssignWorkout/assign_workout.ctp:144
+#: Template/GymAssignWorkout/assign_workout1.ctp:122
 msgid "Step-1 Add Workout"
 msgstr "ขั้นตอนที่ 1 เพิ่มการออกกำลังกาย"
 
-#: Template/GymAssignWorkout/assign_workout.ctp:137
+#: Template/GymAssignWorkout/assign_workout.ctp:159
+#: Template/GymAssignWorkout/assign_workout1.ctp:137
 msgid "Step-2 Save Workout"
-msgstr "บันทึกการออกกำลังกายขั้นตอนที่ 2"
+msgstr "ขั้นตอนที่ 2 บันทึกการออกกำลังกาย"
 
-#: Template/GymAssignWorkout/assign_workout.ctp:137
+#: Template/GymAssignWorkout/assign_workout.ctp:159
+#: Template/GymAssignWorkout/assign_workout1.ctp:137
 msgid "Save Workout"
 msgstr "บันทึกการออกกำลังกาย"
 
-#: Template/GymAssignWorkout/assign_workout.ctp:166 Template/GymAssignWorkout/member_assiged_workout.ctp:54 Template/GymAssignWorkout/print_workout.ctp:52
-#: Template/GymNutrition/addnutrition_schedule.ctp:151 Template/GymNutrition/member_nutrition.ctp:53 Template/GymNutrition/print_nutrition.ctp:44
+#: Template/GymAssignWorkout/assign_workout.ctp:188
+#: Template/GymAssignWorkout/assign_workout1.ctp:166
+#: Template/GymAssignWorkout/member_assiged_workout.ctp:54
+#: Template/GymAssignWorkout/print_workout.ctp:52
+#: Template/GymNutrition/addnutrition_schedule.ctp:175
+#: Template/GymNutrition/member_nutrition.ctp:53
+#: Template/GymNutrition/print_nutrition.ctp:45
 msgid "Start From"
-msgstr "เริ่มต้นจาก"
+msgstr "เริ่มจาก"
 
-#: Template/GymAssignWorkout/assign_workout.ctp:166 Template/GymAssignWorkout/member_assiged_workout.ctp:54 Template/GymAssignWorkout/print_workout.ctp:52
-#: Template/GymNutrition/addnutrition_schedule.ctp:151 Template/GymNutrition/member_nutrition.ctp:53 Template/GymNutrition/print_nutrition.ctp:44
+#: Template/GymAssignWorkout/assign_workout.ctp:188
+#: Template/GymAssignWorkout/assign_workout1.ctp:166
+#: Template/GymAssignWorkout/member_assiged_workout.ctp:54
+#: Template/GymAssignWorkout/print_workout.ctp:52
+#: Template/GymNutrition/addnutrition_schedule.ctp:175
+#: Template/GymNutrition/member_nutrition.ctp:53
+#: Template/GymNutrition/print_nutrition.ctp:45
 msgid "TO"
-msgstr "TO"
+msgstr "ไปยัง"
 
-#: Template/GymAssignWorkout/assign_workout.ctp:172 Template/GymAssignWorkout/member_assiged_workout.ctp:60 Template/GymAssignWorkout/print_workout.ctp:57
-#: Template/GymNutrition/addnutrition_schedule.ctp:157 Template/GymNutrition/member_nutrition.ctp:59 Template/GymNutrition/print_nutrition.ctp:49
+#: Template/GymAssignWorkout/assign_workout.ctp:194
+#: Template/GymAssignWorkout/assign_workout1.ctp:172
+#: Template/GymAssignWorkout/member_assiged_workout.ctp:60
+#: Template/GymAssignWorkout/print_workout.ctp:57
+#: Template/GymNutrition/addnutrition_schedule.ctp:181
+#: Template/GymNutrition/member_nutrition.ctp:59
+#: Template/GymNutrition/print_nutrition.ctp:50
 msgid "Day name"
 msgstr "ชื่อวัน"
 
-#: Template/GymAssignWorkout/member_assiged_workout.ctp:18 Template/GymAssignWorkout/workout_log.ctp:35
+#: Template/GymAssignWorkout/member_assiged_workout.ctp:18
+#: Template/GymAssignWorkout/workout_log.ctp:35
 msgid "Workout Log"
-msgstr "การออกกำลังกายเข้าสู่ระบบ"
+msgstr "บันทึกการออกกำลังกาย"
 
-#: Template/GymAssignWorkout/member_assiged_workout.ctp:97 Template/GymAssignWorkout/print_workout.ctp:94
+#: Template/GymAssignWorkout/member_assiged_workout.ctp:97
+#: Template/GymAssignWorkout/print_workout.ctp:94
 msgid "No Record Found"
 msgstr "ไม่พบบันทึก"
 
-#: Template/GymAssignWorkout/workout_log.ctp:54 Template/GymAssignWorkout/workout_log.ctp:78 Template/GymNutrition/nutrition_list.ctp:54
-#: Template/GymNutrition/nutrition_list.ctp:77
+#: Template/GymAssignWorkout/workout_log.ctp:54
+#: Template/GymAssignWorkout/workout_log.ctp:78
+#: Template/GymNutrition/nutrition_list.ctp:54
+#: Template/GymNutrition/nutrition_list.ctp:78
 msgid "Member Goal"
-msgstr "สมาชิกเป้าหมาย"
+msgstr "เป้าหมายสมาชิก"
 
-#: Template/GymAssignWorkout/workout_log.ctp:67 Template/GymDailyWorkout/view_workout.ctp:36
+#: Template/GymAssignWorkout/workout_log.ctp:67
+#: Template/GymDailyWorkout/view_workout.ctp:58
 msgid "View Workouts"
 msgstr "ดูการออกกำลังกาย"
 
-#: Template/GymAttendance/attendance.ctp:14 Template/GymAttendance/staff_attendance.ctp:17
+#: Template/GymAttendance/attendance.ctp:22
+#: Template/GymAttendance/staff_attendance.ctp:22
 msgid "Member Attendance"
-msgstr "สมาชิกเข้าร่วมประชุม"
+msgstr "การเข้าร่วมเป็นสมาชิก"
 
-#: Template/GymAttendance/attendance.ctp:35 Template/GymAttendance/attendance.ctp:37 Template/GymMessage/compose_message.ctp:62 Template/GymNotice/add_notice.ctp:47
-#: Template/Membership/add.ctp:132
+#: Template/GymAttendance/attendance.ctp:43
+#: Template/GymAttendance/attendance.ctp:47
+#: Template/GymMessage/compose_message.ctp:62
+#: Template/GymNotice/add_notice.ctp:76 Template/Membership/add.ctp:142
 msgid "Select Class"
-msgstr "เลือกชั้นเรียน"
+msgstr "เลือกคลาส"
 
-#: Template/GymAttendance/attendance.ctp:42 Template/GymAttendance/staff_attendance.ctp:31
+#: Template/GymAttendance/attendance.ctp:55
+#: Template/GymMember/view_attendance.ctp:33
+msgid "View Attendance"
+msgstr "ดูการเข้าร่วมประชุม"
+
+#: Template/GymAttendance/attendance.ctp:59
+#: Template/GymAttendance/staff_attendance.ctp:36
 msgid "Take/View Attendance"
-msgstr "รับ / ดูผู้เข้าร่วม"
+msgstr "ใช้ / ดูการเข้าร่วมประชุม"
 
-#: Template/GymAttendance/attendance.ctp:102 Template/GymAttendance/staff_attendance.ctp:83
+#: Template/GymAttendance/attendance.ctp:168
+#: Template/GymAttendance/staff_attendance.ctp:88
 msgid "Save Attendance"
 msgstr "บันทึกผู้เข้าร่วม"
 
-#: Template/GymAttendance/attendance.ctp:108 Template/GymNutrition/member_nutrition.ctp:89 Template/GymNutrition/print_nutrition.ctp:79
-msgid "No record found."
-msgstr "ไม่พบบันทึก"
+#: Template/GymAttendance/attendance.ctp:179
+msgid "No attendance found."
+msgstr "ไม่พบการเข้าร่วม"
 
-#: Template/GymAttendance/staff_attendance.ctp:47
+#: Template/GymAttendance/staff_attendance.ctp:52
 msgid "Staff Attendance, Date"
-msgstr "พนักงานเข้าร่วมประชุมวันที่"
+msgstr "พนักงานเข้าร่วมวันที่"
 
-#: Template/GymDailyWorkout/add_measurment.ctp:21 Template/GymDailyWorkout/add_workout.ctp:88 Template/GymDailyWorkout/view_workout.ctp:14
-#: Template/GymDailyWorkout/workout_list.ctp:37 Template/MembershipPayment/payment_list.ctp:33
+#: Template/GymDailyWorkout/add_measurment.ctp:24
+#: Template/GymDailyWorkout/add_workout.ctp:127
+#: Template/GymDailyWorkout/view_workout.ctp:34
+#: Template/GymDailyWorkout/workout_list.ctp:37
+#: Template/MembershipPayment/payment_list.ctp:33
 msgid "Workout Daily"
-msgstr "ออกกำลังกายประจำวัน"
+msgstr "ออกกำลังกายทุกวัน"
 
-#: Template/GymDailyWorkout/add_measurment.ctp:24 Template/GymDailyWorkout/add_workout.ctp:91 Template/GymDailyWorkout/view_workout.ctp:17
+#: Template/GymDailyWorkout/add_measurment.ctp:27
+#: Template/GymDailyWorkout/add_workout.ctp:130
+#: Template/GymDailyWorkout/view_workout.ctp:37
 #: Template/GymDailyWorkout/workout_list.ctp:36
 msgid "Workout List"
 msgstr "รายการออกกำลังกาย"
 
-#: Template/GymDailyWorkout/add_measurment.ctp:53
+#: Template/GymDailyWorkout/add_measurment.ctp:56
 msgid "Result Measurement"
-msgstr "วัดผล"
+msgstr "การวัดผลลัพธ์"
 
-#: Template/GymDailyWorkout/add_measurment.ctp:57
+#: Template/GymDailyWorkout/add_measurment.ctp:60
 msgid "Select Result Measurement"
-msgstr "เลือกผลการวัด"
+msgstr "เลือกการวัดผลลัพธ์"
 
-#: Template/GymDailyWorkout/add_measurment.ctp:68
+#: Template/GymDailyWorkout/add_measurment.ctp:71
 msgid "Result Date"
 msgstr "วันที่ผล"
 
-#: Template/GymDailyWorkout/add_measurment.ctp:84
+#: Template/GymDailyWorkout/add_measurment.ctp:87
 msgid "Save Measurement"
 msgstr "บันทึกการวัด"
 
-#: Template/GymDailyWorkout/add_workout.ctp:114
+#: Template/GymDailyWorkout/add_workout.ctp:179
 msgid "Select Date"
 msgstr "เลือกวันที่"
 
-#: Template/GymDailyWorkout/add_workout.ctp:132
+#: Template/GymDailyWorkout/add_workout.ctp:197
 msgid "Select Record Date For Today Workout"
-msgstr "เลือกวัน Record Date สำหรับวันนี้การออกกำลังกาย"
+msgstr "เลือกวันที่บันทึกสำหรับการออกกำลังกายวันนี้"
 
-#: Template/GymDailyWorkout/add_workout.ctp:137
-msgid "Note"
-msgstr "บันทัก"
-
-#: Template/GymDailyWorkout/workout_list.ctp:57 Template/GymDailyWorkout/workout_list.ctp:83
+#: Template/GymDailyWorkout/workout_list.ctp:57
+#: Template/GymDailyWorkout/workout_list.ctp:83
 msgid "Mobile"
 msgstr "โทรศัพท์มือถือ"
 
-#: Template/GymDailyWorkout/workout_list.ctp:72 Template/GymGroup/group_list.ctp:66 Template/GymNotice/notice_list.ctp:63
+#: Template/GymDailyWorkout/workout_list.ctp:72
+#: Template/GymNotice/notice_list.ctp:63
 msgid "View"
 msgstr "ดู"
 
 #: Template/GymDailyWorkout/workout_list.ctp:73
 msgid "View Measurement"
-msgstr "วัดดู"
+msgstr "ดูการวัด"
 
 #: Template/GymEmailSetting/index.ctp:13 Template/GymEmailSetting/index.ctp:14
 msgid "Email Setting"
 msgstr "การตั้งค่าอีเมล์"
 
-#: Template/GymEmailSetting/index.ctp:22 Template/Installer/index.ctp:37
+#: Template/GymEmailSetting/index.ctp:22 Template/Installer/index.ctp:108
 msgid "Host"
-msgstr "เจ้าภา"
+msgstr "เจ้าภาพ"
 
 #: Template/GymEmailSetting/index.ctp:28
 msgid "Port"
-msgstr "Port"
+msgstr "ท่าเรือ"
 
-#: Template/GymEmailSetting/index.ctp:57 Template/MembershipPayment/generate_payment_invoice.ctp:87
+#: Template/GymEmailSetting/index.ctp:57
+#: Template/MembershipPayment/generate_payment_invoice.ctp:95
 msgid "To"
-msgstr "ถึง"
+msgstr "ไปยัง"
 
 #: Template/GymEmailSetting/index.ctp:63
 msgid "Send Test Mail"
-msgstr "ส่งจดหมายทดสอบ"
+msgstr "ส่งเมลทดสอบ"
 
-#: Template/GymGroup/add_group.ctp:33 Template/GymGroup/group_list.ctp:45 Template/GymGroup/group_list.ctp:76
+#: Template/GymGroup/add_group.ctp:33 Template/GymGroup/group_list.ctp:45
+#: Template/GymGroup/group_list.ctp:76
 msgid "Group Name"
 msgstr "ชื่อกลุ่ม"
 
 #: Template/GymGroup/add_group.ctp:37
 msgid "Group Image"
-msgstr "Image กลุ่ม"
+msgstr "รูปภาพกลุ่ม"
 
 #: Template/GymGroup/add_group.ctp:45
 msgid "Save Group"
@@ -1808,240 +2428,256 @@ msgstr "บันทึกกลุ่ม"
 
 #: Template/GymGroup/group_list.ctp:46 Template/GymGroup/group_list.ctp:77
 msgid "Total Group Members"
-msgstr "สมาชิกในกลุ่มทั้งหมด"
+msgstr "สมาชิกกลุ่มทั้งหมด"
 
-#: Template/GymMember/add_member.ctp:72 Template/GymMember/member_list.ctp:48 Template/GymMember/view_member.ctp:36
+#: Template/GymMember/add_member.ctp:152 Template/GymMember/member_list.ctp:38
+#: Template/GymMember/view_member.ctp:36
 msgid "Members List"
 msgstr "รายชื่อสมาชิก"
 
-#: Template/GymMember/add_member.ctp:83 Template/GymMember/member_list.ctp:67 Template/GymMember/member_list.ctp:115 Template/GymMember/view_member.ctp:56
-#: Template/MemberRegistration/index.ctp:106
+#: Template/GymMember/add_member.ctp:163 Template/GymMember/member_list.ctp:57
+#: Template/GymMember/member_list.ctp:110 Template/GymMember/view_member.ctp:62
+#: Template/MemberRegistration/index.ctp:107
 msgid "Member ID"
-msgstr "สมาชิก ID"
+msgstr "รหัสสมาชิก"
 
-#: Template/GymMember/add_member.ctp:142 Template/GymMember/view_member.ctp:64 Template/MemberRegistration/index.ctp:170
+#: Template/GymMember/add_member.ctp:222 Template/GymMember/view_member.ctp:70
+#: Template/MemberRegistration/index.ctp:164
 msgid "Address"
 msgstr "ที่อยู่"
 
-#: Template/GymMember/add_member.ctp:156 Template/MemberRegistration/index.ctp:184
-msgid "state"
-msgstr "จังหวัด"
+#: Template/GymMember/add_member.ctp:236
+msgid "State"
+msgstr "สถานะ"
 
-#: Template/GymMember/add_member.ctp:163 Template/MemberRegistration/index.ctp:191
+#: Template/GymMember/add_member.ctp:243
+#: Template/MemberRegistration/index.ctp:185
 msgid "Zip code"
 msgstr "รหัสไปรษณีย์"
 
-#: Template/GymMember/add_member.ctp:195
+#: Template/GymMember/add_member.ctp:275
 msgid "Physical Information"
 msgstr "ข้อมูลทางกายภาพ"
 
-#: Template/GymMember/add_member.ctp:206
-msgid "Centimeter"
-msgstr "เซนติเมตร"
+#: Template/GymMember/add_member.ctp:305
+msgid "Thigh"
+msgstr "ต้นขา"
 
-#: Template/GymMember/add_member.ctp:213 Template/GymMember/add_member.ctp:220 Template/GymMember/add_member.ctp:227 Template/GymMember/add_member.ctp:234
-msgid "Inches"
-msgstr "นิ้ว"
-
-#: Template/GymMember/add_member.ctp:241
-msgid "Percentage"
-msgstr "เปอร์เซ็น"
-
-#: Template/GymMember/add_member.ctp:271 Template/MemberRegistration/index.ctp:248
+#: Template/GymMember/add_member.ctp:351
+#: Template/MemberRegistration/index.ctp:242
 msgid "More Information"
-msgstr "ข้อมูลเพิ่มเติม"
+msgstr "ข้อมูลมากกว่านี้"
 
-#: Template/GymMember/add_member.ctp:278 Template/GymMember/add_member.ctp:308 Template/StaffMembers/staff_list.ctp:44
+#: Template/GymMember/add_member.ctp:358 Template/GymMember/add_member.ctp:388
 msgid "Add Staff"
 msgstr "เพิ่มพนักงาน"
 
-#: Template/GymMember/add_member.ctp:283 Template/MemberRegistration/index.ctp:251
+#: Template/GymMember/add_member.ctp:363
+#: Template/MemberRegistration/index.ctp:245
 msgid "Interested Area"
 msgstr "พื้นที่ที่สนใจ"
 
-#: Template/GymMember/add_member.ctp:285 Template/MemberRegistration/index.ctp:253
+#: Template/GymMember/add_member.ctp:365
+#: Template/MemberRegistration/index.ctp:247
 msgid "Select Interest"
-msgstr "เลือกที่น่าสนใจ"
+msgstr "เลือกความสนใจ"
 
-#: Template/GymMember/add_member.ctp:288 Template/GymMember/add_member.ctp:298 Template/StaffMembers/add_staff.ctp:94 Template/StaffMembers/add_staff.ctp:102
+#: Template/GymMember/add_member.ctp:368 Template/GymMember/add_member.ctp:378
+#: Template/StaffMembers/add_staff.ctp:104
+#: Template/StaffMembers/add_staff.ctp:112
 msgid "Add/Remove"
 msgstr "เพิ่ม / ลบ"
 
-#: Template/GymMember/add_member.ctp:293 Template/MemberRegistration/index.ctp:258
+#: Template/GymMember/add_member.ctp:373
+#: Template/MemberRegistration/index.ctp:252
 msgid "Source"
-msgstr "แหล่งที่มา"
+msgstr "แหล่ง"
 
-#: Template/GymMember/add_member.ctp:295 Template/MemberRegistration/index.ctp:260
+#: Template/GymMember/add_member.ctp:375
+#: Template/MemberRegistration/index.ctp:254
 msgid "Select Source"
-msgstr "เลือกแหล่ง"
+msgstr "เลือกแหล่งที่มา"
 
-#: Template/GymMember/add_member.ctp:303
+#: Template/GymMember/add_member.ctp:383
 msgid "Referred By"
 msgstr "อ้างอิงจาก"
 
-#: Template/GymMember/add_member.ctp:313
+#: Template/GymMember/add_member.ctp:393
 msgid "Inquiry Date"
-msgstr "สอบถามรายละเอียดเพิ่มเติมวันที่"
+msgstr "วันสอบถาม"
 
-#: Template/GymMember/add_member.ctp:320
+#: Template/GymMember/add_member.ctp:400
 msgid "Trial End Date"
-msgstr "การพิจารณาคดีวันที่สิ้นสุด"
+msgstr "วันที่สิ้นสุดการทดลอง"
 
-#: Template/GymMember/add_member.ctp:329 Template/GymMember/member_list.ctp:70 Template/GymMember/member_list.ctp:118
+#: Template/GymMember/add_member.ctp:409 Template/GymMember/member_list.ctp:60
+#: Template/GymMember/member_list.ctp:113
 msgid "Member Type"
 msgstr "ประเภทสมาชิก"
 
-#: Template/GymMember/add_member.ctp:333
+#: Template/GymMember/add_member.ctp:413 Template/GymMember/add_member.ctp:447
 msgid "Prospect"
 msgstr "โอกาส"
 
-#: Template/GymMember/add_member.ctp:334
+#: Template/GymMember/add_member.ctp:414
 msgid "Alumni"
 msgstr "ศิษย์เก่า"
 
-#: Template/GymMember/add_member.ctp:355
+#: Template/GymMember/add_member.ctp:435
 msgid "Add Class"
-msgstr "เพิ่มระดับชั้น"
+msgstr "เพิ่มคลาส"
 
-#: Template/GymMember/add_member.ctp:364 Template/GymMember/member_list.ctp:71 Template/GymMember/member_list.ctp:119
+#: Template/GymMember/add_member.ctp:444 Template/GymMember/member_list.ctp:61
+#: Template/GymMember/member_list.ctp:114
 msgid "Membership Status"
-msgstr "สถานะการเป็นสมาชิก"
+msgstr "สถานะสมาชิก"
 
-#: Template/GymMember/add_member.ctp:367
+#: Template/GymMember/add_member.ctp:448
 msgid "Continue"
 msgstr "ต่อ"
 
-#: Template/GymMember/add_member.ctp:368
+#: Template/GymMember/add_member.ctp:449
 msgid "Expired"
-msgstr "หมดอายุแล้ว"
+msgstr "หมดอายุ"
 
-#: Template/GymMember/add_member.ctp:369
+#: Template/GymMember/add_member.ctp:450
 msgid "Dropped"
-msgstr "•ตก"
+msgstr "ปรับตัวลดลง"
 
-#: Template/GymMember/add_member.ctp:375 Template/MembershipPayment/generate_payment_invoice.ctp:83
+#: Template/GymMember/add_member.ctp:456
+#: Template/MembershipPayment/generate_payment_invoice.ctp:91
 msgid "Membership Valid From"
 msgstr "สมาชิกที่ถูกต้องจาก"
 
-#: Template/GymMember/add_member.ctp:388
+#: Template/GymMember/add_member.ctp:469
 msgid "First Payment Date"
-msgstr "วันที่ชำระเงินครั้งแรก"
+msgstr "วันชำระเงินครั้งแรก"
 
-#: Template/GymMember/add_member.ctp:396 Template/MemberRegistration/index.ctp:298
+#: Template/GymMember/add_member.ctp:477
+#: Template/MemberRegistration/index.ctp:292
 msgid "Save Member"
 msgstr "บันทึกสมาชิก"
 
-#: Template/GymMember/member_list.ctp:68 Template/GymMember/member_list.ctp:116
+#: Template/GymMember/member_list.ctp:58 Template/GymMember/member_list.ctp:111
 msgid "Joining Date"
 msgstr "วันที่เข้าร่วม"
 
-#: Template/GymMember/member_list.ctp:69 Template/GymMember/member_list.ctp:117
+#: Template/GymMember/member_list.ctp:59 Template/GymMember/member_list.ctp:112
 msgid "Expire Date"
 msgstr "วันที่หมดอายุ"
 
-#: Template/GymMember/member_list.ctp:102
+#: Template/GymMember/member_list.ctp:96
 msgid "Activate"
-msgstr "เปิดใช้งาน"
+msgstr "กระตุ้น"
 
-#: Template/GymMember/member_list.ctp:104
+#: Template/GymMember/member_list.ctp:98
 msgid "Activated"
 msgstr "เปิดใช้งาน"
 
-#: Template/GymMember/view_attendance.ctp:15
-msgid "View Attendance"
-msgstr "ดูผู้เข้าเรียน"
-
-#: Template/GymMember/view_attendance.ctp:19
+#: Template/GymMember/view_attendance.ctp:37
 msgid "Member List"
 msgstr "รายชื่อสมาชิก"
 
-#: Template/GymMember/view_attendance.ctp:39 Template/Reports/attendance_report.ctp:45
+#: Template/GymMember/view_attendance.ctp:57
+#: Template/Reports/attendance_report.ctp:74
 msgid "Go"
 msgstr "ไป"
 
 #: Template/GymMember/view_member.ctp:32
 msgid "View Member"
-msgstr "ดูข้อมูลส่วนตัว"
+msgstr "ดูสมาชิก"
 
-#: Template/GymMember/view_member.ctp:60 Template/GymProfile/view_profile.ctp:58
+#: Template/GymMember/view_member.ctp:66
+#: Template/GymProfile/view_profile.ctp:64
 msgid "Name"
 msgstr "ชื่อ"
 
-#: Template/GymMember/view_member.ctp:72
+#: Template/GymMember/view_member.ctp:78
 msgid "Mobile No"
 msgstr "หมายเลขโทรศัพท์มือถือ"
 
-#: Template/GymMember/view_member.ctp:76
+#: Template/GymMember/view_member.ctp:82
 msgid "Date Of Birth"
-msgstr "วันเดือนปีเกิด"
+msgstr "วันเกิด"
 
-#: Template/GymMember/view_member.ctp:97
+#: Template/GymMember/view_member.ctp:103
 msgid "Moreinfo"
 msgstr "ข้อมูลเพิ่มเติม"
 
-#: Template/GymMember/view_member.ctp:101
+#: Template/GymMember/view_member.ctp:107
 msgid "MemberShip"
-msgstr "สมาชิก"
+msgstr "การเป็นสมาชิก"
 
-#: Template/GymMember/view_member.ctp:105
+#: Template/GymMember/view_member.ctp:111
 msgid "Expiry Date"
-msgstr "วันหมดอายุ:"
+msgstr "วันหมดอายุ"
 
-#: Template/GymMember/view_member.ctp:109
+#: Template/GymMember/view_member.ctp:115
 msgid "Classes"
-msgstr "ชั้นเรียน"
+msgstr "การเรียนการสอน"
 
-#: Template/GymMember/view_member.ctp:113
+#: Template/GymMember/view_member.ctp:119
 msgid "Interest Area"
 msgstr "พื้นที่ที่น่าสนใจ"
 
-#: Template/GymMember/view_member.ctp:127
+#: Template/GymMember/view_member.ctp:133
 msgid "Groups"
 msgstr "กลุ่ม"
 
-#: Template/GymMember/view_member.ctp:141
+#: Template/GymMember/view_member.ctp:147
 msgid "Add Weight"
 msgstr "เพิ่มน้ำหนัก"
 
-#: Template/GymMember/view_member.ctp:165
+#: Template/GymMember/view_member.ctp:171
 msgid "Add Waist"
 msgstr "เพิ่มรอบเอว"
 
-#: Template/GymMember/view_member.ctp:191
+#: Template/GymMember/view_member.ctp:197
 msgid "Add Thigh"
 msgstr "เพิ่มต้นขา"
 
-#: Template/GymMember/view_member.ctp:215
+#: Template/GymMember/view_member.ctp:221
 msgid "Add Arms"
-msgstr "เพิ่มแขน"
+msgstr "เพิ่มอาวุธ"
 
-#: Template/GymMember/view_member.ctp:241
+#: Template/GymMember/view_member.ctp:247
 msgid "Add Height"
 msgstr "เพิ่มความสูง"
 
-#: Template/GymMember/view_member.ctp:265
+#: Template/GymMember/view_member.ctp:271
 msgid "Add Chest"
-msgstr "เพิ่มหน้าอก"
+msgstr "เพิ่มทรวงอก"
 
-#: Template/GymMember/view_member.ctp:291
+#: Template/GymMember/view_member.ctp:297
 msgid "Add Fat"
 msgstr "เพิ่มไขมัน"
 
-#: Template/GymMember/view_member.ctp:315
+#: Template/GymMember/view_member.ctp:321
 msgid "Add Photo"
 msgstr "เพิ่มรูปภาพ"
 
-#: Template/GymMember/view_member.ctp:381 Template/GymMember/view_member.ctp:409 Template/GymSubscriptionHistory/index.ctp:40 Template/GymSubscriptionHistory/index.ctp:68
+#: Template/GymMember/view_member.ctp:387
+#: Template/GymMember/view_member.ctp:415
+#: Template/GymSubscriptionHistory/index.ctp:42
+#: Template/GymSubscriptionHistory/index.ctp:72
 msgid "Membership Title"
 msgstr "ชื่อสมาชิก"
 
-#: Template/GymMember/view_member.ctp:383 Template/GymMember/view_member.ctp:411 Template/GymSubscriptionHistory/index.ctp:42 Template/GymSubscriptionHistory/index.ctp:70
-#: Template/MembershipPayment/payment_list.ctp:53 Template/MembershipPayment/payment_list.ctp:98
+#: Template/GymMember/view_member.ctp:389
+#: Template/GymMember/view_member.ctp:417
+#: Template/GymSubscriptionHistory/index.ctp:44
+#: Template/GymSubscriptionHistory/index.ctp:74
+#: Template/MembershipPayment/payment_list.ctp:53
+#: Template/MembershipPayment/payment_list.ctp:98
 msgid "Due Amount"
-msgstr "เนื่องจากจำนวนเงินที่"
+msgstr "จำนวนเงินที่ต้องชำระ"
 
-#: Template/GymMember/view_member.ctp:386 Template/GymMember/view_member.ctp:414 Template/GymSubscriptionHistory/index.ctp:45 Template/GymSubscriptionHistory/index.ctp:73
-#: Template/MembershipPayment/payment_list.ctp:56 Template/MembershipPayment/payment_list.ctp:101
+#: Template/GymMember/view_member.ctp:392
+#: Template/GymMember/view_member.ctp:420
+#: Template/GymSubscriptionHistory/index.ctp:47
+#: Template/GymSubscriptionHistory/index.ctp:77
+#: Template/MembershipPayment/payment_list.ctp:56
+#: Template/MembershipPayment/payment_list.ctp:101
 msgid "Payment Status"
 msgstr "สถานะการชำระเงิน"
 
@@ -2049,30 +2685,35 @@ msgstr "สถานะการชำระเงิน"
 msgid "Compose Message"
 msgstr "เขียนข้อความ"
 
-#: Template/GymMessage/compose_message.ctp:25 Template/GymMessage/compose_message.ctp:28 Template/GymMessage/inbox.ctp:26 Template/GymMessage/inbox.ctp:30
-#: Template/GymMessage/sent.ctp:20 Template/GymMessage/view_message.ctp:20
+#: Template/GymMessage/compose_message.ctp:25
+#: Template/GymMessage/compose_message.ctp:28 Template/GymMessage/inbox.ctp:26
+#: Template/GymMessage/inbox.ctp:30 Template/GymMessage/sent.ctp:20
+#: Template/GymMessage/view_message.ctp:20
 msgid "Compose"
 msgstr "แต่ง"
 
-#: Template/GymMessage/compose_message.ctp:36 Template/GymMessage/inbox.ctp:42 Template/GymMessage/sent.ctp:31 Template/GymMessage/view_message.ctp:29
+#: Template/GymMessage/compose_message.ctp:36 Template/GymMessage/inbox.ctp:42
+#: Template/GymMessage/sent.ctp:31 Template/GymMessage/view_message.ctp:29
 msgid "Inbox"
-msgstr "กล่องจดหมาย"
+msgstr "กล่องขาเข้า"
 
-#: Template/GymMessage/compose_message.ctp:38 Template/GymMessage/inbox.ctp:44 Template/GymMessage/sent.ctp:33 Template/GymMessage/view_message.ctp:31
+#: Template/GymMessage/compose_message.ctp:38 Template/GymMessage/inbox.ctp:44
+#: Template/GymMessage/sent.ctp:33 Template/GymMessage/view_message.ctp:31
 msgid "Sent"
-msgstr "ส่งแล้ว"
+msgstr "ส่ง"
 
 #: Template/GymMessage/compose_message.ctp:52 Template/GymMessage/sent.ctp:41
 msgid "Message To"
-msgstr "ส่งข้อความถึง"
+msgstr "ข้อความถึง"
 
 #: Template/GymMessage/compose_message.ctp:64
 msgid "None"
 msgstr "ไม่มี"
 
-#: Template/GymMessage/compose_message.ctp:69 Template/GymMessage/inbox.ctp:53 Template/GymMessage/sent.ctp:42 Template/GymMessage/view_message.ctp:37
+#: Template/GymMessage/compose_message.ctp:69 Template/GymMessage/inbox.ctp:53
+#: Template/GymMessage/sent.ctp:42 Template/GymMessage/view_message.ctp:37
 msgid "Subject"
-msgstr "หัวเรื่อง"
+msgstr "เรื่อง"
 
 #: Template/GymMessage/compose_message.ctp:75
 msgid "Message Comment"
@@ -2082,9 +2723,10 @@ msgstr "ข้อความแสดงความคิดเห็น"
 msgid "Send Message"
 msgstr "ส่งข้อความ"
 
-#: Template/GymMessage/inbox.ctp:9 Template/GymMessage/inbox.ctp:34 Template/GymMessage/view_message.ctp:8
+#: Template/GymMessage/inbox.ctp:9 Template/GymMessage/inbox.ctp:34
+#: Template/GymMessage/view_message.ctp:8
 msgid "Inbox Messages"
-msgstr "กล่องขาเข้าข้อความ"
+msgstr "ข้อความเข้า"
 
 #: Template/GymMessage/inbox.ctp:52
 msgid "Message From"
@@ -2094,17 +2736,19 @@ msgstr "ข้อความจาก"
 msgid "Sent Messages"
 msgstr "ข้อความที่ส่ง"
 
-#: Template/GymNewsletter/campaign.ctp:1 Template/GymNewsletter/setting.ctp:1 Template/GymNewsletter/sync_mail.ctp:1
+#: Template/GymNewsletter/campaign.ctp:1 Template/GymNewsletter/setting.ctp:1
+#: Template/GymNewsletter/sync_mail.ctp:1
 msgid "Setting"
 msgstr "การตั้งค่า"
 
-#: Template/GymNewsletter/campaign.ctp:1 Template/GymNewsletter/setting.ctp:1 Template/GymNewsletter/sync_mail.ctp:1
+#: Template/GymNewsletter/campaign.ctp:1 Template/GymNewsletter/setting.ctp:1
+#: Template/GymNewsletter/sync_mail.ctp:1
 msgid "Sync Mail"
 msgstr "ซิงค์เมล"
 
 #: Template/GymNewsletter/campaign.ctp:1
 msgid "MailChimp list"
-msgstr "รายการ MailChimp"
+msgstr "รายการจดหมาย"
 
 #: Template/GymNewsletter/campaign.ctp:1 Template/GymNewsletter/sync_mail.ctp:1
 msgid "Select list"
@@ -2120,7 +2764,7 @@ msgstr "เลือกแคมเปญ"
 
 #: Template/GymNewsletter/campaign.ctp:1
 msgid "Send Capmaign"
-msgstr "ส่ง Capmaign"
+msgstr "ส่งแคมเปญ"
 
 #: Template/GymNewsletter/setting.ctp:1 Template/GymNewsletter/sync_mail.ctp:1
 msgid "Campaign"
@@ -2128,241 +2772,280 @@ msgstr "รณรงค์"
 
 #: Template/GymNewsletter/setting.ctp:1
 msgid "MailChimp API key"
-msgstr "ที่สำคัญ MailChimp API"
+msgstr "คีย์ API ของ mailchimp"
 
 #: Template/GymNewsletter/sync_mail.ctp:1
 msgid "Mailing list"
 msgstr "รายชื่อผู้รับจดหมาย"
 
-#: Template/GymNotice/add_notice.ctp:17 Template/GymNotice/notice_list.ctp:31
+#: Template/GymNotice/add_notice.ctp:41
+msgid "Edit Notice"
+msgstr "แก้ไขประกาศ"
+
+#: Template/GymNotice/add_notice.ctp:43 Template/GymNotice/notice_list.ctp:31
 msgid "Add Notice"
-msgstr "เพิ่มเวปไซด์"
+msgstr "เพิ่มประกาศ"
 
-#: Template/GymNotice/add_notice.ctp:21 Template/GymNotice/notice_list.ctp:24
+#: Template/GymNotice/add_notice.ctp:50 Template/GymNotice/notice_list.ctp:24
 msgid "Notice List"
-msgstr "รายการแจ้งให้ทราบล่วงหน้า"
+msgstr "รายการประกาศ"
 
-#: Template/GymNotice/add_notice.ctp:29 Template/GymNotice/notice_list.ctp:41 Template/GymNotice/notice_list.ctp:70
+#: Template/GymNotice/add_notice.ctp:58 Template/GymNotice/notice_list.ctp:41
+#: Template/GymNotice/notice_list.ctp:70
 msgid "Notice Title"
-msgstr "แจ้งให้ทราบชื่อ"
+msgstr "ชื่อประกาศ"
 
-#: Template/GymNotice/add_notice.ctp:38
+#: Template/GymNotice/add_notice.ctp:67
 msgid "All"
 msgstr "ทั้งหมด"
 
-#: Template/GymNotice/add_notice.ctp:67
+#: Template/GymNotice/add_notice.ctp:96
 msgid "Comment"
-msgstr "ความเห็น"
+msgstr "คิดเห็น"
 
-#: Template/GymNutrition/addnutrition_schedule.ctp:25
-msgid "Nutrition Schdule List"
-msgstr "โภชนาการรายการ Schdule"
+#: Template/GymNutrition/addnutrition_schedule.ctp:46
+#: Template/GymNutrition/member_nutrition.ctp:18
+msgid "Nutrition Schedule List"
+msgstr "รายการกำหนดการโภชนาการ"
 
-#: Template/GymNutrition/addnutrition_schedule.ctp:74
+#: Template/GymNutrition/addnutrition_schedule.ctp:98
 msgid "Select Nutrition to add on selected days"
-msgstr "เลือกโภชนาการเพิ่มในวันที่เลือก"
+msgstr "เลือกโภชนาการเพื่อเพิ่มในวันที่เลือก"
 
-#: Template/GymNutrition/addnutrition_schedule.ctp:79
+#: Template/GymNutrition/addnutrition_schedule.ctp:103
 msgid "Break Fast"
-msgstr "- อาหารเช้า"
+msgstr "อาหารเช้า"
 
-#: Template/GymNutrition/addnutrition_schedule.ctp:85
+#: Template/GymNutrition/addnutrition_schedule.ctp:109
 msgid "Mid-Morning Snacks"
-msgstr "อาหารว่างช่วงเช้า"
+msgstr "อาหารว่างตอนเช้า"
 
-#: Template/GymNutrition/addnutrition_schedule.ctp:91
+#: Template/GymNutrition/addnutrition_schedule.ctp:115
 msgid "Lunch"
-msgstr "อาหารกลางวัน 13:30 น. - 15:30 น."
+msgstr "อาหารกลางวัน"
 
-#: Template/GymNutrition/addnutrition_schedule.ctp:96
+#: Template/GymNutrition/addnutrition_schedule.ctp:120
 msgid "Afternoon Snacks"
-msgstr "อาหารว่างช่วงบ่าย"
+msgstr "อาหารว่างยามบ่าย"
 
-#: Template/GymNutrition/addnutrition_schedule.ctp:101
+#: Template/GymNutrition/addnutrition_schedule.ctp:125
 msgid "Dinner"
-msgstr "อาหารเย็น 20:00 น. - 23:00 น."
+msgstr "อาหารเย็น"
 
-#: Template/GymNutrition/addnutrition_schedule.ctp:105
+#: Template/GymNutrition/addnutrition_schedule.ctp:129
 msgid "+ Add Nutrition"
-msgstr "+ เพิ่มคุณค่าทางโภชนาการ"
+msgstr "+ เพิ่มโภชนาการ"
 
-#: Template/GymNutrition/addnutrition_schedule.ctp:122
+#: Template/GymNutrition/addnutrition_schedule.ctp:146
 msgid "Step-2 Save"
 msgstr "ขั้นตอนที่ 2 บันทึก"
 
-#: Template/GymNutrition/addnutrition_schedule.ctp:160 Template/GymNutrition/member_nutrition.ctp:62 Template/GymNutrition/print_nutrition.ctp:52
+#: Template/GymNutrition/addnutrition_schedule.ctp:184
+#: Template/GymNutrition/member_nutrition.ctp:62
+#: Template/GymNutrition/print_nutrition.ctp:53
 msgid "Time"
 msgstr "เวลา"
 
-#: Template/GymNutrition/member_nutrition.ctp:18
-msgid "Nutrition Schedule List"
-msgstr "โภชนาการรายการกำหนดเวลา"
+#: Template/GymNutrition/member_nutrition.ctp:89
+#: Template/GymNutrition/print_nutrition.ctp:80
+msgid "No record found."
+msgstr "ไม่พบบันทึก"
 
-#: Template/GymNutrition/nutrition_list.ctp:52 Template/GymNutrition/nutrition_list.ctp:75
+#: Template/GymNutrition/nutrition_list.ctp:52
+#: Template/GymNutrition/nutrition_list.ctp:76
 msgid "Member Photo"
 msgstr "ภาพถ่ายสมาชิก"
 
-#: Template/GymNutrition/nutrition_list.ctp:67
-msgid "View Nutrition"
-msgstr "ดูโภชนาการ"
+#: Template/GymProduct/add_product.ctp:9
+msgid "Edit Product"
+msgstr "แก้ไขผลิตภัณฑ์"
 
-#: Template/GymProduct/add_product.ctp:8 Template/GymProduct/product_list.ctp:42 Template/GymStore/sell_product.ctp:55
+#: Template/GymProduct/add_product.ctp:11
+#: Template/GymProduct/product_list.ctp:37
+#: Template/GymStore/sell_product.ctp:70
 msgid "Add Product"
-msgstr "เพิ่มสินค้า"
+msgstr "เพิ่มผลิตภัณฑ์"
 
-#: Template/GymProduct/add_product.ctp:9 Template/GymProduct/product_list.ctp:36
+#: Template/GymProduct/add_product.ctp:15
+#: Template/GymProduct/product_list.ctp:31
 msgid "Products"
-msgstr "สินค้า"
+msgstr "ผลิตภัณฑ์"
 
-#: Template/GymProduct/add_product.ctp:12 Template/GymProduct/product_list.ctp:35
+#: Template/GymProduct/add_product.ctp:18
+#: Template/GymProduct/product_list.ctp:30
 msgid "Product List"
 msgstr "รายการสินค้า"
 
-#: Template/GymProduct/add_product.ctp:20 Template/GymProduct/product_list.ctp:52 Template/GymProduct/product_list.ctp:75 Template/GymStore/sell_record.ctp:35
-#: Template/GymStore/sell_record.ctp:58
+#: Template/GymProduct/add_product.ctp:26
+#: Template/GymProduct/product_list.ctp:47
+#: Template/GymProduct/product_list.ctp:76 Template/GymStore/sell_record.ctp:35
+#: Template/GymStore/sell_record.ctp:62
 msgid "Product Name"
-msgstr "ชื่อสินค้า"
+msgstr "ชื่อผลิตภัณฑ์"
 
-#: Template/GymProduct/add_product.ctp:26 Template/GymProduct/product_list.ctp:53 Template/GymProduct/product_list.ctp:76
+#: Template/GymProduct/add_product.ctp:32
+#: Template/GymProduct/product_list.ctp:48
+#: Template/GymProduct/product_list.ctp:77
 msgid "Product Price"
 msgstr "ราคาสินค้า"
 
-#: Template/GymProduct/add_product.ctp:35 Template/GymProduct/product_list.ctp:54 Template/GymProduct/product_list.ctp:77 Template/GymStore/sell_record.ctp:37
-#: Template/GymStore/sell_record.ctp:60
+#: Template/GymProduct/add_product.ctp:41
+#: Template/GymProduct/product_list.ctp:49
+#: Template/GymProduct/product_list.ctp:78 Template/GymStore/sell_record.ctp:37
+#: Template/GymStore/sell_record.ctp:64
 msgid "Product Quantity"
-msgstr "จำนวนสินค้า"
+msgstr "ปริมาณสินค้า"
 
-#: Template/GymProfile/view_profile.ctp:45
+#: Template/GymProfile/view_profile.ctp:51
 msgid "Account Settings"
 msgstr "การตั้งค่าบัญชี"
 
-#: Template/GymProfile/view_profile.ctp:70
-msgid "Current Password"
-msgstr "รหัสผ่านปัจจุบัน:"
-
 #: Template/GymProfile/view_profile.ctp:76
+msgid "Current Password"
+msgstr "รหัสผ่านปัจจุบัน"
+
+#: Template/GymProfile/view_profile.ctp:82
 msgid "New Password"
 msgstr "รหัสผ่านใหม่"
 
-#: Template/GymProfile/view_profile.ctp:81 Template/Installer/index.ctp:500
+#: Template/GymProfile/view_profile.ctp:87 Template/Installer/index.ctp:571
 msgid "Confirm Password"
 msgstr "ยืนยันรหัสผ่าน"
 
-#: Template/GymProfile/view_profile.ctp:100
+#: Template/GymProfile/view_profile.ctp:106
 msgid "Other Information"
 msgstr "ข้อมูลอื่น ๆ"
 
-#: Template/GymReservation/add_reservation.ctp:15 Template/GymReservation/reservation_list.ctp:48
-msgid "Add Reservation"
-msgstr "เพิ่มการจองห้องพัก"
+#: Template/GymReservation/add_reservation.ctp:58
+msgid "Edit Event"
+msgstr "แก้ไขกิจกรรม"
 
-#: Template/GymReservation/add_reservation.ctp:16
+#: Template/GymReservation/add_reservation.ctp:60
+#: Template/GymReservation/reservation_list.ctp:41
+msgid "Add Event"
+msgstr "เพิ่มกิจกรรม"
+
+#: Template/GymReservation/add_reservation.ctp:63
 msgid "Schedule"
-msgstr "กำหนดการ"
+msgstr "ตารางเวลา"
 
-#: Template/GymReservation/add_reservation.ctp:19 Template/GymReservation/reservation_list.ctp:41
-msgid "Reservation List"
-msgstr "รายการการจองห้องพัก"
+#: Template/GymReservation/add_reservation.ctp:66
+#: Template/GymReservation/reservation_list.ctp:34
+msgid "Event List"
+msgstr "รายการกิจกรรม"
 
-#: Template/GymReservation/add_reservation.ctp:28 Template/GymReservation/reservation_list.ctp:58 Template/GymReservation/reservation_list.ctp:86
+#: Template/GymReservation/add_reservation.ctp:75
+#: Template/GymReservation/reservation_list.ctp:51
+#: Template/GymReservation/reservation_list.ctp:83
 msgid "Event Name"
-msgstr "ชื่อเหตุการณ์"
+msgstr "ชื่อกิจกรรม"
 
-#: Template/GymReservation/add_reservation.ctp:35 Template/GymReservation/reservation_list.ctp:59 Template/GymReservation/reservation_list.ctp:87
+#: Template/GymReservation/add_reservation.ctp:82
+#: Template/GymReservation/reservation_list.ctp:52
+#: Template/GymReservation/reservation_list.ctp:84
 msgid "Event Date"
 msgstr "วันที่จัดกิจกรรม"
 
-#: Template/GymReservation/add_reservation.ctp:42
+#: Template/GymReservation/add_reservation.ctp:89
 msgid "Event Place"
-msgstr "สถานที่จัดกิจกรรม"
+msgstr "สถานที่จัดงาน"
 
-#: Template/GymReservation/add_reservation.ctp:44
+#: Template/GymReservation/add_reservation.ctp:91
 msgid "Select Event Places"
 msgstr "เลือกสถานที่จัดกิจกรรม"
 
-#: Template/GymReservation/add_reservation.ctp:47
+#: Template/GymReservation/add_reservation.ctp:94
 msgid "Add or Remove"
 msgstr "เพิ่มหรือลบ"
 
-#: Template/GymReservation/reservation_list.ctp:60 Template/GymReservation/reservation_list.ctp:88
+#: Template/GymReservation/reservation_list.ctp:53
+#: Template/GymReservation/reservation_list.ctp:85
 msgid "Place"
 msgstr "สถานที่"
 
-#: Template/GymStore/sell_product.ctp:19 Template/GymStore/sell_record.ctp:26
-msgid "Sell Product"
-msgstr "ขายสินค้า"
+#: Template/GymStore/sell_product.ctp:29
+msgid "Edit Sell Product"
+msgstr "แก้ไขขายสินค้า"
 
-#: Template/GymStore/sell_product.ctp:23 Template/GymStore/sell_record.ctp:22
+#: Template/GymStore/sell_product.ctp:31 Template/GymStore/sell_record.ctp:26
+msgid "Add Sell Product"
+msgstr "เพิ่มสินค้าขาย"
+
+#: Template/GymStore/sell_product.ctp:38 Template/GymStore/sell_record.ctp:22
 msgid "Sell Records"
-msgstr "ขายแผ่นเสียง"
+msgstr "ขายบันทึก"
 
-#: Template/GymStore/sell_product.ctp:48
+#: Template/GymStore/sell_product.ctp:63
 msgid "Select Product"
 msgstr "เลือกผลิตภัณฑ์"
 
-#: Template/GymStore/sell_product.ctp:60
+#: Template/GymStore/sell_product.ctp:75
 msgid "Quantity"
-msgstr "จำนวน"
+msgstr "ปริมาณ"
 
-#: Template/Installer/index.ctp:2 Template/Installer/success.ctp:2
+#: Template/Installer/index.ctp:10 Template/Installer/success.ctp:2
 msgid "Gym Master - GYM Management Installation Wizard"
-msgstr "ยิม Master - ตัวช่วยสร้างการติดตั้งการบริหารจัดการโรงยิม"
+msgstr "ยิมหลัก - ตัวช่วยสร้างการติดตั้งการจัดการ GYM"
 
-#: Template/Installer/index.ctp:8 Template/Installer/index.ctp:10
+#: Template/Installer/index.ctp:16 Template/Installer/index.ctp:18
+msgid "Server Requirements"
+msgstr "ข้อกำหนดของเซิร์ฟเวอร์"
+
+#: Template/Installer/index.ctp:79 Template/Installer/index.ctp:81
 msgid "Database Setup"
-msgstr "7.5 การตั้งค่าฐานข้อมูล .............................................."
+msgstr "ตั้งค่าฐานข้อมูล"
 
-#: Template/Installer/index.ctp:13
+#: Template/Installer/index.ctp:84
 msgid "Database Name"
 msgstr "ชื่อฐานข้อมูล"
 
-#: Template/Installer/index.ctp:21
+#: Template/Installer/index.ctp:92
 msgid "Database Username"
 msgstr "ชื่อผู้ใช้ฐานข้อมูล"
 
-#: Template/Installer/index.ctp:29
+#: Template/Installer/index.ctp:100
 msgid "Database Password"
 msgstr "รหัสผ่านฐานข้อมูล"
 
-#: Template/Installer/index.ctp:45 Template/Installer/index.ctp:475
+#: Template/Installer/index.ctp:116 Template/Installer/index.ctp:546
 msgid "Fields are required."
-msgstr "เขตข้อมูลที่จำเป็น"
+msgstr "ต้องระบุข้อมูลในฟิลด์"
 
-#: Template/Installer/index.ctp:48 Template/Installer/index.ctp:50
+#: Template/Installer/index.ctp:119 Template/Installer/index.ctp:121
 msgid "System Setting"
 msgstr "การตั้งค่าระบบ"
 
-#: Template/Installer/index.ctp:53
+#: Template/Installer/index.ctp:124
 msgid "System Name"
-msgstr "ระบบชื่อ"
+msgstr "ชื่อระบบ"
 
-#: Template/Installer/index.ctp:478 Template/Installer/index.ctp:480
+#: Template/Installer/index.ctp:549 Template/Installer/index.ctp:551
 msgid "Login Details"
 msgstr "เข้าสู่ระบบรายละเอียด"
 
-#: Template/Installer/index.ctp:508
+#: Template/Installer/index.ctp:579
 msgid "Finish"
 msgstr "เสร็จสิ้น"
 
-#: Template/Installer/index.ctp:510
+#: Template/Installer/index.ctp:581
 msgid "Please Note :"
-msgstr "หมายเหตุ:"
+msgstr "โปรดทราบ:"
 
-#: Template/Installer/index.ctp:513
+#: Template/Installer/index.ctp:584
 msgid "1. It may take couple of minutes to set-up database."
-msgstr "1. มันอาจจะใช้เวลาไม่กี่นาทีในการตั้งค่าฐานข้อมูล"
+msgstr "1. อาจใช้เวลาสองสามนาทีในการตั้งค่าฐานข้อมูล"
 
-#: Template/Installer/index.ctp:516
+#: Template/Installer/index.ctp:587
 msgid "2. Do not refresh page after to you click on install button."
-msgstr "2. อย่ารีเฟรชหน้าหลังจากที่ให้คุณคลิกที่ปุ่มติดตั้ง"
+msgstr "2. อย่ารีเฟรชหน้าหลังจากที่คุณคลิกที่ปุ่มติดตั้ง"
 
-#: Template/Installer/index.ctp:519
+#: Template/Installer/index.ctp:590
 msgid "3. You will be acknowledge with success message once after installation finishes."
-msgstr "3. คุณจะได้รับทราบด้วยข้อความที่ประสบความสำเร็จครั้งหลังจากติดตั้งเสร็จสิ้น"
+msgstr "3. คุณจะได้รับทราบด้วยข้อความยืนยันความสำเร็จหนึ่งครั้งหลังจากการติดตั้งเสร็จสิ้น"
 
-#: Template/Installer/index.ctp:522
+#: Template/Installer/index.ctp:593
 msgid "4. Click on install to complete the installation."
-msgstr "4. คลิกที่ติดตั้งเพื่อทำการติดตั้ง"
+msgstr "4. คลิกที่การติดตั้งเพื่อทำการติดตั้งให้เสร็จสมบูรณ์"
 
 #: Template/Installer/success.ctp:7
 msgid "Congratulation"
@@ -2370,7 +3053,7 @@ msgstr "การแสดงความยินดี"
 
 #: Template/Installer/success.ctp:8
 msgid "Installation Completed Successfully"
-msgstr "ติดตั้งเสร็จสมบูรณ์"
+msgstr "การติดตั้งเสร็จสมบูรณ์เรียบร้อยแล้ว"
 
 #: Template/Installer/success.ctp:9
 msgid "Click"
@@ -2380,301 +3063,393 @@ msgstr "คลิก"
 msgid "here to redirect on \tlogin page."
 msgstr "ที่นี่เพื่อเปลี่ยนเส้นทางในหน้า \\ tlogin"
 
-#: Template/MemberRegistration/index.ctp:96 Template/Users/login.ctp:29
+#: Template/MemberRegistration/index.ctp:97 Template/Users/login.ctp:32
 msgid "Member Registration"
-msgstr "ลงทะเบียนสมาชิก"
+msgstr "สมัครสมาชิก"
 
-#: Template/MemberRegistration/index.ctp:272
+#: Template/MemberRegistration/index.ctp:178
+msgid "state"
+msgstr "สถานะ"
+
+#: Template/MemberRegistration/index.ctp:273
 msgid "Select Joining Date"
 msgstr "เลือกวันที่เข้าร่วม"
 
-#: Template/MemberRegistration/index.ctp:301
+#: Template/MemberRegistration/index.ctp:295
 msgid "Go Back"
-msgstr "กลับไป"
+msgstr "ย้อนกลับ"
 
-#: Template/Membership/add.ctp:59 Template/Membership/edit_membership.ctp:11 Template/Membership/membership_list.ctp:36 Template/Membership/view_activity.ctp:33
+#: Template/Membership/add.ctp:69 Template/Membership/edit_membership.ctp:11
+#: Template/Membership/membership_list.ctp:36
+#: Template/Membership/view_activity.ctp:44
 msgid "Membership List"
 msgstr "รายชื่อสมาชิก"
 
-#: Template/Membership/add.ctp:78 Template/Membership/edit_membership.ctp:25
+#: Template/Membership/add.ctp:88 Template/Membership/edit_membership.ctp:25
 msgid "Membership Category"
-msgstr "หมวดหมู่สมาชิก"
+msgstr "หมวดสมาชิก"
 
-#: Template/Membership/add.ctp:88 Template/Membership/edit_membership.ctp:35 Template/Membership/membership_list.ctp:55 Template/Membership/membership_list.ctp:96
+#: Template/Membership/add.ctp:98 Template/Membership/edit_membership.ctp:35
+#: Template/Membership/membership_list.ctp:55
+#: Template/Membership/membership_list.ctp:103
 msgid "Membership Period"
-msgstr "เวลาที่เป็นสมาชิก"
+msgstr "ระยะเวลาการเป็นสมาชิก"
 
-#: Template/Membership/add.ctp:91
+#: Template/Membership/add.ctp:101
 msgid "No. of Days"
 msgstr "จำนวนวัน"
 
-#: Template/Membership/add.ctp:98 Template/Membership/edit_membership.ctp:39
+#: Template/Membership/add.ctp:108 Template/Membership/edit_membership.ctp:39
 msgid "Membership Limit"
-msgstr "จำกัด สมาชิก"
+msgstr "จำกัด จำนวนสมาชิก"
 
-#: Template/Membership/add.ctp:100
+#: Template/Membership/add.ctp:110
 msgid "Limited"
-msgstr "จำก"
+msgstr "ถูก จำกัด"
 
-#: Template/Membership/add.ctp:101
+#: Template/Membership/add.ctp:111
 msgid "Unlimited"
-msgstr "ไม่จำกัด"
+msgstr "ไม่ จำกัด"
 
-#: Template/Membership/add.ctp:122 Template/Membership/edit_membership.ctp:46
+#: Template/Membership/add.ctp:114
+msgid "no. of classes"
+msgstr "ไม่ ของชั้นเรียน"
+
+#: Template/Membership/add.ctp:117
+msgid "Class every week"
+msgstr "เรียนทุกสัปดาห์"
+
+#: Template/Membership/add.ctp:117
+msgid "Class every month"
+msgstr "เรียนทุกเดือน"
+
+#: Template/Membership/add.ctp:132 Template/Membership/edit_membership.ctp:46
 msgid "Membership Amount"
 msgstr "จำนวนสมาชิก"
 
-#: Template/Membership/add.ctp:140
+#: Template/Membership/add.ctp:150 Template/Membership/membership_list.ctp:56
+#: Template/Membership/membership_list.ctp:104
 msgid "Installment Plan"
-msgstr "การผ่อนชำระ"
+msgstr "แผนการผ่อนชำระ"
 
-#: Template/Membership/add.ctp:146 Template/Membership/edit_membership.ctp:56
-msgid "Select Instalment Plan"
-msgstr "เลือกแผนการงวด"
+#: Template/Membership/add.ctp:156 Template/Membership/edit_membership.ctp:56
+msgid "Select Installment Plan"
+msgstr "เลือกผ่อนชำระ"
 
-#: Template/Membership/add.ctp:151
+#: Template/Membership/add.ctp:161 Template/Membership/edit_membership.ctp:62
 msgid "Add Installment Plan"
-msgstr "เพิ่มการผ่อนชำระ"
+msgstr "เพิ่มแผนการผ่อนชำระ"
 
-#: Template/Membership/add.ctp:157 Template/Membership/edit_membership.ctp:67
+#: Template/Membership/add.ctp:167 Template/Membership/edit_membership.ctp:67
 msgid "Signup Fee"
-msgstr "ค่าลงทะเบียน"
+msgstr "ค่าธรรมเนียมการสมัคร"
 
-#: Template/Membership/add.ctp:167 Template/Membership/edit_membership.ctp:71
+#: Template/Membership/add.ctp:177 Template/Membership/edit_membership.ctp:71
 msgid "Membership Description"
-msgstr "รายละเอียดสมาชิก"
+msgstr "คำอธิบายการเป็นสมาชิก"
 
-#: Template/Membership/add.ctp:174 Template/Membership/edit_membership.ctp:76
+#: Template/Membership/add.ctp:184 Template/Membership/edit_membership.ctp:76
 msgid "Membership Image"
-msgstr "ภาพสมาชิก"
+msgstr "รูปภาพสมาชิก"
 
-#: Template/Membership/add.ctp:188
+#: Template/Membership/add.ctp:198
 msgid "Save Membership"
-msgstr "บันทึกสมาชิก"
+msgstr "บันทึกการเป็นสมาชิก"
 
 #: Template/Membership/edit_membership.ctp:51
-msgid "Instalment Amount"
-msgstr "จํานวนเงินงวด"
+msgid "Installment Amount"
+msgstr "จำนวนเงินผ่อนชำระ"
 
 #: Template/Membership/edit_membership.ctp:55
-msgid "Instalment Period"
-msgstr "ระยะเวลาผ่อน"
+msgid "Installment Period"
+msgstr "งวดการผ่อนชำระ"
 
-#: Template/Membership/edit_membership.ctp:62
-msgid "Add Instalment Plan"
-msgstr "เพิ่มแผนงวด"
-
-#: Template/Membership/membership_list.ctp:56 Template/Membership/membership_list.ctp:97
-msgid "Instalment Plan"
-msgstr "แผนงวด"
-
-#: Template/Membership/membership_list.ctp:57 Template/Membership/membership_list.ctp:98
+#: Template/Membership/membership_list.ctp:57
+#: Template/Membership/membership_list.ctp:105
 msgid "SignUp Fee"
-msgstr "ค่าสมัครสมาชิก"
+msgstr "ค่าธรรมเนียมการสมัคร"
 
-#: Template/Membership/membership_list.ctp:84
+#: Template/Membership/membership_list.ctp:91
 msgid "Activities"
-msgstr "{0}activities{/0}"
+msgstr "กิจกรรม"
 
-#: Template/Membership/view_activity.ctp:30
+#: Template/Membership/view_activity.ctp:41
 msgid "View Activity"
 msgstr "ดูกิจกรรม"
 
-#: Template/Membership/view_activity.ctp:44
+#: Template/Membership/view_activity.ctp:56
 msgid "Select Activity"
-msgstr "เลือกเปิดทำงาน"
+msgstr "เลือกกิจกรรม"
 
-#: Template/MembershipPayment/add_expense.ctp:13 Template/MembershipPayment/expense_list.ctp:30
+#: Template/MembershipPayment/add_expense.ctp:17
+msgid "Edit Expense"
+msgstr "แก้ไขค่าใช้จ่าย"
+
+#: Template/MembershipPayment/add_expense.ctp:19
+#: Template/MembershipPayment/expense_list.ctp:30
 msgid "Add Expense"
 msgstr "เพิ่มค่าใช้จ่าย"
 
-#: Template/MembershipPayment/add_expense.ctp:17 Template/MembershipPayment/expense_list.ctp:26
+#: Template/MembershipPayment/add_expense.ctp:25
+#: Template/MembershipPayment/expense_list.ctp:26
 msgid "Expense List"
 msgstr "รายการค่าใช้จ่าย"
 
-#: Template/MembershipPayment/add_expense.ctp:26 Template/MembershipPayment/expense_list.ctp:39
+#: Template/MembershipPayment/add_expense.ctp:34
+#: Template/MembershipPayment/expense_list.ctp:39
+#: Template/MembershipPayment/expense_list.ctp:67
 msgid "Supplier Name"
 msgstr "ชื่อผู้ผลิต"
 
-#: Template/MembershipPayment/add_expense.ctp:36 Template/MembershipPayment/add_income.ctp:47
+#: Template/MembershipPayment/add_expense.ctp:44
+#: Template/MembershipPayment/add_income.ctp:59
 msgid "Paid"
-msgstr "ชำระเรียบร้อยแล้ว"
+msgstr "ต้องจ่าย"
 
-#: Template/MembershipPayment/add_expense.ctp:36 Template/MembershipPayment/add_income.ctp:47
+#: Template/MembershipPayment/add_expense.ctp:44
+#: Template/MembershipPayment/add_income.ctp:59
 msgid "Part Paid"
-msgstr "ส่วนที่เรียกชำระแล้ว"
+msgstr "ส่วนที่จ่าย"
 
-#: Template/MembershipPayment/add_expense.ctp:36 Template/MembershipPayment/add_income.ctp:47
+#: Template/MembershipPayment/add_expense.ctp:44
+#: Template/MembershipPayment/add_income.ctp:59
 msgid "Unpaid"
-msgstr "ยังไม่ได้ชำระเงิน"
+msgstr "ยังไม่ได้ชำระ"
 
-#: Template/MembershipPayment/add_expense.ctp:53 Template/MembershipPayment/add_expense.ctp:75
+#: Template/MembershipPayment/add_expense.ctp:61
+#: Template/MembershipPayment/add_expense.ctp:83
 msgid "Expense Entry"
 msgstr "รายการค่าใช้จ่าย"
 
-#: Template/MembershipPayment/add_expense.ctp:55 Template/MembershipPayment/add_expense.ctp:77
+#: Template/MembershipPayment/add_expense.ctp:63
+#: Template/MembershipPayment/add_expense.ctp:85
 msgid "Expense Amount"
 msgstr "จำนวนเงินค่าใช้จ่าย"
 
-#: Template/MembershipPayment/add_expense.ctp:58 Template/MembershipPayment/add_expense.ctp:80
+#: Template/MembershipPayment/add_expense.ctp:66
+#: Template/MembershipPayment/add_expense.ctp:88
 msgid "Expense Entry Label"
-msgstr "ฉลากรายการค่าใช้จ่าย"
+msgstr "ฉลากค่าใช้จ่าย"
 
-#: Template/MembershipPayment/add_expense.ctp:95
+#: Template/MembershipPayment/add_expense.ctp:103
 msgid "Add Expense Entry"
-msgstr "รายการค่าใช้จ่ายเพิ่ม"
+msgstr "เพิ่มรายการค่าใช้จ่าย"
 
-#: Template/MembershipPayment/add_expense.ctp:100
+#: Template/MembershipPayment/add_expense.ctp:108
 msgid "Create Expense Entry"
 msgstr "สร้างรายการค่าใช้จ่าย"
 
-#: Template/MembershipPayment/add_income.ctp:18 Template/MembershipPayment/add_income.ctp:22 Template/MembershipPayment/income_list.ctp:26
-msgid "Income List"
-msgstr "รายการรายได้"
+#: Template/MembershipPayment/add_income.ctp:25
+msgid "Edit Income"
+msgstr "แก้ไขรายได้"
 
-#: Template/MembershipPayment/add_income.ctp:29
-msgid "income"
-msgstr "รายได้"
-
-#: Template/MembershipPayment/add_income.ctp:37
-msgid "Income label"
-msgstr "ฉลากรายได้"
-
-#: Template/MembershipPayment/add_income.ctp:64 Template/MembershipPayment/add_income.ctp:86
-msgid "Income Entry"
-msgstr "รายการรายได้"
-
-#: Template/MembershipPayment/add_income.ctp:66 Template/MembershipPayment/add_income.ctp:88
-msgid "Income Amount"
-msgstr "จํานวนเงินรายได้"
-
-#: Template/MembershipPayment/add_income.ctp:69 Template/MembershipPayment/add_income.ctp:91
-msgid "Income Entry Label"
-msgstr "ป้ายชื่อรายการรายได้"
-
-#: Template/MembershipPayment/add_income.ctp:106
-msgid "Add Income Entry"
-msgstr "เพิ่มรายได้เข้า"
-
-#: Template/MembershipPayment/add_income.ctp:111
-msgid "Create Income Entry"
-msgstr "สร้างรายได้เข้า"
-
-#: Template/MembershipPayment/generate_payment_invoice.ctp:41 Template/MembershipPayment/payment_list.ctp:39
-msgid "Generate Payment Invoice"
-msgstr "สร้างใบแจ้งหนี้การชำระเงิน"
-
-#: Template/MembershipPayment/generate_payment_invoice.ctp:45
-msgid "Membership Payment List"
-msgstr "รายการชำระเงินสมาชิก"
-
-#: Template/MembershipPayment/generate_payment_invoice.ctp:74
-msgid "Total Amount"
-msgstr "จำนวนทั้งสิ้น"
-
-#: Template/MembershipPayment/generate_payment_invoice.ctp:94
-msgid "save_membership_payment"
-msgstr "save_membership_payment"
-
+#: Template/MembershipPayment/add_income.ctp:27
 #: Template/MembershipPayment/income_list.ctp:30
 msgid "Add Income"
 msgstr "เพิ่มรายได้"
 
-#: Template/MembershipPayment/payment_list.ctp:49 Template/MembershipPayment/payment_list.ctp:94
+#: Template/MembershipPayment/add_income.ctp:34
+#: Template/MembershipPayment/income_list.ctp:26
+msgid "Income List"
+msgstr "รายการรายได้"
+
+#: Template/MembershipPayment/add_income.ctp:41
+msgid "income"
+msgstr "เงินได้"
+
+#: Template/MembershipPayment/add_income.ctp:49
+msgid "Income label"
+msgstr "ฉลากรายได้"
+
+#: Template/MembershipPayment/add_income.ctp:60
+msgid "Select Status"
+msgstr "เลือกสถานะ"
+
+#: Template/MembershipPayment/add_income.ctp:76
+#: Template/MembershipPayment/add_income.ctp:98
+msgid "Income Entry"
+msgstr "รายได้"
+
+#: Template/MembershipPayment/add_income.ctp:78
+#: Template/MembershipPayment/add_income.ctp:100
+msgid "Income Amount"
+msgstr "จำนวนเงินรายได้"
+
+#: Template/MembershipPayment/add_income.ctp:81
+#: Template/MembershipPayment/add_income.ctp:103
+msgid "Income Entry Label"
+msgstr "ป้ายรายได้"
+
+#: Template/MembershipPayment/add_income.ctp:118
+msgid "Add Income Entry"
+msgstr "เพิ่มรายการรายได้"
+
+#: Template/MembershipPayment/add_income.ctp:123
+msgid "Create Income Entry"
+msgstr "สร้างการบันทึกรายได้"
+
+#: Template/MembershipPayment/generate_payment_invoice.ctp:49
+#: Template/MembershipPayment/payment_list.ctp:39
+msgid "Generate Payment Invoice"
+msgstr "สร้างใบแจ้งหนี้การชำระเงิน"
+
+#: Template/MembershipPayment/generate_payment_invoice.ctp:53
+msgid "Membership Payment List"
+msgstr "รายการชำระเงินสมาชิก"
+
+#: Template/MembershipPayment/generate_payment_invoice.ctp:82
+msgid "Total Amount"
+msgstr "ยอดรวม"
+
+#: Template/MembershipPayment/generate_payment_invoice.ctp:102
+msgid "save_membership_payment"
+msgstr "save_membership_payment"
+
+#: Template/MembershipPayment/payment_list.ctp:49
+#: Template/MembershipPayment/payment_list.ctp:94
 msgid "Title"
-msgstr "หัวเรื่อง"
+msgstr "หัวข้อ"
 
 #: Template/MembershipPayment/payment_list.ctp:79
 msgid "Pay"
 msgstr "จ่ายเงิน"
 
-#: Template/MembershipPayment/print_invoice.ctp:147
-msgid "Discount :"
-msgstr "ส่วนลด:"
-
-#: Template/Reports/attendance_report.ctp:14 Template/Reports/membership_report.ctp:12 Template/Reports/membership_status_report.ctp:14 Template/Reports/payment_report.ctp:12
+#: Template/Reports/attendance_report.ctp:46
+#: Template/Reports/membership_report.ctp:17
+#: Template/Reports/membership_status_report.ctp:19
+#: Template/Reports/monthlyworkoutreport.ctp:29
+#: Template/Reports/payment_report.ctp:17
 msgid "Attendance Report"
 msgstr "รายงานการเข้าร่วมประชุม"
 
-#: Template/Reports/attendance_report.ctp:15 Template/Reports/membership_report.ctp:9 Template/Reports/membership_status_report.ctp:9 Template/Reports/payment_report.ctp:9
+#: Template/Reports/attendance_report.ctp:47
+#: Template/Reports/membership_report.ctp:14
+#: Template/Reports/membership_status_report.ctp:14
+#: Template/Reports/monthlyworkoutreport.ctp:17
+#: Template/Reports/payment_report.ctp:14
 msgid "Reports"
 msgstr "รายงาน"
 
-#: Template/Reports/attendance_report.ctp:18 Template/Reports/membership_report.ctp:24 Template/Reports/membership_status_report.ctp:12
+#: Template/Reports/attendance_report.ctp:50
+#: Template/Reports/membership_report.ctp:30
+#: Template/Reports/membership_status_report.ctp:17
 msgid "Membership Report"
-msgstr "รายงานสมาชิก"
+msgstr "รายงานการเป็นสมาชิก"
 
-#: Template/Reports/attendance_report.ctp:20 Template/Reports/membership_report.ctp:14 Template/Reports/membership_status_report.ctp:8 Template/Reports/payment_report.ctp:14
+#: Template/Reports/attendance_report.ctp:52
+#: Template/Reports/membership_report.ctp:19
+#: Template/Reports/membership_status_report.ctp:13
+#: Template/Reports/monthlyworkoutreport.ctp:31
+#: Template/Reports/payment_report.ctp:19
 msgid "Membership Status Report"
-msgstr "รายงานสถานะการเป็นสมาชิก"
+msgstr "รายงานสถานะสมาชิก"
 
-#: Template/Reports/attendance_report.ctp:22 Template/Reports/membership_report.ctp:16 Template/Reports/membership_status_report.ctp:16 Template/Reports/payment_report.ctp:16
+#: Template/Reports/attendance_report.ctp:54
+#: Template/Reports/membership_report.ctp:21
+#: Template/Reports/membership_status_report.ctp:21
+#: Template/Reports/monthlyworkoutreport.ctp:33
+#: Template/Reports/payment_report.ctp:21
 msgid "Payment Report"
-msgstr "แจ้งการชำระเงิน"
+msgstr "รายงานการชำระเงิน"
 
-#: Template/Reports/attendance_report.ctp:30
+#: Template/Reports/attendance_report.ctp:55
+#: Template/Reports/membership_report.ctp:22
+#: Template/Reports/membership_status_report.ctp:22
+#: Template/Reports/monthlyworkoutreport.ctp:16
+#: Template/Reports/monthlyworkoutreport.ctp:24
+#: Template/Reports/monthlyworkoutreport.ctp:34
+#: Template/Reports/payment_report.ctp:22
+msgid "Members Monthly Workout Report"
+msgstr "รายงานการออกกำลังกายของสมาชิกประจำเดือน"
+
+#: Template/Reports/attendance_report.ctp:63
 msgid "Strat Date"
-msgstr "Strat วัน"
+msgstr "วันที่เริ่มต้น"
 
-#: Template/Reports/attendance_report.ctp:90 Template/Reports/membership_report.ctp:55 Template/Reports/membership_status_report.ctp:35 Template/Reports/payment_report.ctp:60
+#: Template/Reports/attendance_report.ctp:119
+#: Template/Reports/membership_report.ctp:61
+#: Template/Reports/membership_status_report.ctp:41
+#: Template/Reports/payment_report.ctp:66
 msgid "There is not enough data to generate report."
-msgstr "มีข้อมูลไม่มากพอที่จะสร้างรายงาน"
+msgstr "มีข้อมูลไม่เพียงพอที่จะสร้างรายงาน"
 
-#: Template/Reports/membership_report.ctp:8 Template/Reports/payment_report.ctp:8
+#: Template/Reports/membership_report.ctp:13
+#: Template/Reports/payment_report.ctp:13
 msgid "Membership report"
-msgstr "รายงานสมาชิก"
+msgstr "รายงานการเป็นสมาชิก"
 
-#: Template/Reports/membership_status_report.ctp:24
+#: Template/Reports/membership_status_report.ctp:30
 msgid "Membership by status"
-msgstr "จำแนกตามสถานภาพการเป็นสมาชิก"
+msgstr "การเป็นสมาชิกตามสถานะ"
 
-#: Template/Reports/payment_report.ctp:24
+#: Template/Reports/monthlyworkoutreport.ctp:63
+msgid "GO"
+msgstr "ไป"
+
+#: Template/Reports/monthlyworkoutreport.ctp:77
+msgid "Workout Date"
+msgstr "วันออกกำลังกาย"
+
+#: Template/Reports/monthlyworkoutreport.ctp:78
+msgid "Workout Name"
+msgstr "ชื่อการออกกำลังกาย"
+
+#: Template/Reports/monthlyworkoutreport.ctp:125
+msgid "Download"
+msgstr "ดาวน์โหลด"
+
+#: Template/Reports/monthlyworkoutreport.ctp:132
+msgid "No Workout Found."
+msgstr "ไม่พบการออกกำลังกาย"
+
+#: Template/Reports/payment_report.ctp:30
 msgid "Fee Payment Report By Month"
-msgstr "แจ้งการชำระเงินค่าบริการรายเดือน"
+msgstr "รายงานการชำระค่าธรรมเนียมตามเดือน"
 
-#: Template/StaffMembers/add_staff.ctp:40 Template/StaffMembers/staff_list.ctp:37
-msgid "Staff List"
-msgstr "รายการพนักงาน"
+#: Template/StaffMembers/add_staff.ctp:50
+#: Template/StaffMembers/staff_list.ctp:30
+msgid "Staff Member List"
+msgstr "รายชื่อพนักงาน"
 
-#: Template/StaffMembers/add_staff.ctp:89
+#: Template/StaffMembers/add_staff.ctp:99
 msgid "Assign Role"
 msgstr "กำหนดบทบาท"
 
-#: Template/StaffMembers/add_staff.ctp:91
+#: Template/StaffMembers/add_staff.ctp:101
 msgid "Select Role"
-msgstr "เลือกที่บทบาท"
+msgstr "เลือกบทบาท"
 
-#: Template/StaffMembers/add_staff.ctp:99
+#: Template/StaffMembers/add_staff.ctp:109
 msgid "Specialization"
 msgstr "ความเชี่ยวชาญ"
 
-#: Template/StaffMembers/add_staff.ctp:172
+#: Template/StaffMembers/add_staff.ctp:182
 msgid "Save Staff"
 msgstr "บันทึกพนักงาน"
 
-#: Template/StaffMembers/staff_list.ctp:55 Template/StaffMembers/staff_list.ctp:85
+#: Template/StaffMembers/staff_list.ctp:48
+#: Template/StaffMembers/staff_list.ctp:81
 msgid "Staff Member Name"
 msgstr "ชื่อสมาชิกพนักงาน"
 
-#: Template/StaffMembers/staff_list.ctp:56 Template/StaffMembers/staff_list.ctp:86
+#: Template/StaffMembers/staff_list.ctp:49
+#: Template/StaffMembers/staff_list.ctp:82
 msgid "Role"
 msgstr "บทบาท"
 
-#: Template/StaffMembers/staff_list.ctp:57 Template/StaffMembers/staff_list.ctp:87
+#: Template/StaffMembers/staff_list.ctp:50
+#: Template/StaffMembers/staff_list.ctp:83
 msgid "Staff Member Email"
-msgstr "พนักงานสมาชิกอีเมล"
+msgstr "อีเมลพนักงานสมาชิก"
 
-#: Template/Users/login.ctp:20
+#: Template/Users/login.ctp:23
 msgid "Logging you in"
-msgstr "เข้าสู่ระบบคุณในการ"
+msgstr "เข้าสู่ระบบคุณ"
 
-#: Template/Users/login.ctp:28
+#: Template/Users/login.ctp:31
 msgid "Login"
 msgstr "เข้าสู่ระบบ"
 
-#~ msgid "Member Manangement"
-#~ msgstr "สมาชิก Manangement"
-
-#~ msgid " Enable"
-#~ msgstr " เปิดใช้งาน"
-
+#: custom
+msgid "(Max. height 50px.)"
+msgstr "(ความสูงสูงสุด 50px.)"

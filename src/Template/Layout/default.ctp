@@ -73,6 +73,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 
       <div class="control-sidebar-bg"></div>
     </div>
-	
+	<script>
+		
+	</script>
 </body>
 </html>

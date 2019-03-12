@@ -6,7 +6,7 @@ echo $this->Html->script('bootstrap-multiselect');
 $(document).ready(function() {
 	$('#activity').multiselect({
 		includeSelectAllOption: true,
-		buttonWidth: '400px'
+		buttonWidth: '170px'
 	});
 	$(".mydataTable").DataTable({
 	"responsive": true,
@@ -19,6 +19,17 @@ $(document).ready(function() {
 	"language" : {<?php echo $this->Gym->data_table_lang();?>}	
 	});
 });
+function validate_multiselect()
+{		
+		var classes = $("#activity").val();
+		if(classes == null)
+		{
+			alert("Please Select Activity first.");
+			return false;
+		}else{
+			return true;
+		}		
+}
 </script>
 <section class="content">
 	<br>
@@ -37,24 +48,26 @@ $(document).ready(function() {
 		<hr>
 		<div class="box-body">
 			<div class="row">
+			<div class="view-activity">
 			<?php		
-			echo $this->Form->create("activity",["class"=>"validateForm"]);
+			echo $this->Form->create("activity",["class"=>"validateForm","onsubmit"=>"return validate_multiselect()"]);
 			echo $this->Form->input("membership_id",["type"=>"hidden","value"=>$this->request->params['pass'][0]]);
-			echo "<div class='col-md-2 text-right'>";
+			echo "<div class='col-md-2 col-xs-12 text-right'>";
 			echo $this->Form->label(__("Select Activity"))."&nbsp;";
 			echo "</div>";
-			echo "<div class='col-md-5'>";
+			echo "<div class='col-md-2 col-xs-12'>";
 			echo $this->Form->select('field', $activities, ['name'=>'activity_id','id'=>'activity','multiple' => 'multiple','default'=>$selected_activities]);
 			echo "</div>";
-			echo "<div class='col-md-4'>";
+			echo "<div class='col-md-4 col-xs-12 member_submit_text'>";
 			echo $this->Form->input(__("Add Activity"),["type"=>"submit","class"=>"btn btn-flat btn-success"]);
 			echo "</div>";
 			echo $this->Form->end();		
 			?>			
 			</div>
+			</div>
 			<hr>
 			<div class="row">
-			<table class="mydataTable table table-striped">
+			<table class="mydataTable table table-striped table-responsive" "width:100%;">
 				<thead>
 					<tr>
 						<th><?php echo __("Activity Name");?></th>
@@ -74,7 +87,7 @@ $(document).ready(function() {
 							<td>{$title}</td>
 							<td>{$category}</td>
 							<td>{$staff}</td>
-							<td><a href='".$this->Gym->createurl('Membership','deleteActivity')."/{$activity['id']}' class='btn btn-flat btn-danger'>Delete</a></td>
+							<td><a href='".$this->Gym->createurl('Membership','deleteActivity')."/{$activity['id']}' class='btn btn-flat btn-danger'>".__('Delete')."</a></td>
 							</tr>";
 					}
 				?>

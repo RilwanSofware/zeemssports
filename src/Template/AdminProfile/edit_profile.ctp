@@ -1,17 +1,11 @@
 <script type="text/javascript">
-$(document).ready(function() {	
-	
+$(document).ready(function() {		
 	var box_height = $(".box").height();
 	var box_height = box_height + 100 ;
 	$(".content-wrapper").css("height",box_height+"px");
 	
-	// $('.class_list').multiselect({
-		// includeSelectAllOption: true	
-	// });
-	
 	$(".datepick").datepicker({format: 'yyyy-mm-dd'});
 	
-	// $(".content-wrapper").removeAttr("style");
 	$(".content-wrapper").css("min-height","600px");
 });
 </script>
@@ -33,8 +27,6 @@ $(document).ready(function() {
 			echo $this->Form->create("editprofile",["type"=>"file","class"=>"validateForm form-horizontal","role"=>"form"]);
 			echo "<fieldset><legend>". __('Personal Information')."</legend>";
 						
-				
-			
 			echo "<div class='form-group'>";	
 			echo '<label class="control-label col-md-2" for="email">'. __("First Name").'<span class="text-danger"> *</span></label>';
 			echo '<div class="col-md-6">';
@@ -76,7 +68,7 @@ $(document).ready(function() {
 			echo '<label class="control-label col-md-2" for="email">'. __("Display Image").'</label>';
 			echo '<div class="col-md-4">';
 			echo $this->Form->file("image",["class"=>"form-control"]);
-			$image = ($edit && !empty($data['image'])) ? $data['image'] : "logo.png";
+			$image = ($edit && !empty($data['image'])) ? $data['image'] : "Thumbnail-img.png";
 			echo "<br><img src='{$this->request->webroot}webroot/upload/{$image}'>";
 			echo "</div>";	
 			echo "</div>";			
@@ -88,7 +80,7 @@ $(document).ready(function() {
 		?>
 		</div>	
 		<div class="overlay gym-overlay">
-		  <i class="fa fa-refresh fa-spin"></i>
+			<i class="fa fa-refresh fa-spin"></i>
 		</div>
 	</div>
 </section>

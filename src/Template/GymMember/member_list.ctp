@@ -4,16 +4,6 @@ $(document).ready(function(){
 	$(".mydataTable").DataTable({
 		"responsive": true,
 		"order": [[ 1, "asc" ]],
-		"aoColumns":[
-	                  {"bSortable": false},
-	                  {"bSortable": true},
-	                  {"bSortable": true},
-	                  {"bSortable": true},
-	                  {"bSortable": true},
-	                  {"bSortable": true},
-	                  {"bSortable": true},	                           
-	                  {"bSortable": false,"visible":false},
-	                  {"bSortable": false,"visible":false}],
 		"language" : {<?php echo $this->Gym->data_table_lang();?>}
 	});
 });		
@@ -24,7 +14,7 @@ if($session["role_name"] == "administrator" || $session["role_name"] == "member"
 <script>
 $(document).ready(function(){
 	var table = $(".mydataTable").DataTable();
-	table.column(7).visible( true );
+	
 });
 </script>
 <?php } 
@@ -34,7 +24,7 @@ if($session["role_name"] == "administrator")
 <script>
 $(document).ready(function(){
 	var table = $(".mydataTable").DataTable();
-	table.column(8).visible( true );
+	
 });
 </script>
 <?php } ?>
@@ -59,7 +49,7 @@ $(document).ready(function(){
 		</div>
 		<hr>
 		<div class="box-body">
-		<table class="mydataTable table table-striped">
+		<table class="mydataTable table table-striped" width="100%">
 			<thead>
 				<tr>
 					<th><?php echo __("Photo");?></th>
@@ -70,19 +60,22 @@ $(document).ready(function(){
 					<th><?php echo __("Member Type");?></th>					
 					<th><?php echo __("Membership Status");?></th>					
 					<th><?php echo __("Action");?></th>
+					<?php if($session['role_name'] == "administrator") {?>
 					<th><?php echo __("Status");?></th>
+					<?php } ?>
 				</tr>
 			</thead>
 			<tbody>
 			<?php
+				
 				foreach($data as $row)
 				{
 					echo "<tr>
 					<td><img src='{$this->request->base}/webroot/upload/{$row['image']}' class='membership-img img-circle'></td>
 					<td>{$row['first_name']} {$row['last_name']}</td>
 					<td>{$row['member_id']}</td>
-					<td>".(($row['membership_valid_from'] != '')?date($this->Gym->getSettings("date_format"),strtotime($row['membership_valid_from'])):'Null')."</td>
-					<td>".(($row['membership_valid_to'] != '')?date($this->Gym->getSettings("date_format"),strtotime($row['membership_valid_to'])):'Null')."</td>
+					<td>".(($row['membership_valid_from'] != '')?$this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($row['membership_valid_from']))):'Null')."</td>
+					<td>".(($row['membership_valid_to'] != '')?$this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($row['membership_valid_to']))):'Null')."</td>
 					<td>{$row['member_type']}</td>
 					<td>{$row['membership_status']}</td>
 					<td>
@@ -93,18 +86,30 @@ $(document).ready(function(){
 					echo " <a href='{$this->request->base}/GymMember/editMember/{$row['id']}' title='Edit' class='btn btn-flat btn-primary'><i class='fa fa-edit'></i></a>
 						<a href='{$this->request->base}/GymMember/deleteMember/{$row['id']}' title='Delete' class='btn btn-flat btn-danger' onClick=\"return confirm('Are you sure,You want to delete this record?');\"><i class='fa fa-trash-o'></i></a>";
 					}
-					echo " <a href='{$this->request->base}/GymMember/viewAttendance/{$row['id']}' title='Attendance' class='btn btn-flat btn-default'><i class='fa fa-eye'></i> Attendance</a>";
+					echo " <a href='{$this->request->base}/GymMember/viewAttendance/{$row['id']}' title='Attendance' class='btn btn-flat btn-default  member_attendance'><i class='fa fa-eye'></i>".__('Attendance')."</a>";
 					
-					echo "</td>
-						  <td>";
+					echo "</td>";
+					if($session['role_name'] == "administrator")
+					{
+					echo "<td>";
 						if($row["activated"] == 0)
 						{
 							echo "<a class='btn btn-success btn-flat' onclick=\"return confirm('Are you sure,you want to activate this account?');\" href='".$this->request->base ."/GymMember/activateMember/{$row['id']}'>".__('Activate')."</a>";
-						}else{
-							echo "<span class='btn btn-flat btn-default'>".__('Activated')."</span>";
+							
 						}
-					echo "</td>
-					</tr>";
+						elseif($row["membership_valid_to"] < date("Y-m-d")){
+							echo "<a class='btn btn-danger btn-flat' href='#'>".__('Deactivate')."</a>";
+							//echo "<a class='btn btn-danger btn-flat' onclick=\"return confirm('Are you sure,you want to activate this account?');\" href='".$this->request->base ."/GymMember/membership_dropped/{$row['id']}'>".__('Dropped')."</a>";
+							//echo "<a class='btn btn-success btn-flat' onclick=\"return confirm('Are you sure,you want to activate this account?');\" href='".$this->request->base ."/GymMember/activateMember/{$row['id']}'>".__('Prospect')."</a>";
+						}
+						else{
+							echo "<span class='btn btn-flat btn-default'>".__('Activated')."</span>";
+							//echo "<a class='btn btn-danger btn-flat' onclick=\"return confirm('Are you sure,you want to activate this account?');\" href='".$this->request->base ."/GymMember/membership_dropped/{$row['id']}'>".__('Dropped')."</a>";
+							//echo "<a class='btn btn-success btn-flat' onclick=\"return confirm('Are you sure,you want to activate this account?');\" href='".$this->request->base ."/GymMember/activateMember/{$row['id']}'>".__('Prospect')."</a>";
+						}
+					echo "</td>";
+					}
+					echo "</tr>";
 				}
 			?>
 			</tbody>
@@ -118,7 +123,9 @@ $(document).ready(function(){
 					<th><?php echo __("Member Type");?></th>					
 					<th><?php echo __("Membership Status");?></th>					
 					<th><?php echo __("Action");?></th>
+					<?php if($session['role_name'] == "administrator"){ ?>
 					<th><?php echo __("Status");?></th>
+					<?php } ?>
 				</tr>
 			</tfoot>
 		</table>

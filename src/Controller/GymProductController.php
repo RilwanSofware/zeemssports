@@ -11,7 +11,6 @@ class GymProductController extends AppController
 		$data = $this->GymProduct->find("all")->hydrate(false)->toArray();
 		$this->set("data",$data);
 		$this->set("role",$role);
-		
 	}
 	public function addProduct()
 	{
@@ -25,7 +24,7 @@ class GymProductController extends AppController
 			$row = $this->GymProduct->patchEntity($row,$this->request->data);
 			if($this->GymProduct->save($row))
 			{
-				$this->Flash->success(__("Success! Record Successfully Saved."));
+				$this->Flash->success(__("Success! Record Saved Successfully."));
 				return $this->redirect(["action"=>"productList"]);
 			}else{
 				$this->Flash->error(__("Error! Record Not Saved.Please Try Again."));
@@ -43,7 +42,7 @@ class GymProductController extends AppController
 			$row = $this->GymProduct->patchEntity($row,$this->request->data);
 			if($this->GymProduct->save($row))
 			{
-				$this->Flash->success(__("Success! Record Successfully Updated."));
+				$this->Flash->success(__("Success! Record Updated Successfully."));
 				return $this->redirect(["action"=>"productList"]);
 			}else{
 				$this->Flash->error(__("Error! Record Not Updated.Please Try Again."));
@@ -58,7 +57,7 @@ class GymProductController extends AppController
 		$row = $this->GymProduct->get($did);
 		if($this->GymProduct->delete($row))
 		{
-			$this->Flash->success(__("Success! Record Successfully Deleted."));
+			$this->Flash->success(__("Success! Record Deleted Successfully."));
 			return $this->redirect($this->referer());
 		} else{ echo false;}		
 	}

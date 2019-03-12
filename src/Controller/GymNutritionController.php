@@ -26,7 +26,7 @@ class GymNutritionController extends AppController
 			}
 		}
 		else{			
-			$data = $this->GymNutrition->find("all")->contain(["GymMember"])->select($this->GymNutrition)->group(["user_id","GymNutrition.id"]);
+			$data = $this->GymNutrition->find("all")->contain(["GymMember"])->select($this->GymNutrition)->group(["user_id"]);
 			$data = $data->select(["GymMember.first_name","GymMember.last_name","GymMember.image","GymMember.member_id","GymMember.intrested_area"])->hydrate(false)->toArray();
 		}	
 		$this->set("data",$data);
@@ -59,8 +59,11 @@ class GymNutritionController extends AppController
 		
 		if($this->request->is("post"))
 		{			
+			
 			$row = $this->GymNutrition->newEntity();
-			$data = $this->request->data;			
+			$data = $this->request->data;
+			$data['start_date'] = $this->GYMFunction->get_db_format_date($this->request->data['start_date']);
+			$data['expire_date'] = $this->GYMFunction->get_db_format_date($this->request->data['expire_date']);
 			$data["created_by"] = $session["id"];
 			$data["created_date"] = date("Y-m-d");
 			$row = $this->GymNutrition->patchEntity($row,$data);
@@ -73,7 +76,7 @@ class GymNutritionController extends AppController
 			{				
 				if($this->nutrition_detail($nid,$data['activity_list']))
 				{
-					$this->Flash->success(__("Success"));	
+					$this->Flash->success(__("Success! Nutrition Added Sucessfully."));	
 					return $this->redirect(["action"=>"nutritionList"]);
 				}
 				else{
@@ -115,11 +118,8 @@ class GymNutritionController extends AppController
 					{
 						foreach($val as $val2)
 						{
-							
-							
 							$activity['activity'][] =array('activity'=>$val2['activity']['activity'],
-														'value'=>$val2['activity']['value']
-														
+														'value'=>$val2['activity']['value']						
 							) ;
 						}
 					}
@@ -178,7 +178,7 @@ class GymNutritionController extends AppController
 		$data = $data->leftjoin(["GymNutritionData"=>"gym_nutrition_data"],
 								["GymNutritionData.nutrition_id = GymNutrition.id"]
 								)->select($this->GymNutrition->GymNutritionData)->hydrate(false)->toArray();
-		
+		$wid = 0;
 		$nutrition_data = array();
 		foreach($data as $key=>$value)
 		{ 			
@@ -200,7 +200,9 @@ class GymNutritionController extends AppController
 		if($this->request->is("post"))
 		{
 			$row = $this->GymNutrition->newEntity();
-			$data = $this->request->data;			
+			$data = $this->request->data;
+			$data['start_date'] = $this->GYMFunction->get_db_format_date($this->request->data['start_date']);
+			$data['expire_date'] = $this->GYMFunction->get_db_format_date($this->request->data['expire_date']);
 			$data["created_by"] = $session["id"];
 			$data["created_date"] = date("Y-m-d");
 			$row = $this->GymNutrition->patchEntity($row,$data);
@@ -213,7 +215,7 @@ class GymNutritionController extends AppController
 			{				
 				if($this->nutrition_detail($nid,$data['activity_list']))
 				{
-					$this->Flash->success(__("Success"));	
+					$this->Flash->success(__("Success! Nutrition Added Sucessfully."));	
 					return $this->redirect(["action"=>"nutritionList"]);
 				}
 				else{
@@ -283,24 +285,28 @@ class GymNutritionController extends AppController
 		}		
 		$this->set("nutrition_data",$nutrition_data);
 	}
-	
+
+	/* change new */
 	public function DeleteNutirion($nid)
 	{
-		// $this->autoRender = false;
+		$this->autoRender = false;
+		$nid = intval($nid);
+		$nutrition_ids = $this->GymNutrition->find("all")->where(["id"=>$nid])->select(["id"])->hydrate(false)->toArray();
 		
-		$gym_nutrition_data = TableRegistry::get('gym_nutrition_data');
-		$delete_ok = $gym_nutrition_data->deleteAll(["nutrition_id"=>$nid]);
-		if($delete_ok)
+		$delete =  $this->GymNutrition->query();
+		$delete = $delete->delete()->where(["id"=>$nid])->execute();	
+		
+		if($delete)
 		{
-			$row = $this->GymNutrition->get($nid);
-			if($this->GymNutrition->delete($row))
+			foreach($nutrition_ids as $nut_id)
 			{
-				$this->Flash->success(__("Success! Record Deleted Successfully"));
-				return $this->redirect($this->referer());
+				$query = $this->GymNutrition->GymNutritionData->query();
+				$query->delete()->where(['nutrition_id' => $nut_id["id"]])->execute();
 			}
-		}
+			$this->Flash->success(__("Success! Record Deleted Successfully."));
+			return $this->redirect(["action"=>"nutritionList"]);
+		}	
 	}
-	
 	public function isAuthorized($user)
 	{
 		$role_name = $user["role_name"];

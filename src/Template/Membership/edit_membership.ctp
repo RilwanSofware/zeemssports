@@ -21,7 +21,7 @@
 			echo $this->Form->input(__("Membership Name"),["name"=>"membership_label","class"=>"form-control validate[required]","value"=>$membership_data['membership_label']]);
 			echo "</div>";
 			
-			echo "<div class='form-group col-md-10 no-padding'>";			
+			echo "<div class='form-group col-md-10 no-padding' >";			
 			echo $this->Form->label(__("Membership Category"));				
 			echo $this->Form->select("membership_cat_id",$categories,["default"=>$membership_data["membership_cat_id"],"empty"=>__("Select Category"),"class"=>"form-control validate[required] cat_list"]);
 			echo "</div>";	
@@ -58,7 +58,7 @@
 			
 			echo "<div class='form-group col-md-4'>";
 			echo $this->Form->label(" ");
-			// echo $this->Form->button(__("Add Instalment Plan"),["class"=>"form-control add_plan btn btn-success btn-flat","type"=>"button","data-url"=>$this->Url->build(array("controller"=>"GymAjax","action"=>"addInstalmentPlan"))]);
+			
 			echo $this->Form->button(__("Add Installment Plan"),["class"=>"form-control add_plan btn btn-success btn-flat","type"=>"button","data-url"=>$this->Gym->createurl("GymAjax","addInstalmentPlan")]);
 			echo "</div>";
 						
@@ -77,13 +77,13 @@
 			echo $this->Form->file("gmgt_membershipimage",["class"=>"form-control"]);
 			echo "</div>";			
 			
-			$url =  (isset($membership_data['gmgt_membershipimage']) && $membership_data['gmgt_membershipimage'] != "") ? $this->request->webroot ."/upload/" . $membership_data['gmgt_membershipimage'] : $this->request->webroot ."/upload/logo.png";
+			$url =  (isset($membership_data['gmgt_membershipimage']) && $membership_data['gmgt_membershipimage'] != "") ? $this->request->webroot ."/upload/" . $membership_data['gmgt_membershipimage'] : $this->request->webroot ."/upload/Thumbnail-img.png";
 			echo "<img src='{$url}'>";
 			echo "<br><br>";
 			
 			echo $this->Form->button("Update Membership",['class'=>"btn btn-primary","name"=>"add_membership"]);
 			echo $this->Form->end();
-			// echo "<br><br><br>";
+			
 		?>
 	
 		</div>	

@@ -7,8 +7,17 @@ $(document).ready(function() {
 	$('.day_list').multiselect({
 		includeSelectAllOption: true	
 	});
-	// $(".dob").datepicker({format: '<?php echo $this->Gym->getSettings("date_format"); ?>'});
 	$(".dob").datepicker({format: '<?php echo $this->Gym->getSettings("date_format"); ?>'});
+	
+	$('#time').timepicker({
+		timeFormat: "HH:mm:ss",
+		showMeridian:false
+	});
+	$('#timepicker').timepicker({
+		timeFormat: "HH:mm:ss",
+		showMeridian:false
+	});
+	
 });
 </script>
 <section class="content">
@@ -81,51 +90,41 @@ $(document).ready(function() {
 			echo "</div>";				
 			echo "</div>";	
 			
-			$hrs = ["0","1","2","3","4","5","6","7","8","9","10","11","12"];
-			$min = ["00"=>"00","15"=>"15","30"=>"30","45"=>"45"];
-			$ampm = ["AM"=>"AM","PM"=>"PM"];
+			echo "<div class='form-group'>";
+			echo '<label class="control-label col-md-2" for="start time">'. __("Start Time").'<span class="text-danger"> *</span></label>';
+			echo '<div class="col-md-6 ">';
+			echo $this->Form->input('',array('label'=>false,'id'=>'time','name'=>'start_time','class'=>'form-control validate[required]  text-input start_time',"value"=>(($edit)?$data['start_time']:'')));
+			echo "</div>";
+			echo '</div>';
 			
-			echo "<div class='form-group'>";	
-			echo '<label class="control-label col-md-2" for="email">'. __("Start Time").'<span class="text-danger"> *</span></label>';
-			echo '<div class="col-md-2">';			
-			echo @$this->Form->select("start_hrs",$hrs,["default"=>$data['start_hrs'],"empty"=>__("Select Time"),"class"=>"start_hrs form-control validate[required]"]);
-			echo "</div>";	
-			echo '<div class="col-md-2">';			
-			echo @$this->Form->select("start_min",$min,["default"=>$data['start_min'],"class"=>"start_min form-control"]);
+			echo "<div class='form-group'>";
+			echo '<label class="control-label col-md-2" for="end time">'. __("End Time").'<span class="text-danger"> *</span></label>';
+			echo '<div class="col-md-6 ">';
+			echo $this->Form->input('',array('label'=>false,'id'=>'timepicker','name'=>'end_time','class'=>'form-control validate[required]  text-input end_time',"value"=>(($edit)?$data['end_time']:'')));
 			echo "</div>";
-			echo '<div class="col-md-2">';			
-			echo @$this->Form->select("start_ampm",$ampm,["default"=>$data['start_ampm'],"class"=>"start_ampm form-control"]);
-			echo "</div>";
-			echo "</div>";
-			
-			echo "<div class='form-group'>";	
-			echo '<label class="control-label col-md-2" for="email">'. __("End Time").'<span class="text-danger"> *</span></label>';
-			echo '<div class="col-md-2">';			
-			echo @$this->Form->select("end_hrs",$hrs,["default"=>$data['end_hrs'],"empty"=>__("Select Time"),"class"=>"end_hrs form-control validate[required]"]);
-			echo "</div>";	
-			echo '<div class="col-md-2">';			
-			echo @$this->Form->select("end_min",$min,["default"=>$data['end_min'],"class"=>"end_min form-control"]);
-			echo "</div>";
-			echo '<div class="col-md-2">';			
-			echo @$this->Form->select("end_ampm",$ampm,["default"=>$data['end_ampm'],"class"=>"end_ampm form-control"]);
-			echo "</div>";
-			echo "</div>";
+			echo '</div>';
 			echo $this->Form->button(__("Add Time"),['type'=>'button','id'=>'add_time','class'=>"btn btn-flat btn-success col-md-offset-2","name"=>"add_class"]);
 			echo "<br><br>";
 			echo "<div class='time_list col-md-10 col-md-offset-2'>";?>
 			<table class="table">
-				<tr><th><?php echo __("Days");?></th><th><?php echo __("Start Time");?></th><th><?php echo __("End Time");?></th><th><?php echo __("Action");?></th></tr>
+				<tr class="table-head"><th><?php echo __("Days");?></th><th><?php echo __("Start Time");?></th><th><?php echo __("End Time");?></th><th><?php echo __("Action");?></th></tr>
 				<tbody class="time_table">
+					
 					<?php
 					if($edit)
 					{
+						
 						foreach($schedule_list as $schedule)
-						{?>
+						{
+							$days_time=	json_decode($schedule["days"]);
+
+							?>
 							<tr>
 								<td><?php echo implode(",",json_decode($schedule["days"]));?></td>
-								<td><?php echo substr_replace($schedule["start_time"], ' ', -3, -2);?></td>
-								<td><?php echo substr_replace($schedule["end_time"], ' ', -3, -2);?>
-								<input type="hidden" name="time_list[]" value='[<?php echo $schedule["days"].",&quot;".$schedule["start_time"]."&quot;,&quot;".$schedule["end_time"] ."&quot;"; ?>]'>								
+								<td><?php echo $schedule["start_time"];?></td>
+								<td><?php echo $schedule["end_time"];?>
+								<input type="hidden" name="time_list[]" value='[<?php echo $schedule["days"].",&quot;".$schedule["start_time"]."&quot;,&quot;".$schedule["end_time"] ."&quot;"; ?>]' class="123">	
+								<input type="hidden" name="demo[]" value='[<?php echo "&quot;". $days_time[0] ."&quot;,&quot;".$days_time[1] ."&quot;,&quot;".$schedule["start_time"]."&quot;,&quot;".$schedule["end_time"] ."&quot;"; ?>]' class="time_schedule">								
 								</td>								
 								<td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-danger class_sch_del_row"><i class="fa fa-times-circle"></i></span></td>
 							</tr>							
@@ -159,52 +158,102 @@ if(!$edit)
 ?>
 
 <script>
-
 $("#add_time").click(function(){
 		
 	var time_list = [];
+	var tmp_list = [];
 	var days = $(".day_list").val();
-	if(days == null || $(".start_hrs").val() == "" || $(".end_hrs").val() == "")
+	
+	if(days == null || $(".start_time").val() == "" || $(".end_time").val() == "")
 	{
 		alert("Please select days,start time and end time");
 		return false;
 	}
 	$(".time_list").css("display","block");
 	var json_days =  JSON.stringify(days);	
-	var start_time = $(".start_hrs").val() + ":" +  $(".start_min").val() + ":" +  $(".start_ampm").val();	
-	var dstart_time = $(".start_hrs").val() + ":" +  $(".start_min").val() + " " +  $(".start_ampm").val();	
-	var end_time = $(".end_hrs").val() + ":" +  $(".end_min").val() + ":" +  $(".end_ampm").val();	
-	var dend_time = $(".end_hrs").val() + ":" +  $(".end_min").val() + " " +  $(".end_ampm").val();	
+	
+	
+	var time_schedule =[];
+	var start_time = $(".start_time").val();	
+	var end_time = $(".end_time").val();	
+	
+	var i=0;
+	
+	temp='';
 	time_list[0] = days;
 	time_list[1] = start_time;
 	time_list[2] = end_time;
-	var val = JSON.stringify(time_list);	
+	k=0
+	 $.each(days, function() {
+		tmp_list[k] = days[k];
+		k++;
+	});
+	var productIds = [];
+	tmp_list[k] = start_time;
+	tmp_list[k+1] = end_time;
+	$(".time_schedule").each(function() {
+		var j=0;
+		time_schedule[i]=$(this).val();
+		var value =  jQuery.parseJSON(time_schedule[i]);
+						 
+		for (var i=0; i<value.length; i++) {
+			index = tmp_list.indexOf(value[i]);
+			if (index > -1) {
+				tmp_list.splice(index, 1);
+			}
+		}				
+		i++;				
+	});
 	
-	/* $(".time_list").append("<input type='text' name='time_list[]' class='ssd' value='"+val+"'>"); */
+	if(tmp_list!=''){
+		var val = JSON.stringify(time_list);	
+		var val1 = JSON.stringify(tmp_list);	
 	
-	$(".time_table").append('<tr><td>'+days+'</td><td>'+dstart_time+'</td><td>'+dend_time+'<input type="hidden" name="time_list[]" value='+val+'></td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-danger class_sch_del_row"><i class="fa fa-times-circle"></i></span></td></tr>');
-	
-	var hidchkval = $("#hidchkval").val();
-	hidchkval++;
-	$("#hidchkval").val(hidchkval);
-	hidchkval = $("#hidchkval").val();
-	
-	if(hidchkval == 0)
-	{
-		$(".svcls").hide();
+		var time = gettime();
+							
+		if(time == true)
+		{	
+			$(".time_table").append('<tr><td>'+days+'</td><td>'+start_time+'</td><td>'+end_time+'<input type="hidden" name="time_list[]" value='+val+' class="123"><input type="hidden" name="demo[]" value='+val1+' class="time_schedule"></td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-danger class_sch_del_row"><i class="fa fa-times-circle"></i></span></td></tr>');
+								
+			var hidchkval = $("#hidchkval").val();
+			hidchkval++;
+			$("#hidchkval").val(hidchkval);
+			hidchkval = $("#hidchkval").val();
+								
+			if(hidchkval == 0)
+			{
+				$(".svcls").hide();
+			}
+			else
+			{
+				$(".svcls").show();
+			}
+		}						
 	}
-	else
-	{
-		$(".svcls").show();
-	}
+	else{
+		alert('This class schedule already added.');	
+		}
 });
 
+
+function gettime(){
+	var n=new Date();
+	var st = Date.parse( n.getMonth()+1+'/'+n.getDate()+'/'+n.getFullYear() + ' ' + $("#time").val());
+	var nd = Date.parse( n.getMonth()+1+'/'+n.getDate()+'/'+n.getFullYear() + ' ' + $("#timepicker").val());
+	if(st >= nd){
+		alert("Plese enter valid time.");
+		return false;
+	}else{
+		return true;
+	}
+}
+
 $(document).ready(function(){
-	// var hidchkval = 0;
+	
 	$("#hidchkval").val(0)
 	var hidchkval = $("#hidchkval").val();
-	// alert(hidchkval);
-	if(hidchkval <= 0)
+
+	if(hidchkval <= 0 )
 	{
 		$(".svcls").hide();
 	}

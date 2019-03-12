@@ -6,6 +6,8 @@ use Cake\I18n\Time;
 use Cake\View\Helper\UrlHelper;
 use Cake\Datasource\ConnectionManger;
 use Cake\Mailer\Email;
+use Cake\Database\Type; 
+Type::build('date')->setLocaleFormat('yyyy-MM-dd');
 
 Class GYMfunctionComponent extends Component
 {	
@@ -376,7 +378,7 @@ Class GYMfunctionComponent extends Component
 	$membership_payment_tbl = TableRegistry::get('MembershipPayment');	
 	$result = $membership_payment_tbl->get($mp_id)->toArray();
 	if($result['paid_amount'] >= $result['membership_amount'])
-		return 'Fully Paid';		
+		return __('Fully Paid');		
 	elseif($result['paid_amount'] == 0 )
 		return __('Not Paid');
 	else
@@ -543,7 +545,7 @@ Class GYMfunctionComponent extends Component
 		$sys_email = $this->getSettings("email");
 		$sys_name = $this->getSettings("name");
 		$reminder_days = $this->getSettings("reminder_days");		
-		$reminder_message = $this->getSettings("reminder_message");
+		
 		$search = ["GYM_MEMBERNAME","GYM_MEMBERSHIP","GYM_STARTDATE","GYM_ENDDATE"];				
 			
 		$mem_table = TableRegistry::get("GymMember");
@@ -555,8 +557,10 @@ Class GYMfunctionComponent extends Component
 			})->hydrate(false)->toArray();
 				
 		$user_ids = array();
+		
 		foreach($data as $member)
 		{
+			
 			if($member["alert_sent"] == 0)
 			{
 				/* $membership = $m_table->get($member["selected_membership"])->toArray(); */
@@ -564,9 +568,12 @@ Class GYMfunctionComponent extends Component
 		
 				if(!empty($membership))
 				{
+					
 					$membership = $membership[0];
 					$member_name = $member["first_name"]." ".$member["last_name"];
+					//$replace=[];
 					$replace = [$member_name,$membership["membership_label"],$member["membership_valid_from"],$member["membership_valid_to"]];
+					$reminder_message = $this->getSettings("reminder_message");
 					$reminder_message = str_replace($search,$replace,$reminder_message);
 					$expiry_date = $member["membership_valid_to"]->format("Y-m-d");
 					$mail_date = date('Y-m-d',(strtotime ( "-{$reminder_days} day" , strtotime ( $expiry_date) ) ));
@@ -574,16 +581,17 @@ Class GYMfunctionComponent extends Component
 					$str_mail_date = strtotime($mail_date);
 					$str_curr_date = strtotime($curr_date);
 					$last_date = strtotime($expiry_date);
-					/* if($curr_date == $mail_date) */
+					
 					if($curr_date > $mail_date && $curr_date <= $last_date)
-					{						
+					{	
+					
 						$to = $member["email"];
 						$headers = "From: {$sys_name} <{$sys_email}>" . "\r\n";
 						/* $email->from([$sys_email => $sys_name])
 						->to($to)
 						->subject( _("Membership Reminder Alert!"))
-						->send($reminder_message); */
-						mail($to,_("Membership Reminder Alert!"),$reminder_message,$headers);
+						->send($reminder_message); */ 
+						@mail($to,_("Membership Reminder Alert!"),$reminder_message,$headers);
 						$user_ids[] = $member["id"];
 					}
 				}
@@ -592,7 +600,8 @@ Class GYMfunctionComponent extends Component
 		if(!empty($user_ids))
 		{
 			$rows = $mem_table->updateAll(["alert_sent"=>1],["id IN"=>$user_ids]);
-		}			
+		}	
+		
 	}
 	
 	public function get_class_by_member($mid)
@@ -627,11 +636,12 @@ Class GYMfunctionComponent extends Component
 	public function check_valid_extension($filename)
 	{
 		$flag = 2;
+
 		if($filename != '')
 		{
 			$flag = 0;
 			$ext = pathinfo($filename, PATHINFO_EXTENSION);
-			$valid_extension = ['gif','png','jpg','jpeg',""];
+			$valid_extension = ['gif','png','jpg','jpeg',"",'JPG','GIF','PNG','JPEG'];
 			if(in_array($ext,$valid_extension) )
 			{
 				$flag = 1;
@@ -866,17 +876,75 @@ Class GYMfunctionComponent extends Component
 		$GeneralSettingData = $GeneralSetting->find()->select([$field])->hydrate(false)->toArray();
 		return $GeneralSettingData[0][$field];
 	}
-	public function sendWorkoutAlertEmail()
-	{				
-		$todayDate = date('Y-m-d');
+	public function sendworkout($id=null)
+	{
+				 $todayDate = date('Y-m-d');
 		// $todayDate = '2018-11-15';
 		
+		$GymDailyWorkout = TableRegistry::get("GymDailyWorkout");
+		$DailyWorkoutData = $GymDailyWorkout->find()->select(['id','member_id','record_date'])->where(['record_date'=>$todayDate,'reminder_status'=>0,'member_id'=>$id])->hydrate(false)->toArray();
+		
+		$GYMName = $this->getGeneralSettingFieldValue('name');
+		$GYMEmail = $this->getGeneralSettingFieldValue('email');
+		$sys_email = $this->getSettings("email");
+		$sys_name = $this->getSettings("name");
+		
+		foreach($DailyWorkoutData as $dailydata)
+		{
+/* 			debug($dailydata);
+			die; */
+			// $memberEmail = 'ajay@dasinfomedia.com';
+			$memberEmail = $this->getMemberFieldValue($dailydata['member_id'],'email');
+			$memberName = $this->getMemberFieldValue($dailydata['member_id'],'first_name');
+			
+			$mailSubject = "Workout Reminder!";
+			$mailMessage = "Dear $memberName
+							Today Your Workout Complete.
+							Regards,<br>
+							$GYMName";
+							
+			$header = "From:{$GYMEmail} \r\n";
+			// $header .= "Cc:afgh@somedomain.com \r\n";
+			$header .= "MIME-Version: 1.0\r\n";
+			$header .= "Content-type: text/html\r\n";
+			
+			if($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_NAME'] == '192.168.1.109')
+			{
+				$email = new Email('default');
+				$email->from([$sys_email => $sys_name])
+						->to($memberEmail)
+					->subject($mailSubject)
+					->send("Dear $memberName
+							Today Your Workout Complete.
+							Regards,
+							$GYMName");
+			}
+			else
+			{			
+				$retval = mail ($memberEmail,$mailSubject,$mailMessage,$header);
+			}
+			
+			$result = $GymDailyWorkout->query()
+					  ->update()
+					  ->set(['reminder_status'=>1])
+					  ->where(['record_date'=>$todayDate])
+					  ->execute();
+									
+		} 
+		return "123";
+	}	
+	public function sendWorkoutAlertEmail($id=null)
+	{				
+		/*  $todayDate = date('Y-m-d');
+		// $todayDate = '2018-11-15';
+		//return $todayDate; die;
 		$GymDailyWorkout = TableRegistry::get("GymDailyWorkout");
 		$DailyWorkoutData = $GymDailyWorkout->find()->select(['id','member_id','record_date'])->where(['record_date'=>$todayDate,'reminder_status'=>0])->hydrate(false)->toArray();
 		
 		$GYMName = $this->getGeneralSettingFieldValue('name');
 		$GYMEmail = $this->getGeneralSettingFieldValue('email');
-		
+		$sys_email = $this->getSettings("email");
+		$sys_name = $this->getSettings("name");
 		
 		foreach($DailyWorkoutData as $dailydata)
 		{
@@ -895,11 +963,11 @@ Class GYMfunctionComponent extends Component
 			$header .= "MIME-Version: 1.0\r\n";
 			$header .= "Content-type: text/html\r\n";
 			
-			if($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_NAME'] == '192.168.1.22')
+			if($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_NAME'] == '192.168.1.109')
 			{
 				$email = new Email('default');
-				$email->from(['me@example.com' => 'My Site'])
-					->to('ajay@dasinfomedia.com')
+				$email->from([$sys_email => $sys_name])
+						->to($to)
 					->subject($mailSubject)
 					->send("Dear $memberName
 							Today Your workout assign.
@@ -917,6 +985,306 @@ Class GYMfunctionComponent extends Component
 					  ->where(['record_date'=>$todayDate])
 					  ->execute();
 									
-		}
+		} 
+		return "123"; */
 	}
+	
+	public function get_db_format_date($date)
+	{
+		$date_format = $this->getSettings("date_format");
+		$datepicker_lang = $this->getSettings("datepicker_lang");
+		
+		if($date_format == "F j, Y")
+		{
+			//echo "hello";
+			switch ($datepicker_lang) {
+				case 'ar':
+					$find = array("يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر");
+					break;
+					
+				case 'zh_CN':
+					$find = array("一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月");
+					break;
+					
+				case 'cs':
+					$find = array("leden", "únor", "březen", "duben", "květen", "červen" ,"červenec" ,"srpen", "září" ,"říjen", "listopad", "prosinec");
+					break;
+				
+				case 'fr':
+					$find = array('janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre');
+					break;
+				
+				case 'de':
+					$find = array("Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September","Oktober", "November", "Dezember" );
+					break;
+					
+				case 'el':
+					$find = array("Ιανουάριος", "Φεβρουάριος", "Μάρτιος", "Απρίλιος", "Μάιος", "Ιούνιος", "Ιούλιος","Αύγουστος", "Σεπτέμβριος", "Οκτώβριος", "Νοέμβριος", "Δεκέμβριος" );
+					break;
+					
+				case 'it':
+					$find = array("Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto","Settembre", "Ottobre", "Novembre", "Dicembre" );
+					break;
+					
+				case 'ja':
+					$find = array("1月", "2月", "3月", "4月", "5月", "6月",	"7月", "8月", "9月", "10月", "11月", "12月" );
+					break;
+					
+				case 'pl':
+					$find = array("Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień","Wrzesień", "Październik", "Listopad", "Grudzień" );
+					break;
+					
+				case 'pt_BR':
+					$find = array("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" );
+					break;
+				
+				case 'pt_PT':
+					$find = array("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro","Outubro", "Novembro", "Dezembro");
+					break;
+					
+				case 'fa':
+					$find = array("ژانویه", "فوریه", "مارس", "آوریل", "مه", "ژوئن", "ژوئیه", "اوت", "سپتامبر", "اکتبر", "نوامبر", "دسامبر" );
+					break;
+				
+				case 'ru':
+					$find = array("Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь" );
+					break;
+					
+				case 'es':
+					$find = array("enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre" );
+					break;
+					
+				case 'th':
+					$find = array("มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม");
+					break;
+					
+				case 'tr':
+					$find = array("Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık" );
+					break;
+					
+				case 'ca':
+					$find = array("gener", "febrer", "març", "abril", "maig", "juny", "juliol", "agost", "setembre", "octubre", "novembre", "desembre" );
+					break;
+					
+				case 'da':
+					$find = array("Januar", "Februar", "Marts", "April", "Maj", "Juni", "Juli", "August", "September", "Oktober", "November", "December" );
+					break;
+				
+				case 'et':
+					$find = array("Jaanuar", "Veebruar", "Märts", "Aprill", "Mai", "Juuni", "Juuli", "August", "September","Oktoober", "November", "Detsember" );
+					break;
+					
+				case 'fi':
+					$find = array("Tammikuu", "Helmikuu", "Maaliskuu", "Huhtikuu", "Toukokuu", "Kesäkuu", "Heinäkuu", "Elokuu", "Syyskuu", "Lokakuu", "Marraskuu", "Joulukuu" );
+					break;
+				
+				case 'he':
+					$find = array("ינואר", "פברואר", "מרץ", "אפריל", "מאי", "יוני", "יולי", "אוגוסט", "ספטמבר", "אוקטובר", "נובמבר", "דצמבר" );
+					break;
+					
+				case 'hr':
+					$find = array("Siječanj", "Veljača", "Ožujak", "Travanj", "Svibanj", "Lipanj", "Srpanj", "Kolovoz", "Rujan", "Listopad", "Studeni", "Prosinac" );
+					break;
+					
+				case 'hu':
+					$find = array("Január", "Február", "Március", "Április", "Május", "Június", "Július", "Augusztus", "Szeptember", "Október", "November", "December" );
+					break;
+					
+				case 'id':
+					$find = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "Nopember", "Desember" );
+					break;
+					
+				case 'lt':
+					$find = array("Sausis", "Vasaris", "Kovas", "Balandis", "Gegužė", "Birželis", "Liepa", "Rugpjūtis", "Rugsėjis", "Spalis", "Lapkritis", "Gruodis" );
+					break;
+				
+				case 'nl':
+					$find = array("januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december" );
+					break;
+				
+				case 'no':
+					$find = array("januar",	"februar", "mars", "april", "mai", "juni", "juli", "august", "september",		"oktober", "november", "desember" );
+					break;
+					
+				case 'ro':
+					$find = array("Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie", "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie" );
+					break;
+					
+				case 'sv':
+					$find = array("januari", "februari", "mars", "april", "maj", "juni", "juli", "augusti", "september","oktober", "november", "december" );
+					break;
+					
+				case 'vi':
+					$find = array("Tháng Một", "Tháng Hai", "Tháng Ba", "Tháng Tư", "Tháng Năm", "Tháng Sáu", "Tháng Bảy", "Tháng Tám", "Tháng Chín", "Tháng Mười", "Tháng Mười Một", "Tháng Mười Hai" );
+					break;
+					
+				default:
+					$find = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
+					break;
+			}
+			/* English Month Name */
+			$replace = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
+			/* English Month Name */
+			
+			/* Replace Month Name to English */
+			$save_date = str_replace($find, $replace, $date);
+			$save_date = date('Y-m-d',strtotime($save_date));
+			
+			/* Replace Month Name to English */
+		}elseif($date_format == "Y-m-d"){
+			$save_date = date("Y-m-d",strtotime($date));
+		}elseif($date_format == "m/d/Y"){
+			$save_date = date("Y-m-d",strtotime($date));
+		}
+		return $save_date;
+	}
+	public function get_db_format_en_lang($date)
+	{
+		//echo $date;
+		$date_format = $this->getSettings("date_format");
+		$datepicker_lang = $this->getSettings("datepicker_lang");
+		
+		if($date_format == "F j, Y")
+		{
+		
+			$find = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
+			
+			switch ($datepicker_lang) {
+				case 'ar':
+					$replace = array("يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر");
+					break;
+					
+				case 'zh_CN':
+					$replace = array("一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月");
+					break;
+					
+				case 'cs':
+					$replace = array("leden", "únor", "březen", "duben", "květen", "červen" ,"červenec" ,"srpen", "září" ,"říjen", "listopad", "prosinec");
+					break;
+				
+				case 'fr':
+					$replace = array('janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre');
+					break;
+				
+				case 'de':
+					$replace = array("Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September","Oktober", "November", "Dezember" );
+					break;
+					
+				case 'el':
+					$replace = array("Ιανουάριος", "Φεβρουάριος", "Μάρτιος", "Απρίλιος", "Μάιος", "Ιούνιος", "Ιούλιος","Αύγουστος", "Σεπτέμβριος", "Οκτώβριος", "Νοέμβριος", "Δεκέμβριος" );
+					break;
+					
+				case 'it':
+					$replace = array("Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto","Settembre", "Ottobre", "Novembre", "Dicembre" );
+					break;
+					
+				case 'ja':
+					$replace = array("1月", "2月", "3月", "4月", "5月", "6月",	"7月", "8月", "9月", "10月", "11月", "12月" );
+					break;
+					
+				case 'pl':
+					$replace = array("Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień","Wrzesień", "Październik", "Listopad", "Grudzień" );
+					break;
+					
+				case 'pt_BR':
+					$replace = array("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" );
+					break;
+				
+				case 'pt_PT':
+					$replace = array("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro","Outubro", "Novembro", "Dezembro");
+					break;
+					
+				case 'fa':
+					$replace = array("ژانویه", "فوریه", "مارس", "آوریل", "مه", "ژوئن", "ژوئیه", "اوت", "سپتامبر", "اکتبر", "نوامبر", "دسامبر" );
+					break;
+				
+				case 'ru':
+					$replace = array("Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь" );
+					break;
+					
+				case 'es':
+					$replace = array("enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre" );
+					break;
+					
+				case 'th':
+					$replace = array("มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม");
+					break;
+					
+				case 'tr':
+					$replace = array("Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık" );
+					break;
+					
+				case 'ca':
+					$replace = array("gener", "febrer", "març", "abril", "maig", "juny", "juliol", "agost", "setembre", "octubre", "novembre", "desembre" );
+					break;
+					
+				case 'da':
+					$replace = array("Januar", "Februar", "Marts", "April", "Maj", "Juni", "Juli", "August", "September", "Oktober", "November", "December" );
+					break;
+				
+				case 'et':
+					$replace = array("Jaanuar", "Veebruar", "Märts", "Aprill", "Mai", "Juuni", "Juuli", "August", "September","Oktoober", "November", "Detsember" );
+					break;
+					
+				case 'fi':
+					$replace = array("Tammikuu", "Helmikuu", "Maaliskuu", "Huhtikuu", "Toukokuu", "Kesäkuu", "Heinäkuu", "Elokuu", "Syyskuu", "Lokakuu", "Marraskuu", "Joulukuu" );
+					break;
+				
+				case 'he':
+					$replace = array("ינואר", "פברואר", "מרץ", "אפריל", "מאי", "יוני", "יולי", "אוגוסט", "ספטמבר", "אוקטובר", "נובמבר", "דצמבר" );
+					break;
+					
+				case 'hr':
+					$replace = array("Siječanj", "Veljača", "Ožujak", "Travanj", "Svibanj", "Lipanj", "Srpanj", "Kolovoz", "Rujan", "Listopad", "Studeni", "Prosinac" );
+					break;
+					
+				case 'hu':
+					$replace = array("Január", "Február", "Március", "Április", "Május", "Június", "Július", "Augusztus", "Szeptember", "Október", "November", "December" );
+					break;
+					
+				case 'id':
+					$replace = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "Nopember", "Desember" );
+					break;
+					
+				case 'lt':
+					$replace = array("Sausis", "Vasaris", "Kovas", "Balandis", "Gegužė", "Birželis", "Liepa", "Rugpjūtis", "Rugsėjis", "Spalis", "Lapkritis", "Gruodis" );
+					break;
+				
+				case 'nl':
+					$replace = array("januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december" );
+					break;
+				
+				case 'no':
+					$replace = array("januar",	"februar", "mars", "april", "mai", "juni", "juli", "august", "september",		"oktober", "november", "desember" );
+					break;
+					
+				case 'ro':
+					$replace = array("Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie", "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie" );
+					break;
+					
+				case 'sv':
+					$replace = array("januari", "februari", "mars", "april", "maj", "juni", "juli", "augusti", "september","oktober", "november", "december" );
+					break;
+					
+				case 'vi':
+					$replace = array("Tháng Một", "Tháng Hai", "Tháng Ba", "Tháng Tư", "Tháng Năm", "Tháng Sáu", "Tháng Bảy", "Tháng Tám", "Tháng Chín", "Tháng Mười", "Tháng Mười Một", "Tháng Mười Hai" );
+					break;
+					
+				default:
+					$replace = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
+					break;
+			}
+		
+			/* Replace English to Month Name */
+			$save_date = str_replace($find, $replace, $date);
+	
+			/* Replace English to Month Name */
+		}elseif($date_format == "Y-m-d"){
+			$save_date = date("Y-m-d",strtotime($date));
+		}elseif($date_format == "m/d/Y"){
+			$save_date = date("Y-m-d",strtotime($date));
+		}
+		return $save_date;
+	}
+	
 }

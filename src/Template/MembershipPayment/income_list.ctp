@@ -51,7 +51,7 @@ $(document).ready(function() {
 						echo "<tr>
 								<td>{$row['gym_member']['first_name']} {$row['gym_member']['last_name']}</td>
 								<td>". $this->Gym->get_currency_symbol() ." {$row['total_amount']}</td>
-								<td>".date($this->Gym->getSettings("date_format"),strtotime($row["invoice_date"]))."</td>
+								<td>".$this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($row["invoice_date"])))."</td>
 								<td>
 								<a href='javascript:void(0)' class='btn btn-flat btn-info view_income_expense' data-url='".$this->request->base ."/GymAjax/viewIncomeExpense/{$row['id']}' type='income'><i class='fa fa-eye'></i></a>
 								<a href='".$this->request->base ."/MembershipPayment/incomeEdit/{$row['id']}' class='btn btn-flat btn-primary' title='Edit'><i class='fa fa-edit'></i></a>

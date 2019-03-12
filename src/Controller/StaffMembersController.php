@@ -32,22 +32,28 @@ class StaffMembersController extends AppController
 			$ext = $this->GYMFunction->check_valid_extension($this->request->data['image']['name']);
 			if($ext != 0)
 			{
+				//echo "hello";
 				$staff = $this->StaffMembers->GymMember->newEntity();
-				
+								
+
 				$image = $this->GYMFunction->uploadImage($this->request->data['image']);
-				$this->request->data['image'] = (!empty($image)) ? $image : "logo.png";
-				$this->request->data['birth_date'] = date("Y-m-d",strtotime($this->request->data['birth_date']));
+				$this->request->data['image'] = (!empty($image)) ? $image : "Thumbnail-img.png";
+				//$this->request->data['birth_date'] = date("Y-m-d",strtotime($this->request->data['birth_date']));
+				 $this->request->data['birth_date'] = $this->GYMFunction->get_db_format_date($this->request->data['birth_date']); 
 				$this->request->data['created_date'] = date("Y-m-d");
 				$this->request->data['s_specialization'] = json_encode($this->request->data['s_specialization']);
 				$this->request->data["role_name"]="staff_member";
 				
 				$staff = $this->StaffMembers->GymMember->patchEntity($staff,$this->request->data);
+				debug($staff);//die;
 				if($this->StaffMembers->GymMember->save($staff))
 				{
+					echo 'wel';
 					$this->Flash->success(__("Success! Record Successfully Saved."));
 					return $this->redirect(["action"=>"staffList"]);
 				}else
-				{				
+				{		
+					echo "hello"; 
 					if($staff->errors())
 					{	
 						foreach($staff->errors() as $error)
@@ -86,7 +92,9 @@ class StaffMembersController extends AppController
 			if($ext != 0)
 			{
 				$row = $this->StaffMembers->GymMember->get($id);
-				$this->request->data['birth_date'] = date("Y-m-d",strtotime($this->request->data['birth_date']));
+				//$this->request->data['birth_date'] = date("Y-m-d",strtotime($this->request->data['birth_date']));
+				$this->request->data['birth_date'] = $this->GYMFunction->get_db_format_date($this->request->data['birth_date']); 
+				
 				$this->request->data['s_specialization'] = json_encode($this->request->data['s_specialization']);
 				$image = $this->GYMFunction->uploadImage($this->request->data['image']);
 				if($image != "")

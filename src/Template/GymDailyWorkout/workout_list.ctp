@@ -21,7 +21,7 @@ if($session["role_name"] == "administrator" || $session["role_name"] == "staff_m
 
 $(document).ready(function(){
 	var table = $(".mydataTable").DataTable();
-	table.column(4).visible( true );
+	
 });
 </script>
 <?php } ?>
@@ -49,7 +49,7 @@ $(document).ready(function(){
 		</div>
 		<hr>
 		<div class="box-body">
-		<table class="mydataTable table table-striped">
+		<table class="mydataTable table table-striped" width="100%">
 			<thead>
 				<tr>
 					<th><?php echo __("Photo");?></th>

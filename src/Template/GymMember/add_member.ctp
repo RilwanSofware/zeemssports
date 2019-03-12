@@ -1,9 +1,12 @@
 <?php
 echo $this->Html->css('bootstrap-multiselect');
 echo $this->Html->script('bootstrap-multiselect');
-
+$session = $this->request->session();
+$dtp_lang = $session->read("User.dtp_lang");
 $inquiry_date = (($edit)?$data['inquiry_date']:'');
 $i_date = date("Y-m-d",strtotime($inquiry_date));
+	
+
 $inquiry_date = (($i_date != '1970-01-01' && $inquiry_date != '' )?$inquiry_date:'');
 
 $trial_end_date = (($edit)?$data['trial_end_date']:'');
@@ -13,21 +16,47 @@ $trial_end_date = (($t_date != '1970-01-01' && $trial_end_date != '' )?$trial_en
 $first_pay_date = (($edit)?$data['first_pay_date']:'');
 $p_date = date("Y-m-d",strtotime($first_pay_date));
 $first_pay_date = (($p_date != '1970-01-01' && $first_pay_date != '' )?$first_pay_date:'');
+$assign_group = json_encode(($edit)?$member_class:'');
 
 ?>
 <script type="text/javascript">
 $(document).ready(function() {
+	var m_id = $('.membership_id').val();
+	var ajaxurl = $("#mem_class_url").val();
+	var group = <?php echo $assign_group; ?>;
+	var curr_data = { m_id : m_id,group:group};
+	
+	$(".class_list").html("");
+	$.ajax({
+		url : ajaxurl,
+		type : "POST",
+		data : curr_data,
+		success : function(response){
+			$(".class_list").append(response);
+			$(".class_list").multiselect("rebuild");
+			
+			return false;
+		},
+		error : function(e){
+
+			console.log(e.responseText);
+		}
+	});
+});
+$(document).ready(function() {
+	
 	<?php
 	if($edit)
 	{
+		
 	$date = $data['birth_date'];
-	$timestamp = $date->getTimestamp();
-	$date->setTimestamp($timestamp);
 	$birthday = $date->format($this->Gym->getSettings("date_format"));	
+	//$birthday = $this->Gym->dateformat_PHP_to_jQueryUI($this->Gym->getSettings("date_format"));	
+	
 	?>
-	/* $( ".dob" ).datepicker( "setDate", new Date("<?php echo date($this->Gym->getSettings("date_format"),strtotime($data['birth_date'])); ?>" )); */
+	$(".valid_datepicker").datepicker("setDate")
 	$( ".dob" ).datepicker( "setDate", new Date("<?php echo $birthday; ?>" ));
-	$( ".mem_valid_from" ).datepicker( "setDate", new Date("<?php echo date($this->Gym->getSettings("date_format"),strtotime($data['membership_valid_from'])); ?>" ));
+	
 	<?php } ?>
 	<?php 
 	if($edit && $inquiry_date != '')
@@ -53,21 +82,27 @@ $(document).ready(function() {
 	
 	var box_height = $(".box").height();
 	var box_height = box_height + 500 ;
-	$(".content-wrapper").css("height",box_height+"px");
+	//$(".content-wrapper").css("height",box_height+"px");
 	
 	$('.class_list').multiselect({
 		includeSelectAllOption: true		
 	});
 	
-	$(".date").datepicker( "option", "dateFormat", "<?php echo $this->Gym->dateformat_PHP_to_jQueryUI($this->Gym->getSettings("date_format")); ?>" );
+	
 	$(".mem_valid_from").on("change",function(ev){
-				// var ajaxurl = document.location + "/GymAjax/get_membership_end_date";
+				
 				var ajaxurl = $("#mem_date_check_path").val();
-				var date = ev.target.value;	
-				var membership = $(".membership_id option:selected").val();		
+				
+				var date = $('.mem_valid_from').datepicker('getDate');  
+				date.setDate(date.getDate());
+				date1=formatDate(date);
+			
+				
+				var membership = $(".membership_id option:selected").val();	
+				
 				if(membership != "")
 				{
-					var curr_data = { date : date, membership:membership};
+					var curr_data = { date : date1, membership:membership};
 					$(".valid_to").val("Calculating date..");
 					$.ajax({
 							url :ajaxurl,
@@ -75,17 +110,23 @@ $(document).ready(function() {
 							data : curr_data,
 							success : function(response)
 									{
-										// $(".valid_to").val($.datepicker.formatDate('<?php echo $this->Gym->getSettings("date_format"); ?>',new Date(response)));
-										$(".valid_to").val(response);
-										// alert(response);
-										// console.log(response);
+								
+										$(".valid_to,.check").datepicker({ language: "<?php echo $dtp_lang;?>",
+											 dateFormat :"<?php echo $this->Gym->dateformat_PHP_to_jQueryUI($this->Gym->getSettings("date_format")); ?>",
+											 
+											}
+											);
+											$(".valid_to,.check").datepicker($.datepicker.regional['<?php echo $dtp_lang;?>']);
+											$( ".valid_to,.check" ).datepicker( "setDate",  new Date(response) );
+										
 									}
 						});
 				}else{
 					$(".valid_to").val("Select Membership");
 				}
 			});	
-	$(".content-wrapper").css("height","2600px");	
+
+	
 });
 
 function validate_multiselect()
@@ -99,8 +140,20 @@ function validate_multiselect()
 			return true;
 		}		
 }
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+}
 
 </script>
+
 <section class="content">
 	<br>
 	<div class="col-md-12 box box-default">		
@@ -108,7 +161,9 @@ function validate_multiselect()
 			<section class="content-header">
 			  <h1>
 				<i class="fa fa-user"></i>
-				<?php echo $title;?>
+				<?php echo $title;
+				
+				?>
 				<small><?php echo __("Member");?></small>
 			  </h1>
 			  <ol class="breadcrumb">
@@ -123,56 +178,56 @@ function validate_multiselect()
 			echo "<fieldset><legend>". __('Personal Information')."</legend>";
 						
 			echo "<div class='form-group'>";	
-			echo '<label class="control-label col-md-2" for="email">'. __("Member ID").'</label>';
+			echo '<label class="control-label col-md-2" for="member_id">'. __("Member ID").'</label>';
 			echo '<div class="col-md-6">';
-			echo $this->Form->input("",["label"=>false,"name"=>"member_id","class"=>"form-control","disabled"=>"disabled","value"=>(($edit)?$data['member_id']:$member_id)]);
+			echo $this->Form->input("",["label"=>false,"name"=>"member_id","class"=>"form-control","disabled"=>"disabled","value"=>(($edit)?$data['member_id']:$member_id),"id"=>"member_id"]);
 			echo "</div>";	
 			echo "</div>";
 			
 			
 			echo "<div class='form-group'>";	
-			echo '<label class="control-label col-md-2" for="email">'. __("First Name").'<span class="text-danger"> *</span></label>';
+			echo '<label class="control-label col-md-2" for="first_name">'. __("First Name").'<span class="text-danger"> *</span></label>';
 			echo '<div class="col-md-6">';
-			echo $this->Form->input("",["label"=>false,"name"=>"first_name","class"=>"form-control validate[required,custom[onlyLetterSp],maxSize[30]]","value"=>(($edit)?$data['first_name']:'')]);
+			echo $this->Form->input("",["label"=>false,"name"=>"first_name","class"=>"form-control validate[required,custom[onlyLetterSp],maxSize[30]]","value"=>(($edit)?$data['first_name']:''),"id"=>"first_name"]);
 			echo "</div>";	
 			echo "</div>";	
 			
 			echo "<div class='form-group'>";	
-			echo '<label class="control-label col-md-2" for="email">'. __("Middle Name").'</label>';
+			echo '<label class="control-label col-md-2" for="middle_name">'. __("Middle Name").'</label>';
 			echo '<div class="col-md-6">';
-			echo $this->Form->input("",["label"=>false,"name"=>"middle_name","class"=>"form-control validate[custom[onlyLetterSp],maxSize[30]]","value"=>(($edit)?$data['middle_name']:'')]);
+			echo $this->Form->input("",["label"=>false,"name"=>"middle_name","class"=>"form-control validate[custom[onlyLetterSp],maxSize[30]]","value"=>(($edit)?$data['middle_name']:''),"id"=>"middle_name"]);
 			echo "</div>";	
 			echo "</div>";	
 			
 			echo "<div class='form-group'>";	
-			echo '<label class="control-label col-md-2" for="email">'. __("Last Name").'<span class="text-danger"> *</span></label>';
+			echo '<label class="control-label col-md-2" for="last_name">'. __("Last Name").'<span class="text-danger"> *</span></label>';
 			echo '<div class="col-md-6">';
-			echo $this->Form->input("",["label"=>false,"name"=>"last_name","class"=>"form-control validate[required,custom[onlyLetterSp],maxSize[30]]","value"=>(($edit)?$data['last_name']:'')]);
+			echo $this->Form->input("",["label"=>false,"name"=>"last_name","class"=>"form-control validate[required,custom[onlyLetterSp],maxSize[30]]","value"=>(($edit)?$data['last_name']:''),"id"=>"last_name"]);
 			echo "</div>";	
 			echo "</div>";	
 			
 			echo "<div class='form-group'>";	
-			echo '<label class="control-label col-md-2" for="email">'. __("Gender").'<span class="text-danger"> *</span></label>';
+			echo '<label class="control-label col-md-2" for="gender">'. __("Gender").'<span class="text-danger"> *</span></label>';
 			echo '<div class="col-md-6 checkbox">';
 			$radio = [
-						['value' => 'male', 'text' => __('Male')],
-						['value' => 'female', 'text' => __('Female')]
+						['value' => 'male', 'text' => __('Male'),"class"=>"gender"],
+						['value' => 'female', 'text' => __('Female'),"class"=>"gender"]
 					];
 			echo $this->Form->radio("gender",$radio,['default'=>($edit)?$data["gender"]:"male"]);			
 			echo "</div>";	
 			echo "</div>";
 			
 			echo "<div class='form-group'>";	
-			echo '<label class="control-label col-md-2" for="email">'. __("Date of birth").'<span class="text-danger"> *</span></label>';
+			echo '<label class="control-label col-md-2" for="birth_date">'. __("Date of birth").'<span class="text-danger"> *</span></label>';
 			echo '<div class="col-md-6">';
-			echo $this->Form->input("",["label"=>false,"name"=>"birth_date","class"=>"form-control date dob validate[required] ","value"=>(($edit)?date($this->Gym->getSettings("date_format"),strtotime($data['birth_date'])):'')]);
+			echo $this->Form->input("",["label"=>false,"name"=>"birth_date","class"=>"dob form-control  validate[required] ","value"=>(($edit)?date($this->Gym->getSettings("date_format"),strtotime($data['birth_date'])):''),"id"=>"birth_date"]);
 			echo "</div>";	
 			echo "</div>";
 			
 			echo "<div class='form-group'>";
-			echo '<label class="control-label col-md-2" for="email">'. __("Group").'</label>';
-			echo '<div class="col-md-8">';			
-			echo @$this->Form->select("assign_group",$groups,["default"=>json_decode($data['assign_group']),"multiple"=>"multiple","class"=>"form-control group_list"]);
+			echo '<label class="control-label col-md-2" for="assign_group">'. __("Group").'</label>';
+			echo '<div class="col-md-6 module_padding">';			
+			echo @$this->Form->select("assign_group",$groups,["default"=>json_decode($data['assign_group']),"multiple"=>"multiple","class"=>"form-control group_list","id"=>"assign_group"]);
 			echo "</div>";	
 			echo '<div class="col-md-2">';
 			echo "<a href='{$this->request->base}/GymGroup/addGroup/' class='btn btn-flat btn-default'>".__("Add Group")."</a>";
@@ -182,54 +237,54 @@ function validate_multiselect()
 						
 			echo "<fieldset><legend>". __('Contact Information')."</legend>";
 			echo "<div class='form-group'>";	
-			echo '<label class="control-label col-md-2" for="email">'. __("Address").'<span class="text-danger"> *</span></label>';
+			echo '<label class="control-label col-md-2" for="address">'. __("Address").'<span class="text-danger"> *</span></label>';
 			echo '<div class="col-md-6">';
-			echo $this->Form->input("",["label"=>false,"name"=>"address","class"=>"form-control validate[required,maxSize[150]]","value"=>(($edit)?$data['address']:'')]);
+			echo $this->Form->input("",["label"=>false,"name"=>"address","class"=>"form-control validate[required,maxSize[150]]","value"=>(($edit)?$data['address']:''),"id"=>"address"]);
 			echo "</div>";	
 			echo "</div>";	
 			
 			echo "<div class='form-group'>";	
-			echo '<label class="control-label col-md-2" for="email">'. __("City").'<span class="text-danger"> *</span></label>';
+			echo '<label class="control-label col-md-2" for="city">'. __("City").'<span class="text-danger"> *</span></label>';
 			echo '<div class="col-md-6">';
-			echo $this->Form->input("",["label"=>false,"name"=>"city","class"=>"form-control validate[required,custom[onlyLetterSp],maxSize[20]]","value"=>(($edit)?$data['city']:'')]);
+			echo $this->Form->input("",["label"=>false,"name"=>"city","class"=>"form-control validate[required,custom[onlyLetterSp],maxSize[20]]","value"=>(($edit)?$data['city']:''),"id"=>"city"]);
 			echo "</div>";	
 			echo "</div>";
 			
 			echo "<div class='form-group'>";	
-			echo '<label class="control-label col-md-2" for="email">'. __("State").'</label>';
+			echo '<label class="control-label col-md-2" for="state">'. __("State").'</label>';
 			echo '<div class="col-md-6">';
-			echo $this->Form->input("",["label"=>false,"name"=>"state","class"=>"form-control validate[custom[onlyLetterSp],maxSize[20]]","value"=>(($edit)?$data['state']:'')]);
+			echo $this->Form->input("",["label"=>false,"name"=>"state","class"=>"form-control validate[custom[onlyLetterSp],maxSize[20]]","value"=>(($edit)?$data['state']:''),"id"=>"state"]);
 			echo "</div>";	
 			echo "</div>";
 			
 			echo "<div class='form-group'>";	
-			echo '<label class="control-label col-md-2" for="email">'. __("Zip code").'<span class="text-danger"> *</span></label>';
+			echo '<label class="control-label col-md-2" for="zipcode">'. __("Zip code").'<span class="text-danger"> *</span></label>';
 			echo '<div class="col-md-6">';
-			echo $this->Form->input("",["label"=>false,"name"=>"zipcode","class"=>"form-control validate[required,custom[onlyNumberSp],maxSize[10]]","value"=>(($edit)?$data['zipcode']:'')]);
+			echo $this->Form->input("",["label"=>false,"name"=>"zipcode","class"=>"form-control validate[required,custom[onlyNumberSp],maxSize[10]]","value"=>(($edit)?$data['zipcode']:''),"id"=>"zipcode"]);
 			echo "</div>";	
 			echo "</div>";
 			
 			echo "<div class='form-group'>";	
-			echo '<label class="control-label col-md-2" for="email">'. __("Mobile Number").'<span class="text-danger"> *</span></label>';
+			echo '<label class="control-label col-md-2" for="mobile">'. __("Mobile Number").'<span class="text-danger"> *</span></label>';
 			echo '<div class="col-md-6">';
 			echo '<div class="input-group">';
 			echo '<div class="input-group-addon">+'.$this->Gym->getCountryCode($this->Gym->getSettings("country")).'</div>';
-			echo $this->Form->input("",["label"=>false,"name"=>"mobile","class"=>"form-control validate[required,custom[onlyNumberSp],maxSize[15]]","value"=>(($edit)?$data['mobile']:'')]);
+			echo $this->Form->input("",["label"=>false,"name"=>"mobile","class"=>"form-control validate[required,custom[onlyNumberSp],maxSize[15]]","value"=>(($edit)?$data['mobile']:''),"id"=>"mobile"]);
 			echo "</div>";	
 			echo "</div>";	
 			echo "</div>";	
 			
 			echo "<div class='form-group'>";	
-			echo '<label class="control-label col-md-2" for="email">'. __("Phone").'</label>';
+			echo '<label class="control-label col-md-2" for="phone">'. __("Phone").'</label>';
 			echo '<div class="col-md-6">';
-			echo $this->Form->input("",["label"=>false,"name"=>"phone","class"=>"form-control validate[custom[onlyNumberSp],maxSize[15]]","value"=>(($edit)?$data['phone']:'')]);
+			echo $this->Form->input("",["label"=>false,"name"=>"phone","class"=>"form-control validate[custom[onlyNumberSp],maxSize[15]]","value"=>(($edit)?$data['phone']:''),"id"=>"phone"]);
 			echo "</div>";	
 			echo "</div>";
 			
 			echo "<div class='form-group'>";	
 			echo '<label class="control-label col-md-2" for="email">'. __("Email").'<span class="text-danger"> *</span></label>';
 			echo '<div class="col-md-6">';
-			echo $this->Form->input("",["label"=>false,"name"=>"email","class"=>"form-control validate[required,custom[email]]","value"=>(($edit)?$data['email']:'')]);
+			echo $this->Form->input("",["label"=>false,"name"=>"email","class"=>"form-control validate[required,custom[email]]","value"=>(($edit)?$data['email']:''),"id"=>"email"]);
 			echo "</div>";	
 			echo "</div>";			
 			echo "</fieldset>";
@@ -237,85 +292,85 @@ function validate_multiselect()
 					
 			echo "<fieldset><legend>". __('Physical Information')."</legend>";
 			echo "<div class='form-group'>";	
-			echo '<label class="control-label col-md-2" for="email">'. __("Weight").'</label>';
+			echo '<label class="control-label col-md-2" for="weight">'. __("Weight").'</label>';
 			echo '<div class="col-md-6">';
-			echo $this->Form->input("",["label"=>false,"name"=>"weight","class"=>"form-control validate[custom[onlyNumberSp],maxSize[3]]","placeholder"=>$this->Gym->getSettings("weight"),"value"=>(($edit)?$data['weight']:'')]);
+			echo $this->Form->input("",["label"=>false,"name"=>"weight","class"=>"form-control validate[custom[onlyNumberSp],maxSize[3]]","placeholder"=>$this->Gym->getSettings("weight"),"value"=>(($edit)?$data['weight']:''),"id"=>"weight"]);
 			echo "</div>";	
 			echo "</div>";
 
 			echo "<div class='form-group'>";	
-			echo '<label class="control-label col-md-2" for="email">'. __("Height").'</label>';
+			echo '<label class="control-label col-md-2" for="height">'. __("Height").'</label>';
 			echo '<div class="col-md-6">';
-			echo $this->Form->input("",["label"=>false,"name"=>"height","class"=>"form-control validate[custom[onlyNumberSp],maxSize[3]]","placeholder"=>__($this->Gym->getSettings("height")),"value"=>(($edit)?$data['height']:'')]);
+			echo $this->Form->input("",["label"=>false,"name"=>"height","class"=>"form-control validate[custom[onlyNumberSp],maxSize[3]]","placeholder"=>__($this->Gym->getSettings("height")),"value"=>(($edit)?$data['height']:''),"id"=>"height"]);
 			echo "</div>";	
 			echo "</div>";	
 			
 			echo "<div class='form-group'>";	
-			echo '<label class="control-label col-md-2" for="email">'. __("Chest").'</label>';
+			echo '<label class="control-label col-md-2" for="chest">'. __("Chest").'</label>';
 			echo '<div class="col-md-6">';
-			echo $this->Form->input("",["label"=>false,"name"=>"chest","class"=>"form-control validate[custom[onlyNumberSp],maxSize[3]]","placeholder"=>__($this->Gym->getSettings("chest")),"value"=>(($edit)?$data['chest']:'')]);
+			echo $this->Form->input("",["label"=>false,"name"=>"chest","class"=>"form-control validate[custom[onlyNumberSp],maxSize[3]]","placeholder"=>__($this->Gym->getSettings("chest")),"value"=>(($edit)?$data['chest']:''),"id"=>"chest"]);
 			echo "</div>";	
 			echo "</div>";	
 			
 			echo "<div class='form-group'>";	
-			echo '<label class="control-label col-md-2" for="email">'. __("Waist").'</label>';
+			echo '<label class="control-label col-md-2" for="waist">'. __("Waist").'</label>';
 			echo '<div class="col-md-6">';
-			echo $this->Form->input("",["label"=>false,"name"=>"waist","class"=>"form-control validate[custom[onlyNumberSp],maxSize[3]]","placeholder"=>__($this->Gym->getSettings("waist")),"value"=>(($edit)?$data['waist']:'')]);
+			echo $this->Form->input("",["label"=>false,"name"=>"waist","class"=>"form-control validate[custom[onlyNumberSp],maxSize[3]]","placeholder"=>__($this->Gym->getSettings("waist")),"value"=>(($edit)?$data['waist']:''),"id"=>"waist"]);
 			echo "</div>";	
 			echo "</div>";	
 			
 			echo "<div class='form-group'>";	
-			echo '<label class="control-label col-md-2" for="email">'. __("Thigh").'</label>';
+			echo '<label class="control-label col-md-2" for="thing">'. __("Thigh").'</label>';
 			echo '<div class="col-md-6">';
-			echo $this->Form->input("",["label"=>false,"name"=>"thing","class"=>"form-control validate[custom[onlyNumberSp],maxSize[3]]","placeholder"=>__($this->Gym->getSettings("thing")),"value"=>(($edit)?$data['thing']:'')]);
+			echo $this->Form->input("",["label"=>false,"name"=>"thing","class"=>"form-control validate[custom[onlyNumberSp],maxSize[3]]","placeholder"=>__($this->Gym->getSettings("thing")),"value"=>(($edit)?$data['thing']:''),"id"=>"thing"]);
 			echo "</div>";	
 			echo "</div>";	
 			
 			echo "<div class='form-group'>";	
-			echo '<label class="control-label col-md-2" for="email">'. __("Arms").'</label>';
+			echo '<label class="control-label col-md-2" for="arms">'. __("Arms").'</label>';
 			echo '<div class="col-md-6">';
-			echo $this->Form->input("",["label"=>false,"name"=>"arms","class"=>"form-control validate[custom[onlyNumberSp],maxSize[3]]","placeholder"=>__($this->Gym->getSettings("arms")),"value"=>(($edit)?$data['arms']:'')]);
+			echo $this->Form->input("",["label"=>false,"name"=>"arms","class"=>"form-control validate[custom[onlyNumberSp],maxSize[3]]","placeholder"=>__($this->Gym->getSettings("arms")),"value"=>(($edit)?$data['arms']:''),"id"=>"arms"]);
 			echo "</div>";	
 			echo "</div>";	
 			
 			echo "<div class='form-group'>";	
-			echo '<label class="control-label col-md-2" for="email">'. __("Fat").'</label>';
+			echo '<label class="control-label col-md-2" for="fat">'. __("Fat").'</label>';
 			echo '<div class="col-md-6">';
-			echo $this->Form->input("",["label"=>false,"name"=>"fat","class"=>"form-control validate[custom[onlyNumberSp],maxSize[3]]","placeholder"=>__($this->Gym->getSettings("fat")),"value"=>(($edit)?$data['fat']:'')]);
+			echo $this->Form->input("",["label"=>false,"name"=>"fat","class"=>"form-control validate[custom[onlyNumberSp],maxSize[3]]","placeholder"=>__($this->Gym->getSettings("fat")),"value"=>(($edit)?$data['fat']:''),"id"=>"fat"]);
 			echo "</div>";	
 			echo "</div>";	
 			echo "</fieldset>";
 						
 			echo "<fieldset><legend>". __('Login Information')."</legend>";
 			echo "<div class='form-group'>";	
-			echo '<label class="control-label col-md-2" for="email">'. __("Username").'<span class="text-danger"> *</span></label>';
+			echo '<label class="control-label col-md-2" for="username">'. __("Username").'<span class="text-danger"> *</span></label>';
 			echo '<div class="col-md-6">';
-			echo $this->Form->input("",["label"=>false,"name"=>"username","class"=>"form-control validate[required]","value"=>(($edit)?$data['username']:''),"readonly"=> (($edit)?true:false)]);
+			echo $this->Form->input("",["label"=>false,"name"=>"username","class"=>"form-control validate[required]","value"=>(($edit)?$data['username']:''),"readonly"=> (($edit)?true:false),"id"=>"username"]);
 			echo "</div>";	
 			echo "</div>";
 			
 			echo "<div class='form-group'>";	
-			echo '<label class="control-label col-md-2" for="email">'. __("Password").'<span class="text-danger"> *</span></label>';
+			echo '<label class="control-label col-md-2" for="password">'. __("Password").'<span class="text-danger"> *</span></label>';
 			echo '<div class="col-md-6">';
-			echo $this->Form->password("",["label"=>false,"name"=>"password","class"=>"form-control validate[required]","value"=>(($edit)?$data['password']:'')]);
+			echo $this->Form->password("",["label"=>false,"name"=>"password","class"=>"form-control validate[required]","value"=>(($edit)?$data['password']:''),"id"=>"password"]);
 			echo "</div>";	
 			echo "</div>";
 			
 			echo "<div class='form-group'>";	
-			echo '<label class="control-label col-md-2" for="email">'. __("Display Image").'</label>';
+			echo '<label class="control-label col-md-2" for="image">'. __("Display Image").'</label>';
 			echo '<div class="col-md-4">';
 			echo $this->Form->file("image",["class"=>"form-control"]);
-			$image = ($edit && !empty($data['image'])) ? $data['image'] : "logo.png";
-			echo "<br><img src='{$this->request->webroot}webroot/upload/{$image}'>";
+			$image = ($edit && !empty($data['image'])) ? $data['image'] : "Thumbnail-img.png";
+			echo "<br><img src='{$this->request->webroot}webroot/upload/{$image}' class='img-responsive'>";
 			echo "</div>";	
 			echo "</div>";			
 			echo "</fieldset>";
 								
 			echo "<fieldset><legend>". __('More Information')."</legend>";			
 			echo "<div class='form-group'>";	
-			echo '<label class="control-label col-md-2" for="email">'. __("Select Staff Member").'<span class="text-danger"> *</span></label>';
-			echo '<div class="col-md-6">';			
-			echo @$this->Form->select("assign_staff_mem",$staff,["default"=>$data['assign_staff_mem'],"empty"=>__("Select Staff Member"),"class"=>"form-control validate[required]"]);
+			echo '<label class="control-label col-md-2" for="assign_staff_mem">'. __("Select Staff Member").'<span class="text-danger"> *</span></label>';
+			echo '<div class="col-md-6 module_padding">';			
+			echo @$this->Form->select("assign_staff_mem",$staff,["default"=>$data['assign_staff_mem'],"empty"=>__("Select Staff Member"),"class"=>"form-control validate[required]","id"=>"assign_staff_mem"]);
 			echo "</div>";	
 			echo '<div class="col-md-2">';
 			echo "<a href='{$this->request->base}/StaffMembers/addStaff/' class='btn btn-flat btn-default'>".__("Add Staff")."</a>";
@@ -323,9 +378,9 @@ function validate_multiselect()
 			echo "</div>";
 			
 			echo "<div class='form-group'>";	
-			echo '<label class="control-label col-md-2" for="email">'. __("Interested Area").'</label>';
-			echo '<div class="col-md-6">';			
-			echo @$this->Form->select("intrested_area",$interest,["default"=>$data['intrested_area'],"empty"=>__("Select Interest"),"class"=>"form-control interest_list"]);
+			echo '<label class="control-label col-md-2" for="intrested_area">'. __("Interested Area").'</label>';
+			echo '<div class="col-md-6 module_padding">';			
+			echo @$this->Form->select("intrested_area",$interest,["default"=>$data['intrested_area'],"empty"=>__("Select Interest"),"class"=>"form-control interest_list","id"=>"intrested_area"]);
 			echo "</div>";	
 			echo '<div class="col-md-2">';
 			echo "<a href='javascript:void(0)' class='btn btn-flat btn-default interest-list' data-url='{$this->request->base}/GymAjax/interestList'>".__("Add/Remove")."</a>";
@@ -333,9 +388,9 @@ function validate_multiselect()
 			echo "</div>";
 			
 			echo "<div class='form-group'>";	
-			echo '<label class="control-label col-md-2" for="email">'. __("Source").'</label>';
-			echo '<div class="col-md-6">';			
-			echo @$this->Form->select("g_source",$source,["default"=>$data['g_source'],"empty"=>__("Select Source"),"class"=>"form-control source_list"]);
+			echo '<label class="control-label col-md-2" for="g_source">'. __("Source").'</label>';
+			echo '<div class="col-md-6 module_padding">';			
+			echo @$this->Form->select("g_source",$source,["default"=>$data['g_source'],"empty"=>__("Select Source"),"class"=>"form-control source_list","id"=>"g_source"]);
 			echo "</div>";	
 			echo '<div class="col-md-2">';
 			echo "<a href='javascript:void(0)' class='btn btn-flat btn-default source-list' data-url='{$this->request->base}/GymAjax/sourceList'>".__("Add/Remove")."</a>";
@@ -343,9 +398,9 @@ function validate_multiselect()
 			echo "</div>";
 			
 			echo "<div class='form-group'>";	
-			echo '<label class="control-label col-md-2" for="email">'. __("Referred By").'</label>';
-			echo '<div class="col-md-6">';			
-			echo @$this->Form->select("referrer_by",$referrer_by,["default"=>$data['referrer_by'],"empty"=>__("Select Staff Member"),"class"=>"form-control"]);
+			echo '<label class="control-label col-md-2" for="referrer_by">'. __("Referred By").'</label>';
+			echo '<div class="col-md-6 module_padding">';			
+			echo @$this->Form->select("referrer_by",$referrer_by,["default"=>$data['referrer_by'],"empty"=>__("Select Staff Member"),"class"=>"form-control","id"=>"referrer_by"]);
 			echo "</div>";	
 			echo '<div class="col-md-2">';
 			echo "<a href='{$this->request->base}/StaffMembers/addStaff/' class='btn btn-flat btn-default'>".__("Add Staff")."</a>";
@@ -381,7 +436,7 @@ function validate_multiselect()
 			<?php
 			echo "<div class='form-group class-member'>";	
 			echo '<label class="control-label col-md-2" for="email">'. __("Membership").'<span class="text-danger"> *</span></label>';
-			echo '<div class="col-md-6">';			
+			echo '<div class="col-md-6 module_padding">';			
 			echo @$this->Form->select("selected_membership",$membership,["default"=>$data['selected_membership'],"empty"=>__("Select Membership"),"class"=>"form-control validate[required] membership_id"]);
 			echo "</div>";	
 			echo '<div class="col-md-2">';
@@ -391,7 +446,7 @@ function validate_multiselect()
 					
 			echo "<div class='form-group'>";	
 			echo '<label class="control-label col-md-2" for="email">'. __("Class").'<span class="text-danger"> *</span></label>';
-			echo '<div class="col-md-6">';			
+			echo '<div class="col-md-6 module_padding">';			
 			echo $this->Form->select("assign_class",($edit)?$classes:"",["default"=>($edit)?$member_class:"","class"=>"class_list form-control","id"=>"class_list","multiple"=>"multiple"]);
 			echo "</div>";	
 			echo '<div class="col-md-2">';
@@ -416,16 +471,18 @@ function validate_multiselect()
 			<?php
 			}
 			echo "<div class='form-group class-member'>";	
-			echo '<label class="control-label col-md-2" for="email">'. __("Membership Valid From").'<span class="text-danger"> *</span></label>';
+			echo '<label class="control-label col-md-2" for="email">'. __("Membership Valid From").'<span class="text-danger">*</span></label>';
 			echo '<div class="col-md-2">';
-			echo $this->Form->input("",["label"=>false,"name"=>"membership_valid_from","class"=>"form-control validate[required] date mem_valid_from","value"=>(($edit && $data['membership_valid_from']!="")?date($this->Gym->getSettings("date_format"),strtotime($data['membership_valid_from'])):'')]);
+			echo $this->Form->input("",["label"=>false,"name"=>"membership_valid_from","class"=>"form-control validate[required] date mem_valid_from","value"=>(($edit && $data['membership_valid_from']!="")?$this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($data['membership_valid_from']))):'')]);
+			
 			echo "</div>";
 			echo '<div class="col-md-1 no-padding text-center">';
 			echo "To";
 			echo "</div>";
 			echo '<div class="col-md-2">';
-			echo $this->Form->input("",["label"=>false,"name"=>"membership_valid_to","class"=>"form-control validate[required] valid_to","value"=>(($edit && $data['membership_valid_to']!="")?date($this->Gym->getSettings("date_format"),strtotime($data['membership_valid_to'])):''),"readonly"=>true]);
-			echo "</div>";
+			echo $this->Form->input("",["label"=>false,"name"=>"membership_valid","class"=>"form-control validate[required] valid_to","value"=>(($edit && $data['membership_valid_to']!="")?$this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($data['membership_valid_to']))):''),"disabled"=>true]);?>
+			<input type='hidden' name='membership_valid_to' class='check' value='<?php ($edit && $data['membership_valid_to']!="")?$this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($data['membership_valid_to']))):''?>'>
+			<?php echo "</div>";
 			echo "</div>";
 			
 			echo "<div class='form-group'>";	

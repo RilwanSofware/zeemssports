@@ -5,7 +5,13 @@
 			<section class="content-header">
 			  <h1>
 				<i class="fa fa-plus"></i>
-				<?php echo __("Add Product");?>
+				<?php	if($edit){
+							echo __("Edit Product");
+						}else{
+							echo __("Add Product");
+						}
+				?>
+				
 				<small><?php echo __("Products");?></small>
 			  </h1>
 			  <ol class="breadcrumb">
@@ -19,7 +25,7 @@
 		<div class='form-group'>	
 		<label class="control-label col-md-2" for="email"><?php  echo __("Product Name");?><span class="text-danger"> *</span></label>
 		<div class="col-md-6">
-			<input type="text" name="product_name" class="form-control validate[required]" value="<?php echo ($edit)?$data["product_name"] : "";?>">
+			<input type="text" name="product_name" class="form-control validate[required,custom[onlyLetterNumber]]" value="<?php echo ($edit)?$data["product_name"] : "";?>" maxlength="40">
 		</div>	
 		</div>
 		<div class='form-group'>	
@@ -27,17 +33,17 @@
 		<div class="col-md-6">
 			<div class='input-group'>
 				<span class='input-group-addon'><?php echo $this->Gym->get_currency_symbol();?></span>
-				<input type="text" name="price" class="form-control validate[required]" value="<?php echo ($edit)?$data["price"] : "";?>">
+				<input type="text" name="price" class="form-control validate[required,custom[integer,min[0]]]" value="<?php echo ($edit)?$data["price"] : "";?>" maxlength = "10">
 			</div>	
 		</div>	
 		</div>
 		<div class='form-group'>	
 		<label class="control-label col-md-2" for="email"><?php  echo __("Product Quantity");?><span class="text-danger"> *</span></label>
 		<div class="col-md-6">
-			<input type="text" name="quantity" class="form-control validate[required]" value="<?php echo ($edit)?$data["quantity"] : "";?>">
+			<input type="text" name="quantity" class="form-control validate[required,custom[integer,min[0]]]" value="<?php echo ($edit)?$data["quantity"] : "";?>" maxlength = "5">
 		</div>	
 		</div>
-		<div class="col-md-offset-2 col-md-6">
+		<div class="col-md-offset-2 col-md-6 add_product_save">
 			<input type="submit" value="<?php echo __("Save");?>" name="save_product" class="btn btn-flat btn-success">
 		</div>
 		</form>

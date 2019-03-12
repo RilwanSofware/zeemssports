@@ -146,6 +146,12 @@
                     "alertText": "* No special characters allowed"
                 },
                 // --- CUSTOM RULES -- Those are specific to the demos, they can be removed or changed to your likings
+				/* Change */
+				"onlyLetterNumberSp": {
+                    "regex": /^[0-9a-zA-Z\s-]+$/,
+                    "alertText": "* No special characters allowed"
+                },
+				/* end change */
                 "ajaxUserCall": {
                     "url": "ajaxValidateFieldUser",
                     // you may want to pass extra data on the ajax call

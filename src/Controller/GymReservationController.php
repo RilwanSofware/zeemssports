@@ -22,9 +22,9 @@ class GymReservationController extends AppController
 			$row = $this->GymReservation->newEntity();
 			$this->request->data["created_by"] = $session["id"];
 			$this->request->data["created_date"] = date("Y-m-d");
-			$this->request->data["event_date"] = date("Y-m-d",strtotime($this->request->data["event_date"]));
-			$this->request->data['start_time'] = $this->request->data['start_hrs'].":".$this->request->data['start_min'].":".$this->request->data['start_ampm'];
-			$this->request->data['end_time'] = $this->request->data['end_hrs'].":".$this->request->data['end_min'].":".$this->request->data['end_ampm'];
+			$this->request->data["event_date"] = $this->GYMFunction->get_db_format_date($this->request->data['event_date']);		
+			$this->request->data['start_time'] = $this->request->data['starttime'];
+			$this->request->data['end_time'] = $this->request->data['endtime'];
 			$row = $this->GymReservation->patchEntity($row,$this->request->data);		
 			if($this->GymReservation->save($row))
 			{
@@ -38,29 +38,24 @@ class GymReservationController extends AppController
 		$this->set("edit",true);
 		$row = $this->GymReservation->get($id);	
 		
-		$row['start_hrs'] =  explode(":",$row['start_time'])[0];
-		@$row['start_min'] =  explode(":",$row['start_time'])[1];
-		@$row['start_ampm'] =  explode(":",$row['start_time'])[2];		
-		$row['end_hrs'] =  explode(":",$row['end_time'])[0];
-		$row['end_min'] =  explode(":",$row['end_time'])[1];
-		$row['end_ampm'] =  explode(":",$row['end_time'])[2];
-		
 		$this->set("data",$row->toArray());
+		
 		$event_places = $this->GymReservation->GymEventPlace->find("list",["keyField"=>"id","valueField"=>"place"])->hydrate(false);
 		$this->set("event_places",$event_places);
+		
 		$this->render("addReservation");
 		$row = "";
 		if($this->request->is("post"))
 		{
 			$row = $this->GymReservation->get($id);			
-			$this->request->data["event_date"] = date("Y-m-d",strtotime($this->request->data["event_date"]));
-			$this->request->data['start_time'] = $this->request->data['start_hrs'].":".$this->request->data['start_min'].":".$this->request->data['start_ampm'];
-			$this->request->data['end_time'] = $this->request->data['end_hrs'].":".$this->request->data['end_min'].":".$this->request->data['end_ampm'];
+			$this->request->data["event_date"] = $this->GYMFunction->get_db_format_date($this->request->data['event_date']);		
+			$this->request->data['start_time'] = $this->request->data['starttime'];
+			$this->request->data['end_time'] = $this->request->data['endtime'];
 			
 			$row = $this->GymReservation->patchEntity($row,$this->request->data);
 			if($this->GymReservation->save($row))
 			{
-				$this->Flash->success(__("Success! Record Saved Successfully"));
+				$this->Flash->success(__("Success! Record Updated Successfully"));
 				return $this->redirect(["action"=>"reservationList"]);
 			}
 			

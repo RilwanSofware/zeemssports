@@ -2,17 +2,19 @@
 echo $this->Html->script('jQuery/jQuery-2.1.4.min.js');
 echo $this->Html->script('jquery-ui.min');
 echo $this->Html->css('bootstrap.min');
-
+echo $this->Html->css('jquery-ui.css');	
 $is_rtl = $this->Gym->getSettings("enable_rtl");
 if($is_rtl)
 {
 	echo $this->Html->css('bootstrap-rtl.min');
 }
 echo $this->Html->script('bootstrap/js/bootstrap.min.js');
-echo $this->Html->css('plugins/datepicker/datepicker3');
-echo $this->Html->script('datepicker/bootstrap-datepicker.js');
+//echo $this->Html->css('plugins/datepicker/datepicker3');
+//echo $this->Html->script('datepicker/bootstrap-datepicker.js');
 $dtp_lang = $this->gym->getSettings("datepicker_lang");
-echo $this->Html->script("datepicker/locales/bootstrap-datepicker.{$dtp_lang}");
+//echo $this->Html->script("datepicker/locales/bootstrap-datepicker.{$dtp_lang}");
+echo $this->Html->script("jQueryUI/ui/i18n/datepicker-{$dtp_lang}.js");
+//echo $this->Html->css('bootstrap-datepicker.css');
 echo $this->Html->css('bootstrap-multiselect');
 echo $this->Html->script('bootstrap-multiselect');
 echo $this->Html->css('validationEngine/validationEngine.jquery');
@@ -52,14 +54,16 @@ $(".validateForm").validationEngine();
 	$('.class_list').multiselect({
 		includeSelectAllOption: true	
 	});
-	
-	$(".datepick").datepicker({format: 'yyyy-mm-dd',"language" : "<?php echo $dtp_lang;?>"});
+	$(".dob").datepicker({dateFormat:"<?php echo $this->Gym->dateformat_PHP_to_jQueryUI($this->Gym->getSettings("date_format")); ?>" ,"language" : "<?php echo $dtp_lang;?>"});
+	//$(".datepick").datepicker({format: 'yyyy-mm-dd',"language" : "<?php echo $dtp_lang;?>"});
+	$(".datepick").datepicker({dateFormat:"<?php echo $this->Gym->dateformat_PHP_to_jQueryUI($this->Gym->getSettings("date_format")); ?>" ,"language" : "<?php echo $dtp_lang;?>",});
 		
 	$(".content-wrapper").css("height","2600px");
 	
-	$(".mem_valid_from").datepicker({format: 'yyyy-mm-dd'}).on("changeDate",function(ev){
+	$(".mem_valid_from").datepicker({dateFormat: "<?php echo $this->Gym->dateformat_PHP_to_jQueryUI($this->Gym->getSettings("date_format")); ?>" ,"language" : "<?php echo $dtp_lang;?>"}).on("change",function(ev){
 				var ajaxurl = $("#mem_date_check_path").val();
 				var date = ev.target.value;	
+				
 				var membership = $(".membership_id option:selected").val();		
 				if(membership != "")
 				{
@@ -71,10 +75,15 @@ $(".validateForm").validationEngine();
 							data : curr_data,
 							success : function(response)
 									{
-										// $(".valid_to").val($.datepicker.formatDate('<?php echo $this->Gym->getSettings("date_format"); ?>',new Date(response)));
-										$(".valid_to").val(response);
-										// alert(response);
-										// console.log(response);
+										$(".valid_to,.check").datepicker({ language: "<?php echo $dtp_lang;?>",
+											 dateFormat :"<?php echo $this->Gym->dateformat_PHP_to_jQueryUI($this->Gym->getSettings("date_format")); ?>",
+											 
+											}
+											);
+											$(".valid_to,.check").datepicker($.datepicker.regional['<?php echo $dtp_lang;?>']);
+											$( ".valid_to,.check" ).datepicker( "setDate",  new Date(response) );
+										//$(".valid_to").val(response);
+										
 									},
 							error: function(e){
 									console.log(e.responseText);
@@ -113,21 +122,21 @@ $(".validateForm").validationEngine();
 			echo "<div class='form-group'>";	
 			echo '<label class="control-label col-md-2" for="email">'. __("First Name").'<span class="text-danger"> *</span></label>';
 			echo '<div class="col-md-6">';
-			echo $this->Form->input("",["label"=>false,"name"=>"first_name","class"=>"form-control validate[required]","value"=>(($edit)?$data['first_name']:'')]);
+			echo $this->Form->input("",["label"=>false,"name"=>"first_name","class"=>"form-control validate[required,custom[onlyLetterSp],maxSize[30]]","value"=>(($edit)?$data['first_name']:'')]);
 			echo "</div>";	
 			echo "</div>";	
 			
 			echo "<div class='form-group'>";	
 			echo '<label class="control-label col-md-2" for="email">'. __("Middle Name").'</label>';
 			echo '<div class="col-md-6">';
-			echo $this->Form->input("",["label"=>false,"name"=>"middle_name","class"=>"form-control","value"=>(($edit)?$data['middle_name']:'')]);
+			echo $this->Form->input("",["label"=>false,"name"=>"middle_name","class"=>"form-control validate[custom[onlyLetterSp],maxSize[30]]","value"=>(($edit)?$data['middle_name']:'')]);
 			echo "</div>";	
 			echo "</div>";	
 			
 			echo "<div class='form-group'>";	
 			echo '<label class="control-label col-md-2" for="email">'. __("Last Name").'<span class="text-danger"> *</span></label>';
 			echo '<div class="col-md-6">';
-			echo $this->Form->input("",["label"=>false,"name"=>"last_name","class"=>"form-control validate[required]","value"=>(($edit)?$data['last_name']:'')]);
+			echo $this->Form->input("",["label"=>false,"name"=>"last_name","class"=>"form-control validate[required,custom[onlyLetterSp],maxSize[30]]]","value"=>(($edit)?$data['last_name']:'')]);
 			echo "</div>";	
 			echo "</div>";	
 			
@@ -145,7 +154,7 @@ $(".validateForm").validationEngine();
 			echo "<div class='form-group'>";	
 			echo '<label class="control-label col-md-2" for="email">'. __("Date of birth").'<span class="text-danger"> *</span></label>';
 			echo '<div class="col-md-6">';
-			echo $this->Form->input("",["label"=>false,"name"=>"birth_date","class"=>"form-control dob validate[required] datepick","value"=>(($edit)?date("Y-m-d",strtotime($data['birth_date'])):'')]);
+			echo $this->Form->input("",["label"=>false,"name"=>"birth_date","class"=>"form-control dob validate[required] datepick","value"=>(($edit)?date($this->Gym->getSettings("date_format"),strtotime($data['birth_date'])):''),"onkeydown"=>"return false"]);
 			echo "</div>";	
 			echo "</div>";		
 			
@@ -162,28 +171,28 @@ $(".validateForm").validationEngine();
 			echo "<div class='form-group'>";	
 			echo '<label class="control-label col-md-2" for="email">'. __("Address").'<span class="text-danger"> *</span></label>';
 			echo '<div class="col-md-6">';
-			echo $this->Form->input("",["label"=>false,"name"=>"address","class"=>"form-control validate[required]","value"=>(($edit)?$data['address']:'')]);
+			echo $this->Form->input("",["label"=>false,"name"=>"address","class"=>"form-control validate[required,maxSize[150]]","value"=>(($edit)?$data['address']:'')]);
 			echo "</div>";	
 			echo "</div>";	
 			
 			echo "<div class='form-group'>";	
 			echo '<label class="control-label col-md-2" for="email">'. __("City").'<span class="text-danger"> *</span></label>';
 			echo '<div class="col-md-6">';
-			echo $this->Form->input("",["label"=>false,"name"=>"city","class"=>"form-control validate[required]","value"=>(($edit)?$data['city']:'')]);
+			echo $this->Form->input("",["label"=>false,"name"=>"city","class"=>"form-control validate[required,custom[onlyLetterSp],maxSize[20]]","value"=>(($edit)?$data['city']:'')]);
 			echo "</div>";	
 			echo "</div>";
 			
 			echo "<div class='form-group'>";	
 			echo '<label class="control-label col-md-2" for="email">'. __("state").'</label>';
 			echo '<div class="col-md-6">';
-			echo $this->Form->input("",["label"=>false,"name"=>"state","class"=>"form-control","value"=>(($edit)?$data['state']:'')]);
+			echo $this->Form->input("",["label"=>false,"name"=>"state","class"=>"form-control validate[custom[onlyLetterSp],maxSize[20]]","value"=>(($edit)?$data['state']:'')]);
 			echo "</div>";	
 			echo "</div>";
 			
 			echo "<div class='form-group'>";	
 			echo '<label class="control-label col-md-2" for="email">'. __("Zip code").'<span class="text-danger"> *</span></label>';
 			echo '<div class="col-md-6">';
-			echo $this->Form->input("",["label"=>false,"name"=>"zipcode","class"=>"form-control validate[required]","value"=>(($edit)?$data['zipcode']:'')]);
+			echo $this->Form->input("",["label"=>false,"name"=>"zipcode","class"=>"form-control validate[required ,custom[onlyNumberSp],maxSize[10]]]","value"=>(($edit)?$data['zipcode']:'')]);
 			echo "</div>";	
 			echo "</div>";
 			
@@ -192,7 +201,7 @@ $(".validateForm").validationEngine();
 			echo '<div class="col-md-6">';
 			echo '<div class="input-group">';
 			echo '<div class="input-group-addon">+'.$this->Gym->getCountryCode($this->Gym->getSettings("country")).'</div>';
-			echo $this->Form->input("",["label"=>false,"name"=>"mobile","class"=>"form-control validate[required]","value"=>(($edit)?$data['mobile']:'')]);
+			echo $this->Form->input("",["label"=>false,"name"=>"mobile","class"=>"form-control validate[required,custom[onlyNumberSp],maxSize[15]]","value"=>(($edit)?$data['mobile']:'')]);
 			echo "</div>";	
 			echo "</div>";	
 			echo "</div>";	
@@ -200,7 +209,7 @@ $(".validateForm").validationEngine();
 			echo "<div class='form-group'>";	
 			echo '<label class="control-label col-md-2" for="email">'. __("Phone").'</label>';
 			echo '<div class="col-md-6">';
-			echo $this->Form->input("",["label"=>false,"name"=>"phone","class"=>"form-control","value"=>(($edit)?$data['phone']:'')]);
+			echo $this->Form->input("",["label"=>false,"name"=>"phone","class"=>"form-control validate[custom[onlyNumberSp],maxSize[15]]","value"=>(($edit)?$data['phone']:'')]);
 			echo "</div>";	
 			echo "</div>";
 			
@@ -232,7 +241,7 @@ $(".validateForm").validationEngine();
 			echo '<label class="control-label col-md-2" for="email">'. __("Display Image").'</label>';
 			echo '<div class="col-md-4">';
 			echo $this->Form->file("image",["class"=>"form-control"]);
-			$image = ($edit && !empty($data['image'])) ? $data['image'] : "logo.png";
+			$image = ($edit && !empty($data['image'])) ? $data['image'] : "Thumbnail-img.png";
 			echo "<br><img src='{$this->request->webroot}webroot/upload/{$image}'>";
 			echo "</div>";	
 			echo "</div>";			
@@ -271,14 +280,15 @@ $(".validateForm").validationEngine();
 			echo "<div class='form-group class-member'>";	
 			echo '<label class="control-label col-md-2" for="email">'. __("Select Joining Date").'<span class="text-danger"> *</span></label>';
 			echo '<div class="col-md-2">';
-			echo $this->Form->input("",["label"=>false,"name"=>"membership_valid_from","class"=>"form-control validate[required] mem_valid_from","value"=>(($edit && $data['membership_valid_from']!="")?date("Y-m-d",strtotime($data['membership_valid_from'])):'')]);
+			echo $this->Form->input("",["label"=>false,"name"=>"membership_valid_from","class"=>"form-control validate[required] mem_valid_from","value"=>(($edit && $data['membership_valid_from']!="")?$this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($data['membership_valid_from']))):'')]);
 			echo "</div>";
 			echo '<div class="col-md-1 no-padding text-center">';
 			// echo "To";
 			echo "</div>";
 			echo '<div class="col-md-2">';
-			echo $this->Form->input("",["type"=>"hidden","label"=>false,"name"=>"membership_valid_to","class"=>"form-control validate[required] valid_to","value"=>(($edit && $data['membership_valid_to']!="")?date("Y-m-d",strtotime($data['membership_valid_to'])):''),"readonly"=>true]);
-			echo "</div>";
+			echo $this->Form->input("",["type"=>"hidden","label"=>false,"name"=>"membership_valid_to","class"=>"form-control validate[required] valid_to","value"=>(($edit && $data['membership_valid_to']!="")?date("Y-m-d",strtotime($data['membership_valid_to'])):''),"readonly"=>true]);?>
+			<input type='hidden' name='membership_valid_to' class='check' value='<?php ($edit && $data['membership_valid_to']!="")?$this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($data['membership_valid_to']))):''?>'>
+			<?php echo "</div>";
 			echo "</div>";
 			
 			
@@ -333,7 +343,7 @@ $("body").on("change",".membership_id",function(){
 			return false;
 		},
 		error : function(e){
-			// alert("Error: Could not fetch class list");
+			
 			console.log(e.responseText);
 		}
 	});

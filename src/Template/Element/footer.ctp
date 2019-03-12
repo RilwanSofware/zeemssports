@@ -9,6 +9,6 @@
         <div class="<?php echo $pull;?> hidden-xs">
           <b><?php echo __("Version");?></b> <?php echo $version;?>
         </div>
-      <!--  <strong>Copyright &copy; 2016-2017 <a href=""> Das Infomedia</a> .</strong> All rights reserved.-->
+
 	  <span><?php echo $footer;?></span>
       </footer>

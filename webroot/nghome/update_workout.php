@@ -1,7 +1,7 @@
 <?php
 include('connection.php');
 $id=$_REQUEST['id'];
-$id=explode(",",$id);
+// $id=explode(",",$id);
 $sets=$_REQUEST['sets'];
 $sets=explode(",",$sets);
 $reps=$_REQUEST['reps'];
@@ -18,11 +18,11 @@ $recorddate=$_REQUEST['recorddate'];
 $result = array();
 for($i=0;$i<sizeof($kg);$i++)
 {	
-		$sql1="UPDATE `gym_daily_workout` SET `note`='$note' WHERE `member_id`=$id[$i] AND `record_date`='$recorddate'";
+		$sql1="UPDATE `gym_daily_workout` SET `note`='$note' WHERE `member_id`=$id AND `record_date`='$recorddate'";
 		// echo $sql1;die;
 		$conn->query($sql1);
 		
-		$sql2="SELECT * FROM `gym_daily_workout` WHERE `member_id` = $id[$i] AND `record_date` = '$recorddate'";
+		$sql2="SELECT * FROM `gym_daily_workout` WHERE `member_id` = $id AND `record_date` = '$recorddate'";
 		$res2=$conn->query($sql2);
 		
 		if ($res2->num_rows > 0) 

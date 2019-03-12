@@ -7,14 +7,14 @@ use Cake\ORM\TableRegistry;
 use Cake\Network\Session\DatabaseSession;
 use Cake\Mailer\Email;
 use Cake\I18n\Time;
-// use GoogleCharts;
+
 
 Class GymMemberController extends AppController
 {
 	public function initialize()
 	{
 		parent::initialize();
-		/* $this->loadComponent('Csrf'); */
+
 		$this->loadComponent("GYMFunction");
 		require_once(ROOT . DS .'vendor' . DS  . 'chart' . DS . 'GoogleCharts.class.php');
 		$session = $this->request->session()->read("User");
@@ -26,8 +26,8 @@ Class GymMemberController extends AppController
 		$session = $this->request->session()->read("User");
 		if($session["role_name"] == "administrator")
 		{
-			/* $data = $this->GymMember->find("all")->where(["OR"=>[["role_name"=>"member"],["role_name"=>"administrator"]]])->hydrate(false)->toArray(); */
 			$data = $this->GymMember->find("all")->where(["role_name"=>"member"])->hydrate(false)->toArray();
+			//debug($data);die;
 		}
 		else if($session["role_name"] == "member"){
 			$uid = intval($session["id"]);
@@ -51,7 +51,8 @@ Class GymMemberController extends AppController
 		else{
 			$data = $this->GymMember->find("all")->where(["role_name"=>"member"])->hydrate(false)->toArray();
 		}
-				
+		
+		
 		$this->set("data",$data);	
 	}
 	
@@ -88,25 +89,32 @@ Class GymMemberController extends AppController
 		
 		if($this->request->is("post"))
 		{
+			//var_dump($this->request->data['birth_date']);die;
 			$ext = $this->GYMFunction->check_valid_extension($this->request->data['image']['name']);
 			if($ext != 0)
 			{
 				$this->request->data['member_id'] = $member_id;
 				$image = $this->GYMFunction->uploadImage($this->request->data['image']);
-				$this->request->data['image'] = (!empty($image)) ? $image : "logo.png";
-				$this->request->data['birth_date'] = date("Y-m-d",strtotime($this->request->data['birth_date']));
-				$this->request->data['inquiry_date'] = date("Y-m-d",strtotime($this->request->data['inquiry_date']));
-				$this->request->data['trial_end_date'] = date("Y-m-d",strtotime($this->request->data['trial_end_date']));
+				$this->request->data['image'] = (!empty($image)) ? $image : "Thumbnail-img.png";
+				$this->request->data['birth_date'] = $this->GYMFunction->get_db_format_date($this->request->data['birth_date']);
+				//$this->request->data['birth_date'] = date("Y-m-d",strtotime($this->request->data['birth_date']));
+				//$this->request->data['inquiry_date'] = date("Y-m-d",strtotime($this->request->data['inquiry_date']));
+				$this->request->data['inquiry_date'] = $this->GYMFunction->get_db_format_date($this->request->data['inquiry_date']);
+				$this->request->data['trial_end_date'] = $this->GYMFunction->get_db_format_date($this->request->data['trial_end_date']);
+				//$this->request->data['trial_end_date'] = date("Y-m-d",strtotime($this->request->data['trial_end_date']));
 				if(isset($this->request->data['membership_valid_from']))
 				{
-					$this->request->data['membership_valid_from'] = date("Y-m-d",strtotime($this->request->data['membership_valid_from']));
+					//$this->request->data['membership_valid_from'] = date("Y-m-d",strtotime($this->request->data['membership_valid_from']));
+					$this->request->data['membership_valid_from'] = $this->GYMFunction->get_db_format_date($this->request->data['membership_valid_from']);
 				
 				}
 				if(isset($this->request->data['membership_valid_to']))
 				{
-					$this->request->data['membership_valid_to'] = date("Y-m-d",strtotime($this->request->data['membership_valid_to']));
+					//$this->request->data['membership_valid_to'] = date("Y-m-d",strtotime($this->request->data['membership_valid_to']));
+					$this->request->data['membership_valid_to'] = $this->GYMFunction->get_db_format_date($this->request->data['membership_valid_to']);
 				}
-				$this->request->data['first_pay_date'] = date("Y-m-d",strtotime($this->request->data['first_pay_date']));
+				//$this->request->data['first_pay_date'] = date("Y-m-d",strtotime($this->request->data['first_pay_date']));
+				$this->request->data['first_pay_date'] = $this->GYMFunction->get_db_format_date($this->request->data['first_pay_date']);
 				$this->request->data['created_date'] = date("Y-m-d");
 				$this->request->data['assign_group'] = json_encode($this->request->data['assign_group']);
 				switch($this->request->data['member_type'])
@@ -189,13 +197,15 @@ Class GymMemberController extends AppController
 		$this->set("edit",true);
 		$this->set("title",__("Edit Member"));
 		$this->set("eid",$id);
-		
+		$membership_classes_id=array();
 		$session = $this->request->session()->read("User");
 		$data = $this->GymMember->get($id)->toArray();
 		
+		
+		
 		$membership_classes = $this->GymMember->Membership->find()->where(["id"=>$data['selected_membership']])->select(["membership_class"])->hydrate(false)->toArray();		
 			
-		$membership_classes = (json_decode($membership_classes[0]["membership_class"])); /*ERROR IN NEW PHP 5.7 VERSION */
+		//$membership_classes = (json_decode($membership_classes[0]["membership_class"])); /*ERROR IN NEW PHP 5.7 VERSION */
 		/* if(!empty($membership_classes)) FOR PHP 5.7 But NOT WORKNIG
 		{
 			$membership_classes = $membership_classes[0]["membership_class"];
@@ -207,9 +217,14 @@ Class GymMemberController extends AppController
 		else{
 			$classes = array();
 		} */
-		if(!empty($membership_classes)) 
+		foreach($membership_classes as $value){
+			
+			$membership_classes_id[]=$value['membership_class'];
+		}
+		
+		if(!empty($membership_classes_id)) 
 		{
-			$classes = $this->GymMember->ClassSchedule->find("list",["keyField"=>"id","valueField"=>"class_name"])->where(["id IN"=>$membership_classes])->toArray();
+			$classes = $this->GymMember->ClassSchedule->find("list",["keyField"=>"id","valueField"=>"class_name"])->where(["id IN"=>$membership_classes_id])->toArray();
 		}else{
 			$classes = array();
 		} 
@@ -250,6 +265,7 @@ Class GymMemberController extends AppController
 		if($this->request->is("post"))
 		{
 			$row = $this->GymMember->get($id);
+			//var_dump($this->request->data['birth_date']);die;
 			$ext = $this->GYMFunction->check_valid_extension($this->request->data['image']['name']);
 			if($ext != 0)
 			{
@@ -261,24 +277,35 @@ Class GymMemberController extends AppController
 					unset($this->request->data['image']);
 				}
 				/* $this->request->data['image'] = $image ; */
-				$this->request->data['birth_date'] = date("Y-m-d",strtotime($this->request->data['birth_date']));
-				$this->request->data['inquiry_date'] = (($this->request->data['inquiry_date'] != '')?date("Y-m-d",strtotime($this->request->data['inquiry_date'])):'');
-				$this->request->data['trial_end_date'] = (($this->request->data['trial_end_date'] != '')?date("Y-m-d",strtotime($this->request->data['trial_end_date'])):'');
+
+				$this->request->data['birth_date'] = $this->GYMFunction->get_db_format_date($this->request->data['birth_date']); 
+			
+				//$this->request->data['birth_date'] = date("Y-m-d",strtotime($this->request->data['birth_date']));
+				
+				//$this->request->data['inquiry_date'] = (($this->request->data['inquiry_date'] != '')?date("Y-m-d",strtotime($this->request->data['inquiry_date'])):'');
+				$this->request->data['inquiry_date'] = (($this->request->data['inquiry_date'] != '')?$this->GYMFunction->get_db_format_date($this->request->data['inquiry_date']):'');
+				
+				//echo $this->request->data['inquiry_date']; die;
+				$this->request->data['trial_end_date'] = (($this->request->data['trial_end_date'] != '')?$this->GYMFunction->get_db_format_date($this->request->data['trial_end_date']):'');
 				if(isset($this->request->data['membership_valid_from']))
 				{
-					$this->request->data['membership_valid_from'] = date("Y-m-d",strtotime($this->request->data['membership_valid_from']));
+					//echo $this->request->data['membership_valid_from'] = date("Y-m-d",strtotime($this->request->data['membership_valid_from'])); die;
+					$this->request->data['membership_valid_from'] = $this->GYMFunction->get_db_format_date($this->request->data['membership_valid_from']);
 				}
 				if(isset($this->request->data['membership_valid_to']))
 				{
-					$this->request->data['membership_valid_to'] = date("Y-m-d",strtotime($this->request->data['membership_valid_to']));
+					//$this->request->data['membership_valid_to'] = date("Y-m-d",strtotime($this->request->data['membership_valid_to']));
+					$this->request->data['membership_valid_to'] = $this->GYMFunction->get_db_format_date($this->request->data['membership_valid_to']);
 				}
-				$this->request->data['first_pay_date'] = date("Y-m-d",strtotime($this->request->data['first_pay_date']));
+				//$this->request->data['first_pay_date'] = date("Y-m-d",strtotime($this->request->data['first_pay_date']));
+				$this->request->data['first_pay_date'] = $this->GYMFunction->get_db_format_date($this->request->data['first_pay_date']);
 				$this->request->data['assign_group'] = json_encode($this->request->data['assign_group']);
 				
 				$update = $this->GymMember->patchEntity($row,$this->request->data);
+				
 				if($this->GymMember->save($update))
 				{
-					$this->Flash->success(__("Success! Record Saved Successfully."));
+					$this->Flash->success(__("Success! Record Updated Successfully."));
 					$this->GymMember->GymMemberClass->deleteAll(["member_id"=>$id]);
 					foreach($this->request->data["assign_class"] as $class)
 					{
@@ -286,9 +313,11 @@ Class GymMemberController extends AppController
 						$new_row = $this->GymMember->GymMemberClass->newEntity();
 						$data["member_id"] = $id;
 						$data["assign_class"] = $class;
+						//var_dump($data);
 						$new_row = $this->GymMember->GymMemberClass->patchEntity($new_row,$data);
 						$this->GymMember->GymMemberClass->save($new_row);
 					}
+					//die;
 					return $this->redirect(["action"=>"memberList"]);
 				}
 				else
@@ -309,6 +338,7 @@ Class GymMemberController extends AppController
 				return $this->redirect(["action"=>"editMember",$id]);
 			}
 		}
+		
 	}
 	
 	public function deleteMember($id)
@@ -355,14 +385,13 @@ Class GymMemberController extends AppController
 		$this->set("photos",$photos);
 		
 		$history = $this->GymMember->MembershipPayment->find()->contain(["Membership"])->where(["MembershipPayment.member_id"=>$id])->hydrate(false)->toArray();
-		// $history = $this->GymMember->MembershipHistory->find()->contain(["Membership"])->where(["MembershipHistory.member_id"=>$id])->hydrate(false)->toArray();
+		
 		$this->set("history",$history);
 		
 		##########################################
-		//// $data = $this->GymMember->find()->where(["GymMember.id"=>$id])->contain(['Membership','GymInterestArea','StaffMembers','ClassSchedule'])->select(["Membership.membership_label","GymInterestArea.interest","StaffMembers.first_name","StaffMembers.last_name","ClassSchedule.class_name"])->select($this->GymMember)->hydrate(false)->toArray();
-		// $data = $this->GymMember->find()->where(["GymMember.id"=>$id])->contain(['Membership','GymInterestArea','ClassSchedule'])->select(["Membership.membership_label","GymInterestArea.interest","ClassSchedule.class_name"])->select($this->GymMember)->hydrate(false)->toArray();
+		
 		$data = $this->GymMember->find()->where(["GymMember.id"=>$id])->contain(['Membership','GymInterestArea'])->select(["Membership.membership_label","GymInterestArea.interest"])->select($this->GymMember)->hydrate(false)->toArray();
-		// var_dump($data);die;
+		
 		$this->set("data",$data[0]);		
 	}
 	
@@ -372,16 +401,10 @@ Class GymMemberController extends AppController
 		if($this->request->is("post"))
 		{ 			
 			$uid = $this->request->params["pass"][0];			
-			/* $uid = $this->request->data["uid"];  */
-			$s_date = date("Y-m-d",strtotime($this->request->data["sdate"]));
-			$e_date = date("Y-m-d",strtotime($this->request->data["edate"]));			
-		
-			// $data = $this->GymMember->GymAttendance->find("all")->where(function($exp){
-				// return $exp
-						// ->eq("user_id",$uid)
-						// ->gte("attendance_date",$s_date)
-						// ->lte("attendance_date",$e_date);
-			// })->hydrate(false)->toArray();
+
+			//$s_date = date("Y-m-d",strtotime($this->request->data["sdate"]));
+			$s_date = $this->GYMFunction->get_db_format_date($this->request->data["sdate"]);
+			$e_date = $this->GYMFunction->get_db_format_date($this->request->data["edate"]);			
 			
 			$conditions = array(
 						'conditions' => array(
@@ -397,7 +420,7 @@ Class GymMemberController extends AppController
 			$this->set("s_date",$s_date);
 			$this->set("e_date",$e_date);
 			$this->set("view",true);
-			// var_dump($data);die;
+			
 		}
 	}
 	
@@ -411,7 +434,6 @@ Class GymMemberController extends AppController
 		$membership_valid_from = date($this->GYMFunction->getSettings("date_format"),strtotime($row->membership_valid_from));
 		$membership_valid_to = date($this->GYMFunction->getSettings("date_format"),strtotime($row->membership_valid_to));
 		$membership = $this->GYMFunction->get_membership_name($row->selected_membership);
-		// var_dump($member_email);die;
 		
 		$sys_name = $this->GYMFunction->getSettings('name');
 		$sys_email = $this->GYMFunction->getSettings('email');
@@ -422,23 +444,27 @@ Class GymMemberController extends AppController
 		$headers .= "From: $sys_name<$sys_email> \r\n";
 		$headers .= "Reply-To: $sys_email \r\n";
 		$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-		
-		$email = new Email('default');
-		$email->from(array($sys_email => $sys_name))
-			->to($member_email)
-			->subject('Member Activated')
-			->send($message);
 	
 		$row->activated = 1;
 		if($this->GymMember->save($row))
 		{		
-			mail($member_email, 'Member Activated', $message, $headers);
+			@mail($member_email, 'Member Activated', $message, $headers);
 			
 			$this->Flash->success(__("Success! Member activated successfully."));
 			return $this->redirect(["action"=>"memberList"]);
 		}
 	}
-			
+	
+	/* public function membershipDropped($id)
+	{
+		$this->autoRender = false;
+		$row = $this->GymMember->get($id)->toArray();;
+		$this->request->data['member_id'] = $row['member_id'];
+		$this->request->data['membership_status'] = "Dropped";
+		//$update = $this->GymMember->patchEntity($row,$this->request->data);
+		echo "<script>alert('$id')</script>";
+		
+	} */
 	
 	
 	public function isAuthorized($user)

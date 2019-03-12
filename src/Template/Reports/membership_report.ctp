@@ -6,8 +6,8 @@
 <section class="content">
 	<br>
 	<div class="col-md-12 box box-default">		
-		<div class="box-header">
-			<section class="content-header">
+		<div class="box-header box_payment">
+			<section class="content-header bread_payment">
 			  <h1>
 				<i class="fa fa-bar-chart"></i>
 				<?php echo __("Membership report");?>
@@ -20,7 +20,7 @@
 				&nbsp;
 				<a href="<?php echo $this->Gym->createurl("Reports","paymentReport");?>" class="btn btn-flat btn-custom"><i class="fa fa-bar-chart"></i> <?php echo __("Payment Report");?></a>
 				<a href="<?php echo $this->Gym->createurl("Reports","monthlyworkoutreport");?>" class="btn btn-flat btn-custom"><i class="fa fa-bar-chart"></i> <?php echo __("Members Monthly Workout Report");?></a>
-			</ol>
+			  </ol>
 			</section>
 		</div>
 		<hr>
@@ -40,7 +40,7 @@
 			'vAxis' => Array(
 					'title' =>  __('No of Member','gym_mgt'),
 					'minValue' => 0,
-					'maxValue' => 5,
+					'maxValue' => 6,
 					'format' => '#',
 					'titleTextStyle' => Array('color' => '#66707e','fontSize' => 14,'bold'=>true,'italic'=>false,'fontName' =>'open sans'),
 					'textStyle' => Array('color' => '#66707e','fontSize' => 12),

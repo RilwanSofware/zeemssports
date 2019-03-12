@@ -1,12 +1,14 @@
 <?php $session = $this->request->session()->read("User");?>
 <script>
 $(document).ready(function(){
-	$(".date").datepicker( "option", "dateFormat", "<?php echo $this->Gym->dateformat_PHP_to_jQueryUI($this->Gym->getSettings("date_format")); ?>", "setDate", new Date("<?php echo date($this->Gym->getSettings("date_format"));?>");
-	// $(".date").datepicker(/* { language: "th"} */);
+	$(".date").datepicker( "option", "dateFormat", "<?php echo $this->Gym->dateformat_PHP_to_jQueryUI($this->Gym->getSettings("date_format")); ?>", "setDate", new Date("<?php echo $this->Gym->get_db_format(date($this->Gym->getSettings("date_format")));?>"));
+	
 	<?php
+	
 	if(isset($_POST['curr_date']))
 	{?>
-	$( ".date" ).datepicker( "setDate", new Date("<?php echo date($this->Gym->getSettings("date_format"),strtotime($_POST['curr_date'])); ?>" ));
+	
+	$( ".date" ).datepicker( "setDate","<?php echo $this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($attendance_date))); ?>" );
 	<?php } ?>
 });
 </script>
@@ -35,18 +37,18 @@ $(document).ready(function(){
 			  <input type="hidden" name="class_id" value="0">
 			  <div class="form-group col-md-3">
 				<label class="control-label" for="curr_date"><?php echo __("Date");?></label>				
-					<input id="curr_date" class="form-control validate[required] date" type="text" value="<?php echo (isset($_POST['curr_date'])) ? date($this->Gym->getSettings("date_format"),strtotime($_POST["curr_date"])): date($this->Gym->getSettings("date_format"))?>" name="curr_date">
+					<input id="curr_date" class="form-control validate[required] date" type="text" value="<?php echo (isset($_POST['curr_date'])) ? $this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($_POST["curr_date"]))): $this->Gym->get_db_format(date($this->Gym->getSettings("date_format")))?>" name="curr_date">
 			 </div>
 			<div class="form-group col-md-3">
 				<label for="class_id"><?php echo __("Select Class");?></label>			
 								 
 				<?php 
-				// var_dump($classes);die;
+				
 				echo $this->Form->select("class_id",$classes,["empty"=>__("Select Class"),"class"=>"validation[required] form-control",'required'=>'true']);?>
 				
 			</div>
 			<div class="form-group col-md-3 button-possition">
-				<label for="subject_id">&nbsp;</label>
+				<label for="subject_id"></label>
 				<input type="submit" value="<?php 
 				if($session["role_name"] == "member")
 				{
@@ -76,7 +78,7 @@ $(document).ready(function(){
 			 <div class="panel-heading">
 				<h4 class="panel-title">
 				<?php echo __("Class");?> : <?php echo $this->Gym->get_class_by_id($class_id);?> , 
-				<?php echo __("Date");?> : <?php echo (isset($_POST['curr_date'])) ? date($this->Gym->getSettings("date_format"),strtotime($_POST["curr_date"])):"";?></h4>
+				<?php echo __("Date");?> : <?php echo (isset($_POST['curr_date'])) ? $this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($attendance_date))):"";?></h4>
 			 </div>
 			 <br><br>
 				<div class="clearfix"> </div>

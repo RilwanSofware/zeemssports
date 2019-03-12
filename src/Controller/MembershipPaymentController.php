@@ -32,7 +32,6 @@ class MembershipPaymentController extends AppController
 			$row = $this->MembershipPayment->get($mp_id);			
 			if($this->request->data["payment_method"] == "Paypal" && $session["role_name"] == "member")
 			{				
-				// var_dump($row->member_id);die;
 				$mp_id = $this->request->data["mp_id"];
 				$user_id = $row->member_id;
 				$membership_id = $row->membership_id;
@@ -42,7 +41,6 @@ class MembershipPaymentController extends AppController
 				$new_session->write("Payment.mp_id",$mp_id);
 				$new_session->write("Payment.amount",$this->request->data["amount"]);
 				
-				// var_dump($user_info);die;
 				require_once(ROOT . DS .'vendor' . DS  . 'paypal' . DS . 'paypal_process.php');
 			}
 			else{
@@ -80,8 +78,10 @@ class MembershipPaymentController extends AppController
 		if($this->request->is('post'))
 		{			
 			$mid = $this->request->data["user_id"];
-			$start_date = date("Y-m-d",strtotime($this->request->data["membership_valid_from"]));
-			$end_date = date("Y-m-d",strtotime($this->request->data["membership_valid_to"]));
+			//$start_date = date("Y-m-d",strtotime($this->request->data["membership_valid_from"]));
+			$start_date = $this->GYMFunction->get_db_format_date($this->request->data['membership_valid_from']);
+			//$end_date = date("Y-m-d",strtotime($this->request->data["membership_valid_to"]));
+			$end_date = $this->GYMFunction->get_db_format_date($this->request->data['membership_valid_to']);
 			$row = $this->MembershipPayment->newEntity();
 			$pdata["member_id"] = $mid;
 			$pdata["membership_id"] = $this->request->data["membership_id"];
@@ -128,13 +128,14 @@ class MembershipPaymentController extends AppController
 				
 		$data = $this->MembershipPayment->get($eid);
 		$this->set("data",$data->toArray());
-		// var_dump($data->toArray());die;
 		
 		if($this->request->is("post"))
 		{					
 			$mid = $this->request->data["user_id"];
-			$start_date = date("Y-m-d",strtotime($this->request->data["membership_valid_from"]));
-			$end_date = date("Y-m-d",strtotime($this->request->data["membership_valid_to"]));
+			//$start_date = date("Y-m-d",strtotime($this->request->data["membership_valid_from"]));
+			$start_date = $this->GYMFunction->get_db_format_date($this->request->data['membership_valid_from']);
+			$end_date = $this->GYMFunction->get_db_format_date($this->request->data['membership_valid_to']);
+			//$end_date = date("Y-m-d",strtotime($this->request->data["membership_valid_to"]));
 		
 			$row = $this->MembershipPayment->get($eid);
 			$row->member_id = $mid;
@@ -171,6 +172,8 @@ class MembershipPaymentController extends AppController
 	public function incomeList()
     {
 		$data = $this->MembershipPayment->GymIncomeExpense->find("all")->contain(["GymMember"])->where(["invoice_type"=>"income"])->hydrate(false)->toArray();
+	
+		
 		$this->set("data",$data);	
     }
 	
@@ -186,13 +189,15 @@ class MembershipPaymentController extends AppController
 		{	
 			$row = $this->MembershipPayment->GymIncomeExpense->newEntity();
 			$data = $this->request->data;
+			
 			$total_amount = null;
 			foreach($data["income_amount"] as $amount)
 			{$total_amount += $amount;}
 			$data["total_amount"] = $total_amount;
 			$data["entry"] = $this->get_entry_records($data);
 			$data["receiver_id"] = $session["id"] ;//current userid;			
-			$data["invoice_date"] = date("Y-m-d",strtotime($data["invoice_date"]));	
+			//$data["invoice_date"] = date("Y-m-d",strtotime($data["invoice_date"]));	
+			$data["invoice_date"] = $this->GYMFunction->get_db_format_date($this->request->data['invoice_date']);	
 			$row = $this->MembershipPayment->GymIncomeExpense->patchEntity($row,$data);			
 			if($this->MembershipPayment->GymIncomeExpense->save($row))
 			{
@@ -236,7 +241,8 @@ class MembershipPaymentController extends AppController
 			{$total_amount += $amount;}
 			$data["total_amount"] = $total_amount;
 			$data["entry"] = $this->get_entry_records($data);				
-			$data["invoice_date"] = date("Y-m-d",strtotime($data["invoice_date"]));	
+			//$data["invoice_date"] = date("Y-m-d",strtotime($data["invoice_date"]));	
+			$data["invoice_date"] = $this->GYMFunction->get_db_format_date($this->request->data['invoice_date']);		
 			
 			$row = $this->MembershipPayment->GymIncomeExpense->patchEntity($row,$data);	
 			if($this->MembershipPayment->GymIncomeExpense->save($row))
@@ -287,7 +293,7 @@ class MembershipPaymentController extends AppController
 			
 			$this->set("invoice_data",$invoice_data[0]);
 			$this->set("history_data",$history_data);
-			// debug($invoice_data);die;
+			
 		}
 		else if($invoice_type == "income")
 		{
@@ -333,7 +339,8 @@ class MembershipPaymentController extends AppController
 			$data["total_amount"] = $total_amount;
 			$data["entry"] = $this->get_entry_records($data);
 			$data["receiver_id"] = $session["id"] ;//current userid;			
-			$data["invoice_date"] = date("Y-m-d",strtotime($data["invoice_date"]));	
+			//$data["invoice_date"] = date("Y-m-d",strtotime($data["invoice_date"]));	
+			$data["invoice_date"] = $this->GYMFunction->get_db_format_date($this->request->data['invoice_date']);	
 			$row = $this->MembershipPayment->GymIncomeExpense->patchEntity($row,$data);			
 			if($this->MembershipPayment->GymIncomeExpense->save($row))
 			{
@@ -358,7 +365,7 @@ class MembershipPaymentController extends AppController
 			{$total_amount += $amount;}
 			$data["total_amount"] = $total_amount;
 			$data["entry"] = $this->get_entry_records($data);				
-			$data["invoice_date"] = date("Y-m-d",strtotime($data["invoice_date"]));	
+			$data["invoice_date"] = $this->GYMFunction->get_db_format_date($this->request->data['invoice_date']);	
 			
 			$row = $this->MembershipPayment->GymIncomeExpense->patchEntity($row,$data);	
 			if($this->MembershipPayment->GymIncomeExpense->save($row))

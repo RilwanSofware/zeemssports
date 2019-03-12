@@ -10,7 +10,12 @@ $(document).ready(function(){
 	if($edit){?>
 	$( ".sell-date" ).datepicker( "setDate", new Date("<?php echo date($this->Gym->getSettings("date_format"),strtotime($data['sell_date'])); ?>" ));
 	<?php } ?>
-	$(".mem_list").select2();
+	$(".mem_list").select2({
+		containerCssClass: function(e) { 
+     return $(e).attr('required') ? 'required' : '';
+   }
+	});
+
 });
 </script>
 <section class="content">
@@ -20,7 +25,13 @@ $(document).ready(function(){
 			<section class="content-header">
 			  <h1>
 				<i class="fa fa-plus"></i>
-				<?php echo __("Sell Product");?>
+				<?php if($edit){
+					echo __("Edit Sell Product");
+				}else{
+					echo __("Add Sell Product");
+				}
+				?>
+				
 				<small><?php echo __("Store");?></small>
 			  </h1>
 			  <ol class="breadcrumb">
@@ -35,7 +46,7 @@ $(document).ready(function(){
 		<label class="control-label col-md-2" for="email"><?php  echo __("Member");?><span class="text-danger"> *</span></label>
 		<div class="col-md-6">
 		<?php 
-		echo $this->Form->select("member_id",$members,["empty"=>__("Select Member"),"default"=>($edit)?array($data['member_id']):"","class"=>"mem_list","required"=>"true"]);
+		echo $this->Form->select("member_id",$members,["default"=>($edit)?array($data['member_id']):"","class"=>"mem_list"]);
 		?>
 		</div>	
 		</div>
@@ -47,7 +58,7 @@ $(document).ready(function(){
 		</div>
 		<div class='form-group'>	
 		<label class="control-label col-md-2" for="email"><?php  echo __("Product");?><span class="text-danger"> *</span></label>
-		<div class="col-md-6">
+		<div class="col-md-6 module_padding">
 		<?php 
 		echo $this->Form->select("product_id",$products,["empty"=>__("Select Product"),"default"=>($edit)?array($data['product_id']):"","class"=>"form-control validate[required]"]);
 		?>
@@ -63,13 +74,13 @@ $(document).ready(function(){
 		<div class='form-group'>	
 		<label class="control-label col-md-2" for="email"><?php  echo __("Quantity");?><span class="text-danger"> *</span></label>
 		<div class="col-md-6">
-			<input type="text" name="quantity" class="form-control validate[required,custom[integer,min[0]]]" value="<?php echo ($edit)?$data["quantity"] : "";?>">
+			<input type="text" name="quantity" class="form-control validate[required,custom[integer,min[0]]]" value="<?php echo ($edit)?$data["quantity"] : "";?>" maxlength="5">
 		</div>
 		<?php if($edit){ ?>
 		<input type="hidden" name="old_quantity" class="form-control" value="<?php echo $data["quantity"];?>">
 		<?php } ?>
 		</div>
-		<div class="col-md-offset-2 col-md-6">
+		<div class="col-md-offset-2 col-md-6 add_product_save">
 			<input type="submit" value="<?php echo __("Save");?>" name="save_product" class="btn btn-flat btn-success">
 		</div>
 		

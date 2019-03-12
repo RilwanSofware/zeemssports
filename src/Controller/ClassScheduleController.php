@@ -12,7 +12,6 @@ class ClassScheduleController extends AppController
 	
 	public function classList()
 	{		
-		// $data = $this->ClassSchedule->find("all")->hydrate(false)->toArray();
 		$session = $this->request->session()->read("User");	
 		$data = array();
 		if($session["role_name"]=="member")
@@ -52,12 +51,11 @@ class ClassScheduleController extends AppController
 		
 			$class = $this->ClassSchedule->newEntity();
 			$this->request->data['days'] = json_encode($this->request->data['days']);
-			$this->request->data['start_time'] = $this->request->data['start_hrs'].":".$this->request->data['start_min'].":".$this->request->data['start_ampm'];
-			$this->request->data['end_time'] = $this->request->data['end_hrs'].":".$this->request->data['end_min'].":".$this->request->data['end_ampm'];
+			$this->request->data['start_time'] = $this->request->data['start_time'];
+			$this->request->data['end_time'] = $this->request->data['end_time'];
 			$this->request->data["created_date"] = date("Y-m-d");				
 			$this->request->data["created_by"] = $session["id"];				
 			
-				
 			$class = $this->ClassSchedule->patchEntity($class,$this->request->data);
 			if($this->ClassSchedule->save($class))
 			{
@@ -87,19 +85,13 @@ class ClassScheduleController extends AppController
 	{
 		$this->set("edit",true);
 		$this->set("title",__("Edit Class Schedule"));
-		$row = $this->ClassSchedule->get($id)->toArray();
-		$row['start_hrs'] =  explode(":",$row['start_time'])[0];
-		@$row['start_min'] =  explode(":",$row['start_time'])[1];
-		@$row['start_ampm'] =  explode(":",$row['start_time'])[2];
-		
-		$row['end_hrs'] =  explode(":",$row['end_time'])[0];
-		$row['end_min'] =  explode(":",$row['end_time'])[1];
-		$row['end_ampm'] =  explode(":",$row['end_time'])[2];
+
+		$row = $this->ClassSchedule->find()->where(["id"=>$id])->hydrate(false)->toArray();
 		
 		$schedule_list = $this->ClassSchedule->ClassScheduleList->find()->where(["class_id"=>$id])->hydrate(false)->toArray();
 		
 		$this->set("schedule_list",$schedule_list);
-		$this->set("data",$row);
+		$this->set("data",$row[0]);
 		$staff = $this->ClassSchedule->GymMember->find("list",["keyField"=>"id","valueField"=>"name"])->where(["role_name"=>"staff_member"]);		
 		$staff = $staff->select(["id","name"=>$staff->func()->concat(["first_name"=>"literal"," ","last_name"=>"literal"])]);
 		$staff = $staff->toArray();
@@ -107,14 +99,13 @@ class ClassScheduleController extends AppController
 		$this->set("assistant_staff",$staff);
 		$this->render("addClass");
 		
-		
 		if($this->request->is("post"))
 		{ 
 			$time_list = $this->request->data["time_list"];
 			$class = $this->ClassSchedule->get($id);
 			$this->request->data['days'] = json_encode($this->request->data['days']);
-			$this->request->data['start_time'] = $this->request->data['start_hrs'].":".$this->request->data['start_min'].":".$this->request->data['start_ampm'];
-			$this->request->data['end_time'] = $this->request->data['end_hrs'].":".$this->request->data['end_min'].":".$this->request->data['end_ampm'];
+			$this->request->data['start_time'] = $this->request->data['start_time'];
+			$this->request->data['end_time'] = $this->request->data['end_time'];
 						
 			$class = $this->ClassSchedule->patchEntity($class,$this->request->data());
 			
@@ -151,18 +142,18 @@ class ClassScheduleController extends AppController
 	
 	public function viewSchedule()
 	{
-		// $classes = $this->ClassSchedule->find("all")->hydrate(false)->toArray();
 		$session = $this->request->session()->read("User");	
 		if($session["role_name"]=="member")
 		{
 			$classes_list = $this->ClassSchedule->GymMemberClass->find()->where(["member_id"=>$session["id"]])->hydrate(false)->toArray();
+			
 			if(!empty($classes_list))
 			{
 				foreach($classes_list as $class)
 				{
 					$assign_class[] = $class["assign_class"];
 				}				
-				// var_dump($assign_class);die;
+				
 				$classes = $this->ClassSchedule->ClassScheduleList->find("all")->where(["class_id IN"=>$assign_class])->hydrate(false)->toArray();
 				
 			}
@@ -170,7 +161,6 @@ class ClassScheduleController extends AppController
 		else{
 			$classes = $this->ClassSchedule->ClassScheduleList->find("all")->hydrate(false)->toArray();
 		}
-		
 		$this->set("classes",$classes);	
 	}
 	

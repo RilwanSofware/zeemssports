@@ -16,35 +16,47 @@
 		</div>
 		<hr>
 		<div class="box-body">
-		<table class="table table-bordered table-hover">
-		<?php
-		$days = ["Sunday"=>"Sunday","Monday"=>"Monday","Tuesday"=>"Tuesday","Wednesday"=>"Wednesday","Thursday"=>"Thursday","Friday"=>"Friday","Saturday"=>"Saturday"];
-		foreach($days as $day)
-		{
-			echo "<tr><th width='50' height='50'>". __($day) ."</th><td>";
-				foreach($classes as $class)
-			{
-				$days = json_decode($class['days']);
-				if(in_array($day,$days))
-				{ ?>					
-					<div class="btn-group m-b-sm">
-						<button class="btn btn-flat btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown"><span class="period_box" id="<?php echo $class['id'];?>"><?php echo $this->Gym->get_class_by_id($class['class_id']);?><span class="time"> <?php echo "(".substr_replace($class['start_time'], ' ', -3, -2)."-".substr_replace($class['end_time'], ' ', -3, -2).")";?> </span></span><span class="caret"></span></button>
-						<ul role="menu" class="dropdown-menu">
-							<?php if($session["role_name"] == "administrator" || $session["role_name"] == "staff_member")
-							{?>
-							<li><a href="<?php echo "{$this->request->base}/ClassSchedule/editClass/{$class['class_id']}";?>"><?php echo __("Edit");?></a></li>
-						<?php }else{
-							echo "<script>$('.caret').hide();</script>";
-						}?>
-						<!-- <li><a href="<?php echo "{$this->request->base}/ClassSchedule/deleteClass/{$class['id']}";?>" onClick="return confirm('Are you sure you want to delete this record?');"><?php echo __("Delete");?></a></li> -->
-						 </ul>
-					</div>
-		<?php	}
-			}	
-			echo "</td></tr>";
-		}
-		?>
-		</table>
+			<table class="table table-bordered table-hover">
+				<?php
+				$days = ["Sunday"=>"Sunday","Monday"=>"Monday","Tuesday"=>"Tuesday","Wednesday"=>"Wednesday","Thursday"=>"Thursday","Friday"=>"Friday","Saturday"=>"Saturday"];
+				foreach($days as $day)
+				{
+					echo "<tr><th width='50' height='50'>". __($day) ."</th><td>";
+					foreach($classes as $class)
+					{
+						$classname=$this->Gym->get_class_by_id($class['class_id']);
+
+						$days = json_decode($class['days']);
+						if(in_array($day,$days))
+						{ 
+					?>					
+							<div class="btn-group m-b-sm">
+								<button class="btn btn-flat btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown"><span class="period_box" id="<?php echo $class['id'];?>"><?php echo $this->Gym->get_class_by_id($class['class_id']);?><span class="time"> <?php echo "(".$class['start_time']." - ".$class['end_time'].")";?> </span></span><span class="caret"></span></button>
+								<?php if($classname!="Classdeleted")
+								{ ?>
+								
+									<?php if($session["role_name"] == "administrator" || $session["role_name"] == "staff_member" )
+									{ 
+									?>
+										<ul role="menu" class="dropdown-menu">
+											<li><a href="<?php echo "{$this->request->base}/ClassSchedule/editClass/{$class['class_id']}";?>"><?php echo __("Edit");?></a></li>
+									<?php  } else{
+									echo "<script>$('.caret').hide();</script>"; ?>
+									
+										</ul> <?php }?>
+								
+								<?php }else{ ?>
+									<ul role="menu" class="dropdown-menu">
+										<li><a href="#">This class is deleted</a></li>
+									</ul>
+								<?php } ?>
+							</div>
+				<?php	}
+					}	
+					echo "</td></tr>";
+				}
+				?>
+			</table>
 		</div>		
 	</div>
 </section>

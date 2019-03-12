@@ -12,6 +12,7 @@ Class GymAjaxController extends AppController
 	{
 		parent::initialize();	
 		$this->autoRender = false;
+		$this->loadComponent("GYMFunction");
 	}
 	
 	public function addCategory()
@@ -27,42 +28,43 @@ Class GymAjaxController extends AppController
 				<h4 class="modal-title" id="gridSystemModalLabel"><?php echo __("Add/Remove Category");?></h4>
 			</div>
 			<div class="modal-body">
-			<div class="row">
-				<div class="col-sm-4 col-sm-offset-1">
-					<input type="text" class="cat_name form-control" placeholder="<?php echo __("enter category name");?>" required>
+				<div class="row">
+					<div class="col-sm-4 col-sm-offset-1">
+						<input type="text" class="cat_name form-control" placeholder="<?php echo __("enter category name");?>" required>
+					</div>
+					<div class="col-sm-4">
+						<button class="add-category btn btn-flat btn-success" data-url="<?php echo $this->request->base."/GymAjax/saveCategory";?>"><?php echo  __("Add Category");?></button>
+					</div>
 				</div>
-				<div class="col-sm-4">
-					<button class="add-category btn btn-flat btn-success" data-url="<?php echo $this->request->base."/GymAjax/saveCategory";?>"><?php echo  __("Add Category");?></button>
+				<hr>
+				<div class="row">
+					<div class="col-sm-12 table table-striped">
+						<table class="table" id="category_list">
+							<thead>
+								<tr>
+									<th><?php echo __("Category");?></th>
+									<th><?php echo __("Action");?></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+							<?php
+								foreach($categories as $category)
+								{
+									echo "<tr id='row-{$category->id}'>
+										<td>{$category->name}</td>
+										<td><button class='del-category btn btn-flat btn-danger' del-id='{$category->id}' data-url='{$this->request->base}/GymAjax/deleteCategory'>".__("Delete")."</button></td>
+									</tr>";
+								}
+							?>
+							</tbody>
+						</table>
+					</div>
 				</div>
-			</div>
-			<hr>
-			<div class="row">
-				<div class="col-sm-12 table table-striped">
-					<table class="table" id="category_list">
-					<thead>
-						<tr>
-							<th><?php echo __("Category");?></th>
-							<th><?php echo __("Action");?></th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-					<?php
-						foreach($categories as $category)
-						{
-							echo "<tr id='row-{$category->id}'>
-							<td>{$category->name}</td>
-							<td><button class='del-category btn btn-flat btn-danger' del-id='{$category->id}' data-url='{$this->request->base}/GymAjax/deleteCategory'>".__("Delete")."</button></td>
-							</tr>";
-						}
-					?>
-					</tbody>
-					</table>
-				</div>
-			</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo __("Close");?></button>				
+				<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo __("Close");?>
+				</button>				
 			</div>
 		<?php	
 		}		
@@ -91,8 +93,12 @@ Class GymAjaxController extends AppController
 		$category_table = TableRegistry::get("Category");		
 		$did = $this->request->data['did'];
 		$row = $category_table->get($did);
-		if($category_table->delete($row))
-		{echo true;} else {echo false;}
+		if($category_table->delete($row)){
+			echo true;
+		}
+		else{
+			echo false;
+		}
 	}
 	
 	public function addInstalmentPlan()
@@ -102,10 +108,10 @@ Class GymAjaxController extends AppController
 		$plans = $plans->toArray();
 		?>
 		<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="gridSystemModalLabel"><?php echo __("Add/Remove Installment Plan");?></h4>
-			</div>
-			<div class="modal-body">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title" id="gridSystemModalLabel"><?php echo __("Add/Remove Installment Plan");?></h4>
+		</div>
+		<div class="modal-body">
 			<div class="row">
 				<div class="col-sm-4">
 					<input type="text" name="number" id="number" class="cat_name form-control" placeholder="<?php echo __("Enter Duration Number");?>">
@@ -127,31 +133,31 @@ Class GymAjaxController extends AppController
 			<div class="row">
 				<div class="col-sm-12 table table-striped">
 					<table class="table" id="plan_list">
-					<thead>
-						<tr>
-							<th><?php echo __("Plan");?></th>
-							<th><?php echo __("Action");?></th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-					<?php
-						foreach($plans as $plan)
-						{
-							echo "<tr id='row-{$plan->id}'>
-							<td>{$plan->number} {$plan->duration}</td>
-							<td><button class='del-plan btn btn-flat btn-danger' del-id='{$plan->id}' data-url='{$this->request->base}/GymAjax/deletePlan'>".__("Delete")."</button></td>
-							</tr>";
-						}
-					?>
-					</tbody>
+						<thead>
+							<tr>
+								<th><?php echo __("Plan");?></th>
+								<th><?php echo __("Action");?></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php
+							foreach($plans as $plan)
+							{
+								echo "<tr id='row-{$plan->id}'>
+									<td>{$plan->number} {$plan->duration}</td>
+									<td><button class='del-plan btn btn-flat btn-danger' del-id='{$plan->id}' data-url='{$this->request->base}/GymAjax/deletePlan'>".__("Delete")."</button></td>
+									</tr>";
+							}
+							?>
+						</tbody>
 					</table>
 				</div>
 			</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo __("Close");?></button>				
-			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo __("Close");?></button>				
+		</div>
 		<?php
 	}
 	
@@ -195,10 +201,10 @@ Class GymAjaxController extends AppController
 		$roles = $role_table->find()->all()->toArray();		
 		?>
 		<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="gridSystemModalLabel"><?php echo __("Add/Remove Role");?></h4>
-			</div>
-			<div class="modal-body">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title" id="gridSystemModalLabel"><?php echo __("Add/Remove Role");?></h4>
+		</div>
+		<div class="modal-body">
 			<div class="row">
 				<div class="col-sm-4 col-sm-offset-1">
 					<input type="text" class="role_name form-control" placeholder="<?php echo __("Enter Role");?>">
@@ -211,34 +217,34 @@ Class GymAjaxController extends AppController
 			<div class="row">
 				<div class="col-sm-12 table table-striped">
 					<table class="table" id="roles_list">
-					<thead>
-						<tr>
-							<th><?php echo __("Category");?></th>
-							<th><?php echo __("Action");?></th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-					<?php
-					if(!empty($roles))
-					{
-						foreach($roles as $role)
+						<thead>
+							<tr>
+								<th><?php echo __("Category");?></th>
+								<th><?php echo __("Action");?></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+						<?php
+						if(!empty($roles))
 						{
-							echo "<tr id='row-{$role->id}'>
-							<td>{$role->name}</td>
-							<td><button class='del-role btn btn-flat btn-danger' del-id='{$role->id}' data-url='{$this->request->base}/GymAjax/deleteRole/{$role->id}'>".__("Delete")."</button></td>
-							</tr>";
-						}
-					}else{echo "<tr><td colspan='2'>".__("No roles added")."</td></tr>";}
-					?>
-					</tbody>
+							foreach($roles as $role)
+							{
+								echo "<tr id='row-{$role->id}'>
+								<td>{$role->name}</td>
+								<td><button class='del-role btn btn-flat btn-danger' del-id='{$role->id}' data-url='{$this->request->base}/GymAjax/deleteRole/{$role->id}'>".__("Delete")."</button></td>
+								</tr>";
+							}
+						}else{echo "<tr><td colspan='2'>".__("No roles added")."</td></tr>";}
+						?>
+						</tbody>
 					</table>
 				</div>
 			</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo __("Close");?></button>				
-			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo __("Close");?></button>				
+		</div>
 	<?php
 	}
 	
@@ -262,7 +268,6 @@ Class GymAjaxController extends AppController
 	
 	public function deleteRole($did)
 	{
-		//$did = $this->request->data['did'];
 		$role_table = TableRegistry::get("GymRoles");
 		$row = $role_table->get($did);
 		echo ($role_table->delete($row)) ? true : false ;		
@@ -272,56 +277,57 @@ Class GymAjaxController extends AppController
 	{
 		if($this->request->is("ajax"))
 		{
-		$specialization_table = TableRegistry::get("Specialization");
-		$specialization = $specialization_table->find()->all()->toArray();		
-		?>
-		<div class="modal-header">
+			$specialization_table = TableRegistry::get("Specialization");
+			$specialization = $specialization_table->find()->all()->toArray();		
+			?>
+			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<h4 class="modal-title" id="gridSystemModalLabel"><?php echo __("Add/Remove Specialization");?></h4>
 			</div>
 			<div class="modal-body">
-			<div class="row">
-				<div class="col-sm-4 col-sm-offset-1">
-					<input type="text" class="spec_name form-control" placeholder="<?php echo __("Enter Specialization");?>">
+				<div class="row">
+					<div class="col-sm-4 col-sm-offset-1">
+						<input type="text" class="spec_name form-control" placeholder="<?php echo __("Enter Specialization");?>">
+					</div>
+					<div class="col-sm-4">
+						<button class="save-spec btn btn-flat btn-success" data-url="<?php echo $this->request->base."/GymAjax/saveSpecialization";?>"><?php echo  __("Add Role");?></button>
+					</div>
 				</div>
-				<div class="col-sm-4">
-					<button class="save-spec btn btn-flat btn-success" data-url="<?php echo $this->request->base."/GymAjax/saveSpecialization";?>"><?php echo  __("Add Role");?></button>
+				<hr>
+				<div class="row">
+					<div class="col-sm-12 table table-striped">
+						<table class="table" id="specialization_list">
+							<thead>
+								<tr>
+									<th><?php echo __("Category");?></th>
+									<th><?php echo __("Action");?></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+							<?php
+								if(!empty($specialization))
+								{
+									foreach($specialization as $spec)
+									{
+										echo "<tr id='row-{$spec->id}'>
+										<td>{$spec->name}</td>
+										<td><button class='del-spec btn btn-flat btn-danger' del-id='{$spec->id}' data-url='{$this->request->base}/GymAjax/deleteSpecialization/{$spec->id}'>".__("Delete")."</button></td>
+										</tr>";
+									}
+								}else{
+									echo "<tr id='empty_row'><td colspan='2'>".__("No Specialization added")."</td></tr>";
+								}
+							?>
+							</tbody>
+						</table>
+					</div>
 				</div>
-			</div>
-			<hr>
-			<div class="row">
-				<div class="col-sm-12 table table-striped">
-					<table class="table" id="specialization_list">
-					<thead>
-						<tr>
-							<th><?php echo __("Category");?></th>
-							<th><?php echo __("Action");?></th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-					<?php
-					if(!empty($specialization))
-					{
-						foreach($specialization as $spec)
-						{
-							echo "<tr id='row-{$spec->id}'>
-							<td>{$spec->name}</td>
-							<td><button class='del-spec btn btn-flat btn-danger' del-id='{$spec->id}' data-url='{$this->request->base}/GymAjax/deleteSpecialization/{$spec->id}'>".__("Delete")."</button></td>
-							</tr>";
-						}
-					}else{echo "<tr id='empty_row'><td colspan='2'>".__("No Specialization added")."</td></tr>";}
-					?>
-					</tbody>
-					</table>
-				</div>
-			</div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo __("Close");?></button>				
 			</div>
 			<?php
-			die;
 		}
 	}
 	
@@ -356,10 +362,10 @@ Class GymAjaxController extends AppController
 		$interest = $interest_table->find()->all()->toArray();		
 		?>
 		<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="gridSystemModalLabel"><?php echo __("Add/Remove Interest");?></h4>
-			</div>
-			<div class="modal-body">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title" id="gridSystemModalLabel"><?php echo __("Add/Remove Interest");?></h4>
+		</div>
+		<div class="modal-body">
 			<div class="row">
 				<div class="col-sm-4 col-sm-offset-1">
 					<input type="text" class="interest form-control" placeholder="<?php echo __("Enter Interest");?>">
@@ -372,34 +378,34 @@ Class GymAjaxController extends AppController
 			<div class="row">
 				<div class="col-sm-12 table table-striped">
 					<table class="table" id="interest_list">
-					<thead>
-						<tr>
-							<th><?php echo __("Interest");?></th>
-							<th><?php echo __("Action");?></th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-					<?php
-					if(!empty($interest))
-					{
-						foreach($interest as $row)
+						<thead>
+							<tr>
+								<th><?php echo __("Interest");?></th>
+								<th><?php echo __("Action");?></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+						<?php
+						if(!empty($interest))
 						{
-							echo "<tr id='row-{$row->id}'>
-							<td>{$row->interest}</td>
-							<td><button class='del-interest btn btn-flat btn-danger' del-id='{$row->id}' data-url='{$this->request->base}/GymAjax/deleteInterest/{$row->id}'>".__("Delete")."</button></td>
-							</tr>";
-						}
-					}else{echo "<tr id='empty_row'><td colspan='2'>".__("No record added yet")."</td></tr>";}
-					?>
-					</tbody>
+							foreach($interest as $row)
+							{
+								echo "<tr id='row-{$row->id}'>
+								<td>{$row->interest}</td>
+								<td><button class='del-interest btn btn-flat btn-danger' del-id='{$row->id}' data-url='{$this->request->base}/GymAjax/deleteInterest/{$row->id}'>".__("Delete")."</button></td>
+								</tr>";
+							}
+						}else{echo "<tr id='empty_row'><td colspan='2'>".__("No record added yet")."</td></tr>";}
+						?>
+						</tbody>
 					</table>
 				</div>
 			</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo __("Close");?></button>				
-			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo __("Close");?></button>				
+		</div>
 	<?php
 	}	
 	
@@ -434,10 +440,10 @@ Class GymAjaxController extends AppController
 		$source = $interest_table->find()->all()->toArray();		
 		?>
 		<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="gridSystemModalLabel"><?php echo __("Add/Remove Source");?></h4>
-			</div>
-			<div class="modal-body">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title" id="gridSystemModalLabel"><?php echo __("Add/Remove Source");?></h4>
+		</div>
+		<div class="modal-body">
 			<div class="row">
 				<div class="col-sm-4 col-sm-offset-1">
 					<input type="text" class="source form-control" placeholder="<?php echo __("Enter Source");?>">
@@ -450,34 +456,34 @@ Class GymAjaxController extends AppController
 			<div class="row">
 				<div class="col-sm-12 table table-striped">
 					<table class="table" id="source_list">
-					<thead>
-						<tr>
-							<th><?php echo __("Source List");?></th>
-							<th><?php echo __("Action");?></th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-					<?php
-					if(!empty($source))
-					{
-						foreach($source as $row)
+						<thead>
+							<tr>
+								<th><?php echo __("Source List");?></th>
+								<th><?php echo __("Action");?></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+						<?php
+						if(!empty($source))
 						{
-							echo "<tr id='row-{$row->id}'>
-							<td>{$row->source_name}</td>
-							<td><button class='del-source btn btn-flat btn-danger' del-id='{$row->id}' data-url='{$this->request->base}/GymAjax/deleteSource/{$row->id}'>".__("Delete")."</button></td>
-							</tr>";
-						}
-					}else{echo "<tr><td colspan='2'>".__("No record added yet")."</td></tr>";}
-					?>
-					</tbody>
+							foreach($source as $row)
+							{
+								echo "<tr id='row-{$row->id}'>
+								<td>{$row->source_name}</td>
+								<td><button class='del-source btn btn-flat btn-danger' del-id='{$row->id}' data-url='{$this->request->base}/GymAjax/deleteSource/{$row->id}'>".__("Delete")."</button></td>
+								</tr>";
+							}
+						}else{echo "<tr><td colspan='2'>".__("No record added yet")."</td></tr>";}
+						?>
+						</tbody>
 					</table>
 				</div>
 			</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo __("Close");?></button>				
-			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo __("Close");?></button>				
+		</div>
 	<?php
 	}
 	
@@ -511,18 +517,18 @@ Class GymAjaxController extends AppController
 		
 		$this->loadComponent("GYMFunction");
 		$format = $this->GYMFunction->date_format();
-		// $format = str_ireplace(array("yyyy","yy","dd","mm"),array("y","y","d","m"),$format);
-		// $format = str_replace("yy","Y",$format);
-		// $format = str_replace("dd","d",$format);
-		// $format = str_replace("mm","m",$format);
-		$date = $this->request->data["date"];
-		//$date = str_replace("/","-",$date);
+
+		//$date = $this->request->data["date"];
+		
 		$membership_id = $this->request->data["membership"];
-		$date1 = date("Y-m-d",strtotime($date));
+		//$date1 = date("Y-m-d",strtotime($date));
+		$date1 = $this->GYMFunction->get_db_format_date($this->request->data['date']);
 		$membership_table =  TableRegistry::get("Membership");
 		$row = $membership_table->get($membership_id)->toArray();
 		$period = $row["membership_length"];
-		$end_date = date($format,strtotime($date1 . " + {$period} days"));
+		//$end_date = date('Y-m-d',strtotime($date1 . " + {$period} days"));
+		
+		$end_date =  $this->GYMFunction->get_db_format_date($date1 . " + {$period} days");
 		echo $end_date;
 	}
 	
@@ -532,13 +538,13 @@ Class GymAjaxController extends AppController
 		$levels = $level_table->find()->all()->toArray();		
 		?>
 		<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="gridSystemModalLabel"><?php echo __("Add/Remove Levels");?></h4>
-			</div>
-			<div class="modal-body">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title" id="gridSystemModalLabel"><?php echo __("Add/Remove Levels");?></h4>
+		</div>
+		<div class="modal-body">
 			<div class="row">
 				<div class="col-sm-4 col-sm-offset-1">
-					<input type="text" class="level form-control" placeholder="<?php echo __("Enter Level");?>">
+					<input type="text" class="level form-control" placeholder="<?php echo __("Enter Level");?>" maxLength="30">
 				</div>
 				<div class="col-sm-4">
 					<button class="save-level btn btn-flat btn-success" data-url="<?php echo $this->request->base."/GymAjax/saveLevel";?>"><?php echo  __("Add Level");?></button>
@@ -548,35 +554,36 @@ Class GymAjaxController extends AppController
 			<div class="row">
 				<div class="col-sm-12 table table-striped">
 					<table class="table" id="level_list">
-					<thead>
-						<tr>
-							<th><?php echo __("Levels");?></th>
-							<th><?php echo __("Action");?></th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-					<?php
-					if(!empty($levels))
-					{
-						foreach($levels as $row)
+						<thead>
+							<tr>
+								<th><?php echo __("Levels");?></th>
+								<th><?php echo __("Action");?></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+						<?php
+						if(!empty($levels))
 						{
-							echo "<tr id='row-{$row->id}'>
-							<td>{$row->level}</td>
-							<td><button class='del-level btn btn-flat btn-danger' del-id='{$row->id}' data-url='{$this->request->base}/GymAjax/deleteLevel/{$row->id}'>".__("Delete")."</button></td>
-							</tr>";
-						}
-					}else{echo "<tr><td colspan='2'>".__("No record added yet")."</td></tr>";}
-					?>
-					</tbody>
+							foreach($levels as $row)
+							{
+								echo "<tr id='row-{$row->id}'>
+								<td>{$row->level}</td>
+								<td><button class='del-level btn btn-flat btn-danger' del-id='{$row->id}' data-url='{$this->request->base}/GymAjax/deleteLevel/{$row->id}'>".__("Delete")."</button></td>
+								</tr>";
+							}
+						}else{echo "<tr><td colspan='2'>".__("No record added yet")."</td></tr>";}
+						?>
+						</tbody>
 					</table>
 				</div>
 			</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo __("Close");?></button>				
-			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo __("Close");?></button>				
+		</div>
 	<?php
+		
 	}
 	
 		
@@ -603,6 +610,7 @@ Class GymAjaxController extends AppController
 		$level_table = TableRegistry::get("GymLevels");
 		$row = $level_table->get($did);
 		echo ($level_table->delete($row)) ? true : false ;		
+		
 	}
 	
 	function gmgtAddWorkout()
@@ -638,15 +646,16 @@ Class GymAjaxController extends AppController
 	{
 		$conn = ConnectionManager::get('default');
 		$uid=$this->request->data['uid'];
-		$sel_date=date("Y-m-d",strtotime($this->request->data['sel_date']));
-		// start new code 28-09-2018
+		//$sel_date=date("Y-m-d",strtotime($this->request->data['sel_date']));
+		$sel_date=$this->GYMFunction->get_db_format_date($this->request->data['sel_date']);
+		
 		$gym_member_table = TableRegistry::get("gym_member");
 		$membership_table = TableRegistry::get("membership");
 		$gym_member_data = $gym_member_table->get($uid);
 		$membership_id = $gym_member_data->selected_membership;
 		$membership_data = $membership_table->get($membership_id);
 		$membership_cat_id = $membership_data->membership_cat_id;
-		// end
+		
 		$daily_table = TableRegistry::get("GymDailyWorkout");
 		$user_workout_table = TableRegistry::get("GymUserWorkout");
 		$record_data = $daily_table->find()->where(["member_id"=>$uid,"record_date"=>$sel_date])->select(["id","note"])->hydrate(false)->toArray();
@@ -662,24 +671,21 @@ Class GymAjaxController extends AppController
 			echo "<input type='hidden' name='edit' value='yes'>";
 			echo "<input type='hidden' name='user_workout_id' value='{$record_data[0]["id"]}'>";
 		}
-		// var_dump($dd_array);
-		// die;
+		
 		$assign_table = TableRegistry::get("GymAssignWorkout");
 		$workout_table = TableRegistry::get("GymWorkoutData");
 		$activity_table = TableRegistry::get("Activity");
 		$date = date('Y-m-d');
 		$record_date = date('Y-m-d',strtotime($sel_date));
 		$day_name = date('l', strtotime($record_date));
+		
 		$sql = "SELECT * FROM `gym_assign_workout` as workout,`gym_workout_data` as workoutdata WHERE  workout.user_id = {$uid} 
 		AND  workout.id = workoutdata.workout_id 
 		AND workoutdata.day_name = '{$day_name}'		
 		AND '".$record_date."' BETWEEN workout.start_date and workout.end_date";
-		/* AND ('".$record_date."' >= workout.start_date AND '".$record_date."' <= workout.end_date)"; */
-		// echo $sql;die;
+		
 		$stmt = $conn->execute($sql);
 		$results = $stmt->fetchAll('assoc');	
-		// var_dump($results);
-		// die;
 		if(!empty($results)){
 			echo "<div class='col-md-12' id='membership_cat_id' value='".$membership_cat_id."' style='padding-left: 0px;padding-bottom: 15px;'>Membership Plan Category: ".$this->GYMFunction->get_category_name($membership_cat_id)."</div>";
 			echo $option="<div class='work_out_datalist_header'><div class='col-md-10'>
@@ -689,26 +695,29 @@ Class GymAjaxController extends AppController
 					<span class='col-md-2'>".__('KG')."</span>
 					<span class='col-md-3'>".__('Rest Time')."</span>
 					</div></div>";
-			foreach ($results as $retrieved_data){			
-			$activity = $activity_table->get($retrieved_data['workout_name'])->toArray();
-			$act_name = $activity["title"];
-			echo $option="<div class='work_out_datalist'><div class='col-sm-10'>
-				<input type='hidden' name='workouts_array[]' value='".$retrieved_data['id']."'>
-				<input type='hidden' name='workout_name_".$retrieved_data['id']."' value='".$retrieved_data['workout_name']."'>
-				<span class='col-md-3'>".$act_name."</span>
-				<span class='col-md-2'>".$retrieved_data['sets']." ".__('Sets')."</span>
-				<span class='col-md-2'>".$retrieved_data['reps']."  ".__('Reps')."</span>
-				<span class='col-md-2'>".$retrieved_data['kg']."  ".__('Kg')."</span>
-				<span class='col-md-2'>".$retrieved_data['time']."  ".__('Min')."</span>
-			</div>";
-			$wrk_name = $retrieved_data['workout_name'];
-			echo "<div class='col-sm-10'>
-				<span class='col-md-3'>".__('Your Workout')."</span>
-				<span class='col-md-2'><input type='text' class='my-workouts validate[required]' id='sets' name='sets_".$retrieved_data['id']."' width='50px' value='".((!empty($record_data)) ? $dd_array[$wrk_name]['sets'] : '')."'></span>
-				<span class='col-md-2'><input type='text' class='my-workouts validate[required]' id='reps' name='reps_".$retrieved_data['id']."' width='50px' value='".((!empty($record_data)) ? $dd_array[$wrk_name]['reps'] : '')."'></span>
-				<span class='col-md-2'><input type='text' class='my-workouts validate[required]' id='kg' name='kg_".$retrieved_data['id']."' width='50px' value='".((!empty($record_data)) ? $dd_array[$wrk_name]['kg'] : '')."'></span>
-				<span class='col-md-2'><input type='text' class='my-workouts validate[required]' id='rest' name='rest_".$retrieved_data['id']."' width='50px' value='".((!empty($record_data)) ? $dd_array[$wrk_name]['rest_time'] : '')."'></span>
-			</div></div>"; 
+			foreach ($results as $retrieved_data)
+			{			
+				$activity = $activity_table->get($retrieved_data['workout_name'])->toArray();
+				$act_name = $activity["title"];
+				echo $option="<div class='work_out_datalist savebtn'><div class='col-sm-10'>
+					<input type='hidden' name='workouts_array[]' value='".$retrieved_data['id']."'>
+					<input type='hidden' name='workout_name_".$retrieved_data['id']."' value='".$retrieved_data['workout_name']."'>
+					<span class='col-md-3'>".$act_name."</span>
+					<span class='col-md-2'>".$retrieved_data['sets']." ".__('Sets')."</span>
+					<span class='col-md-2'>".$retrieved_data['reps']."  ".__('Reps')."</span>
+					<span class='col-md-2'>".$retrieved_data['kg']."  ".__('Kg')."</span>
+					<span class='col-md-2'>".$retrieved_data['time']."  ".__('Min')."</span>
+					</div>";
+					
+				$wrk_name = $retrieved_data['workout_name'];
+				
+				echo "<div class='col-sm-10'>
+					<span class='col-md-3'>".__('Your Workout')."</span>
+					<span class='col-md-2'><input type='text' class='my-workouts validate[required,custom[onlyNumberSp],maxSize[3]]' id='sets' name='sets_".$retrieved_data['id']."' width='50px' value='".((!empty($dd_array)) ? $dd_array[$wrk_name]['sets'] : '')."'></span>
+					<span class='col-md-2'><input type='text' class='my-workouts validate[required,custom[onlyNumberSp],maxSize[3]]' id='reps' name='reps_".$retrieved_data['id']."' width='50px' value='".((!empty($dd_array)) ? $dd_array[$wrk_name]['reps'] : '')."'></span>
+					<span class='col-md-2'><input type='text' class='my-workouts validate[required,custom[onlyNumberSp],maxSize[3]]' id='kg' name='kg_".$retrieved_data['id']."' width='50px' value='".((!empty($dd_array)) ? $dd_array[$wrk_name]['kg'] : '')."'></span>
+					<span class='col-md-2'><input type='text' class='my-workouts validate[required,custom[onlyNumberSp],maxSize[3]]' id='rest' name='rest_".$retrieved_data['id']."' width='50px' value='".((!empty($dd_array)) ? $dd_array[$wrk_name]['rest_time'] : '')."'></span>
+					</div></div>"; 
 			}
 			echo "<label class='col-md-2 col-sm-2 col-md-12 control-label' for='note'>".__("Note")."</label><div class='col-md-10 col-sm-10 col-md-12'><textarea id='note' class='form-control' name='note'>".$results[0]['description']."</textarea></div>";
 		}
@@ -742,69 +751,51 @@ Class GymAjaxController extends AppController
 				</div>
 			</div>	
 			<div class='row'>
-				<?php /*
-				<div class='col-md-3 col-xs-5 col-sm-3'>
-					<div class="cat_list">
-					<?php
-					$cat_table = TableRegistry::get("Category");
-					$categories = $cat_table->find("list",["keyField"=>"id","valueField"=>"name"])->hydrate(false)->toArray();
-					echo "<ul class='list-group'>
-							<li class='list-group-item bg-default'>".__("Category List")."</li>";
-					foreach($categories as $key=>$value)
-					{
-						echo  "<li class='list-group-item'>{$value} <span class='pull-right'><input type='checkbox' id='{$key}' class='show_workout'></span></li>";
-					}
-					echo "</ul>";					
-					?>
-					</div>
-				</div>
-				*/ ?>
 				<div class='col-md-12'>
-				<?php /*<input type="hidden" id="get_url" value="<?php echo $this->request->base;?>/GymAjax/getWorkoutByCategory/"> */ ?>
-				<?php
-				echo "<div class='work_out_datalist_header'>
-					<div class='col-md-12'>
-					<span class='col-md-3'>".__('Activity')."</span>
-					<span class='col-md-2'>".__('Sets')."</span>
-					<span class='col-md-2'>".__('Reps')."</span>
-					<span class='col-md-2'>".__('KG')."</span>
-					<span class='col-md-3'>".__('Rest Time')."</span>
-					</div></div>";
-					$activity_table = TableRegistry::get("Activity");
-					$activities = $activity_table->find("list",["keyField"=>"id","valueField"=>"title"])->where(["cat_id"=>$membership_cat_id])->hydrate(false)->toArray();
+					<?php
+						echo "<div class='work_out_datalist_header'>
+								<div class='col-md-12'>
+									<span class='col-md-3'>".__('Activity')."</span>
+									<span class='col-md-2'>".__('Sets')."</span>
+									<span class='col-md-2'>".__('Reps')."</span>
+									<span class='col-md-2'>".__('KG')."</span>
+									<span class='col-md-3'>".__('Rest Time')."</span>
+								</div>
+							</div>";
+						$activity_table = TableRegistry::get("Activity");
+						$activities = $activity_table->find("list",["keyField"=>"id","valueField"=>"title"])->where(["cat_id"=>$membership_cat_id])->hydrate(false)->toArray();
+					
 					if(!empty($activities))
 					{
-						echo "<div class='activity_block' id='act_block_{$membership_cat_id}'>";
+						echo "<div class='activity_block savebtn' id='act_block_{$membership_cat_id}'>";
 						foreach($activities as $key=>$activity)
 						{					
 							echo "<div id='activity_{$key}' class='col-md-12 activity_row'>	
 								<input type='hidden' name='activity_name[]' value='{$key}'>
 								<span class='col-md-3'>{$activity}</span>
-								<span class='col-md-2'><input type='text' class='my-workouts validate[required]' id='sets' name='sets_{$key}' width='50px'></span>
-								<span class='col-md-2'><input type='text' class='my-workouts validate[required]' id='reps' name='reps_{$key}' width='50px'></span>
-								<span class='col-md-2'><input type='text' class='my-workouts validate[required]' id='kg' name='kg_{$key}' width='50px'></span>
-								<span class='col-md-3'><input type='text' class='my-workouts validate[required]' id='rest' name='rest_{$key}' width='50px'></span>
+								<span class='col-md-2'><input type='text' class='my-workouts validate[required,custom[onlyNumberSp],maxSize[3]]' id='sets' name='sets_{$key}' width='50px'></span>
+								<span class='col-md-2'><input type='text' class='my-workouts validate[required,custom[onlyNumberSp],maxSize[3]]' id='reps' name='reps_{$key}' width='50px'></span>
+								<span class='col-md-2'><input type='text' class='my-workouts validate[required,custom[onlyNumberSp],maxSize[3]]' id='kg' name='kg_{$key}' width='50px'></span>
+								<span class='col-md-3'><input type='text' class='my-workouts validate[required,custom[onlyNumberSp],maxSize[3]]' id='rest' name='rest_{$key}' width='50px'></span>
 							</div>";
 						}
 						echo "</div><label class='col-md-2 col-sm-2 col-md-12 control-label' for='note'>".__("Note")."</label><div class='col-md-10 col-sm-10 col-md-12'><textarea id='note' class='form-control' name='note'></textarea></div>";
 					}
-				// echo "<div class='activity_data'></div>";						
-				?>
+										
+					?>
 				</div>
 			</div>		
 	<?php	
 		}
-		
-		// }
 	}
 	
 	public function getWorkoutDates()
 	{
 		$uid = $this->request->data["uid"];
-		// echo $uid;die;
+		
 		$assign_table = TableRegistry::get("GymAssignWorkout");
 		$data = $assign_table->find()->where(["user_id"=>$uid])->select(["GymAssignWorkout.id","GymAssignWorkout.start_date","GymAssignWorkout.end_date"])->hydrate(false)->toArray();
-		// var_dump($data);die;
+		
 		$x=1;
 		if(!empty($data))
 		{
@@ -812,8 +803,10 @@ Class GymAjaxController extends AppController
 			foreach($data as $rec)
 			{
 				$wid[] = $rec["id"];			
-				$date_rages[$x]["start_date"]=date('Y-m-d',strtotime($rec["start_date"]));
-				$date_rages[$x]["end_date"]=date('Y-m-d',strtotime($rec["end_date"]));
+				//$date_rages[$x]["start_date"]=date('Y-m-d',strtotime($rec["start_date"]));
+				//$date_rages[$x]["end_date"]=date('Y-m-d',strtotime($rec["end_date"]));
+				$date_rages[$x]["start_date"]=$this->GYMFunction->get_db_format_date($rec["start_date"]);
+				$date_rages[$x]["end_date"]=$this->GYMFunction->get_db_format_date($rec["end_date"]);
 				$date_rages[$x]["wid"] = $rec["id"];
 				$x++;
 			}
@@ -831,13 +824,7 @@ Class GymAjaxController extends AppController
 				$end = new \DateTime($period["end_date"]);
 				$end->format('Y-m-d');
 				$daterange = new \DatePeriod($start, new \DateInterval('P1D'), $end);
-				
-				// $start = clone $start;
-				// while ($start <= $end) {
-					// $daterange[] = $start->format('Y-m-d');
-					// $start->modify('+1 day');
-				// }
-				
+					
 				$period_wid = $period["wid"];
 				$assign_days = array();
 				foreach($days[$period_wid] as $wd)
@@ -846,8 +833,7 @@ Class GymAjaxController extends AppController
 				}
 				
 				foreach($daterange as $date)
-				{										
-					// $curr_date = $date;			
+				{												
 					$curr_date = $date->format("Y-m-d");			
 					$sel_day = date('l',strtotime($curr_date));	
 					if(in_array($sel_day,$assign_days))
@@ -855,6 +841,7 @@ Class GymAjaxController extends AppController
 						$dates[]= $curr_date;						
 					}
 				}
+				
 				if($start->format("Y-m-d") == $end->format("Y-m-d")) //IF start date and end date is same.than also add in array.
 				{
 					$day = date('l',strtotime($start->format("Y-m-d")));	
@@ -865,6 +852,7 @@ Class GymAjaxController extends AppController
 				}
 				
 			}
+		
 			if(!empty($dates))
 			{ echo json_encode($dates);					 }
 		}
@@ -916,44 +904,45 @@ Class GymAjaxController extends AppController
 				<h4 class="modal-title" id="gridSystemModalLabel"><?php echo __("Edit/Delete Measurement");?></h4>
 			</div>
 			<div class="modal-body">			
-			<div class="row">
-				<div class="col-sm-12 table table-striped">
-					<table class="table" id="level_list">
-					<thead>
-						<tr>
-							<th><?php echo __("Image");?></th>
-							<th><?php echo __("Measurement");?></th>
-							<th><?php echo __("Result");?></th>
-							<th><?php echo __("Record Date");?></th>
-							<th><?php echo __("Action");?></th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>					
-					<?php
-					if(!empty($data))
-					{
-						foreach($data as $row)
-						{
-							echo "<tr id='row_{$row['id']}'>
-									<td><img src='{$this->request->webroot}webroot/upload/{$row['image']}' class='membership-img img-circle'></td>
-									<td>{$row['result_measurment']}</td>
-									<td>{$row['result']}</td>
-									<td>".date($this->GYMFunction->getSettings("date_format"),strtotime($row['result_date']))."</td>
-									<td>
-									<a href='".$this->request->base ."/GymDailyWorkout/editMeasurment/{$row['id']}' class='btn btn-flat btn-primary' title='Edit'><i class='fa fa-edit'></i></a>
-									<a href='javascript:void(0)' data-url='{$this->request->base}/GymAjax/deleteMeasurment/{$row['id']}' class='delete_measurment btn btn-flat btn-danger view-measurement-popup' did='{$row['id']}' title='Delete'><i class='fa fa-trash'></i></a>      
-									</td>
-							</tr>";
-						}
-					}else{
-						echo "<tr><td>".__("No Data Found.")."</td></tr>";
-					}
-					?>
-					</tbody>
-					</table>
+				<div class="row">
+					<div class="col-sm-12 table table-striped">
+						<table class="table" id="level_list">
+							<thead>
+								<tr>
+									<th><?php echo __("Image");?></th>
+									<th><?php echo __("Measurement");?></th>
+									<th><?php echo __("Result");?></th>
+									<th><?php echo __("Record Date");?></th>
+									<th><?php echo __("Action");?></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>					
+							<?php
+							if(!empty($data))
+							{
+								foreach($data as $row)
+								{
+									//echo $this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($row['result_date'])));
+									echo "<tr id='row_{$row['id']}'>
+										<td><img src='{$this->request->webroot}webroot/upload/{$row['image']}' class='membership-img img-circle'></td>
+										<td>{$row['result_measurment']}</td>
+										<td>{$row['result']}</td>
+										<td>".$this->GYMFunction->get_db_format_en_lang(date($this->GYMFunction->getSettings("date_format"),strtotime($row['result_date'])))."</td>
+										<td>
+										<a href='".$this->request->base ."/GymDailyWorkout/editMeasurment/{$row['id']}' class='btn btn-flat btn-primary' title='Edit'><i class='fa fa-edit'></i></a>
+										<a href='javascript:void(0)' data-url='{$this->request->base}/GymAjax/deleteMeasurment/{$row['id']}' class='delete_measurment btn btn-flat btn-danger view-measurement-popup' did='{$row['id']}' title='Delete'><i class='fa fa-trash'></i></a>      
+										</td>
+										</tr>";
+								}
+							}else{
+								echo "<tr><td>".__("No Data Found.")."</td></tr>";
+							}
+							?>
+							</tbody>
+						</table>
+					</div>
 				</div>
-			</div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo __("Close");?></button>				
@@ -969,8 +958,13 @@ Class GymAjaxController extends AppController
 			$measurement_table = TableRegistry::get("GymMeasurement");			
 			$row = $measurement_table->get($did);
 			if($measurement_table->delete($row))
-			{echo true;}
-			else{ echo false;}
+			{
+				echo true;
+			}
+			else
+			{ 
+				echo false;
+			}
 		}
 	}
 	
@@ -981,7 +975,7 @@ Class GymAjaxController extends AppController
 			$data_array = $this->request->data['data_array'];
 			$data_value = json_encode($data_array);
 			echo "<input type='hidden' value='".htmlspecialchars($data_value,ENT_QUOTES)."' name='activity_list[]'>";
-			//var_dump($data_array);
+			
 		}
 		die;
 	}
@@ -1012,50 +1006,81 @@ Class GymAjaxController extends AppController
 		$event_places = $event_tbl->find()->all()->toArray();		
 		?>
 		<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="gridSystemModalLabel"><?php echo __("Add/Remove Event Place");?></h4>
-			</div>
-			<div class="modal-body">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title" id="gridSystemModalLabel"><?php echo __("Add/Remove Event Place");?></h4>
+		</div>
+		<div class="modal-body">
 			<div class="row">
 				<div class="col-sm-4 col-sm-offset-1">
-					<input type="text" class="place_name form-control" placeholder="<?php echo __("Enter Place Name");?>">
+					<input type="text" class="place_name form-control" placeholder="<?php echo __("Enter Place Name"); ?>" maxLength="40" id="place">
 				</div>
 				<div class="col-sm-4">
-					<button class="save-event-place btn btn-flat btn-success" data-url="<?php echo $this->request->base."/GymAjax/saveEventPlace";?>"><?php echo  __("Add Place");?></button>
+					<button class="save-event-place btn btn-flat btn-success" data-url="<?php echo $this->request->base."/GymAjax/saveEventPlace";?>"><?php echo  __("Add Place"); ?></button>
 				</div>
 			</div>
 			<hr>
 			<div class="row">
 				<div class="col-sm-12 table table-striped">
 					<table class="table" id="events_place_list">
-					<thead>
-						<tr>
-							<th><?php echo __("Place Name");?></th>
-							<th><?php echo __("Action");?></th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-					<?php
-					if(!empty($event_places))
-					{
-						foreach($event_places as $place)
+						<thead>
+							<tr>
+								<th><?php echo __("Place Name");?></th>
+								<th><?php echo __("Action");?></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+						<?php
+						if(!empty($event_places))
 						{
-							echo "<tr id='row-{$place->id}'>
-							<td>{$place->place}</td>
-							<td><button class='del-event-place btn btn-flat btn-danger' del-id='{$place->id}' data-url='{$this->request->base}/GymAjax/deleteEventPlace/{$place->id}'>".__("Delete")."</button></td>
-							</tr>";
-						}
-					}else{echo "<tr id='empty_row'><td colspan='2'>".__("No Event Place added")."</td></tr>";}
-					?>
-					</tbody>
+							foreach($event_places as $place)
+							{
+								echo "<tr id='row-{$place->id}'>
+								<td>{$place->place}</td>
+								<td><button class='del-event-place btn btn-flat btn-danger' del-id='{$place->id}' data-url='{$this->request->base}/GymAjax/deleteEventPlace/{$place->id}'>".__("Delete")."</button></td>
+								</tr>";
+							}
+						}else{
+							echo "<tr id='empty_row'><td colspan='2'>".__("No Event Place added")."</td></tr>";
+							}
+						?>
+						</tbody>
 					</table>
 				</div>
 			</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo __("Close");?></button>				
-			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo __("Close");?></button>				
+		</div>
+		<script>
+			$("body").on("blur","#place",function(){
+				var place_name = $(".place_name").val();
+				if(validateEvent())
+				{
+
+				}
+				else{
+					alert("Any Special character and numbers not allow in place name.")
+					$("#place").val('');
+					$(".place_name").attr(data-url,'');
+					return false;
+				}
+			});
+				function validateEvent() {
+					
+					var event = document.getElementById("place").value;
+					//var filter =/^[0-9a-zA-Z]+$/;
+					//var filter =/^[#.0-9a-zA-Z\s,-]+$/;
+					var filter =/^[#.a-zA-Z\s,-]+$/;
+					if (filter.test(event)) {
+						return true;
+					}
+					else {
+						return false;
+					}
+				}
+		</script>
+			
 	<?php
 	}
 	
@@ -1194,6 +1219,7 @@ Class GymAjaxController extends AppController
 	}
 	public function viewInvoice($mp_id)
 	{
+		
 		$this->loadComponent("GYMFunction");
 		$payment_tbl = TableRegistry::get("MembershipPayment");
 		$setting_tbl = TableRegistry::get("GeneralSetting");
@@ -1222,7 +1248,7 @@ Class GymAjaxController extends AppController
 					</td>
 					<td align="right" width="24%">
 						<h5><?php $issue_date=$data[0]['created_date']->format("Y-m-d");
-							$issue_date= date($sys_data[0]['date_format'],strtotime($issue_date));
+							$issue_date= $this->GYMFunction->get_db_format_en_lang(date($sys_data[0]['date_format'],strtotime($issue_date)));
 							echo __('Issue Date')." : ". $issue_date;?></h5>
 						<h5><?php echo __('Status')." : "; echo "<span style='cursor:default;' class='btn btn-success btn-xs'>";
 							echo __($this->GYMFunction->get_membership_paymentstatus($mp_id));
@@ -1318,7 +1344,7 @@ Class GymAjaxController extends AppController
 				foreach($history_data as  $retrive_date)
 				{?>
 					<tr>
-					<td class="text-center"><?php echo date($this->GYMFunction->getSettings("date_format"),strtotime($retrive_date["paid_by_date"]));?></td>
+					<td class="text-center"><?php echo $this->GYMFunction->get_db_format_en_lang(date($this->GYMFunction->getSettings("date_format"),strtotime($retrive_date["paid_by_date"])));?></td>
 					<td class="text-center"><?php echo $this->GYMFunction->get_currency_symbol();?> <?php echo $retrive_date["amount"];?></td>
 					<td class="text-center"><?php echo $retrive_date["payment_method"];?></td>
 					</tr>
@@ -1365,103 +1391,103 @@ Class GymAjaxController extends AppController
 			<h4 class="modal-title" id="gridSystemModalLabel"><?php echo __("Invoice");?></h4>
 		</div>
 		<div class="modal-body">
-		<div id="invoice_print"> 
-		<table width="100%" border="0">
-			<tbody>
-				<tr>
-					<td width="70%">
-						<img style="max-height:80px;" src="<?php echo $sys_data[0]["gym_logo"]; ?>">
-					</td>
-					<td align="<?php echo $float_r;?>" width="24%">
-						<h5><?php $issue_date=$data[0]['invoice_date']->format("Y-m-d");
-							$issue_date= date($sys_data[0]['date_format'],strtotime($issue_date));
-							echo __('Issue Date')." : ". $issue_date;?></h5>
-						<h5><?php echo __('Status')." : "; 
-							echo __($data[0]["payment_status"]);
-							?>
-						</h5>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		<hr>
-		<table width="100%" border="0">
-			<tbody>
-				<tr>
-					<td align="<?php echo $float_l;?>">
-						<h4><?php echo __('Payment To');?> </h4>
-					</td>
-					<td align="<?php echo $float_r;?>">
-						<h4><?php echo __('Bill To');?> </h4>
-					</td>
-				</tr>
-				<tr>
-					<td valign="top" align="<?php echo $float_l;?>">
-						<?php echo $sys_data[0]["name"]."<br>"; 
-						 echo $sys_data[0]["address"].","; 
-						 echo $sys_data[0]["country"]."<br>"; 
-						 echo $sys_data[0]["office_number"]."<br>"; 
-						?>
-					</td>
-					<td valign="top" align="<?php echo $float_r;?>">
+			<div id="invoice_print"> 
+				<table width="100%" border="0">
+					<tbody>
+						<tr>
+							<td width="70%">
+								<img style="max-height:80px;" src="<?php echo $sys_data[0]["gym_logo"]; ?>">
+							</td>
+							<td align="<?php echo $float_r;?>" width="24%">
+								<h5><?php $issue_date=$data[0]['invoice_date']->format("Y-m-d");
+								$issue_date= $this->GYMFunction->get_db_format_en_lang(date($sys_data[0]['date_format'],strtotime($issue_date)));
+								echo __('Issue Date')." : ". $issue_date;?></h5>
+								<h5><?php echo __('Status')." : "; 
+								echo __($data[0]["payment_status"]);
+								?>
+								</h5>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<hr>
+				<table width="100%" border="0">
+					<tbody>
+						<tr>
+							<td align="<?php echo $float_l;?>">
+								<h4><?php echo __('Payment To');?> </h4>
+							</td>
+							<td align="<?php echo $float_r;?>">
+								<h4><?php echo __('Bill To');?> </h4>
+							</td>
+						</tr>
+						<tr>
+							<td valign="top" align="<?php echo $float_l;?>">
+								<?php echo $sys_data[0]["name"]."<br>"; 
+									echo $sys_data[0]["address"].","; 
+									echo $sys_data[0]["country"]."<br>"; 
+									echo $sys_data[0]["office_number"]."<br>"; 
+								?>
+							</td>
+							<td valign="top" align="<?php echo $float_r;?>">
+								<?php
+									if($type == "income")
+									{						
+										echo $data[0]["gym_member"]["first_name"]." ".$data[0]["gym_member"]["last_name"]."<br>"; 
+										echo $data[0]["gym_member"]["address"].","; 
+										echo $data[0]["gym_member"]["city"].","; 
+										echo $data[0]["gym_member"]["zipcode"].",<BR>"; 
+										echo $data[0]["gym_member"]["state"].","; 
+										echo $sys_data[0]["country"].","; 
+										echo $data[0]["gym_member"]["mobile"]."<br>"; 
+									}
+									else if($type == "expense")
+									{
+										echo $data[0]["supplier_name"]."<br>";
+									}
+								?>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<hr>
+				<h4><?php echo __("Invoice Entries");?></h4>
+				<table class="table table-bordered" width="100%" border="1" style="border-collapse:collapse;">
+					<thead>
+						<tr>
+							<th class="text-center">#</th>
+							<th class="text-center"> <?php echo __('Date');?></th>
+							<th class="text-center"> <?php echo __('Entry');?></th>
+							<th class="text-center"> <?php echo __('Price');?></th>
+							<th class="text-center"> <?php echo __('Username');?></th>					
+						</tr>
+					</thead>
+					<tbody>
 						<?php
-						if($type == "income")
-						{						
-							echo $data[0]["gym_member"]["first_name"]." ".$data[0]["gym_member"]["last_name"]."<br>"; 
-							echo $data[0]["gym_member"]["address"].","; 
-							echo $data[0]["gym_member"]["city"].","; 
-							echo $data[0]["gym_member"]["zipcode"].",<BR>"; 
-							echo $data[0]["gym_member"]["state"].","; 
-							echo $sys_data[0]["country"].","; 
-							echo $data[0]["gym_member"]["mobile"]."<br>"; 
-						}
-						else if($type == "expense")
-						{
-							echo $data[0]["supplier_name"]."<br>";
-						}
-						?>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		<hr>
-		<h4><?php echo __("Invoice Entries");?></h4>
-		<table class="table table-bordered" width="100%" border="1" style="border-collapse:collapse;">
-			<thead>
-				<tr>
-					<th class="text-center">#</th>
-					<th class="text-center"> <?php echo __('Date');?></th>
-					<th class="text-center"> <?php echo __('Entry');?></th>
-					<th class="text-center"> <?php echo __('Price');?></th>
-					<th class="text-center"> <?php echo __('Username');?></th>					
-				</tr>
-			</thead>
-			<tbody>
-			<?php
-			$entries = json_decode($data[0]["entry"]);
-			$i = 1 ;
-			foreach($entries as $entry)
-			{ ?>
-				<tr>
-				<td><?php echo $i; ?></td>
-				<td class="text-center"><?php echo date($this->GYMFunction->getSettings("date_format"),strtotime($data[0]["invoice_date"]));?></td>
-				<td class="text-center"><?php echo $entry->entry;?></td>
-				<td class="text-center"><?php echo $this->GYMFunction->get_currency_symbol();?>  <?php echo $entry->amount;?></td>
-				<td class="text-center"><?php echo $data[0]["gym_member"]["first_name"] . " ". $data[0]["gym_member"]["first_name"];?></td>
-				</tr>
-	  <?php	$i++;
-			} ?>
-			</tbody>
-		</table>
-		<table width="100%" border="0">
-			<tbody>
-				<tr>
-					<td width="80%" align="<?php echo $float_r;?>"><?php echo __('Grand Total :');?></td>
-					<td align="<?php echo $float_r;?>"><?php echo $this->GYMFunction->get_currency_symbol();?>  <?php echo $data[0]["total_amount"];?></td>
-				</tr>				
-			</tbody>			
-		</table>		
-		</div>
+							$entries = json_decode($data[0]["entry"]);
+							$i = 1 ;
+							foreach($entries as $entry)
+							{ ?>
+								<tr>
+									<td><?php echo $i; ?></td>
+									<td class="text-center"><?php echo $this->GYMFunction->get_db_format_en_lang(date($this->GYMFunction->getSettings("date_format"),strtotime($data[0]["invoice_date"])));?></td>
+									<td class="text-center"><?php echo $entry->entry;?></td>
+									<td class="text-center"><?php echo $this->GYMFunction->get_currency_symbol();?>  <?php echo $entry->amount;?></td>
+									<td class="text-center"><?php echo $data[0]["gym_member"]["first_name"] . " ". $data[0]["gym_member"]["last_name"];?></td>
+								</tr>
+						<?php	$i++;
+						} ?>
+					</tbody>
+				</table>
+				<table width="100%" border="0">
+					<tbody>
+						<tr>
+							<td width="80%" align="<?php echo $float_r;?>"><?php echo __('Grand Total :');?></td>
+							<td align="<?php echo $float_r;?>"><?php echo $this->GYMFunction->get_currency_symbol();?>  <?php echo $data[0]["total_amount"];?></td>
+						</tr>				
+					</tbody>			
+				</table>		
+			</div>
 		</div>
 		<div class="modal-footer">
 			<div class="print-button pull-left">
@@ -1503,12 +1529,12 @@ Class GymAjaxController extends AppController
 				  <div class="form-group">
 					<label for="notice_title" class="col-sm-3">
 					<?php echo __("Start Date");?>    : </label>
-					<div class="col-sm-9"> <?php echo date($this->GYMFunction->getSettings("date_format"),strtotime($row["start_date"])); ?></div>
+					<div class="col-sm-9"> <?php echo  $this->GYMFunction->get_db_format_en_lang(date($this->GYMFunction->getSettings("date_format"),strtotime($row["start_date"]))); ?></div>
 				  </div>
 				  <div class="form-group">
 					<label for="notice_title" class="col-sm-3">
 					<?php echo __("End Date ");?>   : </label>
-					<div class="col-sm-9"> <?php echo date($this->GYMFunction->getSettings("date_format"),strtotime($row["end_date"])); ?> </div>
+					<div class="col-sm-9"> <?php echo $this->GYMFunction->get_db_format_en_lang(date($this->GYMFunction->getSettings("date_format"),strtotime($row["end_date"]))); ?> </div>
 				  </div>
 				</div>
 			</div>
@@ -1524,20 +1550,30 @@ Class GymAjaxController extends AppController
 		if($this->request->is("ajax"))
 		{
 			$membership_id = $this->request->data["m_id"];
+			$group = $this->request->data["group"];
+			
 			$mem_tbl = TableRegistry::get("Membership");
 			$class_tbl = TableRegistry::get("ClassSchedule");
 			$mem_classes = $mem_tbl->get($membership_id)->toArray();
 			$mem_classes = json_decode($mem_classes["membership_class"]);
 			$data = null;
 			if(!empty($mem_classes))
-			{				
-				foreach($mem_classes as $class)
+			{			
+				echo "</br>" ;		
+				
+				foreach($mem_classes as $key=>$class)
 				{
+					$selected="";
 					$class_data = $class_tbl->find()->where(["id"=>$class])->hydrate(false)->toArray();
+					
 					if(!empty($class_data))
 					{
-						$class_data = $class_data[0];
-						$data .= "<option value='{$class_data['id']}'>{$class_data['class_name']}</option>";
+						
+							
+							if($group[$key]==$class_data[0]['id']){ $selected='selected=selected'; }
+							
+							$data .= "<option  value='{$class_data[0]['id']}'  $selected >{$class_data[0]['class_name']}</option>";
+						
 					}					
 				}
 			}

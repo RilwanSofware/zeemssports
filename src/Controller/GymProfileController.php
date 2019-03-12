@@ -6,7 +6,6 @@ use Cake\Auth\DefaultPasswordHasher;
 
 class GymProfileController extends AppController
 {
-
 	public function viewProfile()
 	{
 		$session = $this->request->session()->read("User");
@@ -45,6 +44,7 @@ class GymProfileController extends AppController
 			if(isset($this->request->data["profile_save_change"]))
 			{
 				$post = $this->request->data;
+				
 				$curr_email = $this->Auth->User('email');
 				if($curr_email != $post["email"])
 				{
@@ -55,7 +55,10 @@ class GymProfileController extends AppController
 				}
 				if($count == 0)
 				{
+					
+					$post['birth_date']=date('Y-m-d',strtotime($post['birth_date']));
 					$update_row = $this->GymProfile->GymMember->patchEntity($user_data,$post);
+					
 					if($this->GymProfile->GymMember->save($update_row))
 					{
 						$this->Flash->success(__("Success! Information Updated Successfully"));

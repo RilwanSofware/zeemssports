@@ -30,8 +30,9 @@ class GymAccountantController extends AppController
 				$accountant = $this->GymAccountant->GymMember->newEntity();
 				
 				$image = $this->GYMFunction->uploadImage($this->request->data['image']);
-				$this->request->data['image'] = (!empty($image)) ? $image : "logo.png";
-				$this->request->data['birth_date'] = date("Y-m-d",strtotime($this->request->data['birth_date']));
+				$this->request->data['image'] = (!empty($image)) ? $image : "Thumbnail-img.png";
+				//$this->request->data['birth_date'] = date("Y-m-d",strtotime($this->request->data['birth_date']));
+				$this->request->data['birth_date'] = $this->GYMFunction->get_db_format_date($this->request->data['birth_date']);
 				$this->request->data['created_date'] = date("Y-m-d");
 				$this->request->data['created_by'] = $session["id"];
 				$this->request->data['role_name'] = "accountant";
@@ -76,7 +77,7 @@ class GymAccountantController extends AppController
 			if($ext != 0)
 			{
 				$row = $this->GymAccountant->GymMember->get($id);
-				$this->request->data['birth_date'] = date("Y-m-d",strtotime($this->request->data['birth_date']));
+				$this->request->data['birth_date'] = $this->GYMFunction->get_db_format_date(date("Y-m-d",strtotime($this->request->data['birth_date'])));
 				$image = $this->GYMFunction->uploadImage($this->request->data['image']);
 				if($image != "")
 				{

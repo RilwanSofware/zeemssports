@@ -17,32 +17,34 @@ class GymAttendanceController extends AppController
 		if($this->request->is("post") && isset($this->request->data["attendence"]))
 		{
 			$class_id = $this->request->data["class_id"];			
-			$att_date = date("Y-m-d",strtotime($this->request->data["curr_date"]));
+			//$att_date = date("Y-m-d",strtotime($this->request->data["curr_date"]));
+			$att_date = $this->GYMFunction->get_db_format_date($this->request->data['curr_date']);
 			if($session["role_name"] == "staff_member")
 			{
-				// $data = $this->GymAttendance->GymMember->find("all")->where(["member_type"=>"Member","assign_class" => $class_id,"assign_staff_mem"=>$session["id"],"membership_valid_from <= " => $att_date,"membership_valid_to >= "=> $att_date])->hydrate(false)->toArray();
 				$data = $this->GymAttendance->GymMemberClass->find("all")->contain(["GymMember"])->where(["GymMember.member_type"=>"Member","GymMember.membership_status"=>"Continue","GymMemberClass.assign_class" => $class_id,"GymMember.assign_staff_mem"=>$session["id"],"GymMember.membership_valid_from <= " => $att_date,"GymMember.membership_valid_to >= "=> $att_date])->hydrate(false)->toArray();
 			}
 			else if($session["role_name"] == "member")
 			{
 				$data = $this->GymAttendance->find("all")->where(["user_id"=>$session["id"],"class_id"=>$class_id,"attendance_date"=>$att_date])->hydrate(false)->toArray();
 			}
-			else{
-				// $data = $this->GymAttendance->GymMember->find("all")->where(["role_name"=>"member","member_type"=>"Member","assign_class" => $class_id,"membership_valid_from <= " => $att_date,"membership_valid_to >= "=> $att_date])->hydrate(false)->toArray();
-				
+			else
+			{
 				$data = $this->GymAttendance->GymMemberClass->find("all")->contain(["GymMember"])->where(["GymMember.role_name"=>"member","GymMember.member_type"=>"Member","GymMember.membership_status"=>"Continue","GymMemberClass.assign_class" => $class_id,"GymMember.membership_valid_from <= " => $att_date,"GymMember.membership_valid_to >= "=> $att_date])->hydrate(false)->toArray();
 			}			
 			$this->set("data",$data);		
 			$this->set("class_id",$class_id);		
 			$this->set("attendance_date",$att_date);		
-			$this->set("view_attendance",true);			
+			$this->set("view_attendance",true);	
+				//var_dump( $att_date);die;
 		}
+		
 		if($this->request->is("post") && isset($this->request->data["save_attendance"]) && isset($this->request->data["attendance"]))
 		{
 			
 			$attendances = $this->request->data["attendance"];			
 			$save_row = array();
-			$att_date = date("Y-m-d",strtotime($this->request->data["attendance_date"]));
+			//$att_date = date("Y-m-d",strtotime($this->request->data["attendance_date"]));
+			$att_date = $this->GYMFunction->get_db_format_date($this->request->data['attendance_date']);
 			$class_id = $this->request->data["class_id"];
 			foreach($attendances as $att)
 			{
@@ -50,7 +52,8 @@ class GymAttendanceController extends AppController
 				
 				$data["user_id"] = $att; 
 				$data["class_id"] = $this->request->data["class_id"]; 
-				$data["attendance_date"] = date("Y-m-d",strtotime($this->request->data["attendance_date"])); 
+				//$data["attendance_date"] = date("Y-m-d",strtotime($this->request->data["attendance_date"])); 
+				$data["attendance_date"] = $this->GYMFunction->get_db_format_date($this->request->data['attendance_date']); 
 				$data["status"] = $this->request->data["status"];
 				$data["attendance_by"] = 1; 
 				$data["role_name"] = "member"; 
@@ -64,11 +67,11 @@ class GymAttendanceController extends AppController
 					{
 						$success = 1;
 					}
-				}else{
-					$save_row[] = $data;
 				}
-				
-				
+				else
+				{
+					$save_row[] = $data;
+				}	
 			}
 			$ma_row = $this->GymAttendance->newEntities($save_row);
 			foreach($ma_row as $m_row)
@@ -93,7 +96,8 @@ class GymAttendanceController extends AppController
 		
 		if($this->request->is("post") && isset($this->request->data["staff_attendence"]))
 		{
-			$att_date = date("Y-m-d",strtotime($this->request->data["curr_date"]));
+			//$att_date = date("Y-m-d",strtotime($this->request->data["curr_date"]));
+			$att_date = $this->GYMFunction->get_db_format_date($this->request->data['curr_date']);
 			$data = $this->GymAttendance->GymMember->find("all")->where(["role_name"=>"staff_member"])->hydrate(false)->toArray();
 			$this->set("data",$data);
 			$this->set("attendance_date",$att_date);		
@@ -104,8 +108,10 @@ class GymAttendanceController extends AppController
 		{
 			$attendances = array();
 			if(isset($this->request->data["attendance"]))
-			{$attendances = $this->request->data["attendance"];}
-			// var_dump($this->request->data["attendance"]);die;
+			{
+				$attendances = $this->request->data["attendance"];
+			}
+			
 			$save_row = array();
 			$att_date = $this->request->data["attendance_date"];
 			if(!empty($attendances))
@@ -128,7 +134,9 @@ class GymAttendanceController extends AppController
 						{
 							$success = 1;
 						}
-					}else{
+					}
+					else
+					{
 						$save_row[] = $data;
 					}
 					

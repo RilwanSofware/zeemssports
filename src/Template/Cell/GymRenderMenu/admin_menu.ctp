@@ -1,46 +1,28 @@
+<?php 
+$session = $this->request->session();
+$is_rtl = $session->read("User.is_rtl");
+$pull = ($is_rtl == "1") ? "pull-left":"pull-right";
 
-
-<?php $session = $this->request->session();
-	$is_rtl = $session->read("User.is_rtl");
-	$pull = ($is_rtl == "1") ? "pull-left":"pull-right";
-
-if($is_rtl == "1") { ?>
-<style>
-.treeview a {
-	display: inline-block !important;
-	width : 100% !important;
-}
-.treeview i:first-child{
-	float:right !important;
-	padding-top : 5px;
-}
-.treeview span{
-	float: right !important;
-    margin-right: 5px !important;
-}
-</style>
+if($is_rtl == "1") 
+{ ?>
+	<style>
+		.treeview a {
+			display: inline-block !important;
+			width : 100% !important;
+		}
+		.treeview i:first-child{
+			float:right !important;
+			padding-top : 5px;
+		}
+		.treeview span{
+			float: right !important;
+			margin-right: 5px !important;
+		}
+	</style>
 <?php } ?>
           <br>
-		<!--  <div class="user-panel">
-            <div class="pull-left image">
-			  <?php //echo $this->Html->image('user2-160x160.jpg',array("class"=>"img-circle","alt"=>"User Image")); ?>
-			</div>
-            <div class="pull-left info">
-              <p><?php //echo $session->read("User.display_name");?></p>
-              <a href="#"><i class="fa fa-circle text-success"></i> <?php //echo __("Online");?></a>
-            </div>
-          </div>-->		  
-     <!-- <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-              <input type="text" name="q" class="form-control" placeholder="Search...">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
-              </span>
-            </div>
-          </form> -->
-		  <br>
-          <ul class="sidebar-menu">
-          <!-- <li class="header">MAIN NAVIGATION</li> -->		 
+		  
+          <ul class="sidebar-menu">	 
             <li class= "treeview <?php echo ($this->request->controller == "Dashboard") ? "active" : "";?>">
               <a href="<?php echo $this->Gym->createurl("Dashboard","index");?>">
                 <i class="fa fa-pie-chart"></i> <span><?php echo __('Dashboard');?></span></i> 
@@ -97,9 +79,9 @@ if($is_rtl == "1") { ?>
               </a>
 			</li>
 			<li class="treeview <?php echo ($this->request->controller == "GymAssignWorkout" || $this->request->controller == "GymDailyWorkout") ? "active" : "";?>">
-              <a href="<?php echo $this->Gym->createurl("GymAssignWorkout","WorkoutLog");?>">
-                <i class="fa fa-hand-grab-o"></i> <span><?php echo __('Workout');?></span><i class="fa fa-angle-left <?php echo $pull;?>"></i>
-              </a>
+				<a href="<?php echo $this->Gym->createurl("GymAssignWorkout","WorkoutLog");?>">
+					<i class="fa fa-hand-grab-o"></i> <span><?php echo __('Workout');?></span><i class="fa fa-angle-left <?php echo $pull;?>"></i>
+				</a>
 			   <ul class="treeview-menu">
 					<li class="<?php echo ($this->request->action == "workoutLog" || $this->request->action == "assignWorkout" || $this->request->action == "viewWorkouts") ? "active" : "";?>">
 						<a href="<?php echo $this->Gym->createurl("GymAssignWorkout","WorkoutLog");?>"><i class="fa fa-circle-o"></i><?php echo __('Assign Workout');?></a>
@@ -112,9 +94,9 @@ if($is_rtl == "1") { ?>
               </ul>	
 			</li>			
 			<li class="treeview <?php echo ($this->request->controller == "GymProduct" || $this->request->controller == "GymStore") ? "active" : "";?>">
-              <a href="<?php echo $this->Gym->createurl("GymProduct","productList");?>">
-                <i class="fa fa-tags"></i> <span><?php echo __("Store & Products");?></span><i class="fa fa-angle-left <?php echo $pull;?>"></i>
-              </a>
+				<a href="<?php echo $this->Gym->createurl("GymProduct","productList");?>">
+					<i class="fa fa-tags"></i> <span><?php echo __("Store & Products");?></span><i class="fa fa-angle-left <?php echo $pull;?>"></i>
+				</a>
 			  <ul class="treeview-menu">
 					<li class="<?php echo ($this->request->action == "productList" || $this->request->action == "addProduct" || $this->request->action == "editProduct") ? "active" : "";?>">
 						<a href="<?php echo $this->Gym->createurl("GymProduct","productList");?>"><i class="fa fa-circle-o"></i><?php echo __('Product');?></a>
@@ -143,17 +125,17 @@ if($is_rtl == "1") { ?>
 				<ul class="treeview-menu">
 					<li class="<?php echo ($this->request->action == "paymentList" || $this->request->action == "generatePaymentInvoice" || $this->request->action == "membershipEdit") ? "active" : "";?>">
 						<a href="<?php echo $this->Gym->createurl("MembershipPayment","paymentList");?>">
-						<i class="fa fa-circle-o"></i> <span><?php echo __('Membership Payment');?></span></i>
+						<i class="fa fa-circle-o"></i><span><?php echo __('Membership Payment');?></span>
 						</a>
 					</li>
 					<li class="<?php echo ($this->request->action == "incomeList" || $this->request->action == "addIncome" || $this->request->action == "incomeEdit") ? "active" : "";?>">
 						<a href="<?php echo $this->Gym->createurl("MembershipPayment","incomeList");?>">
-							<i class="fa fa-circle-o"></i><?php echo __('Income');?>
+							<i class="fa fa-circle-o"></i><span><?php echo __('Income');?></span>
 						</a>
 					</li>
 					<li class="<?php echo ($this->request->action == "expenseList" || $this->request->action == "addExpense" || $this->request->action == "expenseEdit") ? "active" : "";?>">
 						<a href="<?php echo $this->Gym->createurl("MembershipPayment","expenseList");?>">
-							<i class="fa fa-circle-o"></i><?php echo __('Expenses');?>
+							<i class="fa fa-circle-o"></i><span><?php echo __('Expenses');?></span>
 						</a>
 					</li>
 				</ul> 
@@ -178,12 +160,13 @@ if($is_rtl == "1") { ?>
               <a href="<?php echo $this->Gym->createurl("Reports","membershipReport");?>">
                 <i class="fa fa-file-text-o"></i> <span><?php echo __("Report");?></span> 
               </a>
-			</li> <!--			
-			<li class="treeview <?php echo ($this->request->controller == "gymEmailSetting") ? "active" : "";?>">
-              <a href="<?php echo $this->Gym->createurl("gymEmailSetting","index");?>">
-                <i class="fa fa-envelope-o"></i> <span><?php echo __("Email Settings");?></span></i>
-              </a>
-			</li> -->			
+			</li> 	
+			<li class= "treeview <?php echo ($this->request->controller == "GymSubscriptionHistory") ? "active" : "";?>">
+				<a href="<?php echo $this->Gym->createurl("GymSubscriptionHistory",""); ?>">
+					<i class="fa fa-history"></i>
+					<span><?php echo __("SubscriptionHistory");?></span>
+				</a>             
+			</li>
 			<li class="treeview <?php echo ($this->request->controller == "GeneralSetting") ? "active" : "";?>">
               <a href="<?php echo $this->Gym->createurl("GeneralSetting","SaveSetting");?>">
                 <i class="fa fa-sliders"></i> <span><?php echo __("General Settings");?></span></i>

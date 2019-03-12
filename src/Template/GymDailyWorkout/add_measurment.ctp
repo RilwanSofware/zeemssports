@@ -46,7 +46,7 @@ $(document).ready(function(){
 			<label class="control-label col-md-2" for="email"><?php echo __("Member");?><span class="text-danger"> *</span></label>
 			<div class="col-md-8">
 					<?php
-						echo $this->Form->select("user_id",$members,["default"=>($edit || $set)?$data['user_id']:"","empty"=>__("Select Member"),"required"=>"true","class"=>"memlist"]);
+						echo $this->Form->select("user_id",$members,["default"=>($edit || $set)?$data['user_id']:"","class"=>"memlist"]);
 					 ?>
 			</div>			
 		</div>
@@ -64,7 +64,7 @@ $(document).ready(function(){
 		<div class='form-group'>
 			<label class="control-label col-md-2" for="email"><?php echo __("Result");?><span class="text-danger"> *</span></label>
 			<div class="col-md-8">
-			<?php echo $this->Form->input("",["name"=>"result","label"=>false,"class"=>"form-control validate[required]","value"=>($edit)?$data["result"]:""]); ?>
+			<?php echo $this->Form->input("",["name"=>"result","label"=>false,"class"=>"form-control validate[required,custom[onlyNumberSp]]","value"=>($edit)?$data["result"]:""]); ?>
 			</div>
 		</div>
 		<div class='form-group'>
@@ -83,7 +83,7 @@ $(document).ready(function(){
 			<br><img class="measurement_img" src="<?php echo $this->request->webroot ."/webroot/upload/{$image}";?>">
 			</div>	
 			</div>
-		<div class="col-md-offset-2">
+		<div class="col-md-offset-2 sucess_measument">
 			<input type="submit" class="btn btn-flat btn-success" value="<?php echo __("Save Measurement"); ?>">
 		</div>
 		<?php 

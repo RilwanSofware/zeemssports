@@ -7,4 +7,5 @@ $server_path = 'CUST_URL';
 $image_path='UPLOAD_URL';
 $image_pa=$image_path;
 $conn = new mysqli($servername,$username, $password,$dbname);
+
 ?>

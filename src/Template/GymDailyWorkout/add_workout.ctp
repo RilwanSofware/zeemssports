@@ -5,7 +5,7 @@ echo $this->Html->script('select2.min');
 ?>
 <script>
 $(document).ready(function(){
-	// moment.locale('he');
+	
 	
 	var options = {
 		language: "en",
@@ -16,32 +16,16 @@ $(document).ready(function(){
 		offDays : '',
 		onSelectedDateChanged: function(event, date) {
 			
-			// var assigned_dates = $("#date_range").val();
 			
-			// var dates = assigned_dates.split(",");	
-			var sel_date = $.datepicker.formatDate('yy-mm-dd', new Date(date));			
+			var sel_date = $.datepicker.formatDate('yy-mm-dd', new Date(date));	
+				
 			$("#record_date").val(sel_date);
-			
-		/*	for(var i=0;i<dates.length;i++)
-			{				
-				$("[data-moment=2016-07-13]").addClass(" tcolor");						
-			} */
-	/*	// var formattedDate = new Date(date);
 		
-			// var sel_date = date._i;
-			// var sel_date = $(".dp-selected").attr("data-moment");
-			// var sel_date="";
-			// $("body").on("click",".dp-item",function(){
-				// sel_date = $(this).attr("data-moment");		
-					// alert(sel_date);
-			// });
-			// console.log(formattedDate);	
-			// alert(formattedDate);
-			*/
 			
 			var uid = $("#mem_list").val();			
 			var ajaxurl = $("#paginator").attr("data-url");		
 			var curr_data = {sel_date:sel_date,uid:uid};
+			
 			if(uid != "")
 			{
 				$(".workout_area").html("<div class='work_out_datalist'><strong>Fetching data.... please wait</strong></div>");
@@ -51,15 +35,13 @@ $(document).ready(function(){
 						data : curr_data,
 						success:function(response){
 									$(".workout_area").html(response);
-									$("#save_workout").css('display','block');
-									/* for(var i=0;i<dates.length;i++)
-									{			
-										if(dates != "")
-										{
-											$("[data-moment="+dates[i]+"]").addClass(" sel_date");
-										}										
+							
+									$("#save_workout").css('display','none');
+									if ( $(".savebtn").length ) {
+										$("#save_workout").css('display','block');
 									}
-									$(".dp-selected").removeClass("sel_date"); */
+									
+									
 								},
 						error : function(e){
 							alert("There was an error deleting record,Please try again later.");
@@ -71,31 +53,34 @@ $(document).ready(function(){
 				var curt_data = {uid:uid};
 				
 				$.ajax({
-			url : ajaxurl2,
-			data : curt_data,
-			type : "POST",
-			success : function(response){
-				console.log(response); 
-					if(response != false)
-					{
-						var dates = $.parseJSON(response);				
-						$("#date_range").val(dates);
-						
-						var assigned_dates = $("#date_range").val();
-						var dates = assigned_dates.split(",");
-						$("a").removeClass(" sel_date");
-						for(var i=0;i<dates.length;i++)
-						{				
-							$("[data-moment="+dates[i]+"]").addClass(" sel_date");							
-						}						
-						$(".dp-selected").removeClass("sel_date"); 
-					}
-			},
-			error : function(e){
+					url : ajaxurl2,
+					data : curt_data,
+					type : "POST",
+					success : function(response){
+						console.log(response); 
+						if(response != false)
+						{
+							var dates = $.parseJSON(response);
+							
+							$("#date_range").val(dates);
+							
+							var assigned_dates = $("#date_range").val();
+							var dates = assigned_dates.split(",");
+							$("a").removeClass(" sel_date");
+							
+							for(var i=0;i<dates.length;i++)
+							{		
+								$("[data-moment="+dates[i]+"]").addClass(" sel_date");	
+								
+							}						
+							$(".dp-selected").removeClass(" sel_date"); 
+						}
+					},
+					error : function(e){
 							alert("There was an error deleting record,Please try again later.");
 							console.log(e.responseText);
 						}
-		});
+				});
 				
 			}else{
 				alert("Please Select Member!");
@@ -168,7 +153,8 @@ if(role == "member")
 				?>
 			</div>
 			<?php 
-			if($session["role_name"] == 'admin')
+			
+			if($session["role_name"] == 'administrator')
 			{
 			?>
 			<div class="col-md-2">
@@ -184,14 +170,7 @@ if(role == "member")
 				
 			</div>
 		</div>
-	<!--	<div class='form-group'>
-			<label class="control-label col-md-2" for="email"><?php echo __("Start Date");?><span class="text-danger"> *</span></label>
-			<div class="col-md-8">
-				<?php 
-					//echo $this->Form->input("",["label"=>false,"name"=>"record_date","class"=>"date validate[required] form-control","id"=>"record_date"]);
-				?>
-			</div>	
-		</div> -->
+	
 		<input type="hidden" name="record_date" id='record_date'>
 		<div class='form-group'>
 			<label class="control-label col-md-2" for="email"><?php echo __("Workout");?><span class="text-danger"> *</span></label>
@@ -201,14 +180,7 @@ if(role == "member")
 				</div>
 			</div>
 		</div>
-		<?php /*
-		<div class="form-group">
-			<label class="col-md-2 col-sm-2 col-md-12 control-label" for="note"><?php echo __("Note"); ?></label>
-			<div class="col-md-10 col-sm-10 col-md-12">
-				<textarea id="note" class="form-control" name="note"> </textarea>
-			</div>
-		</div>
-		*/ ?>
+		
 		<div class="col-sm-offset-2 col-md-8">
         	<input type="submit" value="<?php echo __("Save");?>" name="save_workout" class="btn btn-flat btn-success" id="save_workout" style="display:none">
         </div>
@@ -227,12 +199,14 @@ if(role == "member")
 	
 <script>
 function changeColor(){	
-alert("dsg");	
+	
 		var assigned_dates = $("#date_range").val();		
 		var dates = assigned_dates.split(",");
+		
 		for(var i=0;i<dates.length;i++)
 		{				
 			$("[data-moment="+dates[i]+"]").addClass(" sel_date");						
 		} 
+		
 	}
 </script>

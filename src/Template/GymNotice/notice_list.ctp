@@ -35,7 +35,7 @@ $(document).ready(function(){
 		</div>
 		<hr>
 		<div class="box-body">
-			<table class="mydataTable table table-striped">
+			<table class="mydataTable table table-striped" width="100%">
 			<thead>
 				<tr>
 					<th><?php echo __("Notice Title");?></th>

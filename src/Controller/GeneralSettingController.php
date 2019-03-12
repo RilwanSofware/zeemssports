@@ -29,7 +29,6 @@ class GeneralSettingController extends AppController{
 			$this->set("data","");	
 		}	
 		
-		// $time_zones = timezone_identifiers_list();
 		$time_zones = timezone_abbreviations_list();
 		$this->set("timezone",$time_zones);
 		
@@ -42,6 +41,10 @@ class GeneralSettingController extends AppController{
 		{
 			$logo_ext = $this->GYMFunction->check_valid_extension($this->request->data['gym_logo']['name']);
 			$cover_ext = $this->GYMFunction->check_valid_extension($this->request->data['cover_image']['name']);
+			$datepicker_lang = $this->request->data['sys_language'];
+			$calendar_lang = $this->request->data['sys_language'];
+			$this->request->data['datepicker_lang'] = $datepicker_lang;
+			$this->request->data['calendar_lang'] = $calendar_lang;
 			
 			if($logo_ext != 0 && $cover_ext != 0)
 			{

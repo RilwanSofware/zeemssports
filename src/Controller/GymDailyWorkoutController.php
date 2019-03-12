@@ -63,17 +63,23 @@ class GymDailyWorkoutController extends AppController
 			$members = $members->select(["id","name"=>$members->func()->concat(["first_name"=>"literal"," ","last_name"=>"literal"])])->hydrate(false)->toArray();
 		}
 		$this->set("members",$members);		
-		
+		//debug($this->request);
+		//die;
 		if($this->request->is("post") && !isset($this->request->data["new_data"]) && !isset($this->request->data["edit"]))
 		{ 
 			$row = $this->GymDailyWorkout->newEntity();
 			$this->request->data["created_date"] = date("Y-m-d");
-			$this->request->data["record_date"] = date("Y-m-d",strtotime($this->request->data["record_date"]));
+			$this->request->data["record_date"] = $this->GYMFunction->get_db_format_date($this->request->data['record_date']);
 			$this->request->data["created_by"] = $session["id"];
 			$row = $this->GymDailyWorkout->patchEntity($row,$this->request->data);
 			if($this->GymDailyWorkout->save($row))
 			{
-				$id = $row->id;				
+				
+				//$this->GymFunction->sendworkout($this->request->data["member_id"]);
+				
+				$id = $row->id;
+				
+				//$this->GymFunction->sendWorkoutAlertEmail();
 				foreach($this->request->data["workouts_array"] as $val)
 				{
 					$user_workoutdata = array();
@@ -107,15 +113,17 @@ class GymDailyWorkoutController extends AppController
 		{
 			$row = $this->GymDailyWorkout->newEntity();
 			$this->request->data["created_date"] = date("Y-m-d");
-			$this->request->data["record_date"] = date("Y-m-d",strtotime($this->request->data["record_date"]));
+			$this->request->data["record_date"] = $this->GYMFunction->get_db_format_date($this->request->data['record_date']);
 			$this->request->data["created_by"] = $session["id"];
 			$row = $this->GymDailyWorkout->patchEntity($row,$this->request->data);
+			$post = $this->request->data;
 			if($this->GymDailyWorkout->save($row))
 			{
+				//$this->GymFunction->sendworkout($this->request->data["member_id"]);
 				$id = $row->id;				
-				$post = $this->request->data;
+				
 				$activities = $post["activity_name"];
-				// var_dump($post);die;
+				
 				foreach($activities as $activity)
 				{
 					$error = null;
@@ -129,7 +137,11 @@ class GymDailyWorkoutController extends AppController
 					$row = $this->GymDailyWorkout->GymUserWorkout->newEntity();
 					$row = $this->GymDailyWorkout->GymUserWorkout->patchEntity($row,$data);
 					if($this->GymDailyWorkout->GymUserWorkout->save($row))
-					{$error = 0;}else{$error = 1;}					
+					{
+						$error = 0;
+					}else{
+						$error = 1;
+						}					
 				}
 				if($error == 0)
 				{
@@ -164,6 +176,7 @@ class GymDailyWorkoutController extends AppController
 			$assign_row = $this->GymDailyWorkout->GymAssignWorkout->patchEntity($assign_row,$assign_data);
 			if($this->GymDailyWorkout->GymAssignWorkout->save($assign_row))
 			{
+				//$this->GymFunction->sendworkout($this->request->data["member_id"]);
 				$id = $assign_row->id;				
 				$post = $this->request->data;
 				$activities = $post["activity_name"];
@@ -197,7 +210,8 @@ class GymDailyWorkoutController extends AppController
 		}
 		else if($this->request->is("post") && !isset($this->request->data["new_data"]) && isset($this->request->data["edit"]) && $this->request->data["edit"] == "yes")
 		{
-			$post = $this->request->data;			
+			$post = $this->request->data;
+				
 			foreach($post["workouts_array"] as $wa)
 			{
 				$wn = $post["workout_name_".$wa];
@@ -207,19 +221,26 @@ class GymDailyWorkoutController extends AppController
 				$row[$wn]["rest"] = $post["rest_{$wa}"];
 				
 				$query = $this->GymDailyWorkout->GymUserWorkout->query();
-				$query->update()
+				//debug($post["rest_{$wa}"]);//die;
+				/* $query->update()
 						->set(["sets" => $post["sets_{$wa}"],"reps"=>$post["reps_{$wa}"],"kg"=>$post["kg_{$wa}"],"rest_time"=>$post["rest_{$wa}"]])
+						->where(['user_workout_id' => $post["user_workout_id"],"workout_name"=>$wn])
+						->execute(); */ 
+				$query->update()
+						->set(["sets" => $row[$wn]['sets'],"reps"=>$row[$wn]['reps'],"kg"=>$row[$wn]['kg'],"rest_time"=>$row[$wn]['rest']])
 						->where(['user_workout_id' => $post["user_workout_id"],"workout_name"=>$wn])
 						->execute();
 				
 				$query2 = $this->GymDailyWorkout->GymAssignWorkout->query();
+				//debug($query); //die;
 				$query2->update()
 						->set(["description" => $post["note"]])
 						->where(['user_id' => $post["member_id"],"start_date "=>$post["record_date"]])
 						->execute();
+						//$this->GYMFunction->sendworkout($this->request->data["member_id"]);			
 			}	
 			$this->Flash->success(__("Success! Record Updated Successfully."));
-			return $this->redirect(["action"=>"workoutList"]);
+			//return $this->redirect(["action"=>"workoutList"]);
 		}
 	}
 	
@@ -266,7 +287,7 @@ class GymDailyWorkoutController extends AppController
 				$this->request->data['image'] = (!empty($image)) ? $image : "measurement.png";
 				$this->request->data["created_by"]= $session["id"];
 				$this->request->data["created_date"]= date("Y-m-d");
-				$this->request->data["result_date"]= date("Y-m-d",strtotime($this->request->data["result_date"]));
+				$this->request->data["result_date"]= $this->GYMFunction->get_db_format_date($this->request->data['result_date']);
 				$row = $this->GymDailyWorkout->GymMeasurement->patchEntity($row,$this->request->data);
 				if($this->GymDailyWorkout->GymMeasurement->save($row))
 				{
@@ -292,36 +313,12 @@ class GymDailyWorkoutController extends AppController
 			return $this->redirect(["action"=>"workoutList"]);			
 		}
 		
-		/*  ##### Gets All Schedule Assigned date ###
-		$user_data = $this->GymDailyWorkout->GymAssignWorkout->find()->where(["user_id"=>$uid])->select(["GymAssignWorkout.id","GymAssignWorkout.start_date","GymAssignWorkout.end_date"])->hydrate(false)->toArray();
-		foreach($user_data as $data)
-		{
-			$all_days = $this->GymDailyWorkout->GymWorkoutData->find()->where(["workout_id"=>$data['id']])->select(['day_name'])->group('day_name')->hydrate(false)->toArray();
-			$days = array();
-			foreach($all_days as $day)
-			{$days[]=$day['day_name'];}
-			
-			$start_date = new \Datetime($data["start_date"]->format("Y-m-d"));
-			$end_date =  new \Datetime($data["end_date"]->format("Y-m-d"));			
-			$date = $start_date;
-			for($date;$date<=$end_date;$date->modify('+1 day'))
-			{				
-				$curr_day = $date->format("l");
-				if(in_array($curr_day,$days))
-				{
-					$date_array[]=$date->format("Y-m-d");
-				}
-			}			
-		}
-		*/
-		// "list",["keyField"=>"record_date","valueField"=>"record_date"]
-
+		  ##### Gets All Schedule Assigned date ###
 		$dates = $this->GymDailyWorkout->find()->select(["id","record_date"])->where(["member_id"=>$uid])->hydrate(false)->toArray();
 		$date_array = array();
 		foreach($dates as $date)
 		{
 			$wid = $date["id"];
-			// $date_array[$wid]=$date["record_date"]->format("Y-m-d");
 			$date_array[]=$date["record_date"]->format("Y-m-d");
 		}
 		$this->set("date_array",$date_array);
@@ -339,65 +336,12 @@ class GymDailyWorkoutController extends AppController
 			
 				$workouts = $this->GymDailyWorkout->find()->select(['GymDailyWorkout.note'])->where(["GymDailyWorkout.id"=>$user_workout_id]);
 				
-				$workouts = $workouts->leftjoin(['GymUserWorkout'=>'gym_user_workout'],[	'GymUserWorkout.user_workout_id=GymDailyWorkout.id'])->select($this->GymDailyWorkout->GymUserWorkout)->hydrate(false)->toArray();
-				// var_dump($workouts);die;				
-				// $workouts = $this->GymDailyWorkout->GymUserWorkout->find()->where(["user_workout_id"=>$user_workout_id])->leftJoinWith('GymDailyWorkout')->hydrate(false)->toArray();
+				$workouts = $workouts->leftjoin(['GymUserWorkout'=>'gym_user_workout'],[	'GymUserWorkout.user_workout_id=GymDailyWorkout.id'])->select($this->GymDailyWorkout->GymUserWorkout)->hydrate(false)->toArray();			
+				
 				$this->set("workouts",$workouts);
 				$this->set("schedule_date",$schedule_date);
 			}
-			// $user_workout_id = $this->request->data["schedule_date"];
-			
-		}
-		
-		/* $dates = $this->GymDailyWorkout->find()->select(["id","record_date"])->where(["member_id"=>$uid])->hydrate(false)->toArray();
-		
-		$date_array = array();
-		foreach($dates as $date)
-		{
-			$wid = $date["id"];
-			// $date_array[$wid]=$date["record_date"]->format("Y-m-d");
-			$date_array[]=$date["record_date"]->format("Y-m-d");
-		}
-		$this->set("date_array",$date_array);
-		$this->set("uid",$uid);
-		$session_workout='';
-		$session_schedule_date='';
-		if($this->request->is("post"))
-		{
-			$schedule_date = $this->request->data["schedule_date"];
-			$dates = '';
-			$dates = $this->GymDailyWorkout->find()->select(["id","record_date"])->where(["member_id"=>$uid,'record_date'=>$schedule_date])->hydrate(false)->toArray();
-		//	debug($dates);
-			if(!empty($dates))
-			{
-			    $user_workout_id = array();
-        		foreach($dates as $date)
-        		{
-        			$user_workout_id[] = $date["id"];
-        			// $date_array[$wid]=$date["record_date"]->format("Y-m-d");
-        			//$date_array[]=$date["record_date"]->format("Y-m-d");
-        		}
-				//$user_workout_id = $dates[0]["id"];
-				//var_dump($user_workout_id);
-				
-				$workouts = $this->GymDailyWorkout->GymUserWorkout->find()->where(["user_workout_id in"=>$user_workout_id])->hydrate(false)->toArray();
-				
-				if(!empty($workouts))
-				{
-				    $this->request->session()->write('workouts',$workouts);
-				    //$this->set("workouts",$workout);
-				}
-				$this->request->session()->write('schedule_date',$schedule_date);
-				//$this->set("schedule_date",$schedule_date);
-			}
-			// $user_workout_id = $this->request->data["schedule_date"];
-		     //debug($workouts);
-		}
-		$session_workout = $this->request->session()->read('workouts');
-		$this->set("session_workout",$session_workout);
-		$session_schedule_date = $this->request->session()->read('schedule_date');
-		$this->set("schedule_date",$session_schedule_date); */
-		
+		}	
 	}
 	
 	public function editMeasurment($id)
@@ -419,7 +363,7 @@ class GymDailyWorkoutController extends AppController
 			$ext = $this->GYMFunction->check_valid_extension($this->request->data['image']['name']);
 			if($ext != 0)
 			{
-				$this->request->data["result_date"]= date("Y-m-d",strtotime($this->request->data["result_date"]));
+				$this->request->data["result_date"]= $this->GYMFunction->get_db_format_date($this->request->data['result_date']);
 				$image = $this->GYMFunction->uploadImage($this->request->data['image']);
 				if($image != "")
 				{

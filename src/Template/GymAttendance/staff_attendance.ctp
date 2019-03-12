@@ -1,10 +1,10 @@
 <script>
 $(document).ready(function(){
-	$(".date").datepicker( "option", "dateFormat", "<?php echo $this->Gym->dateformat_PHP_to_jQueryUI($this->Gym->getSettings("date_format")); ?>", "setDate", new Date("<?php echo date($this->Gym->getSettings("date_format"));?>");
+	$(".date").datepicker( "option", "dateFormat", "<?php echo $this->Gym->dateformat_PHP_to_jQueryUI($this->Gym->getSettings("date_format")); ?>", "setDate", new Date("<?php echo $this->Gym->get_db_format(date($this->Gym->getSettings("date_format")));?>");
 	<?php
 	if(isset($_POST['curr_date']))
 	{?>
-	$( ".date" ).datepicker( "setDate", new Date("<?php echo date($this->Gym->getSettings("date_format"),strtotime($data['curr_date'])); ?>" ));
+	$( ".date" ).datepicker( "setDate","<?php echo $this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($attendance_date))); ?>" );
 	<?php } ?>
 });
 </script>
@@ -29,10 +29,10 @@ $(document).ready(function(){
 			  <input type="hidden" name="class_id" value="0">
 			  <div class="form-group col-md-3">
 				<label class="control-label" for="curr_date"><?php echo __("Date");?></label>				
-					<input id="curr_date" class="form-control validate[required] date" type="text" value="<?php echo (isset($_POST['curr_date'])) ? date($this->Gym->getSettings("date_format"),strtotime($_POST["curr_date"])): date($this->Gym->getSettings("date_format"));?>" name="curr_date">
+					<input id="curr_date" class="form-control validate[required] date" type="text" value="<?php echo (isset($_POST['curr_date'])) ? $this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($attendance_date))): $this->Gym->get_db_format(date($this->Gym->getSettings("date_format")))?>" name="curr_date">
 			 </div>		
-			<div class="form-group col-md-3 button-possition">
-				<label for="subject_id">&nbsp;</label>
+			<div class="form-group col-md-3 button-possition saff_button-possition">
+				<label for="subject_id"></label>
 				<input type="submit" value="<?php echo __("Take/View Attendance");?>" name="staff_attendence" class="btn btn-flat btn-success">
 			</div>       
         </form>
@@ -44,17 +44,17 @@ $(document).ready(function(){
 	{
 	?>
 		<div class="clearfix"> </div>
-		<div class="panel-body">  
+		<div class="panel-body panel-staff">  
             <form method="post" class="form-horizontal">           
           <input type="hidden" name="attendance_date" value="<?php echo $attendance_date;?>">
          <div class="panel-heading">
          	<h4 class="panel-title">		 
-         	<?php echo __("Staff Attendance, Date");?> : <?php echo (isset($_POST['curr_date'])) ? date($this->Gym->getSettings("date_format"),strtotime($_POST["curr_date"])):"";?></h4>
+         	<?php echo __("Staff Attendance, Date");?> : <?php echo (isset($_POST['curr_date'])) ? $this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($attendance_date))):"";?></h4>
          </div>
 		 <br><br>
 			<div class="clearfix"> </div>
           <div class="form-group">
-			  <label class="radio-inline">
+			  <label class="radio-inline saff_inline_radio">
 			  <input type="radio" name="status" value="Present" checked="checked"><?php echo __("Present"); ?></label>
 			  <label class="radio-inline">
 			  <input type="radio" name="status" value="Absent"><?php echo __("Absent"); ?><br>

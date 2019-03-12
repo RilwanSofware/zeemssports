@@ -13,8 +13,6 @@ Class AdminProfileController extends AppController
 		
 	public function editProfile($eid)
 	{
-		// $2y$10$2.yoK5gTRHfH0qkEBimDi.g/5WzJyKUXD8UNwvP1AHbTZYk4a1D8m
-		
 		$this->set("edit",true);
 		$session = $this->request->session()->read("User");
 		$session_w = $this->request->session();

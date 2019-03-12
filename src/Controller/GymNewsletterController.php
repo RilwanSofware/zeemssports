@@ -56,7 +56,9 @@ class GymNewsletterController extends AppController
 			$key = $key['api_key'];			
 		}
 		$api = new MCAPI($key);
+		$api->useSecure(true);
 		$retval = $api->lists();
+		
 		$this->set("retval",$retval);
 		$class_table = TableRegistry::get("ClassSchedule");
 		$classes = $class_table->find("list",["keyField"=>"id","valueField"=>"class_name"])->toArray();	
@@ -65,7 +67,7 @@ class GymNewsletterController extends AppController
 		if($this->request->is("post"))
 		{
 			$mem_tbl = TableRegistry::get("GymMember");
-			// var_dump($this->request->data);die;	
+				
 			$retval = $api->lists();
 			$subcsriber_emil = array();
 			$syncmail = $this->request->data['syncmail'];		
@@ -84,8 +86,6 @@ class GymNewsletterController extends AppController
 			{
 				foreach ($subcsriber_emil as $value)
 				{
-					//$merge_vars = array('FNAME'=>'Test', 'LNAME'=>'Account'));
-					//echo "Fname =>".$value['fname']." LastName => ".$value['lname']."<BR>";
 					$merge_vars = array('FNAME'=>$value['fname'], 'LNAME'=>$value['lname']);
 					$subscribe = $api->listSubscribe($this->request->data['list_id'], $value['email'], $merge_vars );						
 				}
@@ -103,6 +103,7 @@ class GymNewsletterController extends AppController
 			$key = $key['api_key'];			
 		}
 		$api = new MCAPI($key);
+		$api->useSecure(true);
 		$retval = $api->campaigns();
 		$retval1 = $api->lists();
 		$this->set("retval",$retval);
@@ -115,16 +116,14 @@ class GymNewsletterController extends AppController
 			$campaignId =$this->request->data['camp_id'];
 			$listmember = $api->listMembers($listId, 'subscribed', null, 0, 5000 );
 			foreach($listmember['data'] as $member){
-				echo $member['email']." - ".$member['timestamp']."\n";
+				
 				$emails[] = $member['email'];
 			}			
 		
 			$retval2 = $api->campaignSendTest($campaignId, $emails);
-			//$retval2 = $api->campaignSendNow($campaignId);
+			
 			if ($api->errorCode){
-				//echo "Unable to Send Test Campaign!";
-				//echo "\n\tCode=".$api->errorCode;
-				//echo "\n\tMsg=".$api->errorMessage."\n";
+				
 				$this->Flash->error(__("Campaign Tests Not Sent!"));
 			} else {
 				$this->Flash->success(__("Campaign Tests Sent!"));

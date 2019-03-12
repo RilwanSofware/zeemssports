@@ -48,8 +48,10 @@ class GymNoticeController extends AppController
 		if($this->request->is("post"))
 		{
 			$row = $this->GymNotice->newEntity();			
-			$this->request->data["start_date"] = date("Y-m-d",strtotime($this->request->data["start_date"]));		
-			$this->request->data["end_date"] = date("Y-m-d",strtotime($this->request->data["end_date"]));		
+			//$this->request->data["start_date"] = date("Y-m-d",strtotime($this->request->data["start_date"]));		
+			//$this->request->data["end_date"] = date("Y-m-d",strtotime($this->request->data["end_date"]));		
+			$this->request->data["start_date"] = $this->GYMFunction->get_db_format_date($this->request->data['start_date']);
+			$this->request->data["end_date"] = $this->GYMFunction->get_db_format_date($this->request->data['end_date']);	
 			$this->request->data["created_by"] = $session["id"];	
 			
 			/*SANITIZATION*/
@@ -78,8 +80,8 @@ class GymNoticeController extends AppController
 		if($this->request->is("post"))
 		{
 			
-			$this->request->data["start_date"] = date("Y-m-d",strtotime($this->request->data["start_date"]));		
-			$this->request->data["end_date"] = date("Y-m-d",strtotime($this->request->data["end_date"]));
+			$this->request->data["start_date"] = $this->GYMFunction->get_db_format_date($this->request->data['start_date']);		
+			$this->request->data["end_date"] = $this->GYMFunction->get_db_format_date($this->request->data['end_date']);
 			
 			/*SANITIZATION*/
 			$this->request->data["comment"] = $this->GYMFunction->sanitize_string($this->request->data["comment"]);

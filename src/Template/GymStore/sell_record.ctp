@@ -23,7 +23,7 @@ $(document).ready(function(){
 				<small><?php echo __("Store");?></small>
 			  </h1>
 			  <ol class="breadcrumb">				
-				<a href="<?php echo $this->Gym->createurl("GymStore","sellProduct");?>" class="btn btn-flat btn-custom"><i class="fa fa-plus"></i> <?php echo __("Sell Product");?></a>
+				<a href="<?php echo $this->Gym->createurl("GymStore","sellProduct");?>" class="btn btn-flat btn-custom"><i class="fa fa-plus"></i> <?php echo __("Add Sell Product");?></a>
 			  </ol>
 			</section>
 		</div>
@@ -46,8 +46,9 @@ $(document).ready(function(){
 				echo "<td>{$row['gym_product']['product_name']}</td>
 					  <td>{$row['gym_member']['first_name']} {$row['gym_member']['last_name']}</td>
 					  <td>{$row['quantity']}</td>
+					  
 					  <td>
-						<a href='".$this->request->base ."/GymStore/editRecord/{$row['id']}' class='btn btn-flat btn-primary' title='".__('Edit')."'><i class='fa fa-edit'></i></a>";
+						 <a href='{$this->request->base}/GymStore/editRecord/{$row["id"]}' class='btn btn-flat btn-primary' title='".__('Edit')."'><i class='fa fa-edit'></i></a> ";
 				if($role == 'administrator')
 				{		
 				echo "<a href='{$this->request->base}/GymStore/deleteRecord/{$row['id']}' class='btn btn-flat btn-danger' title='".__('Delete')."' onclick=\"return confirm('Are you sure you want to delete this product?')\"><i class='fa fa-trash'></i></a>";

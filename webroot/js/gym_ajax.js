@@ -185,8 +185,8 @@ $("body").on("click",".del-membership",function(e){
 			data:cdata,
 			success:function(response){					
 						$("#row-"+did).fadeOut("slow");
-						var flash = "<div class='message success' onclick=\"this.classList.add('hidden')\">Success! Record Deleted Successfully.</div>"
-						$(".content-wrapper").prepend(flash);					
+						//var flash = "<div class='message success' onclick=\"this.classList.add('hidden')\">Success! Record Deleted Successfully.</div>"
+						//$(".content-wrapper").prepend(flash);					
 					},
 			error : function(e){
 						alert("There was an error deleting record,Please try again later.");
@@ -260,8 +260,8 @@ $("body").on("click",".del-role",function(e){
 			success:function(response){					
 						$("#row-"+did).fadeOut("slow");
 						$(".roles_list option[value="+did+"]").remove();
-						var flash = "<div class='message success' onclick=\"this.classList.add('hidden')\">Success! Record Deleted Successfully.</div>"
-						$(".content-wrapper").prepend(flash);					
+						//var flash = "<div class='message success' onclick=\"this.classList.add('hidden')\">Success! Record Deleted Successfully.</div>"
+						//$(".content-wrapper").prepend(flash);					
 					},
 			error : function(e){
 						alert("There was an error deleting record,Please try again later.");
@@ -345,8 +345,8 @@ $("body").on("click",".del-spec",function(e){
 						$(".specialization_list option[value="+did+"]").remove();
 						$('#specialization').multiselect('destroy');
 						$('#specialization').multiselect('rebuild');
-						var flash = "<div class='message success' onclick=\"this.classList.add('hidden')\">Success! Record Deleted Successfully.</div>"
-						$(".content-wrapper").prepend(flash);					
+						//var flash = "<div class='message success' onclick=\"this.classList.add('hidden')\">Success! Record Deleted Successfully.</div>"
+						//$(".content-wrapper").prepend(flash);					
 					},
 			error : function(e){
 						alert("There was an error deleting record,Please try again later.");
@@ -419,8 +419,8 @@ $("body").on("click",".del-interest",function(e){
 			success:function(response){					
 						$("#row-"+did).fadeOut("slow");
 						$(".interest_list option[value="+did+"]").remove();						
-						var flash = "<div class='message success' onclick=\"this.classList.add('hidden')\">Success! Record Deleted Successfully.</div>"
-						$(".content-wrapper").prepend(flash);					
+						//var flash = "<div class='message success' onclick=\"this.classList.add('hidden')\">Success! Record Deleted Successfully.</div>"
+						//$(".content-wrapper").prepend(flash);					
 					},
 			error : function(e){
 						alert("There was an error deleting record,Please try again later.");
@@ -492,8 +492,8 @@ $("body").on("click",".del-source",function(e){
 			success:function(response){					
 						$("#row-"+did).fadeOut("slow");
 						$(".source_list option[value="+did+"]").remove();						
-						var flash = "<div class='message success' onclick=\"this.classList.add('hidden')\">Success! Record Deleted Successfully.</div>"
-						$(".content-wrapper").prepend(flash);					
+						//var flash = "<div class='message success' onclick=\"this.classList.add('hidden')\">Success! Record Deleted Successfully.</div>"
+						//$(".content-wrapper").prepend(flash);					
 					},
 			error : function(e){
 						alert("There was an error deleting record,Please try again later.");
@@ -560,8 +560,8 @@ $("body").on("click",".del-level",function(e){
 			success:function(response){					
 						$("#row-"+did).fadeOut("slow");
 						$(".level_list option[value="+did+"]").remove();						
-						var flash = "<div class='message success' onclick=\"this.classList.add('hidden')\">Success! Record Deleted Successfully.</div>"
-						$(".content-wrapper").prepend(flash);					
+						//var flash = "<div class='message success' onclick=\"this.classList.add('hidden')\">Success! Record Deleted Successfully.</div>"
+						//$(".content-wrapper").prepend(flash);					
 					},
 			error : function(e){
 						alert("There was an error deleting record,Please try again later.");
@@ -757,6 +757,7 @@ $("body").on("click",".save-event-place",function(){
 						$("#events_place_list").prepend(response[0]);
 						$(".events_place_list").append(response[1]);						
 						$(".events_place_list").val("");
+						$(".place_name").val('');
 					}
 			},
 			error : function(e){
@@ -783,8 +784,8 @@ $("body").on("click",".del-event-place",function(e){
 			success:function(response){					
 						$("#row-"+did).fadeOut("slow");
 						$(".events_place_list option[value="+did+"]").remove();						
-						var flash = "<div class='message success' onclick=\"this.classList.add('hidden')\">Success! Record Deleted Successfully.</div>"
-						$(".content-wrapper").prepend(flash);					
+						//var flash = "<div class='message success' onclick=\"this.classList.add('hidden')\">Success! Record Deleted Successfully.</div>"
+						//$(".content-wrapper").prepend(flash);					
 					},
 			error : function(e){
 						alert("There was an error deleting record,Please try again later.");
@@ -887,10 +888,11 @@ $("body").on("click",".view_notice",function(){
 	});	
 });
 
-$("body").on("change",".membership_id",function(){
+ $("body").on("change",".membership_id",function(){
 	var m_id = $(this).val();
 	var ajaxurl = $("#mem_class_url").val();
 	var curr_data = { m_id : m_id};
+	//alert(curr_data);
 	$(".class_list").html("");
 	$.ajax({
 		url : ajaxurl,
@@ -906,7 +908,7 @@ $("body").on("change",".membership_id",function(){
 			console.log(e.responseText);
 		}
 	});
-});
+}); 
 
 $("body").on("change",".mem_list_workout",function(){
 	var member_id = $(this).val();	

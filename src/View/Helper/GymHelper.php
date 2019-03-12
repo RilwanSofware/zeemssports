@@ -131,6 +131,7 @@ Class GymHelper extends Helper
         'S' => '',
         'w' => '',
         'z' => 'o',
+		'dd'=> 'DD',
         // Week
         'W' => '',
         // Month
@@ -139,11 +140,13 @@ Class GymHelper extends Helper
         'M' => 'M',
         'n' => 'm',
         't' => '',
+		'mm' => 'M',
         // Year
         'L' => '',
         'o' => '',
         'Y' => 'yyyy',
         'y' => 'y',
+		'yy'=> 'yyyy',
         // Time
         'a' => '',
         'A' => '',
@@ -202,7 +205,18 @@ public function get_staff_name($id)
 		return "None";
 	}
 }
-
+ public function get_member_name($id)
+{
+	$mem_table = TableRegistry::get("GymMember");
+	$member = $mem_table->find()->where(["id"=>$id,["role_name"=>"member"]])->select(['first_name','last_name'])->hydrate(false);
+	$member = $member->toArray();	
+	if(!empty($member))
+	{
+		return $member[0]["first_name"]." ".$member[0]["last_name"];
+	}else{
+		return "None";
+	}
+}
 public function days_array()
 {
 	return $week=array('Sunday'=>'Sunday','Monday'=>'Monday','Tuesday'=>'Tuesday','Wednesday'=>'Wednesday','Thursday'=>'Thursday','Friday'=>'Friday','Saturday'=>'Saturday');
@@ -264,9 +278,18 @@ public function get_attendance_status($id,$date)
 
 public function get_class_by_id($id)
 {
+	
 	$class_table = TableRegistry::get("ClassSchedule");
-	$row = $class_table->get($id)->toArray();	
-	return $row["class_name"];
+	//$row = $class_table->get($id)->toArray();	
+	$row = $class_table->find()->where(['id'=>$id])->first();
+	if($row!=null){
+		$row['class_name'];
+	}
+	else{
+		$row['class_name']="Classdeleted";
+		//$row['class_name']="";
+	}
+	return $row['class_name'];
 }
 
 public function get_member_list_for_message()
@@ -298,11 +321,11 @@ public function get_membership_paymentstatus($mp_id)
 	$membership_payment_tbl = TableRegistry::get('MembershipPayment');	
 	$result = $membership_payment_tbl->get($mp_id)->toArray();
 	if($result['paid_amount'] >= $result['membership_amount'])
-		return 'Fully Paid';		
+		return __('Fully Paid');		
 	elseif($result['paid_amount'] == 0 )
-		return 'Not Paid';
+		return __('Not Paid');
 	else
-		return 'Partially Paid';
+		return __('Partially Paid');
 	
 	/*	
 	$mem_table = TableRegistry::get('Membership');	
@@ -585,7 +608,66 @@ public function get_total_group_members($gid)
 		}
 		return $jqueryui_format;
 	}
-	
+	function dateformat_PHP_to_jQueryformate($php_format)
+	{
+			$SYMBOLS_MATCHING = array(
+				// Day
+				'd' => 'D',
+				'D' => 'D',
+				'j' => 'D',
+				'l' => 'DD',
+				'N' => '',
+				'S' => '',
+				'w' => '',
+				'z' => 'o',
+				// Week
+				'W' => '',
+				// Month
+				'F' => 'MMMM',
+				'm' => 'MM',
+				'M' => 'M',
+				'n' => 'm',
+				't' => '',
+				// Year
+				'L' => '',
+				'o' => '',
+				'Y' => 'YYYY',
+				'y' => 'y',
+				// Time
+				'a' => '',
+				'A' => '',
+				'B' => '',
+				'g' => '',
+				'G' => '',
+				'h' => '',
+				'H' => '',
+				'i' => '',
+				's' => '',
+				'u' => ''
+			);
+		$jqueryui_format = "";
+		$escaping = false;
+		for($i = 0; $i < strlen($php_format); $i++)
+		{
+			$char = $php_format[$i];
+			if($char === '\\') // PHP date format escaping character
+			{
+				$i++;
+				if($escaping) $jqueryui_format .= $php_format[$i];
+				else $jqueryui_format .= '\'' . $php_format[$i];
+				$escaping = true;
+			}
+			else
+			{
+				if($escaping) { $jqueryui_format .= "'"; $escaping = false; }
+				if(isset($SYMBOLS_MATCHING[$char]))
+					$jqueryui_format .= $SYMBOLS_MATCHING[$char];
+				else
+					$jqueryui_format .= $char;
+			}
+		}
+		return $jqueryui_format;
+	}
 	public function get_user_role($id)
 	{
 		$gym_member_table = TableRegistry::get("gym_member");
@@ -629,5 +711,154 @@ public function get_total_group_members($gid)
 			$access = $menu['accountant'];
 		}
 		return $access;
+	}
+	
+	public function get_db_format($date)
+	{
+		//echo $date;
+		$date_format = $this->getSettings("date_format");
+		$datepicker_lang = $this->getSettings("datepicker_lang");
+		
+		if($date_format == "F j, Y")
+		{
+		
+			$find = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
+			
+			switch ($datepicker_lang) {
+				case 'ar':
+					$replace = array("يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر");
+					break;
+					
+				case 'zh_CN':
+					$replace = array("一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月");
+					break;
+					
+				case 'cs':
+					$replace = array("leden", "únor", "březen", "duben", "květen", "červen" ,"červenec" ,"srpen", "září" ,"říjen", "listopad", "prosinec");
+					break;
+				
+				case 'fr':
+					$replace = array('janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre');
+					break;
+				
+				case 'de':
+					$replace = array("Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September","Oktober", "November", "Dezember" );
+					break;
+					
+				case 'el':
+					$replace = array("Ιανουάριος", "Φεβρουάριος", "Μάρτιος", "Απρίλιος", "Μάιος", "Ιούνιος", "Ιούλιος","Αύγουστος", "Σεπτέμβριος", "Οκτώβριος", "Νοέμβριος", "Δεκέμβριος" );
+					break;
+					
+				case 'it':
+					$replace = array("Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto","Settembre", "Ottobre", "Novembre", "Dicembre" );
+					break;
+					
+				case 'ja':
+					$replace = array("1月", "2月", "3月", "4月", "5月", "6月",	"7月", "8月", "9月", "10月", "11月", "12月" );
+					break;
+					
+				case 'pl':
+					$replace = array("Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień","Wrzesień", "Październik", "Listopad", "Grudzień" );
+					break;
+					
+				case 'pt_BR':
+					$replace = array("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" );
+					break;
+				
+				case 'pt_PT':
+					$replace = array("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro","Outubro", "Novembro", "Dezembro");
+					break;
+					
+				case 'fa':
+					$replace = array("ژانویه", "فوریه", "مارس", "آوریل", "مه", "ژوئن", "ژوئیه", "اوت", "سپتامبر", "اکتبر", "نوامبر", "دسامبر" );
+					break;
+				
+				case 'ru':
+					$replace = array("Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь" );
+					break;
+					
+				case 'es':
+					$replace = array("enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre" );
+					break;
+					
+				case 'th':
+					$replace = array("มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม");
+					break;
+					
+				case 'tr':
+					$replace = array("Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık" );
+					break;
+					
+				case 'ca':
+					$replace = array("gener", "febrer", "març", "abril", "maig", "juny", "juliol", "agost", "setembre", "octubre", "novembre", "desembre" );
+					break;
+					
+				case 'da':
+					$replace = array("Januar", "Februar", "Marts", "April", "Maj", "Juni", "Juli", "August", "September", "Oktober", "November", "December" );
+					break;
+				
+				case 'et':
+					$replace = array("Jaanuar", "Veebruar", "Märts", "Aprill", "Mai", "Juuni", "Juuli", "August", "September","Oktoober", "November", "Detsember" );
+					break;
+					
+				case 'fi':
+					$replace = array("Tammikuu", "Helmikuu", "Maaliskuu", "Huhtikuu", "Toukokuu", "Kesäkuu", "Heinäkuu", "Elokuu", "Syyskuu", "Lokakuu", "Marraskuu", "Joulukuu" );
+					break;
+				
+				case 'he':
+					$replace = array("ינואר", "פברואר", "מרץ", "אפריל", "מאי", "יוני", "יולי", "אוגוסט", "ספטמבר", "אוקטובר", "נובמבר", "דצמבר" );
+					break;
+					
+				case 'hr':
+					$replace = array("Siječanj", "Veljača", "Ožujak", "Travanj", "Svibanj", "Lipanj", "Srpanj", "Kolovoz", "Rujan", "Listopad", "Studeni", "Prosinac" );
+					break;
+					
+				case 'hu':
+					$replace = array("Január", "Február", "Március", "Április", "Május", "Június", "Július", "Augusztus", "Szeptember", "Október", "November", "December" );
+					break;
+					
+				case 'id':
+					$replace = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "Nopember", "Desember" );
+					break;
+					
+				case 'lt':
+					$replace = array("Sausis", "Vasaris", "Kovas", "Balandis", "Gegužė", "Birželis", "Liepa", "Rugpjūtis", "Rugsėjis", "Spalis", "Lapkritis", "Gruodis" );
+					break;
+				
+				case 'nl':
+					$replace = array("januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december" );
+					break;
+				
+				case 'no':
+					$replace = array("januar",	"februar", "mars", "april", "mai", "juni", "juli", "august", "september",		"oktober", "november", "desember" );
+					break;
+					
+				case 'ro':
+					$replace = array("Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie", "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie" );
+					break;
+					
+				case 'sv':
+					$replace = array("januari", "februari", "mars", "april", "maj", "juni", "juli", "augusti", "september","oktober", "november", "december" );
+					break;
+					
+				case 'vi':
+					$replace = array("Tháng Một", "Tháng Hai", "Tháng Ba", "Tháng Tư", "Tháng Năm", "Tháng Sáu", "Tháng Bảy", "Tháng Tám", "Tháng Chín", "Tháng Mười", "Tháng Mười Một", "Tháng Mười Hai" );
+					break;
+					
+				default:
+					$replace = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
+					break;
+			}
+		
+			/* Replace English to Month Name */
+			$save_date = str_replace($find, $replace, $date);
+	
+			/* Replace English to Month Name */
+		}elseif($date_format == "Y-m-d"){
+			$save_date = date("Y-m-d",strtotime($date));
+		}elseif($date_format == "m/d/Y"){
+			$save_date = date("Y-m-d",strtotime($date));
+		}
+		return $save_date;
 	}
 }

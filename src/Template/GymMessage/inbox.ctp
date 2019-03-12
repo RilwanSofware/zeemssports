@@ -10,7 +10,7 @@
 				<small><?php echo __("Message");?></small>
 			  </h1>
 			  <ol class="breadcrumb">
-				<!-- <a href="<?php // echo $this->Gym->createurl("GymNotice","NoticeList");?>" class="btn btn-flat btn-custom"><i class="fa fa-bars"></i> <?php //echo __("Notice List");?></a> -->
+				
 			 </ol>
 			</section>
 		</div>
@@ -44,7 +44,7 @@
 				<a href="<?php echo $this->request->base;?>/GymMessage/sent"><i class="fa fa-sign-out"></i>&nbsp;<?php echo __("Sent");?></a></li>                                
 			</ul>
 		</div>
-		<div class="col-md-10">
+		<div class="col-md-10 no-padding-left">
 			<div class="mailbox-content">
  	<table class="table">
  		<thead>
@@ -65,7 +65,7 @@
 					<td>{$message["gym_member"]['first_name']} {$message["gym_member"]['last_name']}</td>
 					<td><a href='".$this->request->base ."/GymMessage/viewMessage/{$message['id']}'>{$message['subject']}</a></td>
 					<td>{$message['message_body']}</td>
-					<td>{$message['date']}</td>
+					<td>".date($this->Gym->getSettings("date_format"),strtotime($message['date']))."</td>
 				</tr>";
 			}
 		}

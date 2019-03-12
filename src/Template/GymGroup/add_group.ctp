@@ -29,8 +29,10 @@ $(document).ready(function(){
 			
 			echo $this->Form->create("addgroup",["type"=>"file","class"=>"validateForm"]);
 			
-			echo "<div class='form-group'>";							
-			echo $this->Form->input(__("Group Name"),["name"=>"name","class"=>"form-control validate[required,maxSize[30]]","value"=>(($edit)?$data['name']:'')]);
+			echo "<div class='form-group'>"; ?>
+			 <label class='control-label '><?php echo __('Group Name');?><span class='text-danger'> *</span></label>
+			<?php echo $this->Form->input("",["label"=>false,"name"=>"name","class"=>"form-control validate[required,maxSize[30],custom[onlyLetterNumberSp]]","value"=>(($edit)?$data['name']:'')]);
+			
 			echo "</div>";	
 			
 			echo "<div class='form-group'>";		
@@ -38,7 +40,7 @@ $(document).ready(function(){
 			echo $this->Form->file("image",["class"=>"form-control"]);
 			echo "</div>";				
 			
-			$url =  (isset($data['image']) && $data['image'] != "") ? $this->request->webroot ."/upload/" . $data['image'] : $this->request->webroot ."/upload/logo.png";
+			$url =  (isset($data['image']) && $data['image'] != "") ? $this->request->webroot ."/upload/" . $data['image'] : $this->request->webroot ."/upload/Thumbnail-img.png";
 			echo "<img src='{$url}' class='membership-img'>";
 			echo "<br><br>";
 			

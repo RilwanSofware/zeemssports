@@ -10,7 +10,7 @@ Class MembershipController extends AppController
 	public function initialize()
     {
         parent::initialize();		
-		// var_dump($this->request);die;
+		
 		$this->loadComponent('Csrf');
         $this->loadComponent('RequestHandler');		
 		$this->loadComponent("GYMFunction");
@@ -77,19 +77,7 @@ Class MembershipController extends AppController
 	public function membershipList()
 	{
 		$membership_data = $this->Membership->find("all")->toArray();   
-		// $membership_data = $this->Membership->find("all",array('contain'=>array('Installment_Plan')))->toArray();
-		// $membership_data = $this->Membership->find()->contain([
-				// 'Installment_Plan'=>function($q){
-					// return $q
-							// ->select(['duration'])
-							// ->where(['Installment_Plan.id'=>2]);
-				// }
-				// ])->toArray();
-			 // $membership_data = $this->Membership->find()->contain(['Installment_Plan'])->select(['Membership.*','Installment_Plan.duration'])->hydrate(false);
-			 // $membership_data = $this->Membership->find();
-			 // $membership_data = $membership_data->contain(['Installment_Plan'])->select(["Membership.membership_label",'duration' => $membership_data->func()->concat(['number' => 'literal',' ','duration' => 'literal'])])->hydrate(false);
-			 
-			 
+		
 		$this->set("membership_data",$membership_data);
 	}
 	
@@ -164,17 +152,9 @@ Class MembershipController extends AppController
 		
 		$selected_activities = $this->Membership->Membership_Activity->find("list",["keyField"=>"id","valueField"=>"activity_id"])->where(["membership_id"=>$mid]);
 		$selected_activities = array_values($selected_activities->toArray());
-		
-		// $assigned_activities = $this->Membership->Membership_Activity->find("all")->where(["membership_id"=>$mid])->contain(["Activity"])->select($this->Membership->Membership_Activity);
-		// $assigned_activities = $assigned_activities->select(["Activity.cat_id","Activity.assigned_to"])->hydrate(false)->toArray();
-		// var_dump($assigned_activities);die;
-		// $assigned_activities = $assigned_activities->toArray();	
-		
+	
 		$assigned_activities = $this->Membership->Membership_Activity->find("all")->where(["membership_id"=>$mid])->contain(["Activity"])->select($this->Membership->Membership_Activity);
 		$assigned_activities = $assigned_activities->select(["Activity.cat_id","Activity.assigned_to"])->hydrate(false)->toArray();
-		// var_dump($assigned_activities);die;
-		// $assigned_activities = $assigned_activities->toArray();	
-
 		
 		$this->set("activities",$activities_list);
 		$this->set("selected_activities",$selected_activities);

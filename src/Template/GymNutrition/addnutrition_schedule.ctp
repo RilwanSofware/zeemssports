@@ -1,3 +1,4 @@
+<?php $session = $this->request->session()->read("User");?>
 <?php
 echo $this->Html->css('select2.css');
 echo $this->Html->script('select2.min');
@@ -5,34 +6,30 @@ echo $this->Html->script('select2.min');
 <script>
 $(document).ready(function() {
 $(".mem_list").select2();
+ $("#startdate").datepicker({
+		minDate:0,
+		dateFormat: '<?php echo $this->Gym->dateformat_PHP_to_jQueryUI($this->Gym->getSettings("date_format")); ?>',
+		changeMonth: true,
+		changeYear: true,
+		onSelect: function() {
+			
+			var date = $('#startdate').datepicker('getDate');  
+			date.setDate(date.getDate());
+			$("#enddate").datepicker("option","minDate", date);  
+		}
+	}); 
+	$("#enddate").datepicker({
+		//minDate:0,
+		
+		dateFormat: '<?php echo $this->Gym->dateformat_PHP_to_jQueryUI($this->Gym->getSettings("date_format")); ?>',
+		changeMonth: true,
+		changeYear: true,
+	}); 
 
-// $(".date").datepicker( "option", "dateFormat", "<?php echo $this->Gym->dateformat_PHP_to_jQueryUI($this->Gym->getSettings("date_format")); ?>" );
-
-$("#start_date").datepicker({
-	numberOfMonths: 1,
-	minDate: new Date(),
-	language: '<?php echo $this->request->session()->read("User.dtp_lang");?>',
-	dateFormat: '<?php echo $this->Gym->dateformat_PHP_to_jQueryUI($this->Gym->getSettings("date_format")); ?>',  
-
-	onSelect: function() {
-	var date = $('#start_date').datepicker('getDate');  
-	date.setDate(date.getDate());
-
-	$("#expire_date").datepicker("option","minDate", date);
-	}
-});
-$("#expire_date").datepicker({     
-	numberOfMonths: 1,
-	minDate: new Date(),
-	language: '<?php echo $this->request->session()->read("User.dtp_lang");?>',
-	dateFormat: '<?php echo $this->Gym->dateformat_PHP_to_jQueryUI($this->Gym->getSettings("date_format")); ?>',  
-	onSelect: function() {
-	}
-}); 
 
 var box_height = $(".box").height();
 var box_height = box_height + 100 ;
-$(".content-wrapper").css("height",box_height+"px");
+
 });
 </script>
 <section class="content">
@@ -56,21 +53,24 @@ $(".content-wrapper").css("height",box_height+"px");
 			echo $this->Form->create("assignWorkout",["class"=>"validateForm form-horizontal","role"=>"form"]);
 		?>
 		<div class='form-group'>
-			<label class="control-label col-md-3" for="email"><?php echo __("Select Member");?><span class="text-danger"> *</span></label>
-			<div class="col-md-6">
+			<label class="control-label col-md-3 col-sm-12 add_text" for="email"><?php echo __("Select Member");?><span class="text-danger"> *</span></label>
+			<div class="gym_addform col-md-6 col-sm-9">
 				<?php 
-					echo $this->Form->select("user_id",$members,["default"=>($edit)?$this->request->params["pass"]:"","empty"=>__("Select Member"),"class"=>"mem_list","required"=>"true"]);
+					
+					echo $this->Form->select("user_id",$members,["default"=>($edit)?$this->request->params["pass"]:"","class"=>"mem_list","required"=>"true"]);
 				?>
 			</div>
-			<div class="col-md-3">
+			<?php if($session["role_name"] == "administrator"){ ?>
+			<div class="col-md-3 col-sm-3">
 				<a href="<?php echo $this->request->base;?>/GymMember/addMember" class="btn btn-default btn-flat"><?php echo __("Add Member");?></a>
 			</div>
+			<?php } ?>
 		</div>	
 		<div class='form-group'>
 			<label class="control-label col-md-3" for="email"><?php echo __("Start Date");?><span class="text-danger"> *</span></label>
 			<div class="col-md-6">
 				<?php 
-					echo $this->Form->input("",["label"=>false,"name"=>"start_date","id"=>"start_date","class"=>"validate[required] form-control"]);
+					echo $this->Form->input("",["label"=>false,"name"=>"start_date","id"=>"startdate","class"=>"validate[required] form-control  "]);
 				?>
 			</div>	
 		</div>
@@ -78,7 +78,7 @@ $(".content-wrapper").css("height",box_height+"px");
 			<label class="control-label col-md-3" for="email"><?php echo __("End Date");?><span class="text-danger"> *</span></label>
 			<div class="col-md-6">
 				<?php 
-					echo $this->Form->input("",["label"=>false,"name"=>"expire_date","id"=>"expire_date","class"=>"validate[required] form-control"]);
+					echo $this->Form->input("",["label"=>false,"name"=>"expire_date","id"=>"enddate","class"=>"validate[required] form-control  "]);
 				?>
 			</div>	
 		</div>
@@ -96,7 +96,7 @@ $(".content-wrapper").css("height",box_height+"px");
 				</div>
 				<div class="col-md-8 activity_list">
 					<label class="col-md-8 list-group-item bg-default"><?php echo __("Select Nutrition to add on selected days");?></label>
-					<!-- <input type="button" value="<?php // echo __('+ Add Nutrition');?>" name="sadd_workouttype" id="add_nutrition" class="pull-right btn btn-flat btn-info"/> -->
+					
 					<label class="activity_title checkbox">				  		
 				  		<strong>
 				  			<input type="checkbox" value="" name="avtivity_id[]" value="breakfast" class="nutrition_check validate[minCheckbox[1]]" 
@@ -133,9 +133,7 @@ $(".content-wrapper").css("height",box_height+"px");
 		<hr>
 		<div class="col-sm-offset-2 col-sm-8">
 			<div class="form-group">
-			<!--	<div class="col-md-8">
-					<input type="button" value="<?php //echo __('Step-1 Add Nutrition');?>" name="sadd_workouttype" id="add_nutrition" class="btn btn-flat btn-success"/>
-				</div> -->
+			
 			</div>
 		</div>
 		<div id="display_nutrition_list"></div>
@@ -143,7 +141,7 @@ $(".content-wrapper").css("height",box_height+"px");
 		<br><br>
 		<div class="col-md-offset-2 col-sm-8 schedule-save-button">
         	
-        	<input type="submit" value="<?php if($edit){ echo __('Step-2 Save'); }else{ echo __('Save');}?>" name="save_workouttype" class="btn  btn-flat btn-success"/>
+        	<input type="submit" value="<?php if($edit){ echo __('Step-2 Save'); }else{ echo __('Save');}?>" name="save_workouttype" class="btn  btn-flat btn-success" id = "save_nutrition"/>
         </div>
 		<input type="hidden" id="add_workout_url" value="<?php echo $this->request->base;?>/GymAjax/gmgt_add_workout">
 		<div class='clear'>
@@ -167,12 +165,14 @@ $(".content-wrapper").css("height",box_height+"px");
 				}					
 			}
 			
-			// var_dump($days_array);
+			
 			foreach($days_array as $data=>$row)
-			{?>
+			{ 
+				?>
+				
 				<div class="panel panel-default workout-block" id="remove_panel_<?php echo $data;?>">				
 				  <div class="panel-heading">
-					<i class="fa fa-calendar"></i> <?php echo __("Start From")." <span class='work_date'>". date($this->Gym->getSettings("date_format"),strtotime($row["start_date"]))."</span> ".__("TO")." <span class='work_date'>".date($this->Gym->getSettings("date_format"),strtotime($row["expire_date"]))."</span>";?>
+					<i class="fa fa-calendar"></i> <?php echo __("Start From")." <span class='work_date'>". $this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($row['start_date'])))."</span> ".__("TO")." <span class='work_date'>".$this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($row['expire_date'])))."</span>";?>
 					<span class="del_nutrition_panel" del_id="<?php echo $data;?>" data-url="<?php echo $this->request->base;?>/GymAjax/deleteNutritionData/<?php echo $data;?>"><i class='fa fa-times-circle' aria-hidden="true"></i></span>
 				  </div>
 				  <br>
@@ -235,6 +235,34 @@ $(".content-wrapper").css("height",box_height+"px");
 		 jsonObj1 = [];
 		 jsonObj2 = [];
 		 jsonObj = [];
+		var day_check = $(".selectDayChk:checked").size();	
+		 if(day_check == 0)
+		 {
+			alert("Please select days.");
+			$(".schedule-save-button").hide();
+			return false;
+		 }
+		 
+		 var activity_check = $(".nutrition_check:checked").size();
+		 if(activity_check == 0)
+		 {
+			alert("Please select nutrition for days.");
+			return false;
+		 }
+		var not_blank = 1;
+		$(".value_textarea").each(function(o){
+			var txt_data = $(this).val();
+			if(txt_data == "")
+			{
+				not_blank = 0;
+			}
+			
+		});
+		if(not_blank == 0)
+		{
+			alert("Please enter the data properly.");
+			return false;
+		}
 		
 		 $(":checkbox:checked").each(function(o){
 			
@@ -243,13 +271,13 @@ $(".content-wrapper").css("height",box_height+"px");
 				
 			  if(check_val == 'day')
 			  {
-				  //day += ' ' + chkID;
+				  
 				  day += add_day(chkID,chkID);
 				  item = {}
 			        item ["day_name"] =chkID;
 			       
 			        jsonObj1.push(item);
-			        //$(this).prop("disabled", true);
+			        
 			  }
 			  if(check_val == 'nutrition_time')
 			  {
@@ -266,6 +294,7 @@ $(".content-wrapper").css("height",box_height+"px");
 					{
 						 activity_name = 'Lunch';
 					}
+				
 				  item = {};
 			        item ["activity"] = {"activity":activity_name,"value":$("#valtxt_"+chkID).val()};
 				  activity += add_nutrition(activity_name,chkID);
@@ -277,7 +306,7 @@ $(".content-wrapper").css("height",box_height+"px");
 			  }
 			  $(this).prop('checked', false);
 			 
-			 // $("#"+chkID+"summ").removeAttr("disabled");
+			
 			  /* ... */
 			  jsonObj = {"days":jsonObj1,"activity":jsonObj2};
 			});
@@ -287,7 +316,7 @@ $(".content-wrapper").css("height",box_height+"px");
 					data_array: jsonObj,			
 					dataType: 'json'
 					};
-					// alert('hello');
+					
 					$.ajax({
 						type : "POST",
 						data : curr_data,
@@ -302,30 +331,24 @@ $(".content-wrapper").css("height",box_height+"px");
 	 $(".nutrition_check").change(function(){
 			
 			id = $(this).attr('id');
-			//alert("Hello" + id);
-			//return false;
-			//$("#reps_sets_"+id).html('<P>Sets <input type="text" name = "sets_' + id + '"></p><P>Reps <input type="text" name = "reps_' + id + '"></p>');
-			
 			
 		 if($(this).is(":checked"))
 		{
-			 //alert("chekked");
-			 //$('#hmsg_message_sent').addClass('hmsg_message_block');
+			 
 			 id = $(this).attr('id');
-				//alert("Hello" + id);
+				
 			 string = '';
 			
-			string += '<div class="nutrition_add" style="float:left;width:100%;overflow:visible;"><textarea name="'+id+'" id="valtxt_'+id+'" style="float:left; width:100%;overflow:visible;"></textarea></div>';
+			string += '<div class="nutrition_add" style="float:left;width:100%;overflow:visible;"><textarea name="'+id+'" id="valtxt_'+id+'" class="value_textarea" style="float:left; width:100%;overflow:visible;"></textarea></div>';
 			
 				$("#txt_"+id).html(string);
 			 
 		}
 		 else
 		{
-			// $('#hmsg_message_sent').addClass('hmsg_message_none');
-			// $('#hmsg_message_sent').removeClass('hmsg_message_block');
+			
 			 id = $(this).attr('id');
-				//alert("Hello" + id);
+				
 			 string = '';
 				$("#txt_"+id).html(string);
 		}
@@ -343,8 +366,7 @@ $(".content-wrapper").css("height",box_height+"px");
 		 var sets = '';
 		 var reps = '';
 		 nutrition = $("#valtxt_"+id).val();		
-		 // string += '<div id="'+id+'" class="nutrition_title"><strong>'+activity+' </strong></div>';
-		 // string += '<div id="value_'+id+'" class="nutrition_value"> '+nutrition+' </div>';		 
+				 
 		 string += '<div id="'+id+'" class="nutrition_title"><strong>'+activity+' </strong>: '+nutrition+'</div>';
 		 
 		
@@ -363,9 +385,16 @@ $(".content-wrapper").css("height",box_height+"px");
 			return string;
 		}
  jQuery("body").on("click", ".removethis", function(event){
-		// alert("hello");
+		
 		 var chkID = $(this).attr("id");
-		 $("#block_"+chkID).remove();
+		 if(chkID){
+			 
+			if($("#block_"+chkID).length != 0) {
+				$("#save_nutrition").hide();
+			} 
+			 $("#block_"+chkID).remove();
+		 }
+		 
 	 });
 </script>
 <style>

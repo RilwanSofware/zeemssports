@@ -34,7 +34,7 @@ class GymStoreController extends AppController
 			if($this->request->data["quantity"] <= $product_quentity)
 			{
 				$this->request->data["sell_by"] = 1;
-				$this->request->data["sell_date"] = date("Y-m-d",strtotime($this->request->data["sell_date"]));		
+				$this->request->data["sell_date"] = $this->GYMFunction->get_db_format_date($this->request->data['sell_date']);		
 				$row = $this->GymStore->patchEntity($row,$this->request->data);
 				if($this->GymStore->save($row))
 				{
@@ -42,7 +42,7 @@ class GymStoreController extends AppController
 					$product->quantity = ($product->quantity) - ($this->request->data["quantity"]);
 					if($this->GymStore->GymProduct->save($product))
 					{
-						$this->Flash->success(__("Success! Record Successfully Saved."));
+						$this->Flash->success(__("Success! Record Saved Successfully."));
 						return $this->redirect(["action"=>"sellRecord"]);
 					}
 				}else{
@@ -57,6 +57,7 @@ class GymStoreController extends AppController
 	}
 	public function editRecord($pid)
 	{	
+		
 		$this->set("edit",true);		
 		$row = $this->GymStore->get($pid);
 		$this->set("data",$row->toArray());
@@ -77,7 +78,7 @@ class GymStoreController extends AppController
 			$available_quentity = $product_row->quantity;
 			if($actual_quentity <= $available_quentity)
 			{
-				$this->request->data["sell_date"] = date("Y-m-d",strtotime($this->request->data["sell_date"]));	
+				$this->request->data["sell_date"] = $this->GYMFunction->get_db_format_date($this->request->data['sell_date']);			
 				$row = $this->GymStore->patchEntity($row,$this->request->data);
 				if($this->GymStore->save($row))
 				{
@@ -85,7 +86,7 @@ class GymStoreController extends AppController
 					$product->quantity = ($product->quantity) - ($actual_quentity);
 					if($this->GymStore->GymProduct->save($product))
 					{
-						$this->Flash->success(__("Success! Record Successfully Updated."));
+						$this->Flash->success(__("Success! Record Updated Successfully."));
 						return $this->redirect(["action"=>"sellRecord"]);
 					}
 				}else{
@@ -93,7 +94,7 @@ class GymStoreController extends AppController
 				}
 			}else{
 				$this->Flash->error(__("Only ".$available_quentity." Item Available in Stock"));
-				//return $this->redirect(["action"=>"sellProduct"]);
+				
 			}
 			
 			
@@ -107,7 +108,7 @@ class GymStoreController extends AppController
 		$row = $this->GymStore->get($did);
 		if($this->GymStore->delete($row))
 		{
-			$this->Flash->success(__("Success! Record Deleted Successfully Updated."));
+			$this->Flash->success(__("Success! Record Deleted Successfully."));
 			return $this->redirect(["action"=>"sellRecord"]); 
 		} 		
 	}

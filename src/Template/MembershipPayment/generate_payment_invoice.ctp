@@ -1,22 +1,25 @@
 <?php
 echo $this->Html->css('select2.css');
 echo $this->Html->script('select2.min');
+$session = $this->request->session();
+$dtp_lang = $session->read("User.dtp_lang");
 ?>
 <script>
 $(document).ready(function(){
 $(".mem_list").select2();
-// $(".mem_valid_from").datepicker( "option", "dateFormat", "yy-mm-dd" );
-$(".mem_valid_from").datepicker( "option", "dateFormat", "<?php echo $this->Gym->dateformat_PHP_to_jQueryUI($this->Gym->getSettings("date_format")); ?>" );
+
+$(".mem_valid_from").datepicker( "option", "dateFormat", "<?php echo $this->Gym->get_db_format($this->Gym->dateformat_PHP_to_jQueryUI($this->Gym->getSettings("date_format"))); ?>" );
 <?php
 if($edit)
 {?>
-$( ".mem_valid_from" ).datepicker( "setDate", new Date("<?php echo date($this->Gym->getSettings("date_format"),strtotime($data['start_date'])); ?>" ));
+$( ".mem_valid_from" ).datepicker( "setDate", new Date("<?php echo $this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($data['start_date']))); ?>" ));
 <?php } ?>
-// $(".mem_valid_from").datepicker({format: 'yyyy-mm-dd'}).on("change",function(ev){
+
 $(".mem_valid_from").on("change",function(ev){
 				
 				var ajaxurl = $("#mem_date_check_path").val();
 				var date = ev.target.value;	
+				//alert(ajaxurl);
 				var membership = $(".gen_membership_id option:selected").val();			
 				if(membership != "")
 				{
@@ -27,8 +30,18 @@ $(".mem_valid_from").on("change",function(ev){
 							type : 'POST',
 							data : curr_data,
 							success : function(response){
-								// $(".valid_to").val($.datepicker.formatDate('<?php echo $this->Gym->getSettings("date_format"); ?>',new Date(response)));
-								$(".valid_to").val(response);								
+								
+								/* moment.locale('<?php echo $dtp_lang;?>');
+								var march = moment(response);
+								var formate='<?php echo $this->Gym->dateformat_PHP_to_jQueryformate($this->Gym->getSettings("date_format")); ?>';
+										
+								$(".valid_to").val(march.format(formate)); */
+								//$(".valid_to").val(response);	
+								$(".valid_to,.check").datepicker({ language: "<?php echo $dtp_lang;?>",
+									dateFormat :"<?php echo $this->Gym->dateformat_PHP_to_jQueryUI($this->Gym->getSettings("date_format")); ?>",
+								});
+								$(".valid_to,.check").datepicker($.datepicker.regional['<?php echo $dtp_lang;?>']);
+								$( ".valid_to,.check" ).datepicker( "setDate",  new Date(response) );
 							}
 						});
 				}else{
@@ -61,8 +74,8 @@ $(".mem_valid_from").on("change",function(ev){
 		<input type="hidden" name="mp_id" value="0">
 		<input type="hidden" name="created_by" value="1">
 		<div class="form-group">
-			<label class="col-sm-2 control-label" for="day"><?php echo __("Member");?><span class="text-danger">*</span></label>	
-			<div class="col-sm-8">
+			<label class="col-md-2 control-label" for="day"><?php echo __("Member");?><span class="text-danger">*</span></label>	
+			<div class="col-md-8">
 				<?php
 				if($edit)
 				{
@@ -73,14 +86,14 @@ $(".mem_valid_from").on("change",function(ev){
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-2 control-label" for="membership"><?php echo __("Membership");?><span class="text-danger">*</span></label>
-			<div class="col-sm-8">
+			<label class="col-md-2 control-label" for="membership"><?php echo __("Membership");?><span class="text-danger">*</span></label>
+			<div class="col-md-8">
 				<?php echo $this->Form->select("membership_id",$membership,["default"=>($edit)?$data["membership_id"]:"","empty"=>__("Select Membership"),"class"=>"form-control gen_membership_id","data-url"=>$this->request->base . "/GymAjax/get_amount_by_memberships"]);?>		
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-2 control-label" for="total_amount"><?php echo __("Total Amount");?><span class="text-danger">*</span></label>
-			<div class="col-sm-8">
+			<label class="col-md-2 control-label" for="total_amount"><?php echo __("Total Amount");?><span class="text-danger">*</span></label>
+			<div class="col-md-8">
 				<div class='input-group'>
 					<span class='input-group-addon'><?php echo $this->Gym->get_currency_symbol();?></span>
 					<input id="total_amount" class="form-control validate[required,custom[number]]" type="text" value="<?php echo ($edit)?$data["membership_amount"]:"";?>" name="membership_amount" readonly="">
@@ -88,17 +101,18 @@ $(".mem_valid_from").on("change",function(ev){
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-2 control-label" for="begin_date"><?php echo __("Membership Valid From");?><span class="text-danger">*</span></label>
-			<div class="col-sm-3">
-				<?php echo $this->Form->input("",["label"=>false,"name"=>"membership_valid_from","class"=>"form-control validate[required] mem_valid_from","value"=>($edit)?date($this->Gym->getSettings("date_format"),strtotime($data["start_date"])):""]); ?>				
+			<label class="col-md-2 control-label" for="begin_date"><?php echo __("Membership Valid From");?><span class="text-danger">*</span></label>
+			<div class="col-md-3">
+				<?php echo $this->Form->input("",["label"=>false,"name"=>"membership_valid_from","class"=>"form-control validate[required] mem_valid_from","value"=>($edit)?$this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($data["start_date"]))):""]); ?>				
 			</div>
-			<div class="col-sm-1 text-center">	<?php echo __("To");?>			</div>
-			<div class="col-sm-4">
-				<?php echo $this->Form->input("",["label"=>false,"name"=>"membership_valid_to","class"=>"form-control validate[required] valid_to","value"=>(($edit)?date($this->Gym->getSettings("date_format"),strtotime($data['end_date'])):''),"readonly"=>true]);
+			<div class="col-md-1 text-center">	<?php echo __("To");?>			</div>
+			<div class="col-md-4">
+				<?php echo $this->Form->input("",["label"=>false,"name"=>"membership_valid","class"=>"form-control validate[required] valid_to","value"=>(($edit)?$this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($data['end_date']))):''),"readonly"=>true]);
 				?>
+				<input type='hidden' name='membership_valid_to' class='check' value='<?php ($edit && $data['end_date']!="")?$this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($data['end_date']))):''?>'>
 			</div>
 		</div>		
-		<div class="col-sm-offset-2 col-sm-8">
+		<div class="col-md-offset-2 col-md-8">
         	<input type="submit" value="Save" name="<?php echo __("save_membership_payment");?>" class="btn btn-flat btn-success">
         </div>
 		</form>

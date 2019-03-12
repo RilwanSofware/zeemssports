@@ -2,17 +2,19 @@
 use Cake\Routing\Router;
 
 $session = $this->request->session();
-// $cover_img = $this->Gym->getSettings("cover_image");
+
 $profile_img = $session->read("User.profile_img");
 $profile_img = (!empty($profile_img)) ? $this->request->base ."/webroot/upload/". $profile_img : $this->request->base ."/webroot/img/Thumbnail-img.png";
 echo $this->Html->css("gymprofile.css");
 ?>
 <script>
 $(document).ready(function(){	
-	$(".hasDatepicker").datepicker({format:"yyyy-mm-dd"});
+	
+	
 	$(".content").css("height","1400px");
 	
 	$("#doctor_form").validationEngine();
+	$("#account_form").validationEngine();
 });
 </script>
 
@@ -49,7 +51,7 @@ $(document).ready(function(){
 										<div class="panel-title"><?php echo __("Account Settings");?> 	</div>
 									</div>
 									<div class="panel-body">
-						<form class="form-horizontal" action="#" method="post">
+						<form class="form-horizontal" action="#" method="post" id="account_form">
 								<div class="form-group">
 									<label class="control-label col-xs-2"></label>
 									<div class="col-xs-10">	
@@ -67,24 +69,24 @@ $(document).ready(function(){
 							<div class="form-group">
 								<label for="inputEmail" class="control-label col-sm-2"><?php echo __("Username");?></label>
 								<div class="col-sm-10">
-									<input type="username" class="form-control " id="name" placeholder="Full Name" value="<?php echo $data["username"];?>" readonly="">
+									<input type="username" class="form-control " id="username" placeholder="Full Name" value="<?php echo $data["username"];?>" readonly="">
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="inputPassword" class="control-label col-sm-2 "><?php echo __("Current Password");?></label>
+								<label for="inputPassword" class="control-label col-sm-2 "><?php echo __("Current Password");?><span class="text-danger">*</span></label>
 								<div class="col-sm-10">
-									<input type="password" class="form-control" id="inputPassword" placeholder="Password" name="current_password">
+									<input type="password" class="form-control validate[required]" id="inputCPassword" placeholder="Password" name="current_password">
 								</div>
 							</div>
 					<div class="form-group">
-								<label for="inputPassword" class="control-label col-sm-2"><?php echo __("New Password");?></label>
+								<label for="inputPassword" class="control-label col-sm-2"><?php echo __("New Password");?><span class="text-danger">*</span></label>
 								<div class="col-sm-10">
-									<input type="password" class="validate[required] form-control" id="inputPassword" placeholder="New Password" name="password">
+									<input type="password" class="form-control validate[required]" id="inputNPassword" placeholder="New Password" name="password">
 								</div>
 							</div><div class="form-group">
-								<label for="inputPassword" class="control-label col-sm-2"><?php echo __("Confirm Password");?></label>
+								<label for="inputPassword" class="control-label col-sm-2"><?php echo __("Confirm Password");?><span class="text-danger">*</span></label>
 								<div class="col-sm-10">
-									<input type="password" class="validate[required] form-control" id="inputPassword" placeholder="Confirm Password" name="confirm_password">
+									<input type="password" class="form-control validate[required]" id="inputCoPassword" placeholder="Confirm Password" name="confirm_password">
 								</div>
 							</div>
 							
@@ -105,13 +107,14 @@ $(document).ready(function(){
 									</div>
 									<div class="panel-body">
 						<form class="form-horizontal" action="#" method="post" id="doctor_form">							
-							<!--<input type="hidden" value="<?php //echo $session->read("User.role_name");?>" name="role">-->
+							
 							<input type="hidden" value="<?php echo $session->read("User.id")?>" name="user_id">
 							<div class="form-group">
 								<label class="col-sm-2 control-label" for="birth_date"><?php echo __("Date of birth");?><span class="text-danger">*</span></label>
 								<div class="col-sm-10">
-									<input id="birth_date" class="form-control validate[required] hasDatepicker" type="text" name="birth_date" value="<?php 
-									if(!empty($data["birth_date"])){echo $data["birth_date"]->format("Y-m-d");}?>">
+									<input id="birth_date" class="dob form-control validate[required]" type="text" name="birth_date" value="<?php 
+									
+									if(!empty($data["birth_date"])){echo date($this->Gym->getSettings("date_format"),strtotime($data['birth_date']));} ?>">
 								</div>
 							</div>	
 							
@@ -132,13 +135,13 @@ $(document).ready(function(){
 							<div class="form-group">
 								<label for="phone" class="control-label col-sm-2"><?php echo __("Mobile No.");?><span class="text-danger">*</span></label>
 								<div class="col-sm-10">
-									<input id="mobile" class="form-control validate[,custom[phone]] text-input" type="text" name="mobile" value="<?php echo $data["mobile"];?>">
+									<input id="mobile" class="form-control validate[required,custom[onlyNumberSp],maxSize[14]] text-input" type="text" name="mobile" value="<?php echo $data["mobile"];?>">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="phone" class="control-label col-sm-2"><?php echo __("Phone");?></label>
 								<div class="col-sm-10">
-									<input id="phone" class="form-control validate[,custom[phone]] text-input" type="text" name="phone" value="<?php echo $data["phone"];?>">
+									<input id="phone" class="form-control validate[,custom[phone],maxSize[14]] text-input" type="text" name="phone" value="<?php echo $data["phone"];?>">
 								</div>
 							</div>
 							<div class="form-group">

@@ -1,4 +1,4 @@
-<script>window.onload = function(){ window.print(); };</script>
+<script>window.onload = function(){ window.print();};</script>
 
 	<div class="modal-body">
 		<div id="invoice_print" style="width: 90%;margin:0 auto;"> 
@@ -18,12 +18,14 @@
 													$issue_date=$income_data["invoice_date"];
 													$payment_status=$income_data["payment_status"];}
 												if(!empty($invoice_data)){			
-													$issue_date=date($this->Gym->getSettings('date_format'),strtotime($invoice_data['created_date']));
+													$issue_date=$this->Gym->get_db_format(date($this->Gym->getSettings('date_format'),strtotime($invoice_data['created_date'])));
 													$payment_status=$this->GYM->get_membership_paymentstatus($invoice_data['mp_id']);}
 												if(!empty($expense_data)){
 													$issue_date=$expense_data["invoice_date"];
 													$payment_status=$expense_data["payment_status"];}
-									echo __('Issue Date')." : ".date($sys_data["date_format"],strtotime($issue_date));?></h5>
+									echo __('Issue Date')." : ".$this->Gym->get_db_format(date($sys_data["date_format"]),strtotime($issue_date));
+									?></h5>
+									
 									<h5><?php echo __('Status')." : ".$payment_status;?></h5>
 								</td>
 							</tr>
@@ -66,7 +68,7 @@
 										if(!empty($invoice_data))
 										{
 											$member_id=$invoice_data["member_id"];
-										// $patient=get_userdata($member_id);
+			
 										
 										echo $invoice_data["gym_member"]["first_name"]." ".$invoice_data["gym_member"]["last_name"]."<br>"; 
 										 echo $invoice_data["gym_member"]["address"].",<br>"; 
@@ -97,7 +99,7 @@
 						 else{
 							 ?>
 							 <tr>
-								<!--<th class="text-center">#</th>-->
+								
 								<th class="text-center"> <?php echo __('Date');?></th>
 								<th width="60%"><?php echo __('Entry');?> </th>
 								<th><?php echo __('Price');?></th>
@@ -120,7 +122,7 @@
 								{ ?>
 									<tr>
 									<!--<td><?php echo $i; ?></td>-->
-									<td align="center"><?php echo date($this->GYM->getSettings("date_format"),strtotime($income_data["invoice_date"]));?></td>
+									<td align="center"><?php echo $this->Gym->get_db_format(date($this->GYM->getSettings("date_format"),strtotime($income_data["invoice_date"])));?></td>
 									<td align="center"><?php echo $entry->entry;?></td>
 									<td align="center"><?php echo $this->Gym->get_currency_symbol();?> <?php echo $entry->amount;?></td>
 									<td align="center"><?php echo $income_data["gym_member"]["first_name"] . " ". $income_data["gym_member"]["first_name"];?></td>
@@ -134,8 +136,8 @@
 								foreach($entries as $entry)
 								{ ?>
 									<tr>
-									<!--<td><?php //echo $i; ?></td>-->
-									<td align="center"><?php echo date($this->GYM->getSettings("date_format"),strtotime($expense_data["invoice_date"]));?></td>
+									
+									<td align="center"><?php echo $this->Gym->get_db_format(date($this->GYM->getSettings("date_format"),strtotime($expense_data["invoice_date"])));?></td>
 									<td align="center"><?php echo $entry->entry;?></td>
 									<td align="center"><?php echo $this->Gym->get_currency_symbol();?> <?php echo $entry->amount;?></td>
 									<td align="center"><?php echo $expense_data["gym_member"]["first_name"] . " ". $expense_data["gym_member"]["first_name"];?></td>
@@ -146,7 +148,7 @@
 														
 						}
 						 if(!empty($invoice_data)){
-							// $total_amount=$invoice_data['total_amount'];
+							
 							 ?>
 							<tr>
 								<td align="center"><?php echo $id;?></td>
@@ -163,8 +165,7 @@
 							<?php if(!empty($invoice_data))
 							{
 								echo "<BR>";
-								//$total_amount=$invoice_data['total_amount'];
-								//$grand_total=$invoice_data['total_amount']-$invoice_data['discount'];
+								
 								?>
 							<tr>
 								<td width="80%" align="right"><?php echo __('Subtotal :');?></td>
@@ -215,7 +216,7 @@
 							foreach($history_data as  $retrive_date)
 							{?>
 								<tr>
-								<td align="center"><?php echo date($this->GYM->getSettings("date_format"),strtotime($retrive_date["paid_by_date"]));?></td>
+								<td align="center"><?php echo $this->Gym->get_db_format(date($this->GYM->getSettings("date_format"),strtotime($retrive_date["paid_by_date"])));?></td>
 								<td align="center"><?php echo $this->GYM->get_currency_symbol();?> <?php echo $retrive_date["amount"];?></td>
 								<td align="center"><?php echo $retrive_date["payment_method"];?></td>
 								</tr>

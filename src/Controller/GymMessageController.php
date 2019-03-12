@@ -3,7 +3,7 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
 use Cake\Datasource\ConnectionManager;
-
+date_default_timezone_set('Asia/Kolkata');
 class GymMessageController extends AppController
 {
 	public function initialize()
@@ -19,15 +19,7 @@ class GymMessageController extends AppController
 	
 	public function index()
 	{
-		// $conn = ConnectionManager::get('default');
-		// $new_field = "activated";
-		// $sql = "ALTER TABLE gym_member  ADD  {$new_field} INT NULL DEFAULT 0";
-		// $sql1 = "ALTER TABLE `gym_member` DROP `activated123`";
-		// $sql2 = "SELECT * FROM gym_member";
-		// $stmt = $conn->execute($sql);
-		// $stmt = $conn->execute($sql);
-		// $results = $stmt->fetchAll('assoc');	
-		// debug($results);die;
+		
 	}
 	
 	public function composeMessage()
@@ -49,12 +41,15 @@ class GymMessageController extends AppController
 			if($role == 'member' || $role == 'staff_member' || $role == 'accountant'|| $role == 'administrator')
 			{
 				$member_ids = $this->GymMessage->GymMember->find("all")->where(["role_name"=>$role])->select(["id"])->hydrate(false)->toArray();
+				
 				$records = array();
 				if(!empty($member_ids))
 				{					
 					foreach($member_ids as $key => $value)
 					{
+						
 						$mid = $value["id"];
+					
 						$data = array();
 						$data["sender"] = $session["id"]; /* current userid*/
 						$data["receiver"] = $mid;
@@ -63,18 +58,21 @@ class GymMessageController extends AppController
 						$data["message_body"] = $this->GYMFunction->sanitize_string($this->request->data["message_body"]);
 						$data["status"] =  0;
 						$records[] = $data;
+						
 					}
+					
 				}
+				 $rows = $this->GymMessage->newEntities($records);
 				
-				$rows = $this->GymMessage->newEntities($records);
 				foreach($rows as $row)
 				{
 					if($this->GymMessage->save($row))
 					{$saved = true;} else{$saved = false;}
-				}				
+				}	
+					
 			}
 			else
-			{				
+			{		
 				$mid = $this->request->data["receiver"];
 				$this->request->data["date"] = $date;
 				$this->request->data["sender"] = $session["id"]; /* current userid*/
@@ -112,35 +110,6 @@ class GymMessageController extends AppController
 					{$saved = true;} else{$saved = false;}
 				}	
 			}
-			else if($this->request->data["class_id"] != "")
-			{
-				$class_id = $this->request->data["class_id"];
-				$member_ids = $this->GymMessage->GymMember->find("all")->where(["role_name"=>"member","assign_class"=>$class_id])->select(["id"])->hydrate(false)->toArray();
-				
-				$records = array();
-				if(!empty($member_ids))
-				{					
-					foreach($member_ids as $key => $value)
-					{
-						$mid = $value["id"];
-						$data = array();
-						$data["sender"] = $session["id"]; /* current userid*/
-						$data["receiver"] = $mid;
-						$data["date"] = $date;
-						$data["subject"] = $this->request->data["subject"];
-						$data["message_body"] = $this->GYMFunction->sanitize_string($this->request->data["message_body"]);
-						$data["status"] =  0;
-						$records[] = $data;
-					}
-				}
-				
-				$rows = $this->GymMessage->newEntities($records);
-				foreach($rows as $row)
-				{
-					if($this->GymMessage->save($row))
-					{$saved = true;} else{$saved = false;}
-				}	
-			}
 			
 			if($saved)
 			{$this->Flash->success(__("Success! Message Sent Successfully."));}
@@ -153,7 +122,7 @@ class GymMessageController extends AppController
     {
 		$session = $this->request->session()->read("User");
 		$uid = $session["id"]; /* Current userid */
-		$messages = $this->GymMessage->find("all")->contain(["GymMember"])->where(["receiver"=>$uid])->select($this->GymMessage)->select(["GymMember.first_name","GymMember.last_name"])->hydrate(false)->toArray();
+		$messages = $this->GymMessage->find("all")->contain(["GymMember"])->where(["receiver"=>$uid])->select($this->GymMessage)->select(["GymMember.first_name","GymMember.last_name"])->hydrate(false)->toArray(); 
 		$this->set("messages",$messages);		
     }
 	

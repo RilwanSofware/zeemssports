@@ -31,6 +31,7 @@ echo $this->Html->script('fullcalendar.min');
 					center: 'title',
 					right: 'month,agendaWeek,agendaDay'
 				},
+				timeFormat: 'H(:mm)',
 				editable: false,
 			eventLimit: true, // allow "more" link when too many events
 			events: <?php echo json_encode($cal_array);?>
@@ -189,7 +190,7 @@ echo $this->Html->script('fullcalendar.min');
 						<?php 
 						foreach($groups_data as $gd)
 						{
-							$image = ($gd['image'] == "") ? "logo.png" : $gd['image'];
+							$image = ($gd['image'] == "") ? "Thumbnail-img.png" : $gd['image'];
 						?>
 							<p>
 								<img src="<?php echo $this->request->base ."/webroot/upload/".$image; ?>" height="40px" width="40px" class="img-circle">

@@ -1,13 +1,27 @@
 <?php $session = $this->request->session()->read("User"); ?>
 <script>
-$(document).ready(function(){		
-// $(".datepick").datepicker({format:"yyyy-mm-dd"});
-$(".datepick").datepicker( "option", "dateFormat", "<?php echo $this->Gym->dateformat_PHP_to_jQueryUI($this->Gym->getSettings("date_format")); ?>" );
-<?php if(isset($_POST['view_attendance'])){?>
-$( ".datepick:first" ).datepicker( "setDate", new Date("<?php echo date($this->Gym->getSettings("date_format"),strtotime($s_date)); ?>" ));
-$( ".datepick:last" ).datepicker( "setDate", new Date("<?php echo date($this->Gym->getSettings("date_format"),strtotime($e_date)); ?>" ));
-<?php } ?>
-});		
+	$(document).ready(function(){
+	$("#startDate").datepicker({
+		
+		dateFormat: '<?php echo $this->Gym->dateformat_PHP_to_jQueryUI($this->Gym->getSettings("date_format")); ?>',
+		changeMonth: true,
+		changeYear: true,
+		onSelect: function() {
+			var date = $('#startDate').datepicker('getDate');
+			
+			date.setDate(date.getDate());
+			$("#endDate").datepicker("option","minDate", date);  
+		}
+	}); 
+	$("#endDate").datepicker({
+		
+		
+		dateFormat: '<?php echo $this->Gym->dateformat_PHP_to_jQueryUI($this->Gym->getSettings("date_format")); ?>',
+		changeMonth: true,
+		changeYear: true,
+	}); 
+});
+
 </script>
 
 <section class="content">
@@ -33,14 +47,14 @@ $( ".datepick:last" ).datepicker( "setDate", new Date("<?php echo date($this->Gy
 				<input type="hidden" value="<?php echo $session["id"];?>" name="uid">
 				<div class="form-group col-md-3">
 					<label for="exam_id"><?php echo __("Start Date");?></label>
-					<input type="text" name="sdate" class="form-control sdate datepick" value="<?php echo ($view)?$s_date:date("Y-m-d");?>">
+					<input type="text" name="sdate" class="form-control" value="<?php echo ($view)?$this->Gym->get_db_format(date($this->gym->getSettings("date_format"),strtotime($s_date))):"";?>" id="startDate">
 				</div>
 				<div class="form-group col-md-3">
 					<label for="exam_id"><?php echo __("End Date");?></label>
-					<input type="text" name="edate" class="form-control edate datepick" value="<?php echo ($view)?$e_date:date("Y-m-d");?>">
+					<input type="text" name="edate" class="form-control" value="<?php echo ($view)?$this->Gym->get_db_format(date($this->gym->getSettings("date_format"),strtotime($e_date))):"";?>" id="endDate">
 				</div>
 				<div class="form-group col-md-3 button-possition">
-					<label for="subject_id">&nbsp;</label>
+					<label for="subject_id"></label>
 					<input type="submit" class="btn btn-flat btn-success" value="<?php echo __("Go");?>" name="view_attendance">
 				</div>	
 			<?php echo $this->Form->end(); ?>
@@ -65,7 +79,7 @@ $( ".datepick:last" ).datepicker( "setDate", new Date("<?php echo date($this->Gy
 					{
 						$date = $row["attendance_date"]->format("Y-m-d");?>				
 						<tr>
-							<td><?php echo date($this->gym->getSettings("date_format"),strtotime($date)); ?></td>
+							<td><?php echo $this->Gym->get_db_format(date($this->gym->getSettings("date_format"),strtotime($date))); ?></td>
 							<td><?php echo date("l",strtotime($date));?></td>
 							<td><?php echo $row["status"];?></td>
 						</tr>

@@ -20,7 +20,7 @@ if($session["role_name"] == "administrator" || $session["role_name"] == "staff_m
 
 $(document).ready(function(){
 	var table = $(".mydataTable").DataTable();
-	table.column(3).visible( true );
+	
 });
 </script>
 <?php } ?>
@@ -46,7 +46,7 @@ $(document).ready(function(){
 		</div>
 		<hr>
 		<div class="box-body">
-			<table class="mydataTable table table-striped">
+			<table class="mydataTable table table-striped" width="100%">
 			<thead>
 				<tr>
 					<th><?php echo __("Member Photo");?></th>
@@ -65,7 +65,7 @@ $(document).ready(function(){
 					<td>".$this->Gym->get_interest_by_id($row['gym_member']['intrested_area'])."</td>
 					<td>
 						<a href='".$this->request->base ."/GymNutrition/viewNutirion/{$row['user_id']}' class='btn btn-primary btn-flat'><i class='fa fa-eye'></i></a>
-						<a href='".$this->request->base ."/GymNutrition/DeleteNutirion/{$row['id']}' onclick='return confirm('Are you sure,You want to delete this record?');' class='btn btn-flat btn-danger'><i class='fa fa-trash-o'></i></a>
+						<a href='".$this->request->base ."/GymNutrition/DeleteNutirion/{$row['id']}' onClick=\"return confirm('Are you sure you want to delete?')\" class='btn btn-flat btn-danger'><i class='fa fa-trash-o' ></i></a>
 					</td>
 				</tr>";
 			}

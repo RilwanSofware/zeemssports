@@ -51,7 +51,7 @@ $(document).ready(function(){
 					<div class="panel panel-default workout-block" id="remove_panel_<?php echo $data;?>">				
 					  <div class="panel-heading">
 						<i class="fa fa-calendar"></i> <?php echo __("Start From")." <span class='work_date'>".date($this->Gym->getSettings("date_format"),strtotime($row["start_date"]))."</span> ".__("TO")." <span class='work_date'>".date($this->Gym->getSettings("date_format"),strtotime($row["expire_date"]))."</span>";?>
-						<a href="<?php echo $this->request->base;?>/GymNutrition/printNutrition/" class="btn btn-sm btn-info pull-right" target="_blank"><?php echo __("Print");?></a>
+						<a href="<?php echo $this->request->base;?>/GymNutrition/printNutrition/" class="btn btn-sm btn-info pull-right" target="_blank" ><?php echo __("Print");?></a>
 					 </div>
 					  <br>
 					<div class="work_out_datalist_header">

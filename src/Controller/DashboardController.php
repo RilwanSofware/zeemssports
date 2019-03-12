@@ -117,8 +117,6 @@ class DashboardController extends AppController
 
 		##################STAFF ATTENDANCE REPORT#############################	
 	
-		// $sdate = '2016-07-01';
-		// $edate = '2016-08-12';
 		$report_2 = null;
 		
 		$chart_array_staff = array();
@@ -141,7 +139,7 @@ class DashboardController extends AppController
 		} 			
 		$this->set("chart_array_staff",$chart_array_staff);
 		$this->set("report_sataff",$report_2);
-		// var_dump($report_2);die;
+	
 		$cal_array = $this->getCalendarData();
 		$this->set("cal_array",$cal_array);		
 		
@@ -160,7 +158,7 @@ class DashboardController extends AppController
 		$res_tbl = TableRegistry::get("gym_reservation");		
 		$notice_tbl = TableRegistry::get("gym_notice");		
 		
-		$members = $mem_table->find("all")->where(["role_name"=>"member"]);
+		$members = $mem_table->find("all")->where(["role_name"=>"member","id"=>$uid]);
 		$members = $members->count();
 		
 		$staff_members = $mem_table->find("all")->where(["role_name"=>"staff_member"]);
@@ -232,9 +230,15 @@ class DashboardController extends AppController
 		$res_tbl = TableRegistry::get("gym_reservation");		
 		$notice_tbl = TableRegistry::get("gym_notice");		
 		
-		$members = $mem_table->find("all")->where(["role_name"=>"member"]);
+		if($session['role_name'] == "staff_member")
+		{
+		$members = $mem_table->find("all")->where(["role_name"=>"member","assign_staff_mem"=>$uid]);
 		$members = $members->count();
-		
+		}
+		else{
+			$members = $mem_table->find("all")->where(["role_name"=>"member"]);
+			$members = $members->count();
+		}
 		$staff_members = $mem_table->find("all")->where(["role_name"=>"staff_member"]);
 		$staff_members = $staff_members->count();
 		
@@ -297,18 +301,13 @@ class DashboardController extends AppController
 		$boys_list="";
 		if (! empty ( $birthday_boys )) {
 			foreach ( $birthday_boys as $boys ) {
-				//$boys_list.=$boys->display_name." ";
+				
 				$startdate = $boys["birth_date"]->format("Y");
 				$enddate = $startdate + 90;
 				$years = range($startdate,$enddate,1);
 				
 				foreach($years as $year)
 				{				
-					/* $cal_array [] = array (
-							'title' => $boys["first_name"]."'s Birthday",
-							'start' =>$boys["birth_date"]->format("Y-m-d"),
-							'end' => $boys["birth_date"]->format("Y-m-d"),
-							'backgroundColor' => '#F25656' */
 					 $cal_array [] = array (
 						'title' => $boys["first_name"]."'s Birthday",
 						'start' =>"{$year}-{$boys["birth_date"]->format("m-d")}",

@@ -1,10 +1,80 @@
+<?php
+$version = phpversion()>= 5.6 ? "Pass":"Fail";
+$mbstring = extension_loaded('mbstring')== 0 ? "Fail" : "Pass";
+$intl = extension_loaded('intl')== 0 ? "Fail" : "Pass";
+$xml = extension_loaded('xml');
+?>
+<body>	 
 <div class="pg-header">
 	<h4 class="install_title"><span style="height:30px"><img  src="<?php echo $this->request->webroot;?>img/Thumbnail-img2.png" height="80%" /></span> <?php echo __("Gym Master - GYM Management Installation Wizard");?></h4>
 </div>
 <div class="step-content">
-<!-- <form id="example-form" method="post" class="form-horizontal"> -->
+
 <?php echo $this->Form->create("",["id"=>"install-form","class"=>"form-horizontal"]);?>
     <div>
+		<h3><?php echo __("Requirements");?></h3>
+			<section>
+				<h4><?php echo __("Server Requirements");?></h4>
+				<p>If Any Result Fail, Then You Are Not Able To Install This Package.</p>
+				<hr/>
+				<div class="config">
+					<table class="table table-strip">
+						<thead>
+						<tr>
+							<th width="30%">Name</th>
+							<th width="20%">Result</th>
+							<th>Current configuration</th>
+							<th>Required configuration</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td>PHP Version</td>
+							<td><?php if($version == "Pass"){ ?>
+								<button class="suc btn btn-success" disabled><?php echo $version; ?></button>
+								<input type="text" name="version" class="form-control required msg" value="pass" readonly id="version">
+								<?php }else{ ?>
+								<button class="des btn btn-danger" disabled><?php echo $version; ?></button>
+								<input type="text" name="version" class="form-control required msg" readonly>
+								<?php }?>
+							</td>
+							<td>PHP <?php echo phpversion(); ?></td>
+							<td>PHP 5.6.0 or greater</td>
+						</tr>
+						<tr>
+							<td>mbstring extension</td>
+							<td>
+							<?php if($mbstring == "Pass"){ ?>
+								<button class="suc btn btn-success" disabled><?php echo $mbstring; ?></button>
+								<input type="text" name="mbstring" class="form-control required msg" value="pass" readonly>
+								<?php }else{ ?>
+								<button class="des btn btn-danger" disabled><?php echo $mbstring; ?></button>
+								<input type="text" name="mbstring" class="form-control required msg" readonly>
+							<?php }?>
+							</td>
+							<td><?php echo extension_loaded('mbstring')== 1 ? "Enable" : "Disable"; ?></td>
+							<td>Enable</td>
+						</tr>
+						<tr>
+							<td>intl extension</td>
+							<td>
+							<?php if($intl == "Pass"){ ?>
+								<button class="suc btn btn-success" disabled><?php echo $intl; ?></button>
+								<input type="text" name="intl" class="form-control required msg" value="pass" readonly>
+								<?php }else{ ?>
+								<button class="des btn btn-danger" disabled><?php echo $intl; ?></button>
+								<input type="text" name="intl" class="form-control required msg" readonly>
+								<?php }?>
+							</td>
+							<td><?php echo extension_loaded('intl')== 1 ? "Enable" : "Disable"; ?></td>
+							<td>Enable</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+				
+			
+			</section>
 		<h3><?php echo __("Database Setup");?></h3>
 			<section>
 				<h4><?php echo __("Database Setup");?></h4>
@@ -404,70 +474,44 @@
 				<option value="F j, Y" selected="selected"><?php echo date("F j, Y");?></option>
 				<option value="Y-m-d"><?php echo date("Y-m-d");?></option>
 				<option value="m/d/Y"><?php echo date("m/d/Y");?></option>
-				<!--<option value="d/m/Y"><?php //echo date("d/m/Y");?></option>-->
 				</select>
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-md-3"><?php echo __("Calendar Language")?></label>
+				<label class="control-label col-md-3"><?php echo __("System Language")?></label>
 				<div class="col-md-8">
-					<select id="lang-selector" name="calendar_lang" class="form-control">
-						<option value="en">en</option>
-						<option value="ar-ma">ar-ma</option>
-						<option value="ar-sa">ar-sa</option>
-						<option value="ar-tn">ar-tn</option>
-						<option value="ar">ar</option>
-						<option value="bg">bg</option>
-						<option value="ca">ca</option>
-						<option value="cs">cs</option>
-						<option value="da">da</option>
-						<option value="de-at">de-at</option>
-						<option value="de">de</option>
-						<option value="el">el</option>
-						<option value="en-au">en-au</option>
-						<option value="en-ca">en-ca</option>
-						<option value="en-gb">en-gb</option>
-						<option value="en-ie">en-ie</option>
-						<option value="en-nz">en-nz</option>
-						<option value="es">es</option>
-						<option value="eu">eu</option>
-						<option value="fa">fa</option>
-						<option value="fi">fi</option>
-						<option value="fr-ca">fr-ca</option>
-						<option value="fr-ch">fr-ch</option>
-						<option value="fr">fr</option>
-						<option value="gl">gl</option>
-						<option value="he">he</option>
-						<option value="hi">hi</option>
-						<option value="hr">hr</option>
-						<option value="hu">hu</option>
-						<option value="id">id</option>
-						<option value="is">is</option>
-						<option value="it">it</option>
-						<option value="ja">ja</option>
-						<option value="ko">ko</option>
-						<option value="lb">lb</option>
-						<option value="lt">lt</option>
-						<option value="lv">lv</option>
-						<option value="nb">nb</option>
-						<option value="nl">nl</option>
-						<option value="nn">nn</option>
-						<option value="pl">pl</option>
-						<option value="pt-br">pt-br</option>
-						<option value="pt">pt</option>
-						<option value="ro">ro</option>
-						<option value="ru">ru</option>
-						<option value="sk">sk</option>
-						<option value="sl">sl</option>
-						<option value="sr-cyrl">sr-cyrl</option>
-						<option value="sr">sr</option>
-						<option value="sv">sv</option>
-						<option value="th">th</option>
-						<option value="tr">tr</option>
-						<option value="uk">uk</option>
-						<option value="vi">vi</option>
-						<option value="zh-cn">zh-cn</option>
-						<option value="zh-tw">zh-tw</option>
+					<select id="lang-selector" name="sys_language" class="form-control">
+						<option value="en">English/en</option>
+						<option value="ar">Arabic/ar</option>
+						<option value="zh_CN">Chinese/zh-CN</option>
+						<option value="cs">Czech/cs</option>
+						<option value="fr">French/fr</option>
+						<option value="de">German/de</option>
+						<option value="el">Greek/el</option>					
+						<option value="it">Italian/it</option>	
+						<option value="ja">Japan/ja</option>
+						<option value="pl">Polish/pl</option>
+						<option value="pt_BR">Portuguese-BR/pt-BR</option>
+						<option value="pt_PT">Portuguese-PT/pt-PT</option>						
+						<option value="fa">Persian/fa</option>
+						<option value="ru">Russian/ru</option>
+						<option value="es">Spanish/es</option>											
+						<option value="th">Thai/th</option>
+						<option value="tr">Turkish/tr</option>
+						<option value="ca">Catalan/ca</option>
+						<option value="da">Danish/da</option>
+						<option value="et">Estonian/et</option>
+						<option value="fi">Finnish/fi</option>
+						<option value="he">Hebrew (Israel)/he</option>
+						<option value="hr">Croatian/hr</option>
+						<option value="hu">Hungarian/hu</option>
+						<option value="id">Indonesian/id</option>
+						<option value="lt">Lithuanian/lt</option>
+						<option value="nl">Dutch/nl</option>
+						<option value="no">Norwegian/no</option>
+						<option value="ro">Romanian/ro</option>
+						<option value="sv">Swadish/sv</option>
+						<option value="vi">Vietnamese/vi</option>
 					</select>				
 				</div>
 			</div> 
@@ -534,13 +578,12 @@
 		</section>
     </div>	
 <?php echo $this->Form->end();?>
-<!-- </form> -->
 </div>
-
+</body>
 <script>
 $(function ()
  {
-	 
+	
 var form = $("#install-form");
 form.validate({
     errorPlacement: function errorPlacement(error, element) { element.before(error); },
@@ -580,4 +623,5 @@ form.children("div").steps({
     }
 });
 });
+
 </script>

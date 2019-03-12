@@ -35,3 +35,4 @@ $dispatcher->dispatch(
     Request::createFromGlobals(),
     new Response()
 );
+

@@ -4,12 +4,6 @@ $(document).ready(function(){
 	$(".mydataTable").DataTable({
 		"responsive": true,
 		"order": [[ 1, "asc" ]],
-		"aoColumns":[
-	                  {"bSortable": false},
-	                  {"bSortable": true},	                  
-	                  {"bSortable": true},
-	                  {"bSortable": true},	                           
-	                  {"bSortable": false,"visible":false}],
 	"language" : {<?php echo $this->Gym->data_table_lang();?>}	
 	});
 });		
@@ -47,14 +41,16 @@ $(document).ready(function(){
 		</div>
 		<hr>
 		<div class="box-body">
-		<table class="mydataTable table table-striped">
+		<table class="mydataTable table table-striped" width="100%">
 			<thead>
 				<tr>
 					<th><?php echo __("Photo");?></th>
 					<th><?php echo __("Accountant Name");?></th>									
 					<th><?php echo __("Accountant Email");?></th>					
-					<th><?php echo __("Mobile No.");?></th>					
+					<th><?php echo __("Mobile No.");?></th>	
+					<?php if($session["role_name"] == "administrator"){ ?>
 					<th><?php echo __("Action");?></th>
+					<?php } ?>
 				</tr>
 			</thead>
 			<tbody>
@@ -68,12 +64,14 @@ $(document).ready(function(){
 					<td><img src='".$this->request->webroot ."upload/{$row['image']}' class='membership-img img-circle'></img></td>
 					<td>{$row['first_name']} {$row['last_name']}</td>					
 					<td>{$row['email']}</td>
-					<td>{$row['mobile']}</td>
-					<td>
+					<td>{$row['mobile']}</td>";
+				if($session["role_name"] == "administrator"){
+				echo "<td>
 					<a href='".$this->Gym->createurl('GymAccountant','editAccountant')."/{$row['id']}' class='btn btn-flat btn-primary' title='Edit'><i class='fa fa-edit'></i></a>
 					<a href='".$this->Gym->createurl('GymAccountant','deleteAccountant')."/{$row['id']}' class='btn btn-flat btn-danger' title='Delete' onClick=\"return confirm('Are you sure you want to delete?')\"><i class='fa fa-trash-o'></i></a>
-					</td>
-				</tr>
+					</td>";
+				}
+				echo "</tr>
 				";
 			} 
 			}	?>
@@ -83,8 +81,10 @@ $(document).ready(function(){
 					<th><?php echo __("Photo");?></th>
 					<th><?php echo __("Accountant Name");?></th>									
 					<th><?php echo __("Accountant Email");?></th>					
-					<th><?php echo __("Mobile No.");?></th>					
+					<th><?php echo __("Mobile No.");?></th>	
+					<?php if($session["role_name"] == "administrator"){ ?>
 					<th><?php echo __("Action");?></th>
+					<?php } ?>
 				</tr>
 			</tfoot>
 		</table>

@@ -5,41 +5,8 @@ echo $this->Html->script('bootstrap-multiselect');
 <script type="text/javascript">
 $(document).ready(function() {	
 $('.class_list').multiselect({
-		includeSelectAllOption: true
-		// onChange: function(element, checked) {
-				// alert("called");
-              // $(element).closest('.multiselect').valid();
-        // },		
+		includeSelectAllOption: true			
 	});
-/*
-	$('.validateForm').validate({
-	rules: {
-		class_list: "required",		
-    },
-	ignore: ':hidden:not(".multiselect")',
-
-        highlight: function(element) {
-            $(element).closest('.form-group').addClass('has-error');
-        },
-        unhighlight: function(element) {
-            $(element).closest('.form-group').removeClass('has-error');
-        },
-        errorElement: 'span',
-        errorClass: 'help-block small',
-        errorPlacement: function(error, element) {
-            if(element.parent('.input-group').length) {
-				error.insertAfter(element.parent());
-            } else {
-				element.closest('.form-group').append(error);
-            }
-        },
-        submitHandler: function() {
-            alert('valid form');
-            return false;
-        }
-    });
-	*/
-	
 });
 function validate_multiselect()
 	{		
@@ -73,9 +40,7 @@ function validate_multiselect()
 		<hr>
 		<div class="box-body">
 		<?php
-			// $this->Form->templates([
-				// 'inputContainer' => '<div class="form-group">{{content}}</div>',
-			// ]);
+			
 			echo $this->Form->create($membership,["type"=>"file","class"=>"validateForm form-horizontal","onsubmit"=>"return validate_multiselect()"]);
 			echo "<div class='form-group'>";
 			echo "<label class='control-label col-md-3'>".__("Membership Name")."<span class='text-danger'> *</span></label>";
@@ -86,7 +51,7 @@ function validate_multiselect()
 			
 			echo "<div class='form-group'>";
 			echo "<label class='control-label col-md-3'>".__("Membership Category")."<span class='text-danger'> *</span></label>";
-			echo "<div class='col-md-5'>";
+			echo "<div class='col-md-5 module_padding'>";
 			echo $this->Form->select("membership_cat_id",$categories,["default"=>($edit)?$membership_data["membership_cat_id"]:"","empty"=>__("Select Category"),"class"=>"form-control validate[required] cat_list"]);
 			echo "</div>";			
 			echo "<div class='col-md-2'>";			
@@ -106,15 +71,15 @@ function validate_multiselect()
 				
 			echo "<div class='form-group'>";
 			echo "<label class='control-label col-md-3'>".__("Membership Limit")."<span class='text-danger'> *</span></label>";
-			echo "<div class='col-md-3'>";
+			echo "<div class='col-md-3 module_padding'>";
 			echo '<label class="radio-inline"><input type="radio" class="check_limit" name="membership_class_limit" value="Limited" '.(($edit && $membership_data['membership_class_limit'] == "Limited") ? "checked" : "") .' '.((!$edit)?"checked":"").'>'. __('Limited') .'</label>
 				  <label class="radio-inline"><input type="radio" class="check_limit" name="membership_class_limit" value="Unlimited" '.(($edit && $membership_data['membership_class_limit'] == "Unlimited") ? "checked" : "") .'>'. __("Unlimited") .'</label>';
 			echo "</div>";
-			echo "<div class='col-md-2 div_limit'>";
-				echo $this->Form->input("",["label"=>false,"name"=>"limit_days","placeholder"=>"no.of classes","class"=>"form-control validate[required,custom[onlyNumberSp],maxSize[2]]","value"=>($edit)?$membership_data["limit_days"]:""]);
+			echo "<div class='col-md-2 div_limit module_padding'>";
+				echo $this->Form->input("",["label"=>false,"name"=>"limit_days","placeholder"=>__('no. of classes'),"class"=>"form-control validate[required,custom[onlyNumberSp],maxSize[2]]","value"=>($edit)?$membership_data["limit_days"]:""]);
 			echo "</div>";
 			echo "<div class='col-md-3 div_limit'>";
-				$limitation = ["per_week"=>"Class every week","per_month"=>"Class every month"];
+				$limitation = ["per_week"=>__("Class every week"),"per_month"=>__("Class every month")];
 				echo $this->Form->select("limitation",$limitation,["default"=>($edit)?$membership_data["limitation"]:"","class"=>"form-control"]);
 			echo "</div>";
 			echo "</div>";
@@ -123,7 +88,7 @@ function validate_multiselect()
 			if($(".check_limit:checked").val() == "Unlimited")
 			{ 
 				$(".div_limit").hide("fast");
-				// $(".div_limit input,.div_limit select").val("");
+				
 				$(".div_limit input,.div_limit select").attr("disabled", "disabled");		
 			}
 			</script>
@@ -148,16 +113,16 @@ function validate_multiselect()
 			
 			echo "<div class='form-group'>";
 			echo "<label class='control-label col-md-3'>".__("Installment Plan")."<span class='text-danger'> *</span></label>";
-			echo "<div class='col-md-2'>";
+			echo "<div class='col-md-2 module_padding'>";
 			echo $this->Form->input("",["label"=>false,"name"=>"installment_amount","class"=>"form-control validate[required,custom[onlyNumberSp],maxSize[6]]","placeholder"=>__("Amount"),"value"=>($edit)?$membership_data['installment_amount']:""]);
 			echo "</div>";
 			
-			echo "<div class='col-md-4'>";											
+			echo "<div class='col-md-4 module_padding'>";						
 			echo $this->Form->select("install_plan_id",$installment_plan,["default"=>($edit)?$membership_data["install_plan_id"]:"","empty"=>__("Select Installment Plan"),"class"=>"form-control plan_list validate[required]"]);
 			echo "</div>";			
 			
 			echo "<div class='col-md-2'>";			
-			// echo $this->Form->button(__("Add Instalment Plan"),["class"=>"form-control add_plan btn btn-success btn-flat","type"=>"button","data-url"=>$this->Url->build(array("controller"=>"GymAjax","action"=>"addInstalmentPlan"))]);
+			
 			echo $this->Form->button(__("Add Installment Plan"),["class"=>"form-control add_plan btn btn-success btn-flat","type"=>"button","data-url"=>$this->Gym->createurl("GymAjax","addInstalmentPlan")]);
 			echo "</div>";
 			echo "</div>";
@@ -187,7 +152,7 @@ function validate_multiselect()
 			echo "</div>";			
 			echo "</div>";	
 			
-			$url =  (isset($membership_data['gmgt_membershipimage']) && $membership_data['gmgt_membershipimage'] != "") ? $this->request->webroot ."/upload/" . $membership_data['gmgt_membershipimage'] : $this->request->webroot ."/upload/logo.png";
+			$url =  (isset($membership_data['gmgt_membershipimage']) && $membership_data['gmgt_membershipimage'] != "") ? $this->request->webroot ."/upload/" . $membership_data['gmgt_membershipimage'] : $this->request->webroot ."/upload/Thumbnail-img.png";
 			echo "<div class='col-md-offset-3'>";
 			echo "<img src='{$url}'>";
 			echo "</div>";
@@ -199,7 +164,7 @@ function validate_multiselect()
 			echo "</div>";	
 			echo $this->Form->end();
 			echo "<br>";
-			// echo "<br><br><br>";
+			
 		?>	
 		</div>	
 		<div class="overlay gym-overlay">
@@ -215,7 +180,7 @@ $(".check_limit").change(function(){
 		$(".div_limit").show("fast");
 	}else{
 		$(".div_limit").hide("fast");
-		// $(".div_limit input,.div_limit select").val("");
+		
 		$(".div_limit input,.div_limit select").attr("disabled", "disabled");		
 	}
 });

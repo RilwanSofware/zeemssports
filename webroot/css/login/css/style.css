@@ -56,7 +56,7 @@
 }
 .form button,.form button:hover {
   outline: 0;
-  background: #EF3B3A;
+  background: #EF3B3A !important;
   width: 100%;
   border: 0;
   padding: 15px;

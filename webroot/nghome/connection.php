@@ -1,10 +1,17 @@
 <?php
-$servername = "localhost";
+/* $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname="gym_mst";
 $server_path = 'http://192.168.1.22/php/cakephp/gym_master/';
 $image_path='http://192.168.1.22/php/cakephp/gym_master/webroot/upload/';
+$image_pa=$image_path; */
+$servername = "CUST_HOST";
+$username = "CUST_USERNAME";
+$password = "CUST_PW";
+$dbname="CUST_DB_NAME";
+$server_path = 'CUST_URL';
+$image_path='UPLOAD_URL';
 $image_pa=$image_path;
 $conn = new mysqli($servername,$username, $password,$dbname);
 

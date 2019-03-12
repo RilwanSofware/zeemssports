@@ -12,7 +12,6 @@ Class GymGroupController extends AppController
 		
 	public function GroupList()
 	{ 
-		// var_dump($this->request->session()->read("Config.username"));
 		$data = $this->GymGroup->find("all")->hydrate(false)->toArray();
 		$this->set("data",$data);
 	}

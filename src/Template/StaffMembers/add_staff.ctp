@@ -7,7 +7,7 @@ $(document).ready(function() {
 	$('#specialization').multiselect({
 		includeSelectAllOption: true	
 	});
-	// $(".dob").datepicker({format: '<?php echo $this->Gym->getSettings("date_format"); ?>'});
+	
 	$(".date").datepicker( "option", "dateFormat", "<?php echo $this->Gym->dateformat_PHP_to_jQueryUI($this->Gym->getSettings("date_format")); ?>" );
 	<?php
 	if($edit)
@@ -47,7 +47,7 @@ function validate_multiselect()
 				<small><?php echo __("Staff Member");?></small>
 			  </h1>
 			  <ol class="breadcrumb">
-				<a href="<?php echo $this->Gym->createurl("StaffMembers","StaffList");?>" class="btn btn-flat btn-custom"><i class="fa fa-bars"></i> <?php echo __("Staff List");?></a>
+				<a href="<?php echo $this->Gym->createurl("StaffMembers","StaffList");?>" class="btn btn-flat btn-custom"><i class="fa fa-bars"></i> <?php echo __("Staff Member List");?></a>
 			  </ol>
 			</section>
 		</div>
@@ -96,11 +96,11 @@ function validate_multiselect()
 			echo "</div>";	
 			
 			echo "<div class='form-group'>";	
-			echo '<label class="control-label col-md-2" for="email">'. __("Assign Role").'<span class="text-danger"> *</span></label>';
-			echo '<div class="col-md-6">';			
+			echo '<label class="control-label col-md-2 col-xs-12 assign_box" for="email">'. __("Assign Role").'<span class="text-danger"> *</span></label>';
+			echo '<div class="col-md-6 col-xs-6">';			
 			echo @$this->Form->select("role",$roles,["default"=>$data['role'],"empty"=>__("Select Role"),"class"=>"form-control validate[required] roles_list"]);
 			echo "</div>";	
-			echo '<div class="col-md-2">';
+			echo '<div class="col-md-2 col-xs-6">';
 			echo "<a href='javascript:void(0)' class='add-role btn btn-flat btn-success' data-url='{$this->Gym->createurl("GymAjax","addRole")}'>".__("Add/Remove")."</a>";
 			echo "</div>";	
 			echo "</div>";	
@@ -108,7 +108,7 @@ function validate_multiselect()
 			echo "<div class='form-group'>";	
 			echo '<label class="control-label col-md-2" for="email">'. __("Specialization").'<span class="text-danger"> *</span></label>';
 			echo '<div class="col-md-8">';			
-			echo @$this->Form->select("s_specialization",$specialization,["default"=>json_decode($data['s_specialization']),"multiple"=>"multiple","class"=>"form-control validate[required] specialization_list","id"=>"specialization"]);
+			echo @$this->Form->select("s_specialization",$specialization,["default"=>json_decode($data['s_specialization']),"multiple"=>"multiple","class"=>"form-control validate[required] specialization_list multi","id"=>"specialization"]);
 			echo "&nbsp;&nbsp;&nbsp;&nbsp;<a href='javascript:void(0)' class='add-spec btn btn-flat btn-success' data-url='{$this->request->base}/GymAjax/AddSpecialization'>".__("Add/Remove")."</a>";
 			echo "</div>";
 			echo "</div>";				
@@ -173,7 +173,7 @@ function validate_multiselect()
 			echo '<label class="control-label col-md-2" for="email">'. __("Display Image").'<span class="text-danger"> *</span></label>';
 			echo '<div class="col-md-4">';
 			echo $this->Form->file("image",["class"=>"form-control"]);
-			$image = ($edit && !empty($data['image'])) ? $data['image'] : "logo.png";
+			$image = ($edit && !empty($data['image'])) ? $data['image'] : "Thumbnail-img.png";
 			echo "<br><img src='{$this->request->webroot}webroot/upload/{$image}'>";
 			echo "</div>";	
 			echo "</div>";			
@@ -184,7 +184,7 @@ function validate_multiselect()
 			?>				
 		</div>	
 		<div class="overlay gym-overlay">
-		  <i class="fa fa-refresh fa-spin"></i>
+			<i class="fa fa-refresh fa-spin"></i>
 		</div>
 	</div>
 	<br>

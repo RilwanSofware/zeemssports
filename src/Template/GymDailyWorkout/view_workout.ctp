@@ -2,24 +2,48 @@
 <script>
 $(document).ready(function(){
 	$(".validateForm").validationEngine();
-	// event.preventDefault();
+	
 	var enableDays = jQuery("#dates").val();
 	var enableDays = jQuery.parseJSON(enableDays);
 	
 	function enableAllTheseDays(date) {
         var sdate = jQuery.datepicker.formatDate('yy-mm-dd', date);
+      
         if(jQuery.inArray(sdate, enableDays) != -1) {
+			
             return [true];
         }
 		return [false];
     }
 	$("#enabledate").datepicker({
-		dateFormat: 'yy-mm-dd',
+		//dateFormat: 'yy-mm-dd',
+		dateFormat: '<?php echo $this->Gym->dateformat_PHP_to_jQueryUI($this->Gym->getSettings("date_format")); ?>',
 		changeMonth: true,
 		changeYear: true,
-		beforeShowDay: enableAllTheseDays	
+		beforeShowDay: enableAllTheseDays,
+		   onSelect : function(){
+			  var date = $('#enabledate').datepicker('getDate');  
+				date.setDate(date.getDate());
+				date1=formatDate(date);
+			$('#hidedate').val(date1);
+			
+		}   
+		
 	}); 
 });
+
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+
 </script>
 <section class="content">
 	<br>
@@ -47,18 +71,19 @@ $(document).ready(function(){
 		 <br><br><br>
         <div class="form-group">
 			<label class="col-sm-1 control-label" for="curr_date"><?php echo __("Date");?></label>
-			<div class="col-sm-3">				
+			<div class="col-sm-3 module_padding">				
 				<input type='hidden' value='<?php echo $uid;?>' name="uid">
-				<input type="text" name="schedule_date" class="validate[required] form-control" id="enabledate" value="<?php if(isset($schedule_date)){ echo $schedule_date;}else{echo "";}?>">
-			<?php //echo $this->Form->select("schedule_date",$date_array,["empty"=>"Select Date","class"=>"validate[required] form-control"]);?>
+				<input type="text" name="schedule_date1" class="validate[required] date1 form-control" id="enabledate" value="<?php if(isset($_REQUEST['schedule_date'])){ echo $this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($_REQUEST['schedule_date'])));}else{echo "";}?>">
+				<input type="hidden" name="schedule_date" class="validate[required] date1 form-control" id="hidedate" value="<?php if(isset($schedule_date)){ echo $schedule_date;}else{echo "";}?>">
+			
 			</div>
 			<div class="col-sm-3">
-			<input type="submit" value="<?php echo __("View Workouts");?>" name="view_workouts" class="btn btn-flat btn-success">
+			<input type="submit" value="<?php echo __("View Workouts");?>" name="view_workouts" class="btn btn-flat btn-success" >
 			</div>
 		</div>
           </form>
 		<?php
-		// debug($workouts);
+		
 		if(isset($workouts))
 		{
 			foreach($workouts as $workout)

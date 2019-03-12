@@ -1,3 +1,4 @@
+<?php $session = $this->request->session()->read("User");?>
 <?php
 echo $this->Html->css('select2.css');
 echo $this->Html->script('select2.min');
@@ -5,10 +6,27 @@ echo $this->Html->script('select2.min');
 <script>
 $(document).ready(function() {
 $(".mem_list_workout").select2();
-$(".date").datepicker( "option", "dateFormat", "<?php echo $this->Gym->dateformat_PHP_to_jQueryUI($this->Gym->getSettings("date_format")); ?>" );
+
+$("#startDate").datepicker({
+			minDate:0,
+		dateFormat: '<?php echo $this->Gym->dateformat_PHP_to_jQueryUI($this->Gym->getSettings("date_format")); ?>',
+		changeMonth: true,
+		changeYear: true,
+		onSelect: function() {
+			var date = $('#startDate').datepicker('getDate');  
+			date.setDate(date.getDate());
+			$("#endDate").datepicker("option","minDate", date);  
+		}
+	}); 
+	$("#endDate").datepicker({
+	
+		
+		dateFormat: '<?php echo $this->Gym->dateformat_PHP_to_jQueryUI($this->Gym->getSettings("date_format")); ?>',
+		changeMonth: true,
+		changeYear: true,
+	}); 
 var box_height = $(".box").height();
 var box_height = box_height + 100 ;
-$(".content-wrapper").css("height",box_height+"px");
 
 /* FETCH Activity On Page Load */
 
@@ -57,19 +75,21 @@ $(".content-wrapper").css("height",box_height+"px");
 		?>
 		<div class='form-group'>
 			<label class="control-label col-md-3" for="email"><?php echo __("Select Member");?><span class="text-danger"> *</span></label>
-			<div class="col-md-6">
+			<div class="col-md-6 module_padding">
 				<?php 
 					echo $this->Form->select("user_id",$members,["default"=>($edit)?$this->request->params["pass"]:"","class"=>"mem_list_workout"]);
 				?>
 			<input type="hidden" id="getcategory" data-url="<?php echo $this->request->base;?>/GymAjax/getCategoriesByMember" >
 			</div>
+			<?php if($session["role_name"] == "administrator"){ ?>
 			<div class="col-md-3">
 				<a href="<?php echo $this->request->base;?>/GymMember/addMember" class="btn btn-default btn-flat"><?php echo __("Add Member");?></a>
 			</div>
+			<?php } ?>
 		</div>		
 		<div class='form-group'>
 			<label class="control-label col-md-3" for="email"><?php echo __("Level");?><span class="text-danger"> *</span></label>
-			<div class="col-md-6">
+			<div class="col-md-6 module_padding">
 				<?php 
 					echo $this->Form->select("level_id",$levels,["empty"=>__("Select Level"),"class"=>"form-control level_list validate[required]"]);
 				?>
@@ -88,7 +108,7 @@ $(".content-wrapper").css("height",box_height+"px");
 			<label class="control-label col-md-3" for="email"><?php echo __("Start Date");?><span class="text-danger"> *</span></label>
 			<div class="col-md-6">
 				<?php 
-					echo $this->Form->input("",["label"=>false,"name"=>"start_date","class"=>"date validate[required] form-control"]);
+					echo $this->Form->input("",["label"=>false,"name"=>"start_date","class"=>"validate[required] form-control",'id'=>'startDate']);
 				?>
 			</div>	
 		</div>
@@ -96,7 +116,7 @@ $(".content-wrapper").css("height",box_height+"px");
 			<label class="control-label col-md-3" for="email"><?php echo __("End Date");?><span class="text-danger"> *</span></label>
 			<div class="col-md-6">
 				<?php 
-					echo $this->Form->input("",["label"=>false,"name"=>"end_date","class"=>"date validate[required] form-control"]);
+					echo $this->Form->input("",["label"=>false,"name"=>"end_date","class"=>" validate[required] form-control",'id'=>'endDate']);
 				?>
 			</div>	
 		</div>
@@ -115,7 +135,7 @@ $(".content-wrapper").css("height",box_height+"px");
 				</div>
 				<div class="col-md-8 activity_list">
 				<label class="col-md-8 list-group-item bg-default"><?php echo __("Select workout activity to add on selected days");?></label>
-			<!-- <input type="button" value="<?php // echo __('Step-1 Add Workout');?>" name="sadd_workouttype" id="add_workouttype" class="pull-right btn btn-flat btn-info"/> -->
+			
 				<div class="clearfix"></div>
 				<div id="append">			
 				</div>
@@ -127,7 +147,7 @@ $(".content-wrapper").css("height",box_height+"px");
 		<div class="col-sm-offset-2 col-sm-8">
 			<div class="form-group">
 				<div class="col-md-8">
-				<!--	<input type="button" value="<?php //echo __('Step-1 Add Workout');?>" name="sadd_workouttype" id="add_workouttype" class="btn btn-success"/> -->
+				
 				</div>
 			</div>
 		</div>
@@ -135,7 +155,7 @@ $(".content-wrapper").css("height",box_height+"px");
 		<br><br>
 		<div class="col-md-offset-2 col-sm-8 schedule-save-button">
         	
-        	<input type="submit" value="<?php if($edit){ echo __('Step-2 Save Workout'); }else{ echo __('Save Workout');}?>" name="save_workouttype" class="btn btn-flat btn-success"/>
+        	<input type="submit" value="<?php if($edit){ echo __('Step-2 Save Workout'); }else{ echo __('Save Workout');}?>" name="save_workouttype" class="btn btn-flat btn-success" id = "save-workout"/>
         </div>
 		<input type="hidden" id="add_workout_url" value="<?php echo $this->request->base;?>/GymAjax/gmgt_add_workout">
 		<div class='clear'>
@@ -164,7 +184,7 @@ $(".content-wrapper").css("height",box_height+"px");
 			{?>
 				<div class="panel panel-default workout-block" id="remove_panel_<?php echo $data;?>">				
 				  <div class="panel-heading">
-					<i class="fa fa-calendar"></i> <?php echo __("Start From")." <span class='work_date'>".date($this->Gym->getSettings("date_format"),strtotime($row["start_date"]))."</span> ".__("TO")." <span class='work_date'>".date($this->Gym->getSettings("date_format"),strtotime($row["end_date"]))."</span>";?>
+					<i class="fa fa-calendar"></i> <?php echo __("Start From")." <span class='work_date'>".$this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($row["start_date"])))."</span> ".__("TO")." <span class='work_date'>".$this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($row["end_date"])))."</span>";?>
 					<span class="del_panel" del_id="<?php echo $data;?>" data-url="<?php echo $this->request->base;?>/GymAjax/deleteWorkoutData/<?php echo $data;?>"><i class='fa fa-times-circle' aria-hidden="true"></i></span>
 				  </div>
 				  <br>
@@ -227,7 +247,11 @@ jQuery("body").on("click", "#add_workouttype", function(event){
 		 if(day_check == 0)
 		 {
 			alert("Please select days.");
+			//$("#save-workout").hide();
 			return false;
+		 }else{
+			$(".achilactiveadd").hide();
+			 $("#save-workout").show();
 		 }
 		 
 		 var activity_check = $(".activity_check:checked").size();
@@ -236,14 +260,29 @@ jQuery("body").on("click", "#add_workouttype", function(event){
 			alert("Please select activity.");
 			return false;
 		 }
+		  var is_empty = 0;
+		 $(".activity_value_box").each(function(o){
+			 var activity_val = $(this).val();
+			 if(activity_val == "")
+			 {
+				is_empty = 1;
+				is_empty--;
+			 }
+		 });
 		 
+		 if(is_empty == 1)
+		 {
+			alert("Please Fill All The Fields.");
+			$("#save-workout").hide();
+			
+			return false;
+		 } 
 		 $(":checkbox:checked").each(function(o){
 			
 			  var chkID = $(this).attr("id");
 			  var check_val = $(this).attr("data-val");			  
 			  if(check_val == 'day')
 			  { 
-				  //day += ' ' + chkID;
 				  day += add_day(chkID,chkID);
 				  item = {}
 			        item ["day_name"] =chkID;
@@ -251,6 +290,7 @@ jQuery("body").on("click", "#add_workouttype", function(event){
 			        jsonObj1.push(item);
 			        //$(this).prop("disabled", true);
 			  }
+			  
 			  if(check_val == 'activity')
 			  {
 				  activity_name = $(this).attr("activity_title");
@@ -284,6 +324,7 @@ jQuery("body").on("click", "#add_workouttype", function(event){
 		return false;					
 		var list_workout =  workout_list(day,activity);
 		 $("#display_rout_list").append(list_workout);
+		 $(".achilactiveadd").hide();
 	}); 
 	
 function workout_list(day,activity,id,response)
@@ -298,8 +339,6 @@ function workout_list(day,activity,id,response)
 }
 function transalte_day(day)
 {
-	/* moment.locale('es'); */
-	/* moment.localeData('es').weekdays(3); */
 	var day_name;
 	switch(day)
 	{
@@ -341,66 +380,72 @@ function add_activity(activity,id)
 	var string = '';
 	var sets = '';
 	var reps = '';
+	var kg = '';
+	var time = '';
 	sets = $("#sets_"+id).val();
 	reps = $("#reps_"+id).val();
 	kg = $("#kg_"+id).val();
 	time = $("#time_"+id).val();
-	string += '<p id="'+id+'"><strong>'+activity+' </strong>: ';
-	string += '<span id="sets_'+id+'"> Sets '+sets+', </span>';
-	string += '<span id="reps_'+id+'"> Reps '+reps+', </span>';
-	string += '<span id="kg_'+id+'"> KG '+kg+', </span>';
-	string += '<span id="time_'+id+'"> Rest Time '+time+', </span></p>';
-	string += '<input type="hidden" name="sets[]" value="'+sets+'">';
-	string += '<input type="hidden" name="reps[]" value="'+reps+'">';
-	string += '<input type="hidden" name="kg[]" value="'+kg+'">';
-	string += '<input type="hidden" name="time[]" value="'+time+'">';
-	string += '<input type="hidden" name="activity[]" value="'+activity+'">';
-	sets = $("#sets_"+id).val('');
-	reps = $("#reps_"+id).val('');
-	kg = $("#kg_"+id).val('');
-	time = $("#time_"+id).val('');
-	return string;
+	var s1 =$.isNumeric(sets);
+	var r1 =$.isNumeric(reps);
+	var k1 =$.isNumeric(kg);
+	var t1 =$.isNumeric(time);
+	if(s1 == true && r1 == true && k1 == true && t1 == true){
+		string += '<p id="'+id+'"><strong>'+activity+' </strong>: ';
+		string += '<span id="sets_'+id+'"> Sets '+sets+', </span>';
+		string += '<span id="reps_'+id+'"> Reps '+reps+', </span>';
+		string += '<span id="kg_'+id+'"> KG '+kg+', </span>';
+		string += '<span id="time_'+id+'"> Rest Time '+time+', </span></p>';
+		string += '<input type="hidden" name="sets[]" value="'+sets+'">';
+		string += '<input type="hidden" name="reps[]" value="'+reps+'">';
+		string += '<input type="hidden" name="kg[]" value="'+kg+'">';
+		string += '<input type="hidden" name="time[]" value="'+time+'">';
+		string += '<input type="hidden" name="activity[]" value="'+activity+'">';
+		sets = $("#sets_"+id).val('');
+		reps = $("#reps_"+id).val('');
+		kg = $("#kg_"+id).val('');
+		time = $("#time_"+id).val('');
+		return string;
+	}else{
+		alert("Please Enter Valid Value");
+		//break;
+		(".workout-block").hide();
+		$("#save-workout").hide();
+	}
 }
 
-/* $(".activity_check").change(function(){ */
+
 $("body").on("change",".activity_check",function(){
 			
-			//id = $(this).attr('id');
-			//alert("Hello" + id);
-			
-			//$("#reps_sets_"+id).html('<P>Sets <input type="text" name = "sets_' + id + '"></p><P>Reps <input type="text" name = "reps_' + id + '"></p>');
-			
-			
+
 		 if($(this).is(":checked"))
 		{
-			 //alert("chekked");
-			 //$('#hmsg_message_sent').addClass('hmsg_message_block');
+			 
 			 id = $(this).attr('id');
-				//alert("Hello" + id);
+				
 			 string = '';
 			
-			string += '<div class="achilactiveadd"><span class="label"> Sets </span><input type="text" name = "sets_' + id + '" id = "sets_' + id + '" placeholder="Sets"></div>';
-			string += '<div class="achilactiveadd"><span class="label"> Reps</span> <input type="text" name = "reps_' + id + '" id = "reps_' + id + '" placeholder="Reps"></div>';
-			string += '<div class="achilactiveadd"><span class="label"> KG </span><input type="text" name = "kg_' + id + '" id = "kg_' + id + '" placeholder="KG"></div>';
-			string += '<div class="achilactiveadd"><span class="label">Rest Time </span><input type="text" name = "time_' + id + '" id = "time_' + id + '" placeholder="Min"></div>';
+			string += '<div class="achilactiveadd "><span class="label"> Sets </span><input type="text" name = "sets_' + id + '" id = "sets_' + id + '" placeholder="Sets" class="activity_value_box validate[custom[integer]]" maxLength=5></div>';
+			string += '<div class="achilactiveadd"><span class="label"> Reps</span> <input type="text" name = "reps_' + id + '" id = "reps_' + id + '" placeholder="Reps" class="activity_value_box validate[custom[integer]]" maxLength=5></div>';
+			string += '<div class="achilactiveadd"><span class="label"> KG </span><input type="text" name = "kg_' + id + '" id = "kg_' + id + '" placeholder="KG" class="activity_value_box validate[custom[integer]]" maxLength=5></div>';
+			string += '<div class="achilactiveadd"><span class="label">Rest Time </span><input type="text" name = "time_' + id + '" id = "time_' + id + '" placeholder="Min" class="activity_value_box validate[custom[integer]]" maxLength=5></div>';
 			
 				$("#reps_sets_"+id).html(string);
 			 
 		}
 		 else
 		{
-			// $('#hmsg_message_sent').addClass('hmsg_message_none');
-			// $('#hmsg_message_sent').removeClass('hmsg_message_block');
-			 id = $(this).attr('id');
-				//alert("Hello" + id);
-				
-				$("#reps_sets_"+id).html('');
+			id = $(this).attr('id');
+			$("#reps_sets_"+id).html('');
+			$(".achilactiveadd").hide();
 		}
 	 });
 
 $("body").on("click",".badge-delete",function(){		
 	var remove = $(this).attr("did");
 	$("#block_"+remove).remove(); 
+	$("#save-workout").hide();
+	
 });
 jQuery("body").on("click", ".days_checkbox", function(event){
 	$(".activity_list").css('display','block');

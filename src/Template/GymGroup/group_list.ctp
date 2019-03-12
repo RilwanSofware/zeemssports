@@ -51,7 +51,7 @@ $(document).ready(function(){
 			<?php
 			foreach($data as $row)
 			{
-				$image = ($row['image'] == "") ? "logo.png" : $row['image'];
+				$image = ($row['image'] == "") ? "Thumbnail-img.png" : $row['image'];
 				echo "
 				<tr>					
 					<td><img src='".$this->request->webroot ."upload/{$image}' class='membership-img img-circle'></img></td>

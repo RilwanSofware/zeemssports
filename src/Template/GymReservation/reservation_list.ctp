@@ -9,13 +9,6 @@ $(document).ready(function(){
 	$(".mydataTable").DataTable({
 		"responsive": true,
 		"order": [[ 1, "asc" ]],
-		"aoColumns":[	                 
-	                  {"bSortable": true},
-	                  {"bSortable": true},
-	                  {"bSortable": true},	                                            
-	                  {"bSortable": true},	                                            
-	                  {"bSortable": true},	                                            
-	                  {"bSortable": false,"visible":false}],
 	"language" : {<?php echo $this->Gym->data_table_lang();?>}	
 	});
 });		
@@ -27,7 +20,7 @@ if($session["role_name"] == "administrator" || $session["role_name"] == "staff_m
 
 $(document).ready(function(){
 	var table = $(".mydataTable").DataTable();
-	table.column(5).visible( true );
+	//table.column(5).visible( true );
 });
 </script>
 <?php } ?>
@@ -52,7 +45,7 @@ $(document).ready(function(){
 		</div>
 		<hr>
 		<div class="box-body">
-			<table class="mydataTable table table-striped">
+			<table class="mydataTable table table-striped" width="100%">
 			<thead>
 				<tr>
 					<th><?php echo __("Event Name");?></th>
@@ -60,7 +53,9 @@ $(document).ready(function(){
 					<th><?php echo __("Place");?></th>
 					<th><?php echo __("Start Time");?></th>
 					<th><?php echo __("Ending Time");?></th>
+					<?php if($session["role_name"] != "member"){?>
 					<th><?php echo __("Action");?></th>
+					<?php } ?>
 				</tr>
 			</thead>
 			<tbody>
@@ -69,15 +64,17 @@ $(document).ready(function(){
 			{
 				echo "<tr>
 					<td>{$row['event_name']}</td>
-					<td>".date($this->Gym->getSettings("date_format"),strtotime($row["event_date"]))."</td>
+					<td>".$this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($row["event_date"])))."</td>
 					<td>{$row['gym_event_place']['place']}</td>
-					<td>".substr_replace($row['start_time'], ' ', -3, -2)."</td>
-					<td>".substr_replace($row['end_time'], ' ', -3, -2)."</td>
-					<td>
+					<td>{$row['start_time']}</td>
+					<td>{$row['end_time']}</td>";
+				 if($session["role_name"] != "member"){ 
+				echo "<td>
 						<a href='".$this->request->base ."/GymReservation/editReservation/{$row['id']}' class='btn btn-primary btn-flat' title='Edit'><i class='fa fa-edit'></i> </a>
 						<a href='".$this->request->base ."/GymReservation/deleteReservation/{$row['id']}' class='btn btn-danger btn-flat' title='Delete' onclick=\"return confirm('Are you sure you want to delete this record?')\"><i class='fa fa-trash'></i></a>
-					</td>
-				</tr>";
+				</td>";
+				} 
+				echo "</tr>";
 			}
 			?>
 			</tbody>
@@ -88,7 +85,9 @@ $(document).ready(function(){
 					<th><?php echo __("Place");?></th>
 					<th><?php echo __("Start Time");?></th>
 					<th><?php echo __("Ending Time");?></th>
+					<?php if($session["role_name"] != "member"){ ?>
 					<th><?php echo __("Action");?></th>
+					<?php } ?>
 				</tr>
 			</tfoot>
 			</table>

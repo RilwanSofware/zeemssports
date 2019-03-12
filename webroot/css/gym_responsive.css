@@ -22,7 +22,7 @@
 	#calendar .fc-toolbar .fc-right,
 	#calendar .fc-toolbar .fc-center
 	{float:left;width: 100%;padding-bottom:10px;}
-	.table .btn-primary{width: 100%;margin-bottom:5px;}
+	.table .btn-primary{width: auto;/*margin-bottom:5px;*/}
 	.period_box {
 	  position: relative;
 	  white-space: normal;

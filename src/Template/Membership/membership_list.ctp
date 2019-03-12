@@ -4,13 +4,7 @@ $(document).ready(function(){
 	$(".mydataTable").DataTable({
 		"responsive": true,
 		"order": [[ 1, "asc" ]],
-		"aoColumns":[
-	                  {"bSortable": false},
-	                  {"bSortable": true},
-	                  {"bSortable": true,"sWidth":"1%"},
-	                  {"bSortable": true,"sWidth":"1%"},
-	                  {"bSortable": true},	               
-	                  {"bSortable": false,"visible":false}],
+		
 		"language" : {<?php echo $this->Gym->data_table_lang();?>}
 	});
 });		
@@ -22,7 +16,7 @@ if($session["role_name"] == "administrator" || $session["role_name"] == "staff_m
 
 $(document).ready(function(){
 	var table = $(".mydataTable").DataTable();
-	table.column(5).visible( true );
+	
 });
 </script>
 <?php } ?>
@@ -47,7 +41,7 @@ $(document).ready(function(){
 		</div>
 		<hr>
 		<div class="box-body">
-			<table class="mydataTable table table-striped">
+			<table class="mydataTable table table-striped" width="100%">
 				<thead>
 					<tr>
 						<th><?php echo __("Photo");?></th>
@@ -55,7 +49,9 @@ $(document).ready(function(){
 						<th><?php echo __("Membership Period");?></th>
 						<th><?php echo __("Installment Plan");?></th>
 						<th><?php echo __("SignUp Fee");?></th>
+						<?php if($session["role_name"] != "member"){ ?>
 						<th><?php echo __("Action");?></th>
+						<?php } ?>
 					</tr>
 				</thead>
 				<tbody>
@@ -68,24 +64,29 @@ $(document).ready(function(){
 							$duration["number"] = "";
 							$duration["duration"] = "";
 						}
-						$image = ($membership->gmgt_membershipimage !="") ? $membership->gmgt_membershipimage : "logo.png";
+						$image = ($membership->gmgt_membershipimage !="") ? $membership->gmgt_membershipimage : "Thumbnail-img.png";
 						echo "
 						<tr id='row-{$membership->id}'>
 						<td><image src='".$this->request->base ."/upload/{$image}' class='membership-img img-circle'></td>
 						<td>{$membership->membership_label}</td>						
 						<td>{$membership->membership_length}</td>
 						<td>{$duration['number']} {$duration['duration']}</td>
-						<td>". $this->Gym->get_currency_symbol() ."{$membership->signup_fee}</td>
-						<td>";
+						<td>". $this->Gym->get_currency_symbol() ."{$membership->signup_fee}</td>";
+						
+						if($session["role_name"] != "member")	
+						{
+						echo "<td>";
+						
 						echo " <a href='{$this->Gym->createurl("Membership","editMembership")}/{$membership->id}' title='Edit' class='btn btn-flat btn-primary' ><i class='fa fa-edit'></i></a>
 						<a title='Delete' did='{$membership->id}' class='del-membership btn btn-flat btn-danger' data-url='".$this->Gym->createurl("GymAjax","deleteMembership")."'><i class='fa fa-trash-o'></i></a>";
+						
 						if($session["role_name"] == "administrator")
 						{ 
 						echo " <a href='{$this->Gym->createurl("Membership","viewActivity")}/{$membership->id}' class='btn btn-flat btn-info'>".__("Activities")."</a>";	
 						}
-						echo "</td>
-						</tr>
-						";
+						echo "</td>"; }
+						echo "</tr>";
+						
 					}
 				?>
 				</tbody>
@@ -96,7 +97,10 @@ $(document).ready(function(){
 						<th><?php echo __("Membership Period");?></th>
 						<th><?php echo __("Installment Plan");?></th>
 						<th><?php echo __("SignUp Fee");?></th>
+						<?php if($session["role_name"] != "member"){ ?>
 						<th><?php echo __("Action");?></th>
+						<?php } ?>
+						
 					</tr>
 				</tfoot>
 			</table>			
