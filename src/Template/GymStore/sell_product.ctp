@@ -32,7 +32,7 @@ $(document).ready(function(){
 				}
 				?>
 				
-				<small><?php echo __("Store");?></small>
+				<!-- <small><?php echo __("Store");?></small> -->
 			  </h1>
 			  <ol class="breadcrumb">
 				<a href="<?php echo $this->Gym->createurl("GymStore","sellRecord");?>" class="btn btn-flat btn-custom"><i class="fa fa-bars"></i> <?php echo __("Sell Records");?></a>

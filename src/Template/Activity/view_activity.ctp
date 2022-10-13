@@ -6,7 +6,7 @@
 			  <h1>
 				<i class="fa fa-bars"></i>
 				<?php echo $activity_title;?>
-				<small>&nbsp;<?php echo __("Activity");?></small>
+				<!-- <small>&nbsp;<?php echo __("Activity");?></small> -->
 			  </h1>
 			  
 			</section>

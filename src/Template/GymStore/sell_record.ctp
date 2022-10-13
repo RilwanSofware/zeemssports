@@ -21,7 +21,7 @@ $(document).ready(function(){
 			  <h1>
 				<i class="fa fa-bars"></i>
 				<?php echo __("Sell Records");?>
-				<small><?php echo __("Store");?></small>
+				<!-- <small><?php echo __("Store");?></small> -->
 			  </h1>
 			  <?php 
 			  if($role != 'member'){?>

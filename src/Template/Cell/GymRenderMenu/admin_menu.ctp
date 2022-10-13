@@ -167,11 +167,11 @@ if($is_rtl == "1")
                 <i class="fa fa-file-text-o"></i> <span><?php echo __("Report");?></span> 
               </a>
 			</li> 	
-			<li class= "treeview <?php echo ($this->request->controller == "GymSubscriptionHistory") ? "active" : "";?>">
+			<li class="treeview <?php echo ($this->request->controller == "GymSubscriptionHistory") ? "active" : "";?>">
 				<a href="<?php echo $this->Gym->createurl("GymSubscriptionHistory",""); ?>">
 					<i class="fa fa-history"></i>
 					<span><?php echo __("SubscriptionHistory");?></span>
-				</a>             
+				</a>
 			</li>
 			<?php if($role_name == 'administrator')
 			{?>

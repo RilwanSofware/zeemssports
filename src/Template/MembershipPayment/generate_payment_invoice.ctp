@@ -60,7 +60,7 @@ $(".mem_valid_from").on("change",function(ev){
 				<h1>
 					<i class="fa fa-plus"></i>
 					<?php echo __("Generate Payment Invoice");?>
-					<small><?php echo __("Payment");?></small>
+					<!-- <small><?php echo __("Payment");?></small> -->
 				</h1>
 				<ol class="breadcrumb">
 					<a href="<?php echo $this->Gym->createurl("MembershipPayment","paymentList");?>" class="btn btn-flat btn-custom"><i class="fa fa-bars"></i> <?php echo __("Membership Payment List");?></a>

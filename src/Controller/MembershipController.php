@@ -456,7 +456,6 @@ Class MembershipController extends AppController
 
 			$this->Flash->Success(__("Success! Activity Successfully Assigned."));
 
-			// return $this->redirect($this->here);
 			return $this->redirect($this->referer());
 
 		}		
@@ -469,13 +468,14 @@ Class MembershipController extends AppController
 
 	{
 
-		$row = $this->Membership->Membership_Activity->get($id);		
-
+		$row = $this->Membership->Membership_Activity->get($id);
+		debug($row);
+		die;
 		if($this->Membership->Membership_Activity->delete($row))
-
+		
 		{
-
 			$this->Flash->Success(__("Success! Activity Unassigned Successfully."));
+
 
 			return $this->redirect($this->referer());
 

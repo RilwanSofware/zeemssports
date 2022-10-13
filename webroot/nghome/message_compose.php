@@ -1,5 +1,6 @@
 <?php
 include("connection.php");
+$id = "1";
 if(isset($_REQUEST['id'])){$sender=intval(mysqli_real_escape_string($conn,$_REQUEST['id']));}
 if(isset($_REQUEST['receiver'])){$receiver=$_REQUEST['receiver'];}
 if(isset($_REQUEST['class'])){$class=$_REQUEST['class'];}

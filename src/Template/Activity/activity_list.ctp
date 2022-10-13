@@ -28,7 +28,7 @@ if($session["role_name"] == "administrator" || $session["role_name"] == "staff_m
 			  <h1>
 				<i class="fa fa-bars"></i>
 				<?php echo __("Activity List");?>
-				<small>&nbsp;<?php echo __("Activity");?></small>
+				<!-- <small>&nbsp;<?php echo __("Activity");?></small> -->
 			  </h1>
 			  <?php
 				if($session["role_name"] == "administrator" || $session["role_name"] == "staff_member" || $session["role_name"] == "accountant")

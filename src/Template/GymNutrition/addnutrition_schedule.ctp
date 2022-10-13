@@ -47,7 +47,7 @@
 			  <h1>
 				<i class="fa fa-leaf"></i>
 				<?php echo $title;?>
-				<small><?php echo __("Nutrition Schedule");?></small>
+				<!-- <small><?php echo __("Nutrition Schedule");?></small> -->
 			  </h1>
 			  <ol class="breadcrumb">
 				<a href="<?php echo $this->Gym->createurl("GymNutrition","nutritionList");?>" class="btn btn-flat btn-custom"><i class="fa fa-bars"></i> <?php echo __("Nutrition Schedule List");?></a>
@@ -153,7 +153,7 @@
 		<br><br>
 		<?php 
 		$this->Form->end();
-		$days_array='';
+		$days_array=[];
 		if($edit) {
 			foreach($nutrition_data as $data=>$row) {				
 				foreach($row as $r)	{

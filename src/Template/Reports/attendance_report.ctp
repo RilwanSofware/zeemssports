@@ -35,7 +35,7 @@
 				<h1>
 					<i class="fa fa-bar-chart"></i>
 					<?php echo __("Attendance Report");?>
-					<small><?php echo __("Reports");?></small>
+					<!-- <small><?php echo __("Reports");?></small> -->
 				</h1>
 				<ol class="breadcrumb">
 					<a href="<?php echo $this->Gym->createurl("Reports","membershipReport");?>" class="btn btn-flat btn-custom "><i class="fa fa-bar-chart"></i> <?php echo __("Membership Report");?></a>

@@ -27,7 +27,7 @@ $(document).ready(function(){
 			  <h1>
 				<i class="fa fa-bars"></i>
 				<?php echo __("Event List");?>
-				<small><?php echo __("Event");?></small>
+				<!-- <small><?php echo __("Event");?></small> -->
 			  </h1>
 			   <?php
 			if($session["role_name"] == "administrator" || $session["role_name"] == "staff_member" || $session["role_name"] == "accountant")

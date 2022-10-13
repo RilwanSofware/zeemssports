@@ -20,6 +20,7 @@ if ($res->num_rows > 0)
 		if($role=='administrator'){$r['name']='Administrator';}
 		$r['id']=$row['id'];
 		$result['result']['members'][]=$r;
+		
 	}
 }
 else

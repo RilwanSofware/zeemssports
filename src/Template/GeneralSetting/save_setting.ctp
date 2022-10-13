@@ -14,7 +14,7 @@ $(document).ready(function(){
 			<section class="content-header">
 			  <h1>
 				<?php echo __("General Settings");?>
-				<small><?php echo __("Settings");?></small>
+				<!-- <small><?php echo __("Settings");?></small> -->
 			  </h1>			
 			</section>
 		</div>

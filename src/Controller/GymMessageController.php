@@ -41,7 +41,7 @@ class GymMessageController extends AppController
 		
 		if($this->request->is("post"))
 		{	
-			
+			// var_dump($date);die;
 			$role = $this->request->data["receiver"];	
 
 			if($role == 'member' || $role == 'staff_member' || $role == 'accountant'|| $role == 'administrator')
@@ -78,7 +78,7 @@ class GymMessageController extends AppController
 						$data = array();
 						$data["sender"] = $session["id"]; /* current userid*/
 						$data["receiver"] = $mid;
-						$data["date"] = $date;
+						$data["date"] = NOW();
 						$data["subject"] = $this->request->data["subject"];
 						$data["message_body"] = $this->GYMFunction->sanitize_string($this->request->data["message_body"]);
 						$data["status"] =  0;
@@ -184,7 +184,7 @@ class GymMessageController extends AppController
 								["GymMember.id = GymMessage.receiver"])->select(["GymMember.first_name","GymMember.last_name","GymMember.email"])->hydrate(false)->toArray();
 		$temp = $data[0]["GymMember"];
 		unset($data[0]["GymMember"]);
-		$data[0]["gym_member"] = $temp;		
+		$data[0]["gym_member"] = $temp;	
 		$this->set("data",$data[0]);
 		$this->render("viewMessage");
 	}

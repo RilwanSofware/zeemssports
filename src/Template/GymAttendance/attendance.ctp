@@ -20,7 +20,7 @@ $(document).ready(function(){
 			  <h1>
 				<i class="fa fa-plus"></i>
 				<?php echo __("Member Attendance");?>
-				<small><?php echo __("Attendance");?></small>
+				<!-- <small><?php echo __("Attendance");?></small> -->
 			  </h1>
 			   <?php
 				if($session["role_name"] == "administrator")

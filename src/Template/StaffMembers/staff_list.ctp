@@ -25,7 +25,7 @@ if($session["role_name"] == "administrator")
 			  <h1>
 				<i class="fa fa-bars"></i>
 				<?php echo __("Staff Member List");?>
-				<small><?php echo __("Staff Member");?></small>
+				<!-- <small><?php echo __("Staff Member");?></small> -->
 			  </h1>
 			  <?php
 				if($session["role_name"] == "administrator")

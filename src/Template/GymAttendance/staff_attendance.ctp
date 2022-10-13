@@ -16,7 +16,7 @@ $(document).ready(function(){
 			  <h1>
 				<i class="fa fa-plus"></i>
 				<?php echo __("Staff Attendance");?>
-				<small><?php echo __("Attendance");?></small>
+				
 			  </h1>
 			  <ol class="breadcrumb">
 				<a href="<?php echo $this->Gym->createurl("GymAttendance","Attendance");?>" class="btn btn-flat btn-custom"><i class="fa fa-plus"></i> <?php echo __("Member Attendance");?></a>

@@ -129,7 +129,7 @@ $("body").on("click",".del-level",function(e) {
 			  <h1>
 				<i class="fa fa-hand-grab-o"></i>
 				<?php echo $title;?>
-				<small><?php echo __("Assign Workout");?></small>
+				<!-- <small><?php echo __("Assign Workout");?></small> -->
 			  </h1>
 			  <ol class="breadcrumb">
 				<a href="<?php echo $this->Gym->createurl("GymAssignWorkout","workoutLog");?>" class="btn btn-flat btn-custom"><i class="fa fa-bars"></i> <?php echo __("Workout Logs");?></a>

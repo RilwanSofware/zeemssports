@@ -28,7 +28,7 @@ $(".date").datepicker( "option", "dateFormat", "<?php echo $this->Gym->dateforma
 						}
 					?>
 					
-					<small><?php echo __("Income");?></small>
+					<!-- <small><?php echo __("Income");?></small> -->
 				</h1>
 				<ol class="breadcrumb">
 					<a href="<?php echo $this->Gym->createurl("MembershipPayment","incomeList");?>" class="btn btn-flat btn-custom"><i class="fa fa-bars"></i> <?php echo __("Income List");?></a>

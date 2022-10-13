@@ -17,7 +17,7 @@ $(document).ready(function() {
 			  <h1>
 				<i class="fa fa-user"></i>
 				<?php echo __("Profile Setting");?>
-				<small><?php echo __("Admin");?></small>
+				<!-- <small><?php echo __("Admin");?></small> -->
 			  </h1>			 
 			</section>
 		</div>

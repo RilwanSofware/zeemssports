@@ -1,7 +1,9 @@
 <?php
 include("connection.php");
+date_default_timezone_set('Asia/Kolkata');
 if(isset($_REQUEST['id'])){$id=intval(mysqli_real_escape_string($conn,$_REQUEST['id']));}
 $sql="SELECT * FROM `gym_message` WHERE `receiver`= '$id' ORDER BY `date` DESC";
+// $sql="SELECT * FROM `gym_message` WHERE `receiver`= '6' ORDER BY `date` DESC";
 $result1=$conn->query($sql);
 $result=array();
 if ($result1->num_rows > 0) {
@@ -16,6 +18,7 @@ if ($result1->num_rows > 0) {
 		if ($result2->num_rows > 0)
 		{
 			$r1=$result2->fetch_assoc();
+			
 			$row['sender']=$r1['first_name']." ".$r1['last_name'];
 			$row['image']=$image_path.$r1['image'];
 			$date = new DateTime($row['date']);

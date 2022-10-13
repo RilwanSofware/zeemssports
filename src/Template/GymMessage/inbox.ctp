@@ -7,7 +7,7 @@
 			  <h1>
 				<i class="fa fa-plus"></i>
 				<?php echo __("Inbox Messages");?>
-				<small><?php echo __("Message");?></small>
+				<!-- <small><?php echo __("Message");?></small> -->
 			  </h1>
 			  <ol class="breadcrumb">
 				
@@ -16,7 +16,7 @@
 		</div>
 		<hr>
 		<div class="box-body">
-		<div class="row mailbox-header">
+			<div class="row mailbox-header">
 			<div class="col-md-2">
 			<?php
 			if($session["role_name"] == "member")
@@ -52,7 +52,7 @@
 				<th class="hidden-xs"><span><?php echo __("Message From");?></span></th>           
 				<th><?php echo __("Subject");?></th>
 				<th><?php echo __("Description");?></th>
-				<th><?php echo __("Date");?></th>     
+				<th><?php echo __("Date");?></th>
  			</tr>
  		</thead>
  		<tbody> 		

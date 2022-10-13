@@ -28,7 +28,7 @@ $(document).ready(function(){
 			  <h1>
 				<i class="fa fa-bars"></i>
 				<?php echo __("Membership List");?>
-				<small><?php echo __("Membership");?></small>
+				<!-- <small><?php echo __("Membership");?></small> -->
 			  </h1>
 			  <?php
 			if($session["role_name"] == "administrator" || $session["role_name"] == "staff_member")
@@ -58,11 +58,18 @@ $(document).ready(function(){
 				<?php
 					foreach($membership_data as $membership)
 					{
-						$duration = $this->Gym->get_plan_duration($membership->install_plan_id);					
+						$duration = $this->Gym->get_plan_duration($membership->install_plan_id);
+						$durat = "";			
 						if(empty($duration))
 						{
 							$duration["number"] = "";
 							$duration["duration"] = "";
+						}
+						if($duration['number'] == null) {
+							$durat = "N/A";
+						}
+						else {
+							$durat = $duration['number'] ;
 						}
 						$time = __($duration['duration']);
 						
@@ -73,7 +80,7 @@ $(document).ready(function(){
 						<td><image src='".$this->request->base ."/upload/{$image}' class='membership-img img-circle'></td>
 						<td>{$membership->membership_label}</td>						
 						<td>{$membership->membership_length}</td>
-						<td>{$duration['number']} {$time}</td>
+						<td>{$durat}</td>
 						<td>". $this->Gym->get_currency_symbol() ."{$membership->signup_fee}</td>";
 						
 						if($session["role_name"] != "member")	

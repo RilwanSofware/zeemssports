@@ -31,7 +31,7 @@ echo $this->Html->script('lang-all');
 					left: 'prev,next today',
 					center: 'title',
 					right: 'month,agendaWeek,agendaDay'
-				},
+			},
 			timeFormat: 'H(:mm)',
 			lang: '<?php echo $cal_lang;?>',
 			editable: false,

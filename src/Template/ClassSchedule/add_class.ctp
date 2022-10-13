@@ -34,7 +34,7 @@ $(document).ready(function() {
 			  <h1>
 				<i class="fa fa-plus"></i>
 				<?php echo $title;?>
-				<small><?php echo __("Class Schedule");?></small>
+				<!-- <small><?php echo __("Class Schedule");?></small> -->
 			  </h1>
 			  <ol class="breadcrumb">
 				<a href="<?php echo $this->Gym->createurl("ClassSchedule","classList");?>" class="btn btn-flat btn-custom"><i class="fa fa-bars"></i> <?php echo __("Class List");?></a>

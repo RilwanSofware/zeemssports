@@ -18,6 +18,7 @@ if ($result1->num_rows > 0) {
 		//$new_date = $date->format('d/m/Y,h:i:s a');
 		$row['date']=$new_date;
 		$result['result'][]=$row;
+		
 	}
 } 
 else

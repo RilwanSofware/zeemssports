@@ -13,7 +13,7 @@
 					}
 				?>
 				
-				<small><?php echo __("Products");?></small>
+				<!-- <small><?php echo __("Products");?></small> -->
 			  </h1>
 			  <ol class="breadcrumb">
 				<a href="<?php echo $this->Gym->createurl("GymProduct","productList");?>" class="btn btn-flat btn-custom"><i class="fa fa-bars"></i> <?php echo __("Product List");?></a>

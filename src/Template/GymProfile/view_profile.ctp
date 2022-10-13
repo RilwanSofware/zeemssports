@@ -43,9 +43,9 @@ $(document).ready(function(){
 	<div id="main-wrapper"> 
 		<div class="row">
 			<div class="col-md-4 user-profile">
-				<h3 class="text-center"><?php echo $session->read("User.display_name");?></h3>				
+				<h3 style="margin-left: 40px;"><?php echo $session->read("User.display_name");?></h3>				
 				<hr>
-				<ul class="list-unstyled text-center">
+				<ul class="list-unstyled" style="margin-left: 40px;">
 					<li>
 						<p><i class="fa fa-map-marker m-r-xs"></i>
 						<a href="#"><?php echo $data["city"];?>,<?php echo $data["state"];?></a></p>

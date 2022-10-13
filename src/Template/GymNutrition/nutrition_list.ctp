@@ -33,7 +33,7 @@ $(document).ready(function(){
 			  <h1>
 				<i class="fa fa-bars"></i>
 				<?php echo __("Nutrition Schedule");?>
-				<small><?php echo __("Nutrition Schedule");?></small>
+				<!-- <small><?php echo __("Nutrition Schedule");?></small> -->
 			  </h1>
 			  <?php
 			if($session["role_name"] == "administrator" || $session["role_name"] == "staff_member")
