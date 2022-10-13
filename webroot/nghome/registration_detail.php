@@ -66,14 +66,36 @@ else
 {
 	$result['result']['interest_area']=array();
 }
+
 //Membership
-$sql="SELECT `id`,`membership_label` FROM `membership`";
+
+$sql="SELECT * FROM `membership` ";
 $res=$conn->query($sql);
+
+$row3 = array();
 if($res->num_rows > 0)
 {
+
 	while($row=$res->fetch_assoc())
 	{
-		$result['result']['membership'][]=$row;
+		$row3 = json_decode($row['membership_class']);
+		
+		foreach($row3 as $class)
+		{
+			$sql1="SELECT `id`,`class_name` FROM `class_schedule` where id='$class'";
+			$res1=$conn->query($sql1);
+			if($res1->num_rows > 0)
+			{
+				while($row1=$res1->fetch_assoc())
+				{
+					$row['class'][] = $row1;
+				}
+			}
+			else {
+				$row['class'][] = null;
+			}
+		}
+		$result['result']['membersihp'][]=$row;
 	}
 }
 else

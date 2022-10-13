@@ -7,6 +7,8 @@ use Cake\Controller\Exception\SecurityException;
 use Cake\Core\Configure;
 use Cake\Mailer\Email;
 use Cake\Auth\DefaultPasswordHasher;
+
+use Cake\ORM\TableRegistry;
 use Cake\Routing\Router;
 
 class InstallerController extends AppController
@@ -36,7 +38,7 @@ class InstallerController extends AppController
         // return $this->redirect('https://' . env('SERVER_NAME') . $this->request->here);
     }
 
-
+	
 	public function index() {
 		/* passthru("nohup mysql -u root -p DBNAME < dump.sql"); */
 		if (file_exists(TMP.'installed.txt')) {
@@ -905,6 +907,7 @@ class InstallerController extends AppController
 		$sql = "UPDATE `general_setting` SET `header_color`='#1db198',`sidemenu_color`='#000000'";
 		$stmt = $conn->execute($sql);
 		
+		$this->addClassSchedule();
 		$this->updateSys();
 	}
 
@@ -1082,10 +1085,28 @@ class InstallerController extends AppController
 				/*-------- 06-03-2019 --------- */
 			}
 		}
+		
 		file_put_contents(TMP.'installed.txt', date('Y-m-d, H:i:s'));
 		return $this->redirect(["controller"=>"users","action"=>"login"]);
 	}
-
+	public function addClassSchedule()
+    {
+		$this->autoRender = false;
+		$conn = file_exists(TMP.'installed.txt') ? ConnectionManager::get('default') : ConnectionManager::get('install_db') ;
+		
+		$sql = "SELECT * from class_schedule";
+		$settings = $conn->execute($sql)->fetchAll("assoc");
+		
+		foreach($settings as $list) {
+			$row1 = $list['id'];
+			$row2 = $list['days'];
+			$row3 = $list['start_time'];
+			$row4 = $list['end_time'];
+			$sql1 = "INSERT INTO `class_schedule_list` (`class_id`, `days`, `start_time`, `end_time`) VALUES ('$row1', '$row2', '$row3', '$row4')";		
+			$conn->execute($sql1);
+		}
+		
+    }
 
 	public function success()
 	{
