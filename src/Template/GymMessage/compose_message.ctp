@@ -6,7 +6,7 @@
 			  <h1>
 				<i class="fa fa-plus"></i>
 				<?php echo __("Compose Message");?>
-				<small><?php echo __("Message");?></small>
+				<!-- <small><?php echo __("Message");?></small> -->
 			  </h1>
 			 
 			</section>

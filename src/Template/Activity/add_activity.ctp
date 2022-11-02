@@ -31,7 +31,7 @@ function validate_multiselect() {
 			  <h1>
 				<i class="fa fa-bicycle"></i>
 				<?php echo $title;?>
-				<small><?php echo __("Activity");?></small>
+				<!-- <small><?php echo __("Activity");?></small> -->
 			  </h1>
 			  <ol class="breadcrumb">
 				<a href="<?php echo $this->Gym->createurl("Activity","activityList");?>" class="btn btn-flat btn-custom"><i class="fa fa-bars"></i> <?php echo __("Activity List");?></a>

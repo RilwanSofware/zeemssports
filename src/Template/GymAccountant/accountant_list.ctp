@@ -27,7 +27,7 @@ $(document).ready(function(){
 			  <h1>
 				<i class="fa fa-bars"></i>
 				<?php echo __("Accountant List");?>
-				<small><?php echo __("Accountant");?></small>
+				<!-- <small><?php echo __("Accountant");?></small> -->
 			  </h1>
 			  <?php
 			if($session["role_name"] == "administrator" || $session["role_name"] == "staff_member")

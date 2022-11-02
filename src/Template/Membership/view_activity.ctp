@@ -42,7 +42,7 @@ function validate_multiselect()
 			<section class="content-header">
 			  <h1>
 				<?php echo __("Membership");?>
-				<small><?php echo __("View Activity");?></small>
+				<!-- <small><?php echo __("View Activity");?></small> -->
 			  </h1>
 			  <ol class="breadcrumb">
 				<a href="<?php echo $this->Gym->createurl("Membership","membershipList");?>" class="btn btn-flat btn-custom"><i class="fa fa-bars"></i> <?php echo __("Membership List");?></a>

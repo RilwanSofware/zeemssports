@@ -44,7 +44,7 @@ $( ".date:last" ).datepicker( "setDate", new Date("<?php echo date($this->Gym->g
 				}
 				?>
 				
-				<small><?php echo __("Notice");?></small>
+				<!-- <small><?php echo __("Notice");?></small> -->
 			  </h1>
 			  <ol class="breadcrumb">
 				<a href="<?php echo $this->Gym->createurl("GymNotice","NoticeList");?>" class="btn btn-flat btn-custom"><i class="fa fa-bars"></i> <?php echo __("Notice List");?></a>

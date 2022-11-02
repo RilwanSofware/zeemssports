@@ -54,7 +54,7 @@ function validate_multiselect()
 			  <h1>
 				<i class="fa fa-user"></i>
 				<?php echo $title;?>
-				<small><?php echo __("Staff Member");?></small>
+				<!-- <small><?php echo __("Staff Member");?></small> -->
 			  </h1>
 			  <ol class="breadcrumb">
 				<a href="<?php echo $this->Gym->createurl("StaffMembers","StaffList");?>" class="btn btn-flat btn-custom"><i class="fa fa-bars"></i> <?php echo __("Staff Member List");?></a>

@@ -24,7 +24,7 @@ $(document).ready(function() {
 				<h1>
 					<i class="fa fa-bars"></i>
 					<?php echo __("Income List");?>
-					<small><?php echo __("Income");?></small>
+					<!-- <small><?php echo __("Income");?></small> -->
 				</h1>
 				<ol class="breadcrumb">
 					<a href="<?php echo $this->Gym->createurl("MembershipPayment","addIncome");?>" class="btn btn-flat btn-custom"><i class="fa fa-plus"></i> <?php echo __("Add Income");?></a>

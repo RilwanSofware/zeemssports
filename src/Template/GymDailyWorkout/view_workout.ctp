@@ -20,7 +20,6 @@ $(document).ready(function(){
 		dateFormat: '<?php echo $this->Gym->dateformat_PHP_to_jQueryUI($this->Gym->getSettings("date_format")); ?>',
 		changeMonth: true,
 		changeYear: true,
-		beforeShowDay: enableAllTheseDays,
 		   onSelect : function(){
 			  var date = $('#enabledate').datepicker('getDate');  
 				date.setDate(date.getDate());
@@ -56,7 +55,7 @@ $(".content-wrapper").css("height",box_height+"px");
 			  <h1>
 				<i class="fa fa-eye"></i>
 				<?php echo __("View Workout");?>
-				<small><?php echo __("Workout Daily");?></small>
+				<!-- <small><?php echo __("Workout Daily");?></small> -->
 			  </h1>
 			  <ol class="breadcrumb">
 				<a href="<?php echo $this->Gym->createurl("GymDailyWorkout","workoutList");?>" class="btn btn-flat btn-custom"><i class="fa fa-bars"></i> <?php echo __("Workout List");?></a>
@@ -115,7 +114,7 @@ $(".content-wrapper").css("height",box_height+"px");
 						{ ?>
 						<div class="col-md-6 sets-row no-paddingleft">	
 							<span class="text-center sets_counter"><?php echo $i;?></span>
-							<span class="sets_kg"><?php echo $workout['GymUserWorkout']["kg"];?> Kg</span>								
+							<span class="sets_kg"><?php echo $workout['GymUserWorkout']["kg"];?> Kg / Sets</span>								
 							<span class="col-md-2 reps_count"><?php echo $workout['GymUserWorkout']["reps"];?></span>
 						</div>
 				  <?php } ?>					

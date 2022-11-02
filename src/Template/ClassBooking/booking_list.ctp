@@ -26,7 +26,7 @@ if($session["role_name"] == "administrator" || $session["role_name"] == "staff_m
 			  <h1>
 				<i class="fa fa-bars"></i>
 				<?php echo __("Class Booking List");?>
-				<small><?php echo __("Class Schedule");?></small>
+				<!-- <small><?php echo __("Class Schedule");?></small> -->
 			  </h1>
 			  <ol class="breadcrumb">
 				<?php

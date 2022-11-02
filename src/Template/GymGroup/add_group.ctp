@@ -6,7 +6,7 @@
 			  <h1>
 				<i class="fa fa-object-group"></i>
 				<?php echo $title;?>
-				<small><?php echo __("Group");?></small>
+				<!-- <small><?php echo __("Group");?></small> -->
 			  </h1>
 			  <ol class="breadcrumb">
 				<a href="<?php echo $this->Gym->createurl("GymGroup","GroupList");?>" class="btn btn-flat btn-custom"><i class="fa fa-bars"></i> <?php echo __("Group List");?></a>

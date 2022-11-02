@@ -149,7 +149,7 @@ echo $this->Html->script('select2.min');
 			  <h1>
 				<i class="fa fa-plus"></i>
 				<?php echo $title;?>
-				<small><?php echo __("Workout Daily");?></small>
+				<!-- <small><?php echo __("Workout Daily");?></small> -->
 			  </h1>
 			  <ol class="breadcrumb">
 				<a href="<?php echo $this->Gym->createurl("GymDailyWorkout","workoutList");?>" class="btn btn-flat btn-custom"><i class="fa fa-bars"></i> <?php echo __("Workout List");?></a>

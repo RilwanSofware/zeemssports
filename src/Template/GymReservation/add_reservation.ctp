@@ -42,7 +42,7 @@ $(document).ready(function() {
 					echo __("Add Event");
 				}
 				?>
-				<small><?php echo __("Schedule");?></small>
+				<!-- <small><?php echo __("Schedule");?></small> -->
 			  </h1>
 			  <ol class="breadcrumb">				
 				<a href="<?php echo $this->Gym->createurl("GymReservation","reservationList");?>" class="btn btn-flat btn-custom"><i class="fa fa-bars"></i> <?php echo __("Event List");?></a>

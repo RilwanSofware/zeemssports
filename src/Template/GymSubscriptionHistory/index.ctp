@@ -30,7 +30,7 @@ $(document).ready(function(){
 			  <h1>
 				<i class="fa fa-history"></i>
 				<?php echo __("Subscription History");?>
-				<small><?php echo __("Subscription History");?></small>
+				<!-- <small><?php echo __("Subscription History");?></small> -->
 			  </h1>			 
 			</section>
 		</div>

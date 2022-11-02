@@ -18,7 +18,7 @@
 
 <div class="col-md-12 box box-default">
 <?php $session = $this->request->session()->read("User"); 
-	echo "<h4>" .__('Nutrition Schedule for').$session["display_name"]."</h4><hr/>";
+	echo "<h4>" .__('Nutrition Schedule for ').$session["display_name"]."</h4><hr/>";
 ?>
 		<div class="box-body">
 			<?php

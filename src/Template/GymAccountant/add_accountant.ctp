@@ -39,7 +39,7 @@ $(document).ready(function() {
 			  <h1>
 				<i class="fa fa-user"></i>
 				<?php echo $title;?>
-				<small><?php echo __("Accountant");?></small>
+				<!-- <small><?php echo __("Accountant");?></small> -->
 			  </h1>
 			  <ol class="breadcrumb">
 				<a href="<?php echo $this->Gym->createurl("GymAccountant","accountantList");?>" class="btn btn-flat btn-custom"><i class="fa fa-bars"></i> <?php echo __("Accountant List");?></a>

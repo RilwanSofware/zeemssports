@@ -35,7 +35,7 @@ Class GymGroupController extends AppController
 				
 				if($this->GymGroup->save($group))
 				{
-					$this->Flash->Success(__("Success! Record Added Successfully."));
+					$this->Flash->Success(__("Success!  Record Adeed Suucessfully."));
 					return $this->redirect(["action"=>"groupList"]);
 				}
 			}else{

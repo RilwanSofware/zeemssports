@@ -14,7 +14,7 @@ $role_name = $this->request->session()->read("User.role_name");
 				<h1>
 					<i class="fa fa-bar-chart"></i>
 						<?php echo __("Members Monthly Workout Report");?>
-						<small><?php echo __("Reports");?></small>
+						<!-- <small><?php echo __("Reports");?></small> -->
 				</h1>
 				<ol class="breadcrumb">
 					<?php

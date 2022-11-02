@@ -11,7 +11,7 @@ $(document).ready(function() {
 			  <h1>
 				<i class="fa fa-key"></i>
 				<?php echo __("Access Right Settings");?>
-				<small><?php echo __("Access Right");?></small>
+				<!-- <small><?php echo __("Access Right");?></small> -->
 			  </h1>			  
 			</section>
 		</div>

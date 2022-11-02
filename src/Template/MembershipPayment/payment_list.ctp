@@ -34,7 +34,7 @@ $(".content").css("height",box_height+"px");
 				<h1>
 					<i class="fa fa-bars"></i>
 					<?php echo __("Payment");?>
-					<small><?php echo __("Membership Payment");?></small>
+					<!-- <small><?php echo __("Membership Payment");?></small> -->
 				</h1>
 				 <?php
 				if($session["role_name"] == "administrator" || $session["role_name"] == "staff_member")

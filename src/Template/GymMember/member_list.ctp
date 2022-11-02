@@ -36,7 +36,7 @@ $(document).ready(function(){
 			  <h1>
 				<i class="fa fa-bars"></i>
 				<?php echo __("Members List");?>
-				<small><?php echo __("Member");?></small>
+				<!-- <small><?php echo __("Member");?></small> -->
 			  </h1>
 			   <?php
 			   
@@ -99,12 +99,22 @@ $(document).ready(function(){
 				foreach($data as $row) {
 					$membershipType = __($row['member_type']);
 					$membershipStatus = __($row['membership_status']);
+					$currDateTime = date("Y-m-d");
 					echo "<tr>
 					<td><img src='{$this->request->base}/webroot/upload/{$row['image']}' class='membership-img img-circle'></td>
 					<td>{$row['first_name']} {$row['last_name']}</td>
-					<td><p style='display:none'>{$row['id']}</p>{$row['member_id']}</td>
-					<td>".(($row['membership_valid_from'] != '')?$this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($row['membership_valid_from']))):'Null')."</td>
-					<td>".(($row['membership_valid_to']!= '')?$this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($row['membership_valid_to']))):'Null')."</td>
+					<td><p style='display:none'>{$row['id']}</p>{$row['member_id']}</td>";
+					if($row["membership_valid_to"] > date("Y-m-d")) {
+						echo  "<td>".(($row['membership_valid_from'] != '')?$this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($row['membership_valid_from']))):'Null')."</td>
+						<td>".(($row['membership_valid_to']!= '')?$this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($row['membership_valid_to']))):'Null')."</td> ";
+					}
+					else {
+						echo "<td colspan='2' class='text-center'>please upgrade your plan/membership.</td>";
+					}
+					
+					
+					echo "<td>".(($row['membership_valid_from'] != '')?$this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($row['membership_valid_from']))):'Null')."</td>
+					 <td>".(($row['membership_valid_to']!= '')?$this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($row['membership_valid_to']))):'Null')."</td> 
 					<td>{$membershipType}</td>
 					<td>{$membershipStatus}</td>
 					<td>

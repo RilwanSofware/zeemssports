@@ -90,11 +90,11 @@
 				$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 				// $headers .= 'From: '.$sys_name.' <"cakephp.projects@gmail.com">' . "\r\n";
 				$headers .= 'From: cakephp.projects@gmail.com';
-				$message = "<p>Hi ,".$fName."</p>";
-				$message .= "<p>Thank you for registering on our system.</p>";
-				$message .= "<p>Your Username:".$uname."</p>";
-				$message .= "<p>You can login once after admin review your account and activates it.</p>";
-				$message .= "<p>Thank You.</p>";
+				$message = "Hi ,".$fName."";
+				$message .= "Thank you for registering on our system.";
+				$message .= "Your Username:".$uname."";
+				$message .= "You can login once after admin review your account and activates it.";
+				$message .= "Thank You.";
 				// $sender = "gymmaster.cakephp@pushnifty.com";
 				$recipient = $email;
 				$subject = "New Registration : {$sys_name}";

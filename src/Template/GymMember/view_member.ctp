@@ -28,7 +28,7 @@ $(".sub-history").dataTable({
 			  <h1>
 				<i class="fa fa-eye"></i> 
 				<?php echo __("View Member");?>
-				<small><?php echo __("Member");?></small>
+				<!-- <small><?php echo __("Member");?></small> -->
 			  </h1>
 			  <ol class="breadcrumb">
 				<a href="<?php echo $this->Gym->createurl("GymMember","memberList");?>" class="btn btn-flat btn-custom"><i class="fa fa-bars"></i> <?php echo __("Members List");?></a>
@@ -100,7 +100,7 @@ $(".sub-history").dataTable({
 				</table>
 			</div>
 			</div>
-			<div class="col-md-1 space_member" style="padding-right: ">
+			<div class="col-md-1 space_member">
 			</div>
 			<div class="col-md-4 no-padding border">	
 			

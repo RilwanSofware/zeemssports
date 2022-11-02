@@ -275,8 +275,8 @@ $(document).ready(function(){
 						dateFormat:"<?php echo $this->Gym->dateformat_PHP_to_jQueryUI($this->Gym->getSettings("date_format")); ?>" ,
 						"language" : "<?php echo $dtp_lang;?>",
 
-						beforeShowDay:enableAllTheseDays 
-					});	
+						// beforeShowDay:enableAllTheseDays
+					});
 			}  
 		});
 	});

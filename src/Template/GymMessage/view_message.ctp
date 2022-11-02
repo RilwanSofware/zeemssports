@@ -6,7 +6,7 @@
 			  <h1>
 				<i class="fa fa-plus"></i>
 				<?php echo __("Inbox Messages");?>
-				<small><?php echo __("Message");?></small>
+				<!-- <small><?php echo __("Message");?></small> -->
 			  </h1>
 			  
 			</section>
@@ -33,7 +33,9 @@
 			<div class="mailbox-content">
 				<div class="message-header">
 					<h3><span><?php echo __("Subject");?> :</span>  <?php echo $data["subject"];?></h3>
-					<p class="message-date"><?php echo  date($this->Gym->getSettings("date_format"));?></p>
+					<p class="message-date">
+						<?php echo date($this->Gym->getSettings("date_format"),strtotime($data["date"])) ?>
+					</p>
 				</div>
 				<div class="message-sender">                                
 					<p><?php echo $data["gym_member"]["first_name"]." ".$data["gym_member"]["last_name"];?> <span>&lt;<?php echo $data["gym_member"]["email"];?>&gt;</span></p>
@@ -42,8 +44,7 @@
 					<p><?php echo $data["message_body"];?></p>
 				</div>
 				<div class="message-options pull-right">
-
-					<a class="btn btn-flat btn-danger" href="<?php echo $this->request->base . "/GymMessage/deleteMessage/{$data['id']}";?>" onclick="return confirm('<?php echo __('Do you really want to delete this record?');?>');"><i class="fa fa-trash m-r-xs"></i> <?php echo __("Delete");?></a> 
+					<a class="btn btn-flat btn-danger" href="<?php echo $this->request->base . "/GymMessage/deleteMessage/{$data['id']}";?>" onclick="return confirm('<?php echo __('Do you really want to delete this Message?');?>');"><i class="fa fa-trash m-r-xs"></i> <?php echo __("Delete");?></a> 
 				</div>
 			</div>
 		</div>

@@ -35,7 +35,7 @@ function validate_multiselect()
 			  <h1>
 				<i class="fa fa-users"></i>
 				<?php echo $title;?>
-				<small><?php echo __("Membership");?></small>
+				<!-- <small><?php echo __("Membership");?></small> -->
 			  </h1>
 			  <ol class="breadcrumb">
 				<a href="<?php echo $this->Gym->createurl("Membership","membershipList");?>" class="btn btn-flat btn-custom"><i class="fa fa-bars"></i> <?php echo __("Membership List");?></a>
@@ -117,13 +117,13 @@ function validate_multiselect()
 			
 			
 			echo "<div class='form-group'>";
-			echo "<label class='control-label col-md-3'>".__("Installment Plan")."<span class='text-danger'> *</span></label>";
+			echo "<label class='control-label col-md-3'>".__("Installment Plan")."</label>";
 			echo "<div class='col-md-2 module_padding'>";
-			echo $this->Form->input("",["label"=>false,"name"=>"installment_amount","class"=>"form-control validate[required,custom[onlyNumberSp],maxSize[6]]","placeholder"=>__("Amount"),"value"=>($edit)?$membership_data['installment_amount']:""]);
+			echo $this->Form->input("",["label"=>false,"name"=>"installment_amount","class"=>"form-control validate[custom[onlyNumberSp],maxSize[6]]","placeholder"=>__("Amount"),"value"=>($edit)?$membership_data['installment_amount']:""]);
 			echo "</div>";
 			
 			echo "<div class='col-md-4 module_padding'>";						
-			echo $this->Form->select("install_plan_id",$installment_plan,["default"=>($edit)?$membership_data["install_plan_id"]:"","empty"=>__("Select Installment Plan"),"class"=>"form-control plan_list validate[required]"]);
+			echo $this->Form->select("install_plan_id",$installment_plan,["default"=>($edit)?$membership_data["install_plan_id"]:"","empty"=>__("Select Installment Plan"),"class"=>"form-control plan_list"]);
 			echo "</div>";			
 			
 			echo "<div class='col-md-2'>";			
@@ -260,6 +260,8 @@ $("body").on("click",".add-category",function(){
 					if(response) {
 						$("tr[id=row-"+did+"]").remove();
 						$("option[value="+did+"]").remove();
+						var flash = "<div class='message success'>Success! Record Deleted Successfully.</div>"
+						$(".message").append(flash);	
 					}
 				}
 			});

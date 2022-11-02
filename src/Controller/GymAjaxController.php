@@ -523,7 +523,11 @@ Class GymAjaxController extends AppController
 		if($row['gmgt_membershipimage'] != '') {
 			unlink(WWW_ROOT."/upload/".$row['gmgt_membershipimage']);
 		}
-		echo ($membership_table->delete($row)) ? true : false ;		
+		$this->Flash->Success(__("Success! Activity Unassigned Successfully."));
+	
+		echo ($membership_table->delete($row)) ? 
+		true
+		 : false ;		
 	}	
 
 	public function addRole()
@@ -2351,9 +2355,24 @@ Class GymAjaxController extends AppController
 						<h5><?php $issue_date=$data[0]['created_date']->format("Y-m-d");
 							$issue_date= $this->GYMFunction->get_db_format_en_lang(date($sys_data[0]['date_format'],strtotime($issue_date)));
 							echo __('Issue Date')." : ". $issue_date;?></h5>
-						<h5><?php echo __('Status')." : "; echo "<span style='cursor:default;' class='btn btn-success btn-xs'>";
+						<h5><?php echo __('Status')." : "; 
+						if($this->GYMFunction->get_membership_paymentstatus($mp_id) == "Fully Paid") {
+						echo "<span style='cursor:default;' class='btn btn-success btn-xs'>";
 							echo __($this->GYMFunction->get_membership_paymentstatus($mp_id));
-							echo "</span>";?>
+							echo "</span>";
+						}
+						if($this->GYMFunction->get_membership_paymentstatus($mp_id) == "Partially Paid") {
+						echo "<span style='cursor:default;' class='btn btn-primary btn-xs'>";
+							echo __($this->GYMFunction->get_membership_paymentstatus($mp_id));
+							echo "</span>";
+						}
+						if($this->GYMFunction->get_membership_paymentstatus($mp_id) == "Not Paid") {
+						echo "<span style='cursor:default;' class='btn btn-danger btn-xs pe-none'>";
+							echo __($this->GYMFunction->get_membership_paymentstatus($mp_id));
+							echo "</span>";
+						}
+						?>
+							
 						</h5>
 					</td>
 				</tr>
@@ -2457,6 +2476,7 @@ Class GymAjaxController extends AppController
 		<div class="modal-footer">
 			<div class="print-button pull-left">
 				<a href="<?php echo $this->request->base . "/MembershipPayment/printInvoice/{$mp_id}/{$type}";?>" target="_blank" class="btn btn-flat btn-success"><?php echo __("Print"); ?></a>
+				<a href="<?php echo $this->request->base . "/MembershipPayment/printInvoice/{$mp_id}/{$type}";?>" target="_blank" class="btn btn-flat btn-success"><?php echo __("PDF"); ?></a>
 			</div>
 			<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo __("Close");?></button>				
 		</div>
