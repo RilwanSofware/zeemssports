@@ -3,6 +3,11 @@
 	echo $this->Html->css('select2.css');
 	echo $this->Html->script('select2.min');
 ?>
+<style>
+	.content {
+		min-height: 1130px !important;
+	}
+</style>
 <script>
 	$(document).ready(function() {
 	$(".mem_list").select2();

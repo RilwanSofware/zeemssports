@@ -473,7 +473,7 @@ function formatDate(date) {
 			echo "<div class='form-group class-member'>";	
 			echo '<label class="control-label col-md-2" for="email">'. __("Membership").'<span class="text-danger"> *</span></label>';
 			echo '<div class="col-md-6 module_padding">';			
-			echo @$this->Form->select("selected_membership",$membership,["default"=>$data['selected_membership'],"empty"=>__("Select Membership"),"class"=>"form-control validate[required] membership_id"]);
+			echo $this->Form->select("selected_membership",$membership,["default"=>$data['selected_membership'],"empty"=>__("Select Membership"),"class"=>"form-control validate[required] membership_id"]);
 			echo "</div>";	
 			echo '<div class="col-md-2">';
 			echo "<a href='{$this->request->base}/Membership/add/' class='btn btn-flat btn-default'>".__("Add Membership")."</a>";
@@ -484,8 +484,8 @@ function formatDate(date) {
 			echo '<label class="control-label col-md-2" for="email">'. __("Class").'<span class="text-danger"> *</span></label>';
 			echo '<div class="col-md-6 module_padding">';
 
-			//debug($member_class);die;
-			echo $this->Form->select("assign_class",($edit)?$classes:"",["default"=>($edit)?$member_class:"","class"=>"class_list form-control","id"=>"class_list","multiple"=>"multiple"]);
+			// debug($member_class);die;
+			echo $this->Form->select("assign_class",($edit == "")?$classes:"",["default"=>($edit)?$member_class:"","class"=>"class_list form-control","id"=>"class_list","multiple"=>"multiple"]);
 			echo "</div>";		
 			echo '<div class="col-md-2">';
 			echo "<a href='{$this->request->base}/ClassSchedule/addClass/' class='btn btn-flat btn-default'>".__("Add Class")."</a>";

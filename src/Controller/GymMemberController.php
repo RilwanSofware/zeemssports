@@ -215,7 +215,7 @@ class GymMemberController extends AppController
 		}
 
 		if (!empty($membership_classes_id)) {
-			$classes = $this->GymMember->ClassSchedule->find("list", ["keyField" => "id", "valueField" => "class_name"])->where(["id IN" => $membership_classes_id])->toArray();
+			$classes = $this->GymMember->ClassSchedule->find("list", ["keyField" => "id", "valueField" => "class_name"])->where(["id IN" => $membership_classes_id]);
 		} else {
 			$classes = array();
 		}
@@ -250,7 +250,7 @@ class GymMemberController extends AppController
 		$this->set("referrer_by", $staff);
 
 		$this->render("addMember");
-
+		// dd($edit);
 		if ($this->request->is("post")) {
 			$row = $this->GymMember->get($id);
 			//var_dump($this->request->data['birth_date']);die;

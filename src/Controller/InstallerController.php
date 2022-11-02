@@ -1054,7 +1054,7 @@ class InstallerController extends AppController
 				$conn->execute($sql);
 				$sql = "ALTER TABLE `general_setting` ADD `sys_language` VARCHAR(20) NOT NULL DEFAULT 'en'";
 				$conn->execute($sql); */
-				// $sql = "UPDATE `general_setting` SET system_version = '2'";
+				// $sql = "UPDATE `general_setting	0` SET system_version = '2'";
 				// $sql = "UPDATE `general_setting` SET system_version = '12'";
 				$sql = "UPDATE `general_setting` SET system_version = '23'";
 				$conn->execute($sql);

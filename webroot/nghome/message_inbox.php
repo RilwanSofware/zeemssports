@@ -5,6 +5,11 @@ if(isset($_REQUEST['id'])){$id=intval(mysqli_real_escape_string($conn,$_REQUEST[
 $sql="SELECT * FROM `gym_message` WHERE `receiver`= '$id' ORDER BY `date` DESC";
 // $sql="SELECT * FROM `gym_message` WHERE `receiver`= '6' ORDER BY `date` DESC";
 $result1=$conn->query($sql);
+
+$sql1 = "SELECT * FROM `gym_message` WHERE receiver = $id and status = 0";
+$result2=$conn->query($sql1);
+$unread_count = $result2->num_rows;
+
 $result=array();
 if ($result1->num_rows > 0) {
 	$result['status']='1';
@@ -25,6 +30,8 @@ if ($result1->num_rows > 0) {
 			$new_date = $date->format('h:i A');
 			$row['time']=$new_date;
 			$row['date'] = $date->format('d-M-Y h:i A');
+			
+			$result['unread_message'] = $unread_count;
 			$result['result']['messageInbox'][]=$row;
 		}
 
@@ -40,6 +47,7 @@ else
 	$result['result']=array();
 
 }
+
 echo json_encode($result);
 $conn->close();
 ?>

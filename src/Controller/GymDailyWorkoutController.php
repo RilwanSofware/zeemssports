@@ -158,7 +158,7 @@ class GymDailyWorkoutController extends AppController
 						foreach($error as $key=>$value)
 						{
 							$this->Flash->error(__($value));
-							return $this->redirect(["action"=>"addWorkout"]);
+							return $this->redirect(["action"=>"workoutList"]);
 						}						
 					}
 				}
@@ -211,7 +211,6 @@ class GymDailyWorkoutController extends AppController
 		else if($this->request->is("post") && !isset($this->request->data["new_data"]) && isset($this->request->data["edit"]) && $this->request->data["edit"] == "yes")
 		{
 			$post = $this->request->data;
-				
 			foreach($post["workouts_array"] as $wa)
 			{
 				$wn = $post["workout_name_".$wa];
@@ -243,8 +242,8 @@ class GymDailyWorkoutController extends AppController
 				$query3->update()->set(['note' => $post['note']])->where(['member_id' => $post["member_id"],"record_date "=>$post["record_date"]])->execute();
 				
 			}	
-			$this->Flash->success(__("Success! Record Updated Successfully."));
-			//return $this->redirect(["action"=>"workoutList"]);
+			$this->Flash->success(__("Success! Record Saved Successfully."));
+			return $this->redirect(["action"=>"workoutList"]);
 		}
 	}
 	

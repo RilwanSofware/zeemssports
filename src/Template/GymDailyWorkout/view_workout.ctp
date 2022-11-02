@@ -114,7 +114,7 @@ $(".content-wrapper").css("height",box_height+"px");
 						{ ?>
 						<div class="col-md-6 sets-row no-paddingleft">	
 							<span class="text-center sets_counter"><?php echo $i;?></span>
-							<span class="sets_kg">Sets / <?php echo $workout['GymUserWorkout']["kg"];?> Kg</span>								
+							<span class="sets_kg"><?php echo $workout['GymUserWorkout']["kg"];?> Kg / Sets</span>								
 							<span class="col-md-2 reps_count"><?php echo $workout['GymUserWorkout']["reps"];?></span>
 						</div>
 				  <?php } ?>					

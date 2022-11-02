@@ -78,7 +78,7 @@ class GymMessageController extends AppController
 						$data = array();
 						$data["sender"] = $session["id"]; /* current userid*/
 						$data["receiver"] = $mid;
-						$data["date"] = NOW();
+						$data["date"] = $date;
 						$data["subject"] = $this->request->data["subject"];
 						$data["message_body"] = $this->GYMFunction->sanitize_string($this->request->data["message_body"]);
 						$data["status"] =  0;
