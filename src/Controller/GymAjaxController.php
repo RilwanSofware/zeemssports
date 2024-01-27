@@ -2849,6 +2849,7 @@ Class GymAjaxController extends AppController
 
 	public function getMembershipClasses() {
 		if($this->request->is("ajax")) {
+			debug($this->request->data);
 			$membership_id = $this->request->data["m_id"];
 			$group = $this->request->data["group"];
 			$mem_tbl = TableRegistry::get("Membership");
@@ -2862,7 +2863,7 @@ Class GymAjaxController extends AppController
 					$selected="";
 					$class_data = $class_tbl->find()->where(["id"=>$class])->first();
 					if(!empty($class_data)) {
-							if(in_array($class_data->id,$group)) {
+							if(in_array($class_data->id,$mem_classes)) {
 								 $selected='selected=selected'; 
 							}
 

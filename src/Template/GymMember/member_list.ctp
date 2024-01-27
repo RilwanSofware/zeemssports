@@ -113,9 +113,9 @@ $(document).ready(function(){
 					}
 					
 					
-					echo "<td>".(($row['membership_valid_from'] != '')?$this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($row['membership_valid_from']))):'Null')."</td>
-					 <td>".(($row['membership_valid_to']!= '')?$this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($row['membership_valid_to']))):'Null')."</td> 
-					<td>{$membershipType}</td>
+					// echo "<td>".(($row['membership_valid_from'] != '')?$this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($row['membership_valid_from']))):'Null')."</td>
+					//  <td>".(($row['membership_valid_to']!= '')?$this->Gym->get_db_format(date($this->Gym->getSettings("date_format"),strtotime($row['membership_valid_to']))):'Null')."</td> 
+					echo "<td>{$membershipType}</td>
 					<td>{$membershipStatus}</td>
 					<td>
 					

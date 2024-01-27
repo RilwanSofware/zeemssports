@@ -83,7 +83,7 @@
 									<?php }?>
 								</td>
 								<td>PHP <?php echo phpversion(); ?></td>
-								<td>PHP 5.6.0 or greater</td>
+								<td>PHP 8.0 or greater</td>
 							</tr>
 							<tr>
 								<td>mbstring extension</td>

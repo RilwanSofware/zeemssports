@@ -112,6 +112,9 @@ class InstallerController extends AppController
 				$file = ROOT . DS . 'config'. DS . 'app.php';
 				$content = file_get_contents($file);
 
+				// echo "<pre>";
+				// var_dump($content);
+				// echo "</pre>";
 				$api_file = WWW_ROOT . 'nghome'. DS . 'connection.php';
 				$api_content = file_get_contents($api_file);
 				$base_url = Router::url('/', true);
@@ -131,8 +134,13 @@ class InstallerController extends AppController
 				}
 
 				$content = str_replace(["CUST_HOST","CUST_USERNAME","CUST_PW","CUST_DB_NAME"],[$db_host,$db_username,$db_pass,$db_name],$content);
-				$status = file_put_contents($file, $content);
 
+				// echo "<pre>";
+				// var_dump($content);
+				// echo "</pre>";
+
+				$status = file_put_contents($file, $content);
+				// var_dump($status);die;
 				$api_content = str_replace(["CUST_HOST","CUST_USERNAME","CUST_PW","CUST_DB_NAME","CUST_URL","UPLOAD_URL"],[$db_host,$db_username,$db_pass,$db_name,$base_url,$upload_url],$api_content);
 				$api_status = file_put_contents($api_file, $api_content);
 
@@ -1035,6 +1043,10 @@ class InstallerController extends AppController
 						$sql = "UPDATE `general_setting` SET system_version = '23'";
 						$conn->execute($sql);
 					break ;
+					CASE "23":
+						$sql = "UPDATE `general_setting` SET system_version = '24'";
+						$conn->execute($sql);
+					break ;
 					$this->Flash->success(__("Success! System Update Successfully."));
 				}
 
@@ -1056,7 +1068,8 @@ class InstallerController extends AppController
 				$conn->execute($sql); */
 				// $sql = "UPDATE `general_setting	0` SET system_version = '2'";
 				// $sql = "UPDATE `general_setting` SET system_version = '12'";
-				$sql = "UPDATE `general_setting` SET system_version = '23'";
+				// $sql = "UPDATE `general_setting` SET system_version = '23'";
+				$sql = "UPDATE `general_setting` SET system_version = '24'";
 				$conn->execute($sql);
 
 				/* $sql = "UPDATE `general_setting` SET datepicker_lang = 'en'";

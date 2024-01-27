@@ -8,7 +8,7 @@ $(document).ready(function(){
 	                  {"bSortable": true},
 	                  {"bSortable": true},
 	                  {"bSortable": true},	                                            
-	                  {"bSortable": false,"visible":false}],
+	                  {"bSortable": false}],
 	"language" : {<?php echo $this->Gym->data_table_lang();?>}	
 	});
 });		

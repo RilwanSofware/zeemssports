@@ -1,3 +1,9 @@
+<style>
+.sidebar-mini.sidebar-collapse .sidebar-menu>li>a {
+    padding: 11px 5px 28px 15px ;  
+}
+
+</style>
 <?php $session = $this->request->session(); ?>
   <br>
 

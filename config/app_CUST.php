@@ -192,7 +192,7 @@ return [
             'host' => 'ssl://smtp.gmail.com',
               'port' => 465,
               'username' => 'cakephp.projects@gmail.com',
-              'password' => 'Bigyear2020',
+              'password' => 'dkeqtbbgjrjolzvw',
               'className' => 'Smtp',
               'log' => true,
               'context' => [
